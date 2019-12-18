@@ -1,0 +1,21 @@
+{
+	"webcredentials": {
+		"apps": [
+			"XUG7BZ2546.org.reactjs.native.example.EmarsysApp"
+		]
+	},
+	"activitycontinuation": {
+		"apps": [
+			"XUG7BZ2546.org.reactjs.native.example.EmarsysApp"
+		]
+	},
+	"applinks": {
+		"apps": [],
+		"details": [{
+			"appID": "XUG7BZ2546.org.reactjs.native.example.EmarsysApp",
+			"paths": [
+				"*"
+			]
+		}]
+	}
+}
