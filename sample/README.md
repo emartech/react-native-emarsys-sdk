@@ -5,7 +5,7 @@
 
 ## Setup
 
-[React Native](https://facebook.github.io/react-native/docs/getting-started "React Native")
+Getting Started with [React Native](https://facebook.github.io/react-native/docs/getting-started "React Native").
 
 `$ npm install`
 
