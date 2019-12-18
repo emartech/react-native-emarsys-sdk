@@ -52,10 +52,11 @@ We created a sample application to help in the integration and give an example. 
       compile project(':react-native-emarsys-wrapper')
   	```
 
-## Requirements
-	Android version 0.60.0+
-	The iOS target should be iOS 11 or higher.
-	In order to be able to send push messages to your app, you need to have certifications from Apple Push Notification service (APNs).
+### Requirements
+
+- Android version 0.60.0+
+- The iOS target should be iOS 11 or higher.
+- In order to be able to send push messages to your app, you need to have certifications from Apple Push Notification service (APNs).
 
 
 > `Note`
