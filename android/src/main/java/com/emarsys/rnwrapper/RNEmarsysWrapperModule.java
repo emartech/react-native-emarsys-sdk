@@ -743,7 +743,7 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule
 	// MARK: - ApplicationCode and merchantId change
 
 	@ReactMethod // ******************************************************************************
-	public void changeApplicationCode(@NonNull final String applicationCodeChange, final Promise promise) {
+	public void changeApplicationCode(@Nullable final String applicationCodeChange, final Promise promise) {
 		try {
 			Emarsys.getConfig().changeApplicationCode(applicationCodeChange, new CompletionListener() {
 				@Override
@@ -761,7 +761,7 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule
 	}
 
 	@ReactMethod // ******************************************************************************
-	public void changeMerchantId(@NonNull final String predictMerchantIdChange, Promise promise) {
+	public void changeMerchantId(@Nullable final String predictMerchantIdChange, Promise promise) {
 		try {
 			Emarsys.getConfig().changeMerchantId(predictMerchantIdChange);
 			promise.resolve(true);

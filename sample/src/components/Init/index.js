@@ -83,7 +83,7 @@ export default class Init extends Component {
 			"customEvent-key1": "customEvent-value1",
 			"customEvent-key2": "customEvent-value2",
 		}
-
+		
 		try {
 			let result = await EmarsysWrapper.trackCustomEvent(eventName, eventAttributes)
 			console.log("trackCustomEvent Done: ", result)
@@ -97,12 +97,6 @@ export default class Init extends Component {
 	// MARK: - DeepLink *************************************************************************************************************
 
 	async wrapperTrackDeepLink(url) {
-		if (!url) {
-			showAlert( "trackDeepLink", "trackDeepLink No URL.")
-		}
-		
-		if (!url) return false
-
 		try {
 			let result = await EmarsysWrapper.trackDeepLink(url)
 			console.log("trackDeepLink Done: ", url, result)
@@ -129,7 +123,7 @@ export default class Init extends Component {
 	}
 
 	async wrapperChangeMerchantId() {
-		let predictMerchantIdChange = "1A517D7BD6EAF712"
+		let predictMerchantIdChange = null;
 
 		try {
 			let result = await EmarsysWrapper.changeMerchantId(predictMerchantIdChange)

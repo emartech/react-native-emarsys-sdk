@@ -15,7 +15,7 @@ export default class EmarsysWrapper {
 	  * @return string - Initialization SDK response
 	*/		
 	static init(applicationCode, contactFieldId, predictMerchantId) {
-		return RNEmarsysWrapper.init(applicationCode, contactFieldId, predictMerchantId)
+		return RNEmarsysWrapper.init(applicationCode ? applicationCode : null, contactFieldId, predictMerchantId ? predictMerchantId : null)
 	}
 
 	/**
@@ -47,7 +47,7 @@ export default class EmarsysWrapper {
 	  * @return bool - success or failure
 	*/		
 	static trackCustomEvent(eventName, eventAttributes) {
-		return RNEmarsysWrapper.trackCustomEvent(eventName, eventAttributes)
+		return RNEmarsysWrapper.trackCustomEvent(eventName, eventAttributes ? eventAttributes : null)
 	}
 
 
@@ -217,7 +217,7 @@ export default class EmarsysWrapper {
 	  * @return bool - success or failure
 	*/		
 	static trackTag(tagName, tagAttributes) {
-		return RNEmarsysWrapper.trackTag(tagName, tagAttributes)
+		return RNEmarsysWrapper.trackTag(tagName, tagAttributes ? tagAttributes : null)
 	}
 
 	/**
@@ -629,7 +629,7 @@ export default class EmarsysWrapper {
 	  * @return bool - success or failure
 	*/		
 	static trackDeepLink(url) {
-		return RNEmarsysWrapper.trackDeepLink(url)
+		return RNEmarsysWrapper.trackDeepLink(url ? url : null)
 	}
 
 
@@ -642,7 +642,7 @@ export default class EmarsysWrapper {
 	  * @return bool - success or failure
 	*/		
 	static changeApplicationCode(applicationCodeChange) {
-		return RNEmarsysWrapper.changeApplicationCode(applicationCodeChange)
+		return RNEmarsysWrapper.changeApplicationCode(applicationCodeChange ? applicationCodeChange : null)
 	}
 
 	/**
@@ -651,7 +651,7 @@ export default class EmarsysWrapper {
 	  * @return bool - success or failure
 	*/		
 	static changeMerchantId(predictMerchantIdChange) {
-		return RNEmarsysWrapper.changeMerchantId(predictMerchantIdChange)
+		return RNEmarsysWrapper.changeMerchantId(predictMerchantIdChange ? predictMerchantIdChange : null)
 	}
 
 	/**

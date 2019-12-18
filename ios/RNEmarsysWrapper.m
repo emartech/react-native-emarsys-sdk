@@ -13,45 +13,11 @@
 
 #import "RNEmarsysWrapper.h"
 
-/*
-@implementation NSDictionary (JSONString)
-
-  -(NSString*) jsonStringWithPrettyPrint:(BOOL) prettyPrint {
-     NSError *error;
-     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self
-                                                   options:(NSJSONWritingOptions)    (prettyPrint ? NSJSONWritingPrettyPrinted : 0)
-                                                     error:&error];
-
-     if (! jsonData) {
-        NSLog(@"%s: error: %@", __func__, error.localizedDescription);
-        return @"{}";
-     } else {
-        return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-     }
- }
-@end
-
-@implementation NSArray (JSONString)
--(NSString*) jsonStringWithPrettyPrint:(BOOL) prettyPrint {
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self
-                                                       options:(NSJSONWritingOptions) (prettyPrint ? NSJSONWritingPrettyPrinted : 0)
-                                                         error:&error];
-
-    if (! jsonData) {
-        NSLog(@"%s: error: %@", __func__, error.localizedDescription);
-        return @"[]";
-    } else {
-        return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    }
-}
-@end
-*/
-
 @implementation ArrayUtil
 
 + (NSArray<EMSCartItem *> *)arrayToCartList:(NSArray *)array {
-    NSMutableArray<EMSCartItem *> *items = [NSMutableArray array];
+
+	NSMutableArray<EMSCartItem *> *items = [NSMutableArray array];
 
     for (NSDictionary *i in array) {
         if ([i isKindOfClass:[NSDictionary class]]) {
@@ -82,7 +48,8 @@
 @implementation MapUtil
 
 + (EMSProduct *)mapToProduct:(NSDictionary *)object {
-    NSString *productId = @"";
+    
+	NSString *productId = @"";
     NSString *title = @"";
     NSString *linkUrl = @"";
     NSString *feature = @"";
@@ -624,7 +591,7 @@ RCT_EXPORT_METHOD(trackRecommendationClick:(NSDictionary * _Nonnull)product reso
 // MARK: - DeepLink
 
 // ******************************************************************************
-RCT_EXPORT_METHOD(trackDeepLink:(NSString * _Nonnull)userActivity resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(trackDeepLink:(NSString * _Nullable)userActivity resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         if ( userActivity != nil ) {
             NSUserActivity* activity = [[NSUserActivity alloc] initWithActivityType:NSUserActivityTypeBrowsingWeb];
@@ -650,7 +617,7 @@ RCT_EXPORT_METHOD(trackDeepLink:(NSString * _Nonnull)userActivity resolver:(RCTP
 // MARK: - ApplicationCode and merchantId change
 
 // ******************************************************************************
-RCT_EXPORT_METHOD(changeApplicationCode:(NSString * _Nonnull)applicationCode resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
+RCT_EXPORT_METHOD(changeApplicationCode:(NSString * _Nullable)applicationCode resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys.config changeApplicationCode:applicationCode completionBlock:^(NSError *error) {
             if (NULL != error) {
@@ -666,7 +633,7 @@ RCT_EXPORT_METHOD(changeApplicationCode:(NSString * _Nonnull)applicationCode res
 }
 
 // ******************************************************************************
-RCT_EXPORT_METHOD(changeMerchantId:(NSString * _Nonnull)merchantId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
+RCT_EXPORT_METHOD(changeMerchantId:(NSString * _Nullable)merchantId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys.config changeMerchantId:merchantId ];
         resolve([NSNumber numberWithBool:YES]);

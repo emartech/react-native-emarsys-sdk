@@ -57,18 +57,15 @@ export default class Predict extends Component {
 	// MARK: - Predict *************************************************************************************************************
 
 	async wrapperTrackCart() {
-		let cartItems = [
-			{
-				itemId: "cartId-123",
-				price: 1.66,
-				quantity: 26.4,
-			},
-			{
-				itemId: "cartId-234",
-				price: 2.88,
-				quantity: 56.5,
-			},
-		]
+		let cartItems = [{
+			itemId: "cartId-123",
+			price: 1.66,
+			quantity: 26.4,
+		}, {
+			itemId: "cartId-234",
+			price: 2.88,
+			quantity: 56.5,
+		}]
 		
 		try {
 			let result = await EmarsysWrapper.trackCart(cartItems)
@@ -217,18 +214,15 @@ export default class Predict extends Component {
 
 	async wrapperRecommendProductsCartItems() {
 		let logic = "CART"
-		let cartItems = [
-			{
-				itemId: "103",
-				price: 9.22,
-				quantity: 2.4,
-			},
-			{
-				itemId: "108",
-				price: 89.99,
-				quantity: 6.5,
-			},
-		]
+		let cartItems = [{
+			itemId: "103",
+			price: 9.22,
+			quantity: 2.4,
+		}, {
+			itemId: "108",
+			price: 89.99,
+			quantity: 6.5,
+		}]
 
 		try {
 			let result = await EmarsysWrapper.recommendProductsCartItems(logic, cartItems)
@@ -271,18 +265,15 @@ export default class Predict extends Component {
 
 	async wrapperRecommendProductsCartItemsLimit() {
 		let logic = "CART"
-		let cartItems = [
-			{
-				itemId: "103",
-				price: 299,
-				quantity: 26.4,
-			},
-			{
-				itemId: "108",
-				price: 289.99,
-				quantity: 56.5,
-			},
-		]
+		let cartItems = [{
+			itemId: "103",
+			price: 299,
+			quantity: 26.4,
+		}, {
+			itemId: "108",
+			price: 289.99,
+			quantity: 56.5,
+		}]
 		let limit = 4
 
 		try {
@@ -336,18 +327,15 @@ export default class Predict extends Component {
 
     async wrapperRecommendProductsCartItemsFilters() {
 		let logic = "CART"
-        let cartItems = [
-			{
-				itemId: "103",
-				price: 299,
-				quantity: 26.4,
-			},
-			{
-				itemId: "108",
-				price: 289.99,
-				quantity: 56.5,
-			},
-		]
+        let cartItems = [{
+			itemId: "103",
+			price: 299,
+			quantity: 26.4,
+		}, {
+			itemId: "108",
+			price: 289.99,
+			quantity: 56.5,
+		}]
 		let filters = {}
 
 		try {
@@ -393,18 +381,15 @@ export default class Predict extends Component {
 
     async wrapperRecommendProductsCartItemsLimitFilters() {
 		let logic = "CART"
-        let cartItems = [
-			{
-				itemId: "103",
-				price: 299,
-				quantity: 26.4,
-			},
-			{
-				itemId: "108",
-				price: 289.99,
-				quantity: 56.5,
-			},
-		]
+        let cartItems = [{
+			itemId: "103",
+			price: 299,
+			quantity: 26.4,
+		}, {
+			itemId: "108",
+			price: 289.99,
+			quantity: 56.5,
+		}]
 		let limit = 5
 		let filters = {}
 
