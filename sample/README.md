@@ -1,5 +1,5 @@
 
-# EmarsysAPP
+# EmarsysApp
 
 ## React Native Application for Emarsys SDK wrapper testing
 
