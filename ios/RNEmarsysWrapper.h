@@ -14,11 +14,12 @@
 #import "EMSEventHandler.h"
 
 @interface ArrayUtil : NSObject
-
 @end
 
 @interface MapUtil : NSObject
+@end
 
+@interface LogicParser : NSObject
 @end
 
 typedef void (^InAppHandlerBlock)(NSString *eventName, NSDictionary<NSString *, NSObject *> *payload);

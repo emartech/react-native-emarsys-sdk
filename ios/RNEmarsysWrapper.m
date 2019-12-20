@@ -160,6 +160,68 @@
 @end
 
 
+@implementation LogicParser
+
+-(EMSLogic )parseLogic:(NSString )logic {
+	EMSLogic *recommendedLogic;
+
+	if([logic isEqualToString:@"CART"]) {
+		recommendedLogic = EMSLogic.cart;
+	}
+	else if([logic isEqualToString:@"RELATED"]) {
+		recommendedLogic = EMSLogic.related;
+	}
+	else if([logic isEqualToString:@"CATEGORY"]) {
+		recommendedLogic = EMSLogic.category;
+	}
+	else if([logic isEqualToString:@"ALSO_BOUGHT"]) {
+		recommendedLogic = EMSLogic.alsoBought;
+	}
+	else if([logic isEqualToString:@"POPULAR"]) {
+		recommendedLogic = EMSLogic.popular;
+	}
+	
+	return recommendedLogic;
+}
+
+-(EMSLogic )parseLogic:(NSString )logic readableArray:(NSArray *)readableArray  {
+	EMSLogic *recommendedLogic;
+	
+	if([logic isEqualToString:@"CART"]) {
+		NSArray<EMSCartItem > items = [ArrayUtil arrayToCartList:cartItems];
+		recommendedLogic = [EMSLogic cartWithCartItems:items];
+	}
+	
+	else if([logic isEqualToString:@"RELATED"]) {
+		recommendedLogic = EMSLogic.related;
+	}
+}
+
+-(EMSLogic )parseLogic:(NSString )logic query:(NSString *)query  {
+	EMSLogic *recommendedLogic;
+	
+	if([logic isEqualToString:@"SEARCH"]) {
+		recommendedLogic = [EMSLogic searchWithSearchTerm:query];
+	}
+	else if([logic isEqualToString:@"RELATED"]) {
+		recommendedLogic = [EMSLogic relatedWithViewItemId:query];
+	}
+	else if([logic isEqualToString:@"CATEGORY"]) {
+		recommendedLogic = [EMSLogic categoryWithCategoryPath:query];
+	}
+	else if([logic isEqualToString:@"ALSO_BOUGHT"]) {
+		recommendedLogic = [EMSLogic alsoBoughtWithViewItemId:query];
+	}
+	else if([logic isEqualToString:@"POPULAR"]) {
+		recommendedLogic = [EMSLogic popularWithCategoryPath:query];
+	} else {
+		recommendedLogic = [EMSLogic searchWithSearchTerm:query];
+	}
+}
+
+@end
+
+
 @implementation RNEmarsysWrapper
 
 - (dispatch_queue_t)methodQueue {
@@ -433,134 +495,171 @@ RCT_EXPORT_METHOD(trackTag:(NSString * _Nonnull)tag withAttributes:(NSDictionary
 
 RCT_EXPORT_METHOD(recommendProducts:(NSString * _Nonnull)logic resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
-        NSLog(@"RNEmarsysWrapper recommendProducts");
-        //resolve([NSString stringWithFormat:@"recommendProducts: %@ OK", logic]);
-        resolve([NSNumber numberWithBool:YES]);
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
+		NSLog(@"RNEmarsysWrapper recommendProducts");
+
+		EMSLogic recLogic = LogicParser.parseLogic(logic);
+		  
+		//resolve([NSString stringWithFormat:@"recommendProducts: %@ OK", logic]);
+		
+		resolve([NSNumber numberWithBool:YES]);
+	}
+	@catch (NSException *exception) {
+		reject(exception.name, exception.reason, nil);
+	}
 }
 
 RCT_EXPORT_METHOD(recommendProductsQuery:(NSString * _Nonnull)logic query:(NSString * _Nonnull)query resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    @try {
-        NSLog(@"RNEmarsysWrapper recommendProductsQuery");
-        //resolve([NSString stringWithFormat:@"recommendProductsQuery: %@ OK", logic]);
-        resolve([NSNumber numberWithBool:YES]);
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
+	@try {
+		NSLog(@"RNEmarsysWrapper recommendProductsQuery");
+		
+		EMSLogic recLogic = LogicParser.parseLogic(logic, query);
+		
+		//resolve([NSString stringWithFormat:@"recommendProductsQuery: %@ OK", logic]);
+		resolve([NSNumber numberWithBool:YES]);
+	}
+	@catch (NSException *exception) {
+		reject(exception.name, exception.reason, nil);
+	}
 }
 
 RCT_EXPORT_METHOD(recommendProductsCartItems:(NSString * _Nonnull)logic cartItems:(NSArray * _Nonnull)cartItems resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    @try {
-        NSLog(@"RNEmarsysWrapper recommendProductsCartItems");
-        //resolve([NSString stringWithFormat:@"recommendProductsCartItems: %@ OK", logic]);
-        resolve([NSNumber numberWithBool:YES]);
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
+	@try {
+		NSLog(@"RNEmarsysWrapper recommendProductsCartItems");
+		
+		EMSLogic recLogic = LogicParser.parseLogic(logic, cartItems);
+		
+		//resolve([NSString stringWithFormat:@"recommendProductsCartItems: %@ OK", logic]);
+		resolve([NSNumber numberWithBool:YES]);
+	}
+	@catch (NSException *exception) {
+		reject(exception.name, exception.reason, nil);
+	}
 }
 
 RCT_EXPORT_METHOD(recommendProductsLimit:(NSString * _Nonnull)logic limit:(NSNumber * _Nonnull)limit resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    @try {
-        NSLog(@"RNEmarsysWrapper recommendProductsLimit");
-        //resolve([NSString stringWithFormat:@"recommendProductsLimit: %@ OK", logic]);
-        resolve([NSNumber numberWithBool:YES]);
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
+	@try {
+		NSLog(@"RNEmarsysWrapper recommendProductsLimit");
+		
+		EMSLogic recLogic = LogicParser.parseLogic(logic);
+		
+		//resolve([NSString stringWithFormat:@"recommendProductsLimit: %@ OK", logic]);
+		resolve([NSNumber numberWithBool:YES]);
+	}
+	@catch (NSException *exception) {
+		reject(exception.name, exception.reason, nil);
+	}
 }
 
 RCT_EXPORT_METHOD(recommendProductsQueryLimit:(NSString * _Nonnull)logic query:(NSString * _Nonnull)query limit:(NSNumber * _Nonnull)limit resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    @try {
-        NSLog(@"RNEmarsysWrapper recommendProductsQueryLimit");
-        //resolve([NSString stringWithFormat:@"recommendProductsQueryLimit: %@ OK", logic]);
-        resolve([NSNumber numberWithBool:YES]);
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
+	@try {
+		NSLog(@"RNEmarsysWrapper recommendProductsQueryLimit");
+		
+		EMSLogic recLogic = LogicParser.parseLogic(logic, query);
+		
+		//resolve([NSString stringWithFormat:@"recommendProductsQueryLimit: %@ OK", logic]);
+		resolve([NSNumber numberWithBool:YES]);
+	}
+	@catch (NSException *exception) {
+		reject(exception.name, exception.reason, nil);
+	}
 }
 
 RCT_EXPORT_METHOD(recommendProductsCartItemsLimit:(NSString * _Nonnull)logic cartItems:(NSArray * _Nonnull)cartItems limit:(NSNumber * _Nonnull)limit resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    @try {
-        NSLog(@"RNEmarsysWrapper recommendProductsCartItemsLimit");
-        //resolve([NSString stringWithFormat:@"recommendProductsCartItemsLimit: %@ OK", logic]);
-        resolve([NSNumber numberWithBool:YES]);
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
+	@try {
+		NSLog(@"RNEmarsysWrapper recommendProductsCartItemsLimit");
+
+		EMSLogic recLogic = LogicParser.parseLogic(logic, cartItems);
+
+		//resolve([NSString stringWithFormat:@"recommendProductsCartItemsLimit: %@ OK", logic]);
+		resolve([NSNumber numberWithBool:YES]);
+	}
+	@catch (NSException *exception) {
+		reject(exception.name, exception.reason, nil);
+	}
 }
 
-RCT_EXPORT_METHOD(recommendProductsCartItemsLimit:(NSString * _Nonnull)logic filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    @try {
-        NSLog(@"RNEmarsysWrapper recommendProductsCartItemsLimit");
-        //resolve([NSString stringWithFormat:@"recommendProductsCartItemsLimit: %@ OK", logic]);
-        resolve([NSNumber numberWithBool:YES]);
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
+RCT_EXPORT_METHOD(recommendProductsFilters:(NSString * _Nonnull)logic filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+	@try {
+		NSLog(@"RNEmarsysWrapper recommendProductsFilters");
+
+		EMSLogic recLogic = LogicParser.parseLogic(logic);
+
+		//resolve([NSString stringWithFormat:@"recommendProductsFilters: %@ OK", logic]);
+		resolve([NSNumber numberWithBool:YES]);
+	}
+	@catch (NSException *exception) {
+		reject(exception.name, exception.reason, nil);
+	}
 }
 
 RCT_EXPORT_METHOD(recommendProductsQueryFilters:(NSString * _Nonnull)logic query:(NSString * _Nonnull)query filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    @try {
-        NSLog(@"RNEmarsysWrapper recommendProductsQueryFilters");
-        //resolve([NSString stringWithFormat:@"recommendProductsQueryFilters: %@ OK", logic]);
-        resolve([NSNumber numberWithBool:YES]);
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
+	@try {
+		NSLog(@"RNEmarsysWrapper recommendProductsQueryFilters");
+
+		EMSLogic recLogic = LogicParser.parseLogic(logic, query);
+
+		//resolve([NSString stringWithFormat:@"recommendProductsQueryFilters: %@ OK", logic]);
+		resolve([NSNumber numberWithBool:YES]);
+	}
+	@catch (NSException *exception) {
+		reject(exception.name, exception.reason, nil);
+	}
 }
 
 RCT_EXPORT_METHOD(recommendProductsCartItemsFilters:(NSString * _Nonnull)logic cartItems:(NSArray * _Nonnull)cartItems filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    @try {
-        NSLog(@"RNEmarsysWrapper recommendProductsCartItemsFilters");
-        //resolve([NSString stringWithFormat:@"recommendProductsCartItemsFilters: %@ OK", logic]);
-        resolve([NSNumber numberWithBool:YES]);
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
+	@try {
+		NSLog(@"RNEmarsysWrapper recommendProductsCartItemsFilters");
+
+		EMSLogic recLogic = LogicParser.parseLogic(logic, cartItems);
+
+		//resolve([NSString stringWithFormat:@"recommendProductsCartItemsFilters: %@ OK", logic]);
+		resolve([NSNumber numberWithBool:YES]);
+	}
+	@catch (NSException *exception) {
+		reject(exception.name, exception.reason, nil);
+	}
 }
 
 RCT_EXPORT_METHOD(recommendProductsLimitFilters:(NSString * _Nonnull)logic limit:(NSNumber * _Nonnull)limit filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    @try {
-        NSLog(@"RNEmarsysWrapper recommendProductsLimitFilters");
-        //resolve([NSString stringWithFormat:@"recommendProductsLimitFilters: %@ OK", logic]);
-        resolve([NSNumber numberWithBool:YES]);
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
+	@try {
+		NSLog(@"RNEmarsysWrapper recommendProductsLimitFilters");
+
+		EMSLogic recLogic = LogicParser.parseLogic(logic);
+
+		//resolve([NSString stringWithFormat:@"recommendProductsLimitFilters: %@ OK", logic]);
+		resolve([NSNumber numberWithBool:YES]);
+	}
+	@catch (NSException *exception) {
+		reject(exception.name, exception.reason, nil);
+	}
 }
 
 RCT_EXPORT_METHOD(recommendProductsQueryLimitFilters:(NSString * _Nonnull)logic query:(NSString * _Nonnull)query limit:(NSNumber * _Nonnull)limit filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    @try {
-        NSLog(@"RNEmarsysWrapper recommendProductsQueryLimitFilters");
-        //resolve([NSString stringWithFormat:@"recommendProductsQueryLimitFilters: %@ OK", logic]);
-        resolve([NSNumber numberWithBool:YES]);
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
+	@try {
+		NSLog(@"RNEmarsysWrapper recommendProductsQueryLimitFilters");
+
+		EMSLogic recLogic = LogicParser.parseLogic(logic, query);
+
+		//resolve([NSString stringWithFormat:@"recommendProductsQueryLimitFilters: %@ OK", logic]);
+		resolve([NSNumber numberWithBool:YES]);
+	}
+	@catch (NSException *exception) {
+		reject(exception.name, exception.reason, nil);
+	}
 }
 
 RCT_EXPORT_METHOD(recommendProductsCartItemsLimitFilters:(NSString * _Nonnull)logic cartItems:(NSArray * _Nonnull)cartItems limit:(NSNumber * _Nonnull)limit filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    @try {
-        NSLog(@"RNEmarsysWrapper recommendProductsCartItemsLimitFilters");
-        //resolve([NSString stringWithFormat:@"recommendProductsCartItemsLimitFilters: %@ OK", logic]);
-        resolve([NSNumber numberWithBool:YES]);
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
+	@try {
+		NSLog(@"RNEmarsysWrapper recommendProductsCartItemsLimitFilters");
+
+		EMSLogic recLogic = LogicParser.parseLogic(logic, cartItems);
+
+		//resolve([NSString stringWithFormat:@"recommendProductsCartItemsLimitFilters: %@ OK", logic]);
+		resolve([NSNumber numberWithBool:YES]);
+	}
+	@catch (NSException *exception) {
+		reject(exception.name, exception.reason, nil);
+	}
 }
 
 // ******************************************************************************
