@@ -52,8 +52,7 @@ import org.json.JSONException;
 
 import java.lang.Exception;
 
-public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule
-		implements EventHandler, NotificationEventHandler {
+public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule implements EventHandler, NotificationEventHandler {
 
 	private static final String TAG = "RNEmarsysWrapper";
 

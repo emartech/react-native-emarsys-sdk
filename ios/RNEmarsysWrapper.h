@@ -5,12 +5,6 @@
 #import <React/RCTBridgeModule.h>
 #endif
 
-#if __has_include("RCTEventEmitter.h")
-#import "RCTEventEmitter.h"
-#else
-#import <React/RCTBridgeModule.h>
-#endif
-
 #import "EMSEventHandler.h"
 
 @interface ArrayUtil : NSObject
