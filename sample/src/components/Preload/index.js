@@ -80,12 +80,6 @@ const styles = StyleSheet.create({
 @observer
 export default class Preload extends Component {
 
-	componentDidMount() {
-		this.checkAuth()
-		
-		console.log( "DeepLink Mount :", toJS( this.props.auth.deepLink ) )
-	}
-	
 	checkAuth = () => {
 		if ( toJS( this.props.auth.token ) ) {
 			this.props.navigation.navigate("Init", {
@@ -93,27 +87,41 @@ export default class Preload extends Component {
 			})
 		}
 	}
+
+	componentDidMount() {
+		console.log("****** INIT PRELOAD: ", toJS( this.props.auth.init ) )
+		
+		if ( !toJS( this.props.auth.init ) ) {
+			this.wrapperInit(() => {
+				this.checkAuth()
+			})
+		} else {
+			this.checkAuth()
+		}
+		
+		console.log( "DeepLink Mount :", toJS( this.props.auth.deepLink ) )
+	}
 	
 	// MARK: - Init *************************************************************************************************************
 
-	async wrapperInit() {
+	async wrapperInit( callback ) {
 		let applicationCode = "EMSF6-F532D"
 		let contactFieldId = 3772
 		let predictMerchantId = "1A517D7BD6EAF712"
 
 		try {
 			let config = await EmarsysWrapper.init(applicationCode, contactFieldId, predictMerchantId)
+			
 			console.log("Init Done: ", config)
 			
-			this.props.auth.init = true
+			this.props.auth.init = true			
 			
-			showAlert( "Init", "Init Done: ", config )
+			Boolean( callback ) && callback()
 		} catch (e) {
 			console.log("Init Fail: ", e)
-			showAlert( "Init", "Init Fail: ", e )		
 		}
-	}
-	
+	}	
+
 	async wrapperLogin( callback ) {
 		let contactFieldValue = "second@email-test.com"
 
@@ -138,39 +146,21 @@ export default class Preload extends Component {
 							Emarsys App
 						</Text>
 						
-						{ !toJS( this.props.auth.init ) ? (
-						
-							<View style={ styles.buttonInit }>
-								 <Button
-									title="Init"
-									color="#595959"
-									onPress={() => {
-										this.wrapperInit()
-									}}
-								/>
-							</View>
-							
-						) : null }
-						
-						{ ( toJS( this.props.auth.init ) && !toJS( this.props.auth.token ) ) ? (
-						
-							<View style={ styles.buttonLogin }>
-								 <Button
-									title="Login to App"
-									color="#076bae"
-									onPress={() => {
-										this.wrapperLogin(() => {
-											this.props.auth.login(() => {
-												this.props.navigation.navigate("Init", {
-													cache: Date.now(),
-												})
+						<View style={ styles.buttonLogin }>
+							 <Button
+								title="Login to App"
+								color="#076bae"
+								onPress={() => {
+									this.wrapperLogin(() => {
+										this.props.auth.login(() => {
+											this.props.navigation.navigate("Init", {
+												cache: Date.now(),
 											})
 										})
-									}}
-								/>
-							</View>	
-
-						) : null }
+									})
+								}}
+							/>
+						</View>	
 						
 					</View>
 				</ScrollView>

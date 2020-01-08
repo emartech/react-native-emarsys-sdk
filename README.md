@@ -35,7 +35,7 @@ We created a sample application to help in the integration and give an example. 
 	end
   	```	
 5. After creating/editing the Podfile, you need to execute the command below to download CocoaPods dependencies: pod install
-6. Run your project (`Cmd+R`)<
+6. Run your project (`Cmd+R`)
 
 #### Android
 

@@ -17,17 +17,17 @@
 @implementation NSMutableDictionary (JSONString)
 
 - (NSString*) jsonStringWithPrettyPrint:(BOOL) prettyPrint {
-     NSError *error;
-     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self
-                                                   options:(NSJSONWritingOptions)    (prettyPrint ? NSJSONWritingPrettyPrinted : 0)
-                                                     error:&error];
-
-     if (! jsonData) {
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self
+                                                       options:(NSJSONWritingOptions)    (prettyPrint ? NSJSONWritingPrettyPrinted : 0)
+                                                         error:&error];
+    
+    if (! jsonData) {
         NSLog(@"error");
         return @"{}";
-     } else {
+    } else {
         return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-     }
+    }
 }
 
 @end
@@ -39,9 +39,8 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self
                                                        options:(NSJSONWritingOptions) (prettyPrint ? NSJSONWritingPrettyPrinted : 0)
                                                          error:&error];
-
+    
     if (! jsonData) {
-        
         return @"[]";
     } else {
         return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
@@ -53,15 +52,15 @@
 @implementation ArrayUtil
 
 + (NSArray<EMSCartItem *> *)arrayToCartList:(NSArray *)array {
-
-	NSMutableArray<EMSCartItem *> *items = [NSMutableArray array];
-
+    
+    NSMutableArray<EMSCartItem *> *items = [NSMutableArray array];
+    
     for (NSDictionary *i in array) {
         if ([i isKindOfClass:[NSDictionary class]]) {
             NSString *itemId = @"";
             double price = 0.0;
             double quantity = 0.0;
-
+            
             if ([[i objectForKey:@"itemId"] isKindOfClass:[NSString class]]){
                 itemId = [i objectForKey:@"itemId"];
             }
@@ -71,7 +70,7 @@
             if ([[i objectForKey:@"quantity"] isKindOfClass:[NSNumber class]]){
                 quantity = [[i objectForKey:@"quantity"] doubleValue];
             }
-
+            
             id item = [[EMSCartItem alloc] initWithItemId:itemId price:price quantity:quantity];
             [items addObject:item];
         }
@@ -105,19 +104,19 @@
     [map setObject: product.price forKeyedSubscript: @"price"];
     [map setObject: product.msrp forKeyedSubscript: @"msrp"];
     [map setObject: product.year forKeyedSubscript: @"year"];
-
+    
     return map;
-   
+    
 }
 
 + (EMSProduct *)mapToProduct:(NSDictionary *)object {
-
-	NSString *productId = @"";
+    
+    NSString *productId = @"";
     NSString *title = @"";
     NSString *linkUrl = @"";
     NSString *feature = @"";
     NSString *cohort = @"";
-
+    
     NSString *imageUrl = nil;
     NSString *zoomImageUrl = nil;
     NSString *categoryPath = nil;
@@ -127,16 +126,16 @@
     NSString *artist = nil;
     NSString *author = nil;
     NSString *brand = nil;
-
+    
     NSDictionary<NSString *, NSString *> *customFields = [[NSDictionary alloc] init];
-
+    
     Boolean available = true;
-
+    
     NSNumber *price = 0;
     NSNumber *msrp = 0;
-
+    
     NSNumber *year = 0;
-
+    
     if ([[object objectForKey:@"productId"] isKindOfClass:[NSString class]]){
         productId = [object objectForKey:@"productId"];
     }
@@ -194,13 +193,13 @@
     if ([[object objectForKey:@"year"] isKindOfClass:[NSNumber class]]){
         year = [object objectForKey:@"year"];
     }
-
+    
     EMSProduct *product = [EMSProduct makeWithBuilder:^(EMSProductBuilder *builder) {
         [builder setRequiredFieldsWithProductId:productId
-            title:title
-            linkUrl:[[NSURL alloc] initWithString:linkUrl]
-            feature:feature
-            cohort:cohort];
+                                          title:title
+                                        linkUrl:[[NSURL alloc] initWithString:linkUrl]
+                                        feature:feature
+                                         cohort:cohort];
         [builder setCustomFields:customFields];
         [builder setImageUrl:[[NSURL alloc] initWithString:imageUrl]];
         [builder setZoomImageUrl:[[NSURL alloc] initWithString:zoomImageUrl]];
@@ -216,7 +215,7 @@
         [builder setBrand:brand];
         [builder setYear:year];
     }];
-
+    
     return product;
 }
 
@@ -230,7 +229,7 @@
     NSMutableArray<NSString *> *expectations = [NSMutableArray array];
     
     EMSRecommendationFilter *filter = [[EMSRecommendationFilter alloc] init];
-
+    
     if ([map objectForKey:@"type"]) {
         type = [map objectForKey:@"type"];
     }
@@ -250,12 +249,12 @@
     }
     
     if ([map objectForKey:@"expectations"] && [[map objectForKey:@"expectations"] isMemberOfClass:[NSArray class]]) {
-           NSArray *expArray = [map mutableArrayValueForKey: @"expectations"];
-           for (NSString *item in expArray) {
-               expectation = item;
-               [expectations addObject:item];
-           }
-       }
+        NSArray *expArray = [map mutableArrayValueForKey: @"expectations"];
+        for (NSString *item in expArray) {
+            expectation = item;
+            [expectations addObject:item];
+        }
+    }
     
     if ([type caseInsensitiveCompare:@"include"]) {
         if ([comprasion caseInsensitiveCompare:@"IS"]) {
@@ -268,28 +267,28 @@
             filter = [EMSRecommendationFilter includeFilterWithField:(field) hasValue: (expectation)];
         }
         else if ([comprasion caseInsensitiveCompare:@"OVERLAPS"]) {
-                   filter = [EMSRecommendationFilter includeFilterWithField:(field) overlapsValues: (expectations)];
-               }
+            filter = [EMSRecommendationFilter includeFilterWithField:(field) overlapsValues: (expectations)];
+        }
         else {
             NSLog(@"Not correct comparison value!");
         }
     }
     else if ([type caseInsensitiveCompare:@"exclude"]) {
         if ([comprasion caseInsensitiveCompare:@"IS"]) {
-                  filter = [EMSRecommendationFilter excludeFilterWithField:(field) isValue: (expectation)];
-              }
-              else if ([comprasion caseInsensitiveCompare:@"IN"]) {
-                  filter = [EMSRecommendationFilter excludeFilterWithField:(field) inValues: (expectations)];
-              }
-              else if ([comprasion caseInsensitiveCompare:@"HAS"]) {
-                  filter = [EMSRecommendationFilter excludeFilterWithField:(field) hasValue: (expectation)];
-              }
-              else if ([comprasion caseInsensitiveCompare:@"OVERLAPS"]) {
-                         filter = [EMSRecommendationFilter excludeFilterWithField:(field) overlapsValues: (expectations)];
-                     }
-              else {
-                  NSLog(@"Not correct comparison value!");
-              }
+            filter = [EMSRecommendationFilter excludeFilterWithField:(field) isValue: (expectation)];
+        }
+        else if ([comprasion caseInsensitiveCompare:@"IN"]) {
+            filter = [EMSRecommendationFilter excludeFilterWithField:(field) inValues: (expectations)];
+        }
+        else if ([comprasion caseInsensitiveCompare:@"HAS"]) {
+            filter = [EMSRecommendationFilter excludeFilterWithField:(field) hasValue: (expectation)];
+        }
+        else if ([comprasion caseInsensitiveCompare:@"OVERLAPS"]) {
+            filter = [EMSRecommendationFilter excludeFilterWithField:(field) overlapsValues: (expectations)];
+        }
+        else {
+            NSLog(@"Not correct comparison value!");
+        }
     } else {
         NSLog(@"Not correct type");
     }
@@ -307,62 +306,62 @@
 @implementation LogicParser
 
 +(EMSLogic *)parseLogic:(NSString *)logic {
-	EMSLogic *recommendedLogic;
-
-	if([logic isEqualToString:@"CART"]) {
-		recommendedLogic = EMSLogic.cart;
-	}
-	else if([logic isEqualToString:@"RELATED"]) {
-		recommendedLogic = EMSLogic.related;
-	}
-	else if([logic isEqualToString:@"CATEGORY"]) {
-		recommendedLogic = EMSLogic.category;
-	}
-	else if([logic isEqualToString:@"ALSO_BOUGHT"]) {
-		recommendedLogic = EMSLogic.alsoBought;
-	}
-	else if([logic isEqualToString:@"POPULAR"]) {
-		recommendedLogic = EMSLogic.popular;
-	}
-
-	return recommendedLogic;
+    EMSLogic *recommendedLogic;
+    
+    if([logic isEqualToString:@"CART"]) {
+        recommendedLogic = EMSLogic.cart;
+    }
+    else if([logic isEqualToString:@"RELATED"]) {
+        recommendedLogic = EMSLogic.related;
+    }
+    else if([logic isEqualToString:@"CATEGORY"]) {
+        recommendedLogic = EMSLogic.category;
+    }
+    else if([logic isEqualToString:@"ALSO_BOUGHT"]) {
+        recommendedLogic = EMSLogic.alsoBought;
+    }
+    else if([logic isEqualToString:@"POPULAR"]) {
+        recommendedLogic = EMSLogic.popular;
+    }
+    
+    return recommendedLogic;
 }
 
 +(EMSLogic *)parseLogic:(NSString *)logic cartItems:(NSArray *)cartItems  {
-	EMSLogic *recommendedLogic;
-
-	if([logic isEqualToString:@"CART"]) {
+    EMSLogic *recommendedLogic;
+    
+    if([logic isEqualToString:@"CART"]) {
         NSArray<EMSCartItem *> *items = [ArrayUtil arrayToCartList:cartItems];
-		recommendedLogic = [EMSLogic cartWithCartItems:[items copy]];
-	}
-
-	else if([logic isEqualToString:@"RELATED"]) {
-		recommendedLogic = EMSLogic.related;
-	}
+        recommendedLogic = [EMSLogic cartWithCartItems:[items copy]];
+    }
+    
+    else if([logic isEqualToString:@"RELATED"]) {
+        recommendedLogic = EMSLogic.related;
+    }
     
     return recommendedLogic;
 }
 
 +(EMSLogic *)parseLogic:(NSString *)logic query:(NSString *)query  {
-	EMSLogic *recommendedLogic;
-
-	if([logic isEqualToString:@"SEARCH"]) {
-		recommendedLogic = [EMSLogic searchWithSearchTerm:query];
-	}
-	else if([logic isEqualToString:@"RELATED"]) {
-		recommendedLogic = [EMSLogic relatedWithViewItemId:query];
-	}
-	else if([logic isEqualToString:@"CATEGORY"]) {
-		recommendedLogic = [EMSLogic categoryWithCategoryPath:query];
-	}
-	else if([logic isEqualToString:@"ALSO_BOUGHT"]) {
-		recommendedLogic = [EMSLogic alsoBoughtWithViewItemId:query];
-	}
-	else if([logic isEqualToString:@"POPULAR"]) {
-		recommendedLogic = [EMSLogic popularWithCategoryPath:query];
-	} else {
-		recommendedLogic = [EMSLogic searchWithSearchTerm:query];
-	}
+    EMSLogic *recommendedLogic;
+    
+    if([logic isEqualToString:@"SEARCH"]) {
+        recommendedLogic = [EMSLogic searchWithSearchTerm:query];
+    }
+    else if([logic isEqualToString:@"RELATED"]) {
+        recommendedLogic = [EMSLogic relatedWithViewItemId:query];
+    }
+    else if([logic isEqualToString:@"CATEGORY"]) {
+        recommendedLogic = [EMSLogic categoryWithCategoryPath:query];
+    }
+    else if([logic isEqualToString:@"ALSO_BOUGHT"]) {
+        recommendedLogic = [EMSLogic alsoBoughtWithViewItemId:query];
+    }
+    else if([logic isEqualToString:@"POPULAR"]) {
+        recommendedLogic = [EMSLogic popularWithCategoryPath:query];
+    } else {
+        recommendedLogic = [EMSLogic searchWithSearchTerm:query];
+    }
     
     return recommendedLogic;
 }
@@ -383,11 +382,22 @@
     NSLog(@"EventHandler. handleEvent with eventName %@, payload %@",eventName, payload);
 }
 
+- (void)resolveProducts:(NSArray * _Nonnull)products resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject methodName: (NSString *) methodName withError: (NSError *) error {
+    if (products) {
+		NSMutableArray *recProducts = [NSMutableArray array];
+        for (EMSProduct *product in products) {
+            NSMutableDictionary<NSString *, NSString *> *recProduct = [MapUtil convertProductToMap:product];
+            [recProduct jsonStringWithPrettyPrint:true];
+            [recProducts addObject:recProduct];
+        }
+        resolve(recProducts);
+    } else {
+        reject(@"RNEmarsysWrapper", [NSString stringWithFormat:@"%@", methodName], error);
+    }
+}
+
 RCT_EXPORT_MODULE()
 
-// MARK: - Init
-
-// ******************************************************************************
 RCT_EXPORT_METHOD(init:(NSString * _Nullable)applicationCode contactFieldId:(NSNumber * _Nonnull)contactFieldId predictMerchantId:(NSString * _Nullable)predictMerchantId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         EMSConfig *config = [EMSConfig makeWithBuilder:^(EMSConfigBuilder *builder) {
@@ -395,11 +405,11 @@ RCT_EXPORT_METHOD(init:(NSString * _Nullable)applicationCode contactFieldId:(NSN
             [builder setContactFieldId:contactFieldId];
             [builder setMerchantId:predictMerchantId];
         }];
-
+        
         Emarsys.inApp.eventHandler = self;
-
+        
         [Emarsys setupWithConfig:config];
-
+        
         resolve([NSString stringWithFormat:@"%@", config]);
     }
     @catch (NSException *exception) {
@@ -407,7 +417,6 @@ RCT_EXPORT_METHOD(init:(NSString * _Nullable)applicationCode contactFieldId:(NSN
     }
 }
 
-// ******************************************************************************
 RCT_EXPORT_METHOD(setContact:(NSString * _Nonnull)contactFieldValue resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys setContactWithContactFieldValue:contactFieldValue completionBlock:^(NSError *error) {
@@ -423,7 +432,6 @@ RCT_EXPORT_METHOD(setContact:(NSString * _Nonnull)contactFieldValue resolver:(RC
     }
 }
 
-// ******************************************************************************
 RCT_EXPORT_METHOD(clearContact:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         [Emarsys clearContactWithCompletionBlock:^(NSError *error) {
@@ -439,7 +447,6 @@ RCT_EXPORT_METHOD(clearContact:(RCTPromiseResolveBlock)resolve rejecter:(RCTProm
     }
 }
 
-// ******************************************************************************
 RCT_EXPORT_METHOD(trackCustomEvent:(NSString * _Nonnull)eventName eventAttributes:(NSDictionary * _Nullable)eventAttributes resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys trackCustomEventWithName:eventName eventAttributes:eventAttributes completionBlock:^(NSError *error) {
@@ -455,9 +462,6 @@ RCT_EXPORT_METHOD(trackCustomEvent:(NSString * _Nonnull)eventName eventAttribute
     }
 }
 
-// MARK: - Push
-
-// ******************************************************************************
 RCT_EXPORT_METHOD(setPushToken:(NSData * _Nonnull)deviceToken resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys.push setPushToken:deviceToken completionBlock:^(NSError *error) {
@@ -473,7 +477,6 @@ RCT_EXPORT_METHOD(setPushToken:(NSData * _Nonnull)deviceToken resolver:(RCTPromi
     }
 }
 
-// ******************************************************************************
 RCT_EXPORT_METHOD(clearPushToken:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys.push clearPushTokenWithCompletionBlock:^(NSError *error) {
@@ -489,12 +492,11 @@ RCT_EXPORT_METHOD(clearPushToken:(RCTPromiseResolveBlock)resolve rejecter:(RCTPr
     }
 }
 
-// ******************************************************************************
 RCT_EXPORT_METHOD(trackMessageOpen:(NSString * _Nonnull)messageId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         NSDictionary *userData = @{@"sid":messageId};
         NSDictionary *userInfo = @{@"u": userData};
-
+        
         [Emarsys.push trackMessageOpenWithUserInfo:userInfo completionBlock:^(NSError *error) {
             if (NULL != error) {
                 reject(@"RNEmarsysWrapper", @"trackMessageOpen: ", error);
@@ -508,9 +510,6 @@ RCT_EXPORT_METHOD(trackMessageOpen:(NSString * _Nonnull)messageId resolver:(RCTP
     }
 }
 
-// MARK: - InApp
-
-// ******************************************************************************
 RCT_EXPORT_METHOD(pause:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys.inApp pause];
@@ -521,7 +520,6 @@ RCT_EXPORT_METHOD(pause:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseReje
     }
 }
 
-// ******************************************************************************
 RCT_EXPORT_METHOD(resume:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys.inApp resume];
@@ -532,33 +530,23 @@ RCT_EXPORT_METHOD(resume:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRej
     }
 }
 
-// ******************************************************************************
 RCT_EXPORT_METHOD(setEventHandler:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys.inApp setEventHandler:self];
-
+        
         self.handlerBlock = ^(NSString *eventName, NSDictionary<NSString *,NSObject *> *payload) {
             NSObject *eventData = @{
-              @"eventName": eventName,
-              @"payload": payload,
+                @"eventName": eventName,
+                @"payload": payload,
             };
-
             resolve(eventData);
         };
-
-//        if (self.handlerBlock) {
-//            self.handlerBlock(@"todo", [[NSDictionary alloc] initWithObjectsAndKeys:@"place.city", @"city", nil]);
-//        }
-
     }
     @catch (NSException *exception) {
         reject(exception.name, exception.reason, nil);
     }
 }
 
-// MARK: - Predict
-
-// ******************************************************************************
 RCT_EXPORT_METHOD(trackCart:(NSArray * _Nonnull)cartItems resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         NSArray<EMSCartItem *> *items = [ArrayUtil arrayToCartList:cartItems];
@@ -570,7 +558,6 @@ RCT_EXPORT_METHOD(trackCart:(NSArray * _Nonnull)cartItems resolver:(RCTPromiseRe
     }
 }
 
-// ******************************************************************************
 RCT_EXPORT_METHOD(trackPurchase:(NSString * _Nonnull)orderId items:(NSArray * _Nonnull)cartItems resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         NSArray<EMSCartItem *> *items = [ArrayUtil arrayToCartList:cartItems];
@@ -582,7 +569,6 @@ RCT_EXPORT_METHOD(trackPurchase:(NSString * _Nonnull)orderId items:(NSArray * _N
     }
 }
 
-// ******************************************************************************
 RCT_EXPORT_METHOD(trackItemView:(NSString * _Nonnull)itemId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         [Emarsys.predict trackItemViewWithItemId:itemId];
@@ -593,7 +579,6 @@ RCT_EXPORT_METHOD(trackItemView:(NSString * _Nonnull)itemId resolver:(RCTPromise
     }
 }
 
-// ******************************************************************************
 RCT_EXPORT_METHOD(trackCategoryView:(NSString * _Nonnull)categoryPath resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         [Emarsys.predict trackCategoryViewWithCategoryPath:categoryPath];
@@ -604,7 +589,6 @@ RCT_EXPORT_METHOD(trackCategoryView:(NSString * _Nonnull)categoryPath resolver:(
     }
 }
 
-// ******************************************************************************
 RCT_EXPORT_METHOD(trackSearchTerm:(NSString * _Nonnull)searchTerm resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         [Emarsys.predict trackSearchWithSearchTerm:searchTerm];
@@ -615,7 +599,6 @@ RCT_EXPORT_METHOD(trackSearchTerm:(NSString * _Nonnull)searchTerm resolver:(RCTP
     }
 }
 
-// ******************************************************************************
 RCT_EXPORT_METHOD(trackTag:(NSString * _Nonnull)tag withAttributes:(NSDictionary * _Nullable)attributes resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         [Emarsys.predict trackTag:tag withAttributes:attributes];
@@ -626,293 +609,161 @@ RCT_EXPORT_METHOD(trackTag:(NSString * _Nonnull)tag withAttributes:(NSDictionary
     }
 }
 
-// ******************************************************************************
+
 RCT_EXPORT_METHOD(recommendProducts:(NSString * _Nonnull)logic resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-	@try {
-		EMSLogic *recLogic = [LogicParser parseLogic:logic];
-        NSMutableArray *recProducts = [NSMutableArray array];
-		[Emarsys.predict recommendProductsWithLogic:recLogic productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
-			if (products) {
-                 for (EMSProduct *product in products) {
-                     NSMutableDictionary<NSString *, NSString *> *recProduct = [MapUtil convertProductToMap:product];
-                     [recProduct jsonStringWithPrettyPrint:true];
-                     [recProducts addObject:recProduct];
-                 }
-                 resolve(recProducts);
-			} else {
-				reject(@"RNEmarsysWrapper", @"recommendProducts: ", error);
-			}
-		}];
-	}
-	@catch (NSException *exception) {
-		reject(exception.name, exception.reason, nil);
-	}
-}
-
-// ******************************************************************************
-RCT_EXPORT_METHOD(recommendProductsQuery:(NSString * _Nonnull)logic query:(NSString * _Nonnull)query resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-	@try {
-        EMSLogic *recLogic = [LogicParser parseLogic:logic query:query];
-        NSMutableArray *recProducts = [NSMutableArray array];
+    @try {
+        EMSLogic *recLogic = [LogicParser parseLogic:logic];
         [Emarsys.predict recommendProductsWithLogic:recLogic productsBlock:^(NSArray<EMSProduct * >* products, NSError *error) {
-            if (products) {
-                for (EMSProduct *product in products) {
-                    NSMutableDictionary<NSString *, NSString *> *recProduct = [MapUtil convertProductToMap:product];
-                    [recProduct jsonStringWithPrettyPrint:true];
-                    [recProducts addObject:recProduct];
-                }
-                resolve(recProducts);
-            } else {
-                reject(@"RNEmarsysWrapper", @"recommendProductsQuery: ", error);
-            }
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProducts" withError:error];
         }];
-	}
-	@catch (NSException *exception) {
-		reject(exception.name, exception.reason, nil);
-	}
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
 }
 
-// ******************************************************************************
+RCT_EXPORT_METHOD(recommendProductsQuery:(NSString * _Nonnull)logic query:(NSString * _Nonnull)query resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        EMSLogic *recLogic = [LogicParser parseLogic:logic query:query];
+        [Emarsys.predict recommendProductsWithLogic:recLogic productsBlock:^(NSArray<EMSProduct * >* products, NSError *error) {
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsQuery" withError:error];
+        }];
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
 RCT_EXPORT_METHOD(recommendProductsCartItems:(NSString * _Nonnull)logic cartItems:(NSArray * _Nonnull)cartItems resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-	@try {
-		NSArray<EMSCartItem *> *items = [ArrayUtil arrayToCartList:cartItems];
-		EMSLogic *recLogic = [LogicParser parseLogic:logic cartItems:[items copy]];
-        NSMutableArray *recProducts = [NSMutableArray array];
-        [Emarsys.predict recommendProductsWithLogic:recLogic productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
-            if (products) {
-                 for (EMSProduct *product in products) {
-                     NSMutableDictionary<NSString *, NSString *> *recProduct = [MapUtil convertProductToMap:product];
-                     [recProduct jsonStringWithPrettyPrint:true];
-                     [recProducts addObject:recProduct];
-                 }
-                 resolve(recProducts);
-            } else {
-                reject(@"RNEmarsysWrapper", @"recommendProductsCartItems: ", error);
-            }
-        }];
-	}
-	@catch (NSException *exception) {
-		reject(exception.name, exception.reason, nil);
-	}
-}
-
-// ******************************************************************************
-RCT_EXPORT_METHOD(recommendProductsLimit:(NSString * _Nonnull)logic limit:(NSNumber * _Nonnull)limit resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-	@try {
-		EMSLogic *recLogic = [LogicParser parseLogic:logic];
-        NSMutableArray *recProducts = [NSMutableArray array];
-        [Emarsys.predict recommendProductsWithLogic:recLogic limit:limit productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
-            if (products) {
-                 for (EMSProduct *product in products) {
-                     NSMutableDictionary<NSString *, NSString *> *recProduct = [MapUtil convertProductToMap:product];
-                     [recProduct jsonStringWithPrettyPrint:true];
-                     [recProducts addObject:recProduct];
-                 }
-                 resolve(recProducts);
-            } else {
-                reject(@"RNEmarsysWrapper", @"recommendProductsLimit: ", error);
-            }
-        }];
-	}
-	@catch (NSException *exception) {
-		reject(exception.name, exception.reason, nil);
-	}
-}
-
-// ******************************************************************************
-RCT_EXPORT_METHOD(recommendProductsQueryLimit:(NSString * _Nonnull)logic query:(NSString * _Nonnull)query limit:(NSNumber * _Nonnull)limit resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-	@try {
-		EMSLogic *recLogic = [LogicParser parseLogic:logic query:query ];
-        NSMutableArray *recProducts = [NSMutableArray array];
-        [Emarsys.predict recommendProductsWithLogic:recLogic limit:limit productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
-            if (products) {
-                 for (EMSProduct *product in products) {
-                     NSMutableDictionary<NSString *, NSString *> *recProduct = [MapUtil convertProductToMap:product];
-                     [recProduct jsonStringWithPrettyPrint:true];
-                     [recProducts addObject:recProduct];
-                 }
-                 resolve(recProducts);
-            } else {
-                reject(@"RNEmarsysWrapper", @"recommendProductsQueryLimit: ", error);
-            }
-        }];
-	}
-	@catch (NSException *exception) {
-		reject(exception.name, exception.reason, nil);
-	}
-}
-
-// ******************************************************************************
-RCT_EXPORT_METHOD(recommendProductsCartItemsLimit:(NSString * _Nonnull)logic cartItems:(NSArray * _Nonnull)cartItems limit:(NSNumber * _Nonnull)limit resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-	@try {
-		NSArray<EMSCartItem *> *items = [ArrayUtil arrayToCartList:cartItems];
-		EMSLogic *recLogic = [LogicParser parseLogic:logic cartItems:[items copy]];
-        NSMutableArray *recProducts = [NSMutableArray array];
-        [Emarsys.predict recommendProductsWithLogic:recLogic limit:limit productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
-            if (products) {
-                 for (EMSProduct *product in products) {
-                     NSMutableDictionary<NSString *, NSString *> *recProduct = [MapUtil convertProductToMap:product];
-                     [recProduct jsonStringWithPrettyPrint:true];
-                     [recProducts addObject:recProduct];
-                 }
-                 resolve(recProducts);
-            } else {
-                reject(@"RNEmarsysWrapper", @"recommendProductsCartItemsLimit: ", error);
-            }
-        }];
-	}
-	@catch (NSException *exception) {
-		reject(exception.name, exception.reason, nil);
-	}
-}
-
-// ******************************************************************************
-RCT_EXPORT_METHOD(recommendProductsFilters:(NSString * _Nonnull)logic filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-	@try {
-		EMSLogic *recLogic = [LogicParser parseLogic:logic];
-		NSArray<EMSRecommendationFilter *> *recFilters = [MapUtil mapToRecommendationFilter:filters];
-        NSMutableArray *recProducts = [NSMutableArray array];
-        [Emarsys.predict recommendProductsWithLogic:recLogic filters:recFilters productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
-            if (products) {
-                 for (EMSProduct *product in products) {
-                     NSMutableDictionary<NSString *, NSString *> *recProduct = [MapUtil convertProductToMap:product];
-                     [recProduct jsonStringWithPrettyPrint:true];
-                     [recProducts addObject:recProduct];
-                 }
-                 resolve(recProducts);
-            } else {
-                reject(@"RNEmarsysWrapper", @"recommendProductsFilters: ", error);
-            }
-        }];
-	}
-	@catch (NSException *exception) {
-		reject(exception.name, exception.reason, nil);
-	}
-}
-
-// ******************************************************************************
-RCT_EXPORT_METHOD(recommendProductsQueryFilters:(NSString * _Nonnull)logic query:(NSString * _Nonnull)query filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-	@try {
-        EMSLogic *recLogic = [LogicParser parseLogic:logic query:query ];
-        NSArray<EMSRecommendationFilter *> *recFilters = [MapUtil mapToRecommendationFilter:filters];
-        NSMutableArray *recProducts = [NSMutableArray array];
-        [Emarsys.predict recommendProductsWithLogic:recLogic filters:recFilters productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
-            if (products) {
-                 for (EMSProduct *product in products) {
-                     NSMutableDictionary<NSString *, NSString *> *recProduct = [MapUtil convertProductToMap:product];
-                     [recProduct jsonStringWithPrettyPrint:true];
-                     [recProducts addObject:recProduct];
-                 }
-                 resolve(recProducts);
-            } else {
-                reject(@"RNEmarsysWrapper", @"recommendProductsQueryFilters: ", error);
-            }
-        }];
-	}
-	@catch (NSException *exception) {
-		reject(exception.name, exception.reason, nil);
-	}
-}
-
-// ******************************************************************************
-RCT_EXPORT_METHOD(recommendProductsCartItemsFilters:(NSString * _Nonnull)logic cartItems:(NSArray * _Nonnull)cartItems filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-	@try {
+    @try {
         NSArray<EMSCartItem *> *items = [ArrayUtil arrayToCartList:cartItems];
         EMSLogic *recLogic = [LogicParser parseLogic:logic cartItems:[items copy]];
-        NSArray<EMSRecommendationFilter *> *recFilters = [MapUtil mapToRecommendationFilter:filters];
-        NSMutableArray *recProducts = [NSMutableArray array];
-        [Emarsys.predict recommendProductsWithLogic:recLogic filters:recFilters productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
-            if (products) {
-                 for (EMSProduct *product in products) {
-                     NSMutableDictionary<NSString *, NSString *> *recProduct = [MapUtil convertProductToMap:product];
-                     [recProduct jsonStringWithPrettyPrint:true];
-                     [recProducts addObject:recProduct];
-                 }
-                 resolve(recProducts);
-            } else {
-                reject(@"RNEmarsysWrapper", @"recommendProductsCartItemsFilters: ", error);
-            }
+        [Emarsys.predict recommendProductsWithLogic:recLogic productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsCartItems" withError:error];
         }];
-	}
-	@catch (NSException *exception) {
-		reject(exception.name, exception.reason, nil);
-	}
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
 }
 
-// ******************************************************************************
-RCT_EXPORT_METHOD(recommendProductsLimitFilters:(NSString * _Nonnull)logic limit:(NSNumber * _Nonnull)limit filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-	@try {
+RCT_EXPORT_METHOD(recommendProductsLimit:(NSString * _Nonnull)logic limit:(NSNumber * _Nonnull)limit resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        EMSLogic *recLogic = [LogicParser parseLogic:logic];
+        [Emarsys.predict recommendProductsWithLogic:recLogic limit:limit productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsLimit" withError:error];
+        }];
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
+RCT_EXPORT_METHOD(recommendProductsQueryLimit:(NSString * _Nonnull)logic query:(NSString * _Nonnull)query limit:(NSNumber * _Nonnull)limit resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        EMSLogic *recLogic = [LogicParser parseLogic:logic query:query ];
+        [Emarsys.predict recommendProductsWithLogic:recLogic limit:limit productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsQueryLimit" withError:error];
+        }];
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
+RCT_EXPORT_METHOD(recommendProductsCartItemsLimit:(NSString * _Nonnull)logic cartItems:(NSArray * _Nonnull)cartItems limit:(NSNumber * _Nonnull)limit resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        NSArray<EMSCartItem *> *items = [ArrayUtil arrayToCartList:cartItems];
+        EMSLogic *recLogic = [LogicParser parseLogic:logic cartItems:[items copy]];
+        [Emarsys.predict recommendProductsWithLogic:recLogic limit:limit productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsCartItemsLimit" withError:error];
+        }];
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
+RCT_EXPORT_METHOD(recommendProductsFilters:(NSString * _Nonnull)logic filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
         EMSLogic *recLogic = [LogicParser parseLogic:logic];
         NSArray<EMSRecommendationFilter *> *recFilters = [MapUtil mapToRecommendationFilter:filters];
-        NSMutableArray *recProducts = [NSMutableArray array];
-        [Emarsys.predict recommendProductsWithLogic:recLogic filters:recFilters limit:limit productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
-            if (products) {
-                 for (EMSProduct *product in products) {
-                     NSMutableDictionary<NSString *, NSString *> *recProduct = [MapUtil convertProductToMap:product];
-                     [recProduct jsonStringWithPrettyPrint:true];
-                     [recProducts addObject:recProduct];
-                 }
-                 resolve(recProducts);
-            } else {
-                reject(@"RNEmarsysWrapper", @"recommendProductsLimitFilters: ", error);
-            }
+        [Emarsys.predict recommendProductsWithLogic:recLogic filters:recFilters productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsFilters" withError:error];
         }];
-	}
-	@catch (NSException *exception) {
-		reject(exception.name, exception.reason, nil);
-	}
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
 }
 
-// ******************************************************************************
-RCT_EXPORT_METHOD(recommendProductsQueryLimitFilters:(NSString * _Nonnull)logic query:(NSString * _Nonnull)query limit:(NSNumber * _Nonnull)limit filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-	@try {
+RCT_EXPORT_METHOD(recommendProductsQueryFilters:(NSString * _Nonnull)logic query:(NSString * _Nonnull)query filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
         EMSLogic *recLogic = [LogicParser parseLogic:logic query:query ];
         NSArray<EMSRecommendationFilter *> *recFilters = [MapUtil mapToRecommendationFilter:filters];
-        NSMutableArray *recProducts = [NSMutableArray array];
-        [Emarsys.predict recommendProductsWithLogic:recLogic filters:recFilters limit:limit productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
-            if (products) {
-                 for (EMSProduct *product in products) {
-                     NSMutableDictionary<NSString *, NSString *> *recProduct = [MapUtil convertProductToMap:product];
-                     [recProduct jsonStringWithPrettyPrint:true];
-                     [recProducts addObject:recProduct];
-                 }
-                 resolve(recProducts);
-            } else {
-                reject(@"RNEmarsysWrapper", @"recommendProductsQueryLimitFilters: ", error);
-            }
+        [Emarsys.predict recommendProductsWithLogic:recLogic filters:recFilters productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsQueryFilters" withError:error];
         }];
-	}
-	@catch (NSException *exception) {
-		reject(exception.name, exception.reason, nil);
-	}
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
 }
 
-// ******************************************************************************
-RCT_EXPORT_METHOD(recommendProductsCartItemsLimitFilters:(NSString * _Nonnull)logic cartItems:(NSArray * _Nonnull)cartItems limit:(NSNumber * _Nonnull)limit filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-	@try {
+RCT_EXPORT_METHOD(recommendProductsCartItemsFilters:(NSString * _Nonnull)logic cartItems:(NSArray * _Nonnull)cartItems filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
         NSArray<EMSCartItem *> *items = [ArrayUtil arrayToCartList:cartItems];
         EMSLogic *recLogic = [LogicParser parseLogic:logic cartItems:[items copy]];
         NSArray<EMSRecommendationFilter *> *recFilters = [MapUtil mapToRecommendationFilter:filters];
-        NSMutableArray *recProducts = [NSMutableArray array];
-        [Emarsys.predict recommendProductsWithLogic:recLogic filters:recFilters limit:limit productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
-            if (products) {
-                 for (EMSProduct *product in products) {
-                     NSMutableDictionary<NSString *, NSString *> *recProduct = [MapUtil convertProductToMap:product];
-                     [recProduct jsonStringWithPrettyPrint:true];
-                     [recProducts addObject:recProduct];
-                 }
-                 resolve(recProducts);
-            } else {
-                reject(@"RNEmarsysWrapper", @"recommendProductsCartItemsLimitFilters: ", error);
-            }
+        [Emarsys.predict recommendProductsWithLogic:recLogic filters:recFilters productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsCartItemsFilters" withError:error];
         }];
-	}
-	@catch (NSException *exception) {
-		reject(exception.name, exception.reason, nil);
-	}
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
 }
 
-// ******************************************************************************
+RCT_EXPORT_METHOD(recommendProductsLimitFilters:(NSString * _Nonnull)logic limit:(NSNumber * _Nonnull)limit filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        EMSLogic *recLogic = [LogicParser parseLogic:logic];
+        NSArray<EMSRecommendationFilter *> *recFilters = [MapUtil mapToRecommendationFilter:filters];
+        [Emarsys.predict recommendProductsWithLogic:recLogic filters:recFilters limit:limit productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsLimitFilters" withError:error];
+        }];
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
+RCT_EXPORT_METHOD(recommendProductsQueryLimitFilters:(NSString * _Nonnull)logic query:(NSString * _Nonnull)query limit:(NSNumber * _Nonnull)limit filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        EMSLogic *recLogic = [LogicParser parseLogic:logic query:query ];
+        NSArray<EMSRecommendationFilter *> *recFilters = [MapUtil mapToRecommendationFilter:filters];
+        [Emarsys.predict recommendProductsWithLogic:recLogic filters:recFilters limit:limit productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsQueryLimitFilters" withError:error];
+        }];
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
+RCT_EXPORT_METHOD(recommendProductsCartItemsLimitFilters:(NSString * _Nonnull)logic cartItems:(NSArray * _Nonnull)cartItems limit:(NSNumber * _Nonnull)limit filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        NSArray<EMSCartItem *> *items = [ArrayUtil arrayToCartList:cartItems];
+        EMSLogic *recLogic = [LogicParser parseLogic:logic cartItems:[items copy]];
+        NSArray<EMSRecommendationFilter *> *recFilters = [MapUtil mapToRecommendationFilter:filters];
+        [Emarsys.predict recommendProductsWithLogic:recLogic filters:recFilters limit:limit productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsCartItemsLimitFilters" withError:error];
+        }];
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
 RCT_EXPORT_METHOD(trackRecommendationClick:(NSDictionary * _Nonnull)product resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         EMSProduct *items = [MapUtil mapToProduct:product];
@@ -924,9 +775,6 @@ RCT_EXPORT_METHOD(trackRecommendationClick:(NSDictionary * _Nonnull)product reso
     }
 }
 
-// MARK: - DeepLink
-
-// ******************************************************************************
 RCT_EXPORT_METHOD(trackDeepLink:(NSString * _Nullable)userActivity resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         if ( userActivity != nil ) {
@@ -934,7 +782,7 @@ RCT_EXPORT_METHOD(trackDeepLink:(NSString * _Nullable)userActivity resolver:(RCT
             NSURL *activityURL = [NSURL URLWithString:userActivity];
             @try {
                 activity.webpageURL = activityURL;
-
+                
                 [Emarsys trackDeepLinkWithUserActivity:activity sourceHandler:^(NSString *source) {
                     NSLog(@"trackDeepLink. Source url: %@", source);
                     resolve([NSNumber numberWithBool:YES]);
@@ -950,9 +798,6 @@ RCT_EXPORT_METHOD(trackDeepLink:(NSString * _Nullable)userActivity resolver:(RCT
     }
 }
 
-// MARK: - ApplicationCode and merchantId change
-
-// ******************************************************************************
 RCT_EXPORT_METHOD(changeApplicationCode:(NSString * _Nullable)applicationCode resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys.config changeApplicationCode:applicationCode completionBlock:^(NSError *error) {
@@ -968,7 +813,6 @@ RCT_EXPORT_METHOD(changeApplicationCode:(NSString * _Nullable)applicationCode re
     }
 }
 
-// ******************************************************************************
 RCT_EXPORT_METHOD(changeMerchantId:(NSString * _Nullable)merchantId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys.config changeMerchantId:merchantId ];
@@ -979,7 +823,6 @@ RCT_EXPORT_METHOD(changeMerchantId:(NSString * _Nullable)merchantId resolver:(RC
     }
 }
 
-// ******************************************************************************
 RCT_EXPORT_METHOD(getApplicationCode:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         NSString *applicationCode = [Emarsys.config applicationCode];
@@ -990,7 +833,6 @@ RCT_EXPORT_METHOD(getApplicationCode:(RCTPromiseResolveBlock)resolve rejecter:(R
     }
 }
 
-// ******************************************************************************
 RCT_EXPORT_METHOD(getMerchantId:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         NSString *merchantId = [Emarsys.config merchantId];
@@ -1001,7 +843,6 @@ RCT_EXPORT_METHOD(getMerchantId:(RCTPromiseResolveBlock)resolve rejecter:(RCTPro
     }
 }
 
-// ******************************************************************************
 RCT_EXPORT_METHOD(getContactFieldId:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         NSNumber *contactFieldId = [Emarsys.config contactFieldId];
