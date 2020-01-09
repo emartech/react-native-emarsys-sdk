@@ -5,12 +5,16 @@ class Auth {
 	@observable deepLink = ""
 	@observable isPaused = false
 	@observable init = false
+	
+	@observable messageToken = false
 
 	@action reset() {
 		this.token = false
 		this.deepLink = ""
 		this.isPaused = false
 		this.init = false
+		
+		this.messageToken = false
 	}
 	
 	@action login( callback ) {

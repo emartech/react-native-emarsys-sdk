@@ -15,7 +15,75 @@ import Navigation from "./Navigation"
 
 import EmarsysWrapper from "react-native-emarsys-wrapper"
 
+import firebase from '@react-native-firebase/app'
+import '@react-native-firebase/messaging';
+
+let fcmToken = null
+
 export default class App extends Component {
+	
+	saveToken( token ) {
+		console.log("+++ FCM. saveToken: ", token )
+		
+		if ( !token ) return false
+		
+		Auth.messageToken = token
+	}		
+	
+	async getToken() {
+		
+		fcmToken = await firebase.messaging().getToken()
+
+		if ( fcmToken ) {
+			
+			console.log("+++ FCM. fcmToken: ", fcmToken )
+			
+			this.saveToken( fcmToken )
+		}
+	}
+
+	async requestPermission() {
+		try {
+			await firebase.messaging().requestPermission()
+			console.log("+++ FCM. User has authorised  ")
+			this.getToken()
+		} catch (error) {
+			console.log("+++ FCM. User has rejected permissions:  ", error)
+		}
+	}
+
+	async checkPermission() {
+		const enabled = await firebase.messaging().hasPermission()
+
+		if ( enabled ) {
+			console.log("+++ FCM. permissions granted: ", enabled)
+			this.getToken()
+		} else {
+			console.log("+++ FCM. permissions not granted")
+			this.requestPermission()
+		}
+	}
+
+	async tokenRefreshListener() {
+		firebase.messaging().onTokenRefresh( ( token ) => {
+			if ( token ) {
+				console.log( "+++ FCM onTokenRefresh: ", token )
+				fcmToken = token
+				
+				this.saveToken( fcmToken )
+			}
+		})
+	}	
+	
+	async messageListener() {
+		firebase.messaging().onMessage(async(remoteMessage) => {
+			console.log("+++ FCM onMessage: ", remoteMessage )
+			
+			if ( remoteMessage ) {
+				console.log("+++ FCM onMessage: ", ( remoteMessage.data ) ? remoteMessage.data : "No message" )
+			}
+		})
+	}
 
 	checkAuth = () => {
 		if ( !toJS( Auth.token ) ) {
@@ -25,7 +93,7 @@ export default class App extends Component {
 		}
 	}
 	
-	componentDidMount() {
+	async componentDidMount() {
 		console.log("****** INIT APP: ", toJS( Auth.init ) )
 		
 		if ( !toJS( Auth.init ) ) {
@@ -39,10 +107,20 @@ export default class App extends Component {
 
 			this.checkAuth()
 		}
+		
+		this.checkPermission()
+
+		this.tokenRefreshListener()
+
+		this.messageListener()
 	}	
 	
 	componentWillUnmount() {
 		this.linkingUnMount()
+		
+		this.tokenRefreshListener()
+
+		this.messageListener()
 	}	
 	
 	linkingMount( callback ) {

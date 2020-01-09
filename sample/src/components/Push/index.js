@@ -1,3 +1,7 @@
+import { inject, observer } from "mobx-react"
+
+import { toJS } from "mobx"
+
 import React, { Component } from "react"
 
 import { StyleSheet, View, Text, Button, ScrollView } from "react-native"
@@ -51,16 +55,18 @@ const styles = StyleSheet.create({
 	},	
 })
 
+@inject("auth")
+@observer
 export default class Push extends Component {
 
 	// MARK: - Push *************************************************************************************************************
 
 	async wrapperSetPushToken() {
-		let deviceToken = "custom-push-token"
+		let deviceToken = toJS( this.props.auth.messageToken ) ? toJS( this.props.auth.messageToken ) : ""
 
 		try {
 			let result = await EmarsysWrapper.setPushToken( deviceToken )
-			console.log("setPushToken Done: ", result)
+			console.log("setPushToken Done: ", deviceToken, result)
 			showAlert( "setPushToken", "setPushToken Done.")
 		} catch (e) {
 			console.log("setPushToken Fail: ", e)
