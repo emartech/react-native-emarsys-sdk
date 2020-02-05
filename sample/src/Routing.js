@@ -1,18 +1,17 @@
-import React, { Component } from "react"
+import React from "react"
 
 import { toJS } from "mobx"
 
-import { createAppContainer, createSwitchNavigator } from "react-navigation"
+import { createAppContainer } from "react-navigation"
 import { createStackNavigator } from "react-navigation-stack"
-import { createMaterialTopTabNavigator, createBottomTabNavigator } from "react-navigation-tabs"
+import { createBottomTabNavigator } from "react-navigation-tabs"
 
-import { StyleSheet, TouchableOpacity, View, Text, Platform } from "react-native"
+import { StyleSheet, TouchableOpacity, View, Platform } from "react-native"
 
 import EmarsysWrapper from "react-native-emarsys-wrapper"
 
 import Ionicon from "react-native-vector-icons/Ionicons"
 
-import Preload from "./components/Preload"
 
 import Init from "./components/Init"
 import Push from "./components/Push"
@@ -128,46 +127,6 @@ const btnPreload = navigation => {
 	)
 }
 
-const btnLogOut = navigation => {
-	if ( !navigation ) return (<View />)
-	
-	return toJS( Auth.token ) ? (
-		<TouchableOpacity
-			activeOpacity={0.8}
-			onPress={() => {
-				wrapperLogout(() => {
-					Auth.logout(() => {
-						navigation.navigate("Preload", {
-							cache: Date.now(), 
-						})
-					})
-				})
-			}}
-		>
-			<View style={ Platform.OS === "ios" ? styles.headerBtnBoxIOS : styles.headerBtnBox }>
-				<Ionicon name="md-log-out" style={ Platform.OS === "ios" ? styles.headerBtnIconIOS : styles.headerBtnIcon } />
-			</View>
-		</TouchableOpacity>
-	) : (
-		<TouchableOpacity
-			activeOpacity={0.8}
-			onPress={() => {
-				wrapperLogin(() => {
-					Auth.login(() => {
-						navigation.navigate("Init", {
-							cache: Date.now(), 
-						})
-					})
-				})				
-			}}
-		>
-			<View style={ Platform.OS === "ios" ? styles.headerBtnBoxIOS : styles.headerBtnBox }>
-				<Ionicon name="md-log-in" style={ Platform.OS === "ios" ? styles.headerBtnIconIOS : styles.headerBtnIcon } />
-			</View>
-		</TouchableOpacity>
-	)
-}
-
 const InitStackRouteConfig = {
 	Init: {
 		screen: Init,
@@ -176,8 +135,6 @@ const InitStackRouteConfig = {
 			headerLayoutPreset: "center",
 			headerTitleStyle: Platform.OS === "ios" ? styles.headerTitleStyleIOS : styles.headerTitleStyle,
 			headerStyle: styles.headerStyle,
-			headerLeft: btnPreload(navigation),
-			headerRight: btnLogOut(navigation),
 		}),
 	},
 }
@@ -190,8 +147,6 @@ const PushStackRouteConfig = {
 			headerLayoutPreset: "center",
 			headerTitleStyle: Platform.OS === "ios" ? styles.headerTitleStyleIOS : styles.headerTitleStyle,
 			headerStyle: styles.headerStyle,
-			headerLeft: btnPreload(navigation),
-			headerRight: btnLogOut(navigation),
 		}),
 	},
 }
@@ -204,8 +159,6 @@ const InAppStackRouteConfig = {
 			headerLayoutPreset: "center",
 			headerTitleStyle: Platform.OS === "ios" ? styles.headerTitleStyleIOS : styles.headerTitleStyle,
 			headerStyle: styles.headerStyle,
-			headerLeft: btnPreload(navigation),
-			headerRight: btnLogOut(navigation),
 		}),
 	},
 }
@@ -218,8 +171,6 @@ const PredictStackRouteConfig = {
 			headerLayoutPreset: "center",
 			headerTitleStyle: Platform.OS === "ios" ? styles.headerTitleStyleIOS : styles.headerTitleStyle,
 			headerStyle: styles.headerStyle,
-			headerLeft: btnPreload(navigation),
-			headerRight: btnLogOut(navigation),
 		}),
 	},
 }
@@ -302,17 +253,6 @@ const bottomTabNavigatorConfig = {
 
 const BottomTabNavigator = createBottomTabNavigator( bottomTabRouteConfig, bottomTabNavigatorConfig )
 
-const switchRoutesConfig = {
-	Preload: Preload,
-	App: BottomTabNavigator,
-}
-
-const switchNavigatorConfig = {
-	initialRouteName: "Preload", 
-}
-
-const switchNavigation = createSwitchNavigator( switchRoutesConfig, switchNavigatorConfig )
-
-const Routing = createAppContainer( switchNavigation )
+const Routing = createAppContainer( BottomTabNavigator )
 
 export default Routing
