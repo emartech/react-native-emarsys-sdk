@@ -2,7 +2,7 @@ import { NativeModules } from 'react-native';
 
 const { RNEmarsysWrapper } = NativeModules;
 
-export default class EmarsysWrapper {
+const EmarsysWrapper = {
 
 	/* Init ***************************************************************************************************************************************/
 
@@ -14,9 +14,9 @@ export default class EmarsysWrapper {
 	  * @param string predictMerchantId - is needed if you want to use Predict features
 	  * @return string - Initialization SDK response
 	*/		
-	static init(applicationCode, contactFieldId, predictMerchantId) {
+	init(applicationCode, contactFieldId, predictMerchantId) {
 		return RNEmarsysWrapper.init(applicationCode ? applicationCode : null, contactFieldId, predictMerchantId ? predictMerchantId : null)
-	}
+	},
 
 	/**
 	  * @desc After application setup is finished, you can use setContact method to identify the user with a contactFieldValue. 
@@ -25,9 +25,9 @@ export default class EmarsysWrapper {
 	  * @param required string contactFieldValue - user/application identification e-mail
 	  * @return bool - success or failure
 	*/		
-	static setContact(contactFieldValue) {
+	setContact(contactFieldValue) {
 		return RNEmarsysWrapper.setContact(contactFieldValue)
-	}
+	},
 
 	/**
 	  * @desc When the user signs out, we should use the clearContact method. 
@@ -35,9 +35,9 @@ export default class EmarsysWrapper {
 	  
 	  * @return bool - success or failure
 	*/		
-	static clearContact() {
+	clearContact() {
 		return RNEmarsysWrapper.clearContact()
-	}
+	},
 
 	/**
 	  * @desc If you want to track custom events, the trackCustomEvent method should be used.
@@ -46,9 +46,9 @@ export default class EmarsysWrapper {
 	  * @param object eventAttributes - Attributes of tracked custom event.
 	  * @return bool - success or failure
 	*/		
-	static trackCustomEvent(eventName, eventAttributes) {
+	trackCustomEvent(eventName, eventAttributes) {
 		return RNEmarsysWrapper.trackCustomEvent(eventName, eventAttributes ? eventAttributes : null)
-	}
+	},
 
 
 
@@ -61,18 +61,18 @@ export default class EmarsysWrapper {
 	  * @param required string pushToken - Push Token of your MessagingService
 	  * @return bool - success or failure
 	*/		
-	static setPushToken(pushToken) {
+	setPushToken(pushToken) {
 		return RNEmarsysWrapper.setPushToken(pushToken)
-	}
+	},
 
 	/**
 	  * @desc If you want to remove pushToken for the Contact, please use clearPushToken().
 	  
 	  * @return bool - success or failure
 	*/		
-	static clearPushToken() {
+	clearPushToken() {
 		return RNEmarsysWrapper.clearPushToken()
-	}
+	},
 
 	/**
 	  * @The Emarsys SDK automatically handles whether the push messages have been opened, however, if you want to track it manually the trackMessageOpen method should be used.
@@ -80,9 +80,9 @@ export default class EmarsysWrapper {
 	  * @param required string messageId - Push message ID
 	  * @return bool - success or failure
 	*/		
-	static trackMessageOpen(messageId) {
+	trackMessageOpen(messageId) {
 		return RNEmarsysWrapper.trackMessageOpen(messageId)
-	}
+	},
 
 
 
@@ -93,27 +93,27 @@ export default class EmarsysWrapper {
 
 	  * @return bool - success or failure
 	*/		
-	static pause() {
+	pause() {
 		return RNEmarsysWrapper.pause()
-	}
+	},
 
 	/**
 	  * @desc In order to show inApp messages after being paused, use the resume method.
 
 	  * @return bool - success or failure
 	*/		
-	static resume() {
+	resume() {
 		return RNEmarsysWrapper.resume()
-	}
+	},
 
 	/**
 	  * @desc In order to react to an event, triggered from the InApp message, you can register for it using the setEventHandler method.
 
 	  * @return bool - success or failure
 	*/		
-	static setEventHandler() {
+	setEventHandler() {
 		return RNEmarsysWrapper.setEventHandler()
-	}
+	},
 
 
 
@@ -143,9 +143,9 @@ export default class EmarsysWrapper {
 	  * 	}]
 	  * @return bool - success or failure
 	*/		
-	static trackCart(cartItems) {
+	trackCart(cartItems) {
 		return RNEmarsysWrapper.trackCart(cartItems)
-	}
+	},
 
 	/**
 	  * @desc To report a purchase event, you should call trackPurchase with the items purchased and with an orderId.
@@ -171,9 +171,9 @@ export default class EmarsysWrapper {
 	  * 	}]
 	  * @return bool - success or failure
 	*/		
-	static trackPurchase(orderId, cartItems) {
+	trackPurchase(orderId, cartItems) {
 		return RNEmarsysWrapper.trackPurchase(orderId, cartItems)
-	}
+	},
 
 	/**
 	  * @desc If an item was viewed, use the trackItemView method with an itemId as required parameter.
@@ -181,9 +181,9 @@ export default class EmarsysWrapper {
 	  * @param required string itemId - ID of item was viewed.
 	  * @return bool - success or failure
 	*/		
-	static trackItemView(itemId) {
+	trackItemView(itemId) {
 		return RNEmarsysWrapper.trackItemView(itemId)
-	}
+	},
 
 	/**
 	  * @desc When the user navigates between the categories, you should call trackCategoryView in every navigation. Be aware to send categoryPath in the required format.
@@ -191,9 +191,9 @@ export default class EmarsysWrapper {
 	  * @param required string categoryPath - Category path was viewed.
 	  * @return bool - success or failure
 	*/		
-	static trackCategoryView(categoryPath) {
+	trackCategoryView(categoryPath) {
 		return RNEmarsysWrapper.trackCategoryView(categoryPath)
-	}
+	},
 
 	/**
 	  * @desc To report search terms entered by the contact, use trackSearchTerm method.
@@ -201,9 +201,9 @@ export default class EmarsysWrapper {
 	  * @param required string searchTerm - Term was searched.
 	  * @return bool - success or failure
 	*/		
-	static trackSearchTerm(searchTerm) {
+	trackSearchTerm(searchTerm) {
 		return RNEmarsysWrapper.trackSearchTerm(searchTerm)
-	}
+	},
 
 	/**
 	  * @desc To track custom tags, use the trackTag method, where, the eventName parameter is required, but the attributes is optional.
@@ -216,9 +216,9 @@ export default class EmarsysWrapper {
 	  * 	}
 	  * @return bool - success or failure
 	*/		
-	static trackTag(tagName, tagAttributes) {
+	trackTag(tagName, tagAttributes) {
 		return RNEmarsysWrapper.trackTag(tagName, tagAttributes ? tagAttributes : null)
-	}
+	},
 
 	/**
 	  * @desc With the Emarsys SDK you can ask for product recommendations based on different parameters.
@@ -235,9 +235,9 @@ export default class EmarsysWrapper {
 	  * 	HOME - based on most recent browsing behaviour
 	  * @return array - array of objects with recommended Products
 	*/		
-	static recommendProducts(logic) {
+	recommendProducts(logic) {
 		return RNEmarsysWrapper.recommendProducts(logic)
-	}
+	},
 
 	/**
 	  * @desc With the Emarsys SDK you can ask for product recommendations based on different parameters.
@@ -255,9 +255,9 @@ export default class EmarsysWrapper {
 	  * @param required string query - Query string extends recommended logics.
 	  * @return array - array of objects with recommended Products
 	*/		
-	static recommendProductsQuery(logic, query) {
+	recommendProductsQuery(logic, query) {
 		return RNEmarsysWrapper.recommendProductsQuery(logic, query)
-	}
+	},
 
 	/**
 	  * @desc With the Emarsys SDK you can ask for product recommendations based on different parameters.
@@ -292,9 +292,9 @@ export default class EmarsysWrapper {
 	  * 	}]
 	  * @return array - array of objects with recommended Products
 	*/		
-	static recommendProductsCartItems(logic, cartItems) {
+	recommendProductsCartItems(logic, cartItems) {
 		return RNEmarsysWrapper.recommendProductsCartItems(logic, cartItems)
-	}
+	},
 
 	/**
 	  * @desc With the Emarsys SDK you can ask for product recommendations based on different parameters.
@@ -312,9 +312,9 @@ export default class EmarsysWrapper {
 	  * @param required integer limit - You can limit the number of recommended products received by defining a limit. This is an optional parameter, by default its value is 5.
 	  * @return array - array of objects with recommended Products
 	*/		
-	static recommendProductsLimit(logic, limit) {
+	recommendProductsLimit(logic, limit) {
 		return RNEmarsysWrapper.recommendProductsLimit(logic, limit)
-	}
+	},
 
 	/**
 	  * @desc With the Emarsys SDK you can ask for product recommendations based on different parameters.
@@ -333,9 +333,9 @@ export default class EmarsysWrapper {
 	  * @param required integer limit - You can limit the number of recommended products received by defining a limit. This is an optional parameter, by default its value is 5.
 	  * @return array - array of objects with recommended Products
 	*/		
-	static recommendProductsQueryLimit(logic, query, limit) {
+	recommendProductsQueryLimit(logic, query, limit) {
 		return RNEmarsysWrapper.recommendProductsQueryLimit(logic, query, limit)
-	}
+	},
 
 	/**
 	  * @desc With the Emarsys SDK you can ask for product recommendations based on different parameters.
@@ -371,9 +371,9 @@ export default class EmarsysWrapper {
 	  * @param required integer limit - You can limit the number of recommended products received by defining a limit. This is an optional parameter, by default its value is 5.
 	  * @return array - array of objects with recommended Products
 	*/		
-	static recommendProductsCartItemsLimit(logic, cartItems, limit) {
+	recommendProductsCartItemsLimit(logic, cartItems, limit) {
 		return RNEmarsysWrapper.recommendProductsCartItemsLimit(logic, cartItems, limit)
-	}
+	},
 
 	/**
 	  * @desc With the Emarsys SDK you can ask for product recommendations based on different parameters.
@@ -399,9 +399,9 @@ export default class EmarsysWrapper {
 	  * 	@param required string/array expectations - String/Array of strings extends Comparison of recommended logics.
 	  * @return array - array of objects with recommended Products
 	*/		
-	static recommendProductsFilters(logic, filters) {
+	recommendProductsFilters(logic, filters) {
 		return RNEmarsysWrapper.recommendProductsFilters(logic, filters)
-	}
+	},
 
 	/**
 	  * @desc With the Emarsys SDK you can ask for product recommendations based on different parameters.
@@ -428,9 +428,9 @@ export default class EmarsysWrapper {
 	  * 	@param required string/array expectations - String/Array of strings extends Comparison of recommended logics.
 	  * @return array - array of objects with recommended Products
 	*/		
-	static recommendProductsQueryFilters(logic, query, filters) {
+	recommendProductsQueryFilters(logic, query, filters) {
 		return RNEmarsysWrapper.recommendProductsQueryFilters(logic, query, filters)
-	}
+	},
 
 	/**
 	  * @desc With the Emarsys SDK you can ask for product recommendations based on different parameters.
@@ -474,9 +474,9 @@ export default class EmarsysWrapper {
 	  * 	@param required string/array expectations - String/Array of strings extends Comparison of recommended logics.
 	  * @return array - array of objects with recommended Products
 	*/		
-	static recommendProductsCartItemsFilters(logic, cartItems, filters) {
+	recommendProductsCartItemsFilters(logic, cartItems, filters) {
 		return RNEmarsysWrapper.recommendProductsCartItemsFilters(logic, cartItems, filters)
-	}
+	},
 
 	/**
 	  * @desc With the Emarsys SDK you can ask for product recommendations based on different parameters.
@@ -503,9 +503,9 @@ export default class EmarsysWrapper {
 	  * 	@param required string/array expectations - String/Array of strings extends Comparison of recommended logics.
 	  * @return array - array of objects with recommended Products
 	*/		
-	static recommendProductsLimitFilters(logic, limit, filters) {
+	recommendProductsLimitFilters(logic, limit, filters) {
 		return RNEmarsysWrapper.recommendProductsLimitFilters(logic, limit, filters)
-	}
+	},
 
 	/**
 	  * @desc With the Emarsys SDK you can ask for product recommendations based on different parameters.
@@ -533,9 +533,9 @@ export default class EmarsysWrapper {
 	  * 	@param required string/array expectations - String/Array of strings extends Comparison of recommended logics.
 	  * @return array - array of objects with recommended Products
 	*/		
-	static recommendProductsQueryLimitFilters(logic, query, limit, filters) {
+	recommendProductsQueryLimitFilters(logic, query, limit, filters) {
 		return RNEmarsysWrapper.recommendProductsQueryLimitFilters(logic, query, limit, filters)
-	}
+	},
 
 	/**
 	  * @desc With the Emarsys SDK you can ask for product recommendations based on different parameters.
@@ -580,9 +580,9 @@ export default class EmarsysWrapper {
 	  * 	@param required string/array expectations - String/Array of strings extends Comparison of recommended logics.
 	  * @return array - array of objects with recommended Products
 	*/		
-	static recommendProductsCartItemsLimitFilters(logic, cartItems, limit, filters) {
+	recommendProductsCartItemsLimitFilters(logic, cartItems, limit, filters) {
 		return RNEmarsysWrapper.recommendProductsCartItemsLimitFilters(logic, cartItems, limit, filters)
-	}
+	},
 
 	/**
 	  * @desc The Emarsys SDK doesn't track automatically recommendationClicks, so you have to call manually trackRecommendationClick when an interaction happens with any of the recommended products.
@@ -615,9 +615,9 @@ export default class EmarsysWrapper {
 	  * 	}
 	  * @return bool - success or failure
 	*/		
-	static trackRecommendationClick(product) {
+	trackRecommendationClick(product) {
 		return RNEmarsysWrapper.trackRecommendationClick(product)
-	}
+	},
 
 
 
@@ -628,9 +628,9 @@ export default class EmarsysWrapper {
 	  * @param string url - Track URL 
 	  * @return bool - success or failure
 	*/		
-	static trackDeepLink(url) {
+	trackDeepLink(url) {
 		return RNEmarsysWrapper.trackDeepLink(url ? url : null)
-	}
+	},
 
 
 
@@ -641,40 +641,42 @@ export default class EmarsysWrapper {
 	  * @param string applicationCodeChange - applicationCode for change
 	  * @return bool - success or failure
 	*/		
-	static changeApplicationCode(applicationCodeChange) {
+	changeApplicationCode(applicationCodeChange) {
 		return RNEmarsysWrapper.changeApplicationCode(applicationCodeChange ? applicationCodeChange : null)
-	}
+	},
 
 	/**
 	  * @desc Emarsys SDK provides a solution for merchantId change in a convenient way without restarting the SDK.
 	  * @param string predictMerchantIdChange - predictMerchantId for change
 	  * @return bool - success or failure
 	*/		
-	static changeMerchantId(predictMerchantIdChange) {
+	changeMerchantId(predictMerchantIdChange) {
 		return RNEmarsysWrapper.changeMerchantId(predictMerchantIdChange ? predictMerchantIdChange : null)
-	}
+	},
 
 	/**
 	  * @desc Provides what is the actual applicationCode set in the SDK.
 	  * @return string - applicationCode
 	*/		
-	static getApplicationCode() {
+	getApplicationCode() {
 		return RNEmarsysWrapper.getApplicationCode()
-	}
+	},
 
 	/**
 	  * @desc Provides what is the actual merchantId set in the SDK.
 	  * @return string - merchantId
 	*/		
-	static getMerchantId() {
+	getMerchantId() {
 		return RNEmarsysWrapper.getMerchantId()
-	}
+	},
 
 	/**
 	  * @desc Provides what is the actual contactFieldId set in the SDK.
 	  * @return integer - contactFieldId
 	*/		
-	static getContactFieldId() {
+	getContactFieldId() {
 		return RNEmarsysWrapper.getContactFieldId()
-	}
+	},
 };
+
+export default EmarsysWrapper;
