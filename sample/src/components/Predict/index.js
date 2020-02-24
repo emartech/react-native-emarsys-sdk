@@ -6,7 +6,7 @@ import { SafeAreaView } from "react-navigation"
 
 import showAlert from "../Helpers"
 
-import EmarsysWrapper from "react-native-emarsys-wrapper"
+import Emarsys from "react-native-emarsys-wrapper"
 
 const styles = StyleSheet.create({
 	inbase: {
@@ -68,7 +68,7 @@ export default class Predict extends Component {
 		}]
 		
 		try {
-			let result = await EmarsysWrapper.trackCart(cartItems)
+			let result = await Emarsys.predict.trackCart(cartItems)
 			console.log("trackCart Done: ", result)
 			showAlert( "trackCart", "trackCart Done.")
 		} catch (e) {
@@ -81,7 +81,7 @@ export default class Predict extends Component {
 		let emptyCartItems = []
 		
 		try {
-			let result = await EmarsysWrapper.trackCart(emptyCartItems)
+			let result = await Emarsys.predict.trackCart(emptyCartItems)
 			console.log("trackCart Empty Done: ", result)
 			showAlert( "trackCart Empty", "trackCart Empty Done.")
 		} catch (e) {
@@ -106,7 +106,7 @@ export default class Predict extends Component {
 		]
 		
 		try {
-			let result = await EmarsysWrapper.trackPurchase(orderId, cartItems)
+			let result = await Emarsys.predict.trackPurchase(orderId, cartItems)
 			console.log("trackPurchase Done: ", result)
 			showAlert( "trackPurchase", "trackPurchase Done.")
 		} catch (e) {
@@ -120,7 +120,7 @@ export default class Predict extends Component {
 		let emptyCartItems = []
 		
 		try {
-			let result = await EmarsysWrapper.trackPurchase(emptyOrderId, emptyCartItems)
+			let result = await Emarsys.predict.trackPurchase(emptyOrderId, emptyCartItems)
 			console.log("trackPurchase Empty Done: ", result)
 			showAlert( "trackPurchase Empty", "trackPurchase Empty Done.")
 		} catch (e) {
@@ -133,7 +133,7 @@ export default class Predict extends Component {
 		let itemId = "TrackItemId-Test-111"
 		
 		try {
-			let result = await EmarsysWrapper.trackItemView(itemId)
+			let result = await Emarsys.predict.trackItemView(itemId)
 			console.log("trackItemView Done: ", result)
 			showAlert( "trackItemView", "trackItemView Done.")	
 		} catch (e) {
@@ -146,7 +146,7 @@ export default class Predict extends Component {
 		let categoryPath = "Bikes > Road Bikes"
 
 		try {
-			let result = await EmarsysWrapper.trackCategoryView(categoryPath)
+			let result = await Emarsys.predict.trackCategoryView(categoryPath)
 			console.log("trackCategoryView Done: ", result)
 			showAlert( "trackCategoryView", "trackCategoryView Done.")
 		} catch (e) {
@@ -159,7 +159,7 @@ export default class Predict extends Component {
 		let searchTerm = "TrackSearchTerm Test Search"
 
 		try {
-			let result = await EmarsysWrapper.trackSearchTerm(searchTerm)
+			let result = await Emarsys.predict.trackSearchTerm(searchTerm)
 			console.log("trackSearchTerm Done: ", result)
 			showAlert( "trackSearchTerm", "trackSearchTerm Done.")
 		} catch (e) {
@@ -176,7 +176,7 @@ export default class Predict extends Component {
 		}
 
 		try {
-			let result = await EmarsysWrapper.trackTag(tagName, tagAttributes)
+			let result = await Emarsys.predict.trackTag(tagName, tagAttributes)
 			console.log("trackTag Done: ", result)
 			showAlert( "trackTag", "trackTag Done.")
 		} catch (e) {
@@ -189,7 +189,7 @@ export default class Predict extends Component {
 		let logic = "CATEGORY"
 
 		try {
-			let result = await EmarsysWrapper.recommendProducts(logic)
+			let result = await Emarsys.predict.recommendProducts(logic)
 			console.log("recommendProducts Done: ", result)
 			showAlert( "recommendProducts", "recommendProducts Done.")
 		} catch (e) {
@@ -203,7 +203,7 @@ export default class Predict extends Component {
 		let query = "Shoes>Pump"
 
 		try {
-			let result = await EmarsysWrapper.recommendProductsQuery(logic, query)
+			let result = await Emarsys.predict.recommendProductsQuery(logic, query)
 			console.log("recommendProductsQuery Done: ", result)
 			showAlert( "recommendProductsQuery", "recommendProductsQuery Done.")
 		} catch (e) {
@@ -225,7 +225,7 @@ export default class Predict extends Component {
 		}]
 
 		try {
-			let result = await EmarsysWrapper.recommendProductsCartItems(logic, cartItems)
+			let result = await Emarsys.predict.recommendProductsCartItems(logic, cartItems)
 			console.log("recommendProductsCartItems Done: ", result)
 			showAlert( "recommendProductsCartItems", "recommendProductsCartItems Done.")
 		} catch (e) {
@@ -239,7 +239,7 @@ export default class Predict extends Component {
 		let limit = 1
 
 		try {
-			let result = await EmarsysWrapper.recommendProductsLimit(logic, limit)
+			let result = await Emarsys.predict.recommendProductsLimit(logic, limit)
 			console.log("recommendProductsLimit Done: ", result)
 			showAlert( "recommendProductsLimit", "recommendProductsLimit Done.")
 		} catch (e) {
@@ -254,7 +254,7 @@ export default class Predict extends Component {
 		let limit = 2
 
 		try {
-			let result = await EmarsysWrapper.recommendProductsQueryLimit(logic, query, limit)
+			let result = await Emarsys.predict.recommendProductsQueryLimit(logic, query, limit)
 			console.log("recommendProductsQueryLimit Done: ", result)
 			showAlert( "recommendProductsQueryLimit", "recommendProductsQueryLimit Done.")
 		} catch (e) {
@@ -277,7 +277,7 @@ export default class Predict extends Component {
 		let limit = 4
 
 		try {
-			let result = await EmarsysWrapper.recommendProductsCartItemsLimit(logic, cartItems, limit)
+			let result = await Emarsys.predict.recommendProductsCartItemsLimit(logic, cartItems, limit)
 			console.log("recommendProductsCartItemsLimit Done: ", result)
 			showAlert( "recommendProductsCartItemsLimit", "recommendProductsCartItemsLimit Done.")
 		} catch (e) {
@@ -296,7 +296,7 @@ export default class Predict extends Component {
 		}
 
 		try {
-			let result = await EmarsysWrapper.recommendProductsFilters(logic, filters)
+			let result = await Emarsys.predict.recommendProductsFilters(logic, filters)
 			console.log("recommendProductsFilters Done: ", result)
 			showAlert( "recommendProductsFilters", "recommendProductsFilters Done.")
 		} catch (e) {
@@ -316,7 +316,7 @@ export default class Predict extends Component {
 		}
 
 		try {
-			let result = await EmarsysWrapper.recommendProductsQueryFilters(logic, query, filters)
+			let result = await Emarsys.predict.recommendProductsQueryFilters(logic, query, filters)
 			console.log("recommendProductsQueryFilters Done: ", result)
 			showAlert( "recommendProductsQueryFilters", "recommendProductsQueryFilters Done.")
 		} catch (e) {
@@ -325,9 +325,9 @@ export default class Predict extends Component {
 		}
 	}
 
-    async wrapperRecommendProductsCartItemsFilters() {
+	async wrapperRecommendProductsCartItemsFilters() {
 		let logic = "CART"
-        let cartItems = [{
+		let cartItems = [{
 			itemId: "103",
 			price: 299,
 			quantity: 26.4,
@@ -339,7 +339,7 @@ export default class Predict extends Component {
 		let filters = {}
 
 		try {
-			let result = await EmarsysWrapper.recommendProductsCartItemsFilters(logic, cartItems, filters)
+			let result = await Emarsys.predict.recommendProductsCartItemsFilters(logic, cartItems, filters)
 			console.log("recommendProductsCartItemsFilters Done: ", result)
 			showAlert( "recommendProductsCartItemsFilters", "recommendProductsCartItemsFilters Done.")
 		} catch (e) {
@@ -348,29 +348,29 @@ export default class Predict extends Component {
 		}
 	}
 
-    async wrapperRecommendProductsLimitFilters() {
+	async wrapperRecommendProductsLimitFilters() {
 		let logic = "POPULAR"
 		let limit = 5
 		let filters = {}
 
 		try {
-			let result = await EmarsysWrapper.recommendProductsLimitFilters(logic, limit, filters)
+			let result = await Emarsys.predict.recommendProductsLimitFilters(logic, limit, filters)
 			console.log("recommendProductsLimitFilters Done: ", result)
 			showAlert( "recommendProductsLimitFilters", "recommendProductsLimitFilters Done.")
 		} catch (e) {
 			console.log("recommendProductsLimitFilters Fail: ", e)
 			showAlert( "recommendProductsLimitFilters", "recommendProductsLimitFilters Fail: ", e )
 		}
-    }
+	}
 
-    async wrapperRecommendProductsQueryLimitFilters() {
+	async wrapperRecommendProductsQueryLimitFilters() {
 		let logic = "CATEGORY"
 		let query = "Shoes>Pump"
 		let limit = 5
 		let filters = {}
 
 		try {
-			let result = await EmarsysWrapper.recommendProductsQueryLimitFilters(logic, query, limit, filters)
+			let result = await Emarsys.predict.recommendProductsQueryLimitFilters(logic, query, limit, filters)
 			console.log("recommendProductsQueryLimitFilters Done: ", result)
 			showAlert( "recommendProductsQueryLimitFilters", "recommendProductsQueryLimitFilters Done.")
 		} catch (e) {
@@ -379,9 +379,9 @@ export default class Predict extends Component {
 		}
 	}
 
-    async wrapperRecommendProductsCartItemsLimitFilters() {
+	async wrapperRecommendProductsCartItemsLimitFilters() {
 		let logic = "CART"
-        let cartItems = [{
+		let cartItems = [{
 			itemId: "103",
 			price: 299,
 			quantity: 26.4,
@@ -394,7 +394,7 @@ export default class Predict extends Component {
 		let filters = {}
 
 		try {
-			let result = await EmarsysWrapper.recommendProductsCartItemsLimitFilters(logic, cartItems, limit, filters)
+			let result = await Emarsys.predict.recommendProductsCartItemsLimitFilters(logic, cartItems, limit, filters)
 			console.log("recommendProductsCartItemsLimitFilters Done: ", result)
 			showAlert( "recommendProductsCartItemsLimitFilters", "recommendProductsCartItemsLimitFilters Done.")
 		} catch (e) {
@@ -432,7 +432,7 @@ export default class Predict extends Component {
 		}
 
 		try {
-			let result = await EmarsysWrapper.trackRecommendationClick(product)
+			let result = await Emarsys.predict.trackRecommendationClick(product)
 			console.log("trackRecommendationClick Done: ", result)
 			showAlert( "trackRecommendationClick", "trackRecommendationClick Done.")
 		} catch (e) {
