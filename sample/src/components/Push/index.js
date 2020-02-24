@@ -10,7 +10,7 @@ import { SafeAreaView } from "react-navigation"
 
 import showAlert from "../Helpers"
 
-import EmarsysWrapper from "react-native-emarsys-wrapper"
+import Emarsys from "react-native-emarsys-wrapper"
 
 const styles = StyleSheet.create({
 	inbase: {
@@ -65,7 +65,7 @@ export default class Push extends Component {
 		let deviceToken = toJS( this.props.auth.messageToken ) ? toJS( this.props.auth.messageToken ) : ""
 
 		try {
-			let result = await EmarsysWrapper.setPushToken( deviceToken )
+			let result = await Emarsys.push.setPushToken( deviceToken )
 			console.log("setPushToken Done: ", deviceToken, result)
 			showAlert( "setPushToken", "setPushToken Done.")
 		} catch (e) {
@@ -76,7 +76,7 @@ export default class Push extends Component {
 
 	async wrapperClearPushToken() {
 		try {
-			let result = await EmarsysWrapper.clearPushToken()
+			let result = await Emarsys.push.clearPushToken()
 			console.log("clearPushToken Done: ", result)
 			showAlert( "clearPushToken", "clearPushToken Done.")
 		} catch (e) {
@@ -89,7 +89,7 @@ export default class Push extends Component {
 		let messageId = "+43c_lODSmXqCvdOz"
 	
 		try {
-			let result = await EmarsysWrapper.trackMessageOpen( messageId )
+			let result = await Emarsys.push.trackMessageOpen( messageId )
 			console.log("trackMessageOpen Done: ", result)
 			showAlert( "trackMessageOpen", "trackMessageOpen Done.")
 		} catch (e) {

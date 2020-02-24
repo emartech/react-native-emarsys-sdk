@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from "react-navigation-tabs"
 
 import { StyleSheet, TouchableOpacity, View, Platform } from "react-native"
 
-import EmarsysWrapper from "react-native-emarsys-wrapper"
+import Emarsys from "react-native-emarsys-wrapper"
 
 import Ionicon from "react-native-vector-icons/Ionicons"
 
@@ -26,7 +26,7 @@ wrapperLogin = async ( callback ) => {
 	let contactFieldValue = "second@email-test.com"
 
 	try {
-		let result = await EmarsysWrapper.setContact(contactFieldValue)
+		let result = await Emarsys.setContact(contactFieldValue)
 		console.log("setContact Done: ", result)
 		showAlert( "setContact", "setContact Done.", false,  Boolean( callback ) && callback() )
 	} catch (e) {
@@ -37,7 +37,7 @@ wrapperLogin = async ( callback ) => {
 
 wrapperLogout = async ( callback ) => {
 	try {
-		let result = await EmarsysWrapper.clearContact()
+		let result = await Emarsys.clearContact()
 		console.log("clearContact Done: ", result)
 		showAlert( "clearContact", "clearContact Done.", false,  Boolean( callback ) && callback() )
 	} catch (e) {

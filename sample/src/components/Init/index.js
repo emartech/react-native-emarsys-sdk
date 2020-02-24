@@ -10,7 +10,7 @@ import { SafeAreaView } from "react-navigation"
 
 import showAlert from "../Helpers"
 
-import EmarsysWrapper from "react-native-emarsys-wrapper"
+import Emarsys from "react-native-emarsys-wrapper"
 
 const styles = StyleSheet.create({
 	inbase: {
@@ -85,7 +85,7 @@ export default class Init extends Component {
 		}
 		
 		try {
-			let result = await EmarsysWrapper.trackCustomEvent(eventName, eventAttributes)
+			let result = await Emarsys.trackCustomEvent(eventName, eventAttributes)
 			console.log("trackCustomEvent Done: ", result)
 			showAlert( "trackCustomEvent", "trackCustomEvent Done." )
 		} catch (e) {
@@ -98,7 +98,7 @@ export default class Init extends Component {
 
 	async wrapperTrackDeepLink(url) {
 		try {
-			let result = await EmarsysWrapper.trackDeepLink(url)
+			let result = await Emarsys.trackDeepLink(url)
 			console.log("trackDeepLink Done: ", url, result)
 			showAlert( "trackDeepLink", "trackDeepLink Done." )
 		} catch (e) {
@@ -113,7 +113,7 @@ export default class Init extends Component {
 		let applicationCodeChange = "EMSF6-F532D"
 
 		try {
-			let result = await EmarsysWrapper.changeApplicationCode(applicationCodeChange)
+			let result = await Emarsys.changeApplicationCode(applicationCodeChange)
 			console.log("changeApplicationCode Done: ", result)
 			showAlert( "changeApplicationCode", "changeApplicationCode Done.")
 		} catch (e) {
@@ -126,7 +126,7 @@ export default class Init extends Component {
 		let predictMerchantIdChange = null;
 
 		try {
-			let result = await EmarsysWrapper.changeMerchantId(predictMerchantIdChange)
+			let result = await Emarsys.changeMerchantId(predictMerchantIdChange)
 			console.log("changeMerchantId Done: ", result)
 			showAlert( "changeMerchantId", "changeMerchantId Done.")
 		} catch (e) {
@@ -137,7 +137,7 @@ export default class Init extends Component {
 
 	async wrapperGetApplicationCode() {
 		try {
-			let applicationCode = await EmarsysWrapper.getApplicationCode()
+			let applicationCode = await Emarsys.getApplicationCode()
 			console.log("getApplicationCode Done: ", applicationCode)
 			showAlert( "getApplicationCode", "getApplicationCode Done: ", applicationCode )
 		} catch (e) {
@@ -148,7 +148,7 @@ export default class Init extends Component {
 
 	async wrapperGetMerchantId() {
 		try {
-			let merchantId = await EmarsysWrapper.getMerchantId()
+			let merchantId = await Emarsys.getMerchantId()
 			console.log("getMerchantId Done: ", merchantId)
 			showAlert( "getMerchantId", "getMerchantId Done: ", merchantId )
 		} catch (e) {
@@ -159,7 +159,7 @@ export default class Init extends Component {
 
 	async wrapperGetContactFieldId() {
 		try {
-			let contactFieldId = await EmarsysWrapper.getContactFieldId()
+			let contactFieldId = await Emarsys.getContactFieldId()
 			console.log("getContactFieldId Done: ", contactFieldId)
 			showAlert( "getContactFieldId", "getContactFieldId Done: ", contactFieldId )
 		} catch (e) {

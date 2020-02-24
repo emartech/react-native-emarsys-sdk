@@ -10,7 +10,7 @@ import { SafeAreaView } from "react-navigation"
 
 import showAlert from "../Helpers"
 
-import EmarsysWrapper from "react-native-emarsys-wrapper"
+import Emarsys from "react-native-emarsys-wrapper"
 
 const styles = StyleSheet.create({
 	inbase: {
@@ -61,7 +61,7 @@ export default class InApp extends Component {
 
 	async wrapperPause() {
 		try {
-			let result = await EmarsysWrapper.pause()
+			let result = await Emarsys.inApp.pause()
 			console.log("pause Done: ", result)
 			
 			this.props.auth.isPaused = true
@@ -75,7 +75,7 @@ export default class InApp extends Component {
 
 	async wrapperResume() {
 		try {
-			let result = await EmarsysWrapper.resume()
+			let result = await Emarsys.inApp.resume()
 			console.log("resume Done: ", result)
 			
 			this.props.auth.isPaused = false
@@ -89,7 +89,7 @@ export default class InApp extends Component {
 
 	async wrapperSetEventHandler() {
 		try {
-			let eventData = await EmarsysWrapper.setEventHandler()
+			let eventData = await Emarsys.inApp.setEventHandler()
 			console.log("setEventHandler Done: ", eventData)
 			showAlert( "setEventHandler", "setEventHandler Done.")
 		} catch (e) {

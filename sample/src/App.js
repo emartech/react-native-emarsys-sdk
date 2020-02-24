@@ -11,7 +11,7 @@ import Routing from './Routing';
 
 import Navigation from './Navigation';
 
-import EmarsysWrapper from 'react-native-emarsys-wrapper';
+import Emarsys from 'react-native-emarsys-wrapper';
 
 import firebase from '@react-native-firebase/app';
 import '@react-native-firebase/messaging';
@@ -136,7 +136,7 @@ export default class App extends Component {
     let predictMerchantId = '1A517D7BD6EAF712';
 
     try {
-      let config = await EmarsysWrapper.init(applicationCode, contactFieldId, predictMerchantId);
+      let config = await Emarsys.init(applicationCode, contactFieldId, predictMerchantId);
 
       console.log('Init Done: ', config);
 
@@ -149,7 +149,7 @@ export default class App extends Component {
 
     let contactFieldValue = "second@email-test.com"
 		try {
-			let result = await EmarsysWrapper.setContact(contactFieldValue)
+			let result = await Emarsys.setContact(contactFieldValue)
       console.log("setContact Done: ", result)
 			showAlert( "setContact", "setContact Done.", false,  Boolean( callback ) && callback() )
 		} catch (e) {
