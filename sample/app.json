@@ -1,5 +1,4 @@
 {
 	"name": "EmarsysApp",
-	"displayName": "EmarsysApp", 
-	"firebaseService": "RNFirebaseBackgroundMessage"
+	"displayName": "EmarsysApp"
 }
