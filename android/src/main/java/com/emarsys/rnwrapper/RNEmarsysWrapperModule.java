@@ -91,6 +91,7 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule implement
                     .build();
 
             Emarsys.setup(config);
+            RNEmarsysMessagingService.notifyJSReady(this.reactContext);
 
             promise.resolve(config.toString());
         } catch (Exception e) {
