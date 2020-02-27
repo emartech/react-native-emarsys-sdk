@@ -18,14 +18,13 @@ import com.emarsys.core.api.result.ResultListener;
 import com.emarsys.core.api.result.Try;
 
 import com.emarsys.mobileengage.api.EventHandler;
-import com.emarsys.mobileengage.api.NotificationEventHandler;
-
 import com.emarsys.predict.api.model.CartItem;
 import com.emarsys.predict.api.model.Product;
 
 import com.emarsys.predict.api.model.Logic;
 import com.emarsys.predict.api.model.RecommendationFilter;
 
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -52,7 +51,7 @@ import org.json.JSONException;
 
 import java.lang.Exception;
 
-public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule implements EventHandler, NotificationEventHandler {
+public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
 
     private static final String TAG = "RNEmarsysWrapper";
 
@@ -66,16 +65,6 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule implement
     @Override
     public String getName() {
         return TAG;
-    }
-
-    @Override
-    public void handleEvent(String eventName, @Nullable JSONObject payload) {
-        Log.i(TAG, MessageFormat.format("EventHandler. handleEvent with eventName {0}, payload {1}", eventName, payload));
-    }
-
-    @Override
-    public void handleEvent(Context context, String eventName, @Nullable JSONObject payload) {
-        Log.i(TAG, MessageFormat.format("NotificationEventHandler. handleEvent with context {0}, eventName {1}, payload {2}", context, eventName, payload));
     }
 
     @ReactMethod
@@ -231,22 +220,13 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule implement
     }
 
     @ReactMethod
-    public void setEventHandler(final Promise promise) {
-        try {
-            final WritableMap eventData = new WritableNativeMap();
-
-            Emarsys.getInApp().setEventHandler(new EventHandler() {
-                @Override
-                public void handleEvent(String eventName, @Nullable JSONObject payload) {
-                    eventData.putString("eventName", eventName);
-                    eventData.putMap("payload", MapUtil.jsonToWritableMap(payload));
-
-                    promise.resolve(eventData);
-                }
-            });
-        } catch (Exception e) {
-            promise.reject(TAG, "Error setEventHandler: ", e);
-        }
+    public void setEventHandler(final Callback callback) {
+        Emarsys.getInApp().setEventHandler(new EventHandler() {
+            @Override
+            public void handleEvent(String eventName, @Nullable JSONObject payload) {
+                callback.invoke(eventName, MapUtil.jsonToWritableMap(payload));
+            }
+        });
     }
 
     @ReactMethod

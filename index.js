@@ -96,10 +96,11 @@ const Emarsys = {
 		/**
 		 * @desc In order to react to an event, triggered from the InApp message, you can register for it using the setEventHandler method.
 
+		 * @param function (eventName, payload) callback function receiving events 
 		 * @return bool - success or failure
 		 */
-		setEventHandler() {
-			return RNEmarsysWrapper.setEventHandler()
+		setEventHandler(callback) {
+			return RNEmarsysWrapper.setEventHandler(callback)
 		},
 
 	},
