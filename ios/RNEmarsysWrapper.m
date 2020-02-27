@@ -375,13 +375,6 @@
     return dispatch_get_main_queue();
 }
 
-- (void)handleEvent:(nonnull NSString *)eventName payload:(nullable NSDictionary<NSString *,NSObject *> *)payload {
-    if (self.handlerBlock) {
-        self.handlerBlock(eventName, payload);
-    }
-    NSLog(@"EventHandler. handleEvent with eventName %@, payload %@",eventName, payload);
-}
-
 - (void)resolveProducts:(NSArray * _Nonnull)products resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject methodName: (NSString *) methodName withError: (NSError *) error {
     if (products) {
 		NSMutableArray *recProducts = [NSMutableArray array];
@@ -511,21 +504,12 @@ RCT_EXPORT_METHOD(resume:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRej
     }
 }
 
-RCT_EXPORT_METHOD(setEventHandler:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
-    @try {
-        [Emarsys.inApp setEventHandler:self];
+RCT_EXPORT_METHOD(setEventHandler:(RCTResponseSenderBlock)callback) {
+    [Emarsys.inApp setEventHandler:self];
         
-        self.handlerBlock = ^(NSString *eventName, NSDictionary<NSString *,NSObject *> *payload) {
-            NSObject *eventData = @{
-                @"eventName": eventName,
-                @"payload": payload,
-            };
-            resolve(eventData);
-        };
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
+    self.handlerBlock = ^(NSString *eventName, NSDictionary<NSString *,NSObject *> *payload) {
+        callback(@[eventName, payload]);
+    };
 }
 
 RCT_EXPORT_METHOD(trackCart:(NSArray * _Nonnull)cartItems resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {

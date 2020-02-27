@@ -25,7 +25,7 @@
 
 typedef void (^InAppHandlerBlock)(NSString *eventName, NSDictionary<NSString *, NSObject *> *payload);
 
-@interface RNEmarsysWrapper : NSObject <RCTBridgeModule, EMSEventHandler>
+@interface RNEmarsysWrapper : NSObject <RCTBridgeModule>
 
 @property(nonatomic, strong) InAppHandlerBlock handlerBlock;
 
