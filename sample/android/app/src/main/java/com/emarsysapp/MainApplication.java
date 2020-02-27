@@ -1,6 +1,10 @@
 package com.emarsysapp;
 
 import android.app.Application;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
+import android.content.Context;
 
 import com.facebook.react.PackageList;
 //import com.facebook.react.BuildConfig;
@@ -8,7 +12,10 @@ import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
+import androidx.annotation.RequiresApi;
 import androidx.multidex.MultiDexApplication;
+import com.emarsys.Emarsys;
+import com.emarsys.config.EmarsysConfig;
 
 import java.util.List;
 
@@ -43,6 +50,32 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
   @Override
   public void onCreate() {
     super.onCreate();
+
+    EmarsysConfig config = new EmarsysConfig.Builder()
+            .application(this)
+            .mobileEngageApplicationCode("EMS5C-F60E2")
+            .contactFieldId(3)
+            .predictMerchantId("1428C8EE286EC34B")
+            .build();
+
+    createNotificationChannels();
+    Emarsys.setup(config);
+
     SoLoader.init(this, /* native exopackage */ false);
   }
+
+  private void createNotificationChannels() {
+        if (Build.VERSION.SDK_INT >= 26) {
+            createNotificationChannel("ems_sample_news", "News", "News and updates go into this channel", NotificationManager.IMPORTANCE_HIGH);
+            createNotificationChannel("ems_sample_messages", "Messages", "Important messages go into this channel", NotificationManager.IMPORTANCE_HIGH);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void createNotificationChannel(String id, String name, String description, int importance) {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationChannel channel = new NotificationChannel(id, name, importance);
+        channel.setDescription(description);
+        notificationManager.createNotificationChannel(channel);
+    }
 }

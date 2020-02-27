@@ -79,26 +79,6 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule implement
     }
 
     @ReactMethod
-    public void init(@NonNull String applicationCode, @NonNull int contactFieldId, @NonNull String predictMerchantId, Promise promise) {
-        try {
-            EmarsysConfig config = new EmarsysConfig.Builder()
-                    .application(getCurrentActivity().getApplication())
-                    .mobileEngageApplicationCode(applicationCode)
-                    .contactFieldId(contactFieldId)
-                    .predictMerchantId(predictMerchantId)
-                    .inAppEventHandler(this)
-                    .notificationEventHandler(this)
-                    .build();
-
-            Emarsys.setup(config);
-
-            promise.resolve(config.toString());
-        } catch (Exception e) {
-            promise.reject(TAG, "Error init: ", e);
-        }
-    }
-
-    @ReactMethod
     public void setContact(@NonNull final String contactFieldValue, final Promise promise) {
         try {
             Emarsys.setContact(contactFieldValue, new CompletionListener() {
