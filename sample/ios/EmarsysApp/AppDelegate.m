@@ -1,6 +1,8 @@
 
 #import "AppDelegate.h"
 
+#import "Emarsys.h"
+
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -10,6 +12,14 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  
+  EMSConfig *config = [EMSConfig makeWithBuilder:^(EMSConfigBuilder * builder) {
+    [builder setMobileEngageApplicationCode:@"EMS5C-F60E2"];
+    [builder setContactFieldId:@3];
+    [builder setMerchantId:@"1428C8EE286EC34B"];
+  }];
+  
+  [Emarsys setupWithConfig:config];
 
 	RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
 	RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"EmarsysApp" initialProperties:nil];

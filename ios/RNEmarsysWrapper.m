@@ -398,25 +398,6 @@
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(init:(NSString * _Nullable)applicationCode contactFieldId:(NSNumber * _Nonnull)contactFieldId predictMerchantId:(NSString * _Nullable)predictMerchantId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
-    @try {
-        EMSConfig *config = [EMSConfig makeWithBuilder:^(EMSConfigBuilder *builder) {
-            [builder setMobileEngageApplicationCode:applicationCode];
-            [builder setContactFieldId:contactFieldId];
-            [builder setMerchantId:predictMerchantId];
-        }];
-        
-        Emarsys.inApp.eventHandler = self;
-        
-        [Emarsys setupWithConfig:config];
-        
-        resolve([NSString stringWithFormat:@"%@", config]);
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
-}
-
 RCT_EXPORT_METHOD(setContact:(NSString * _Nonnull)contactFieldValue resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys setContactWithContactFieldValue:contactFieldValue completionBlock:^(NSError *error) {

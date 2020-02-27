@@ -7,18 +7,6 @@ const Emarsys = {
 	/* Init ***************************************************************************************************************************************/
 
 	/**
-	  * @desc Emarsys SDK Initialization
-	  
-	  * @param string applicationCode - is needed if you want to use Mobile Engage features
-	  * @param required integer contactFieldId - Emarsys contact field Id
-	  * @param string predictMerchantId - is needed if you want to use Predict features
-	  * @return string - Initialization SDK response
-	*/		
-	init(applicationCode, contactFieldId, predictMerchantId) {
-		return RNEmarsysWrapper.init(applicationCode ? applicationCode : null, contactFieldId, predictMerchantId ? predictMerchantId : null)
-	},
-
-	/**
 	  * @desc After application setup is finished, you can use setContact method to identify the user with a contactFieldValue. 
 	  * @desc Without setContact all events will be tracked as anonymous usage.
 	  
