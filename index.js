@@ -627,10 +627,11 @@ const Emarsys = {
 	/**
 	  * @desc Emarsys SDK provides a solution for applicationCode change in a convenient way without restarting the SDK.
 	  * @param string applicationCodeChange - applicationCode for change
+	  * @param number customerFieldIdChange - customerFieldId for change (optional)
 	  * @return bool - success or failure
 	*/		
-	changeApplicationCode(applicationCodeChange) {
-		return RNEmarsysWrapper.changeApplicationCode(applicationCodeChange ? applicationCodeChange : null)
+	changeApplicationCode(applicationCodeChange, customerFieldIdChange) {
+		return RNEmarsysWrapper.changeApplicationCode(applicationCodeChange ? applicationCodeChange : null, customerFieldIdChange ? customerFieldIdChange : null)
 	},
 
 	/**

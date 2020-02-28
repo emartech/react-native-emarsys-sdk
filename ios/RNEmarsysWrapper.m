@@ -763,9 +763,9 @@ RCT_EXPORT_METHOD(trackDeepLink:(NSString * _Nullable)userActivity resolver:(RCT
     }
 }
 
-RCT_EXPORT_METHOD(changeApplicationCode:(NSString * _Nullable)applicationCode resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
+RCT_EXPORT_METHOD(changeApplicationCode:(NSString * _Nullable)applicationCode, customerFieldId:(NSNumber * _Nullable)customerFieldId, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
-        [Emarsys.config changeApplicationCode:applicationCode completionBlock:^(NSError *error) {
+        [Emarsys.config changeApplicationCode:applicationCode customerFieldId: customerFieldId completionBlock:^(NSError *error) {
             if (NULL != error) {
                 reject(@"RNEmarsysWrapper", @"changeApplicationCode: ", error);
             } else {
