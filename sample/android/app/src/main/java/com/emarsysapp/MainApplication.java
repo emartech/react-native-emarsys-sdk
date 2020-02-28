@@ -1,21 +1,20 @@
 package com.emarsysapp;
 
-import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.os.Build;
 import android.content.Context;
+import android.os.Build;
 
+import androidx.annotation.RequiresApi;
+import androidx.multidex.MultiDexApplication;
+
+import com.emarsys.Emarsys;
+import com.emarsys.config.EmarsysConfig;
 import com.facebook.react.PackageList;
-//import com.facebook.react.BuildConfig;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
-import androidx.annotation.RequiresApi;
-import androidx.multidex.MultiDexApplication;
-import com.emarsys.Emarsys;
-import com.emarsys.config.EmarsysConfig;
 
 import java.util.List;
 

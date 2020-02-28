@@ -1,12 +1,12 @@
 package com.emarsysapp;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+
 import com.facebook.react.ReactActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.net.Uri;
-
-import android.util.Log;
 import java.text.MessageFormat;
 
 public class MainActivity extends ReactActivity {

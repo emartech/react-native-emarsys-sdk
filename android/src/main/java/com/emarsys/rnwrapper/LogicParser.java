@@ -3,12 +3,16 @@ package com.emarsys.rnwrapper;
 import com.emarsys.predict.api.model.CartItem;
 import com.emarsys.predict.api.model.Logic;
 import com.emarsys.predict.api.model.RecommendationLogic;
-
 import com.facebook.react.bridge.ReadableArray;
 
 import java.util.List;
 
-import static com.emarsys.predict.api.model.RecommendationLogic.*;
+import static com.emarsys.predict.api.model.RecommendationLogic.ALSO_BOUGHT;
+import static com.emarsys.predict.api.model.RecommendationLogic.CART;
+import static com.emarsys.predict.api.model.RecommendationLogic.CATEGORY;
+import static com.emarsys.predict.api.model.RecommendationLogic.POPULAR;
+import static com.emarsys.predict.api.model.RecommendationLogic.RELATED;
+import static com.emarsys.predict.api.model.RecommendationLogic.SEARCH;
 
 public class LogicParser {
 

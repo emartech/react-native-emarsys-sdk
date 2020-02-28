@@ -1,55 +1,42 @@
 package com.emarsys.rnwrapper;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.net.Uri;
-import android.util.Log;
-
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.emarsys.Emarsys;
-import com.emarsys.config.EmarsysConfig;
-
 import com.emarsys.core.api.result.CompletionListener;
 import com.emarsys.core.api.result.ResultListener;
 import com.emarsys.core.api.result.Try;
-
-import com.emarsys.mobileengage.api.EventHandler;
+import com.emarsys.mobileengage.api.event.EventHandler;
 import com.emarsys.predict.api.model.CartItem;
-import com.emarsys.predict.api.model.Product;
-
 import com.emarsys.predict.api.model.Logic;
+import com.emarsys.predict.api.model.Product;
 import com.emarsys.predict.api.model.RecommendationFilter;
-
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.ReadableType;
-import com.facebook.react.bridge.ReadableArray;
-import com.facebook.react.bridge.Promise;
-import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.WritableNativeMap;
-import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.bridge.WritableMap;
 
-import java.text.MessageFormat;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
-
-import android.content.Context;
-
-import org.json.JSONObject;
-import org.json.JSONException;
-
-import java.lang.Exception;
+import java.util.Map;
 
 public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
 
@@ -223,7 +210,7 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     public void setEventHandler(final Callback callback) {
         Emarsys.getInApp().setEventHandler(new EventHandler() {
             @Override
-            public void handleEvent(String eventName, @Nullable JSONObject payload) {
+            public void handleEvent(@NonNull Context context, @NonNull String eventName, @Nullable JSONObject payload) {
                 callback.invoke(eventName, MapUtil.jsonToWritableMap(payload));
             }
         });

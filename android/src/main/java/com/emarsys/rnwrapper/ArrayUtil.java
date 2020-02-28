@@ -1,5 +1,6 @@
 package com.emarsys.rnwrapper;
 
+import com.emarsys.predict.api.model.CartItem;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
@@ -7,20 +8,13 @@ import com.facebook.react.bridge.ReadableType;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableNativeArray;
 
-import android.util.Log;
-
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.json.JSONException;
+import org.json.JSONObject;
 
-import com.emarsys.predict.api.model.CartItem;
-import com.emarsys.predict.api.model.RecommendationFilter;
-
-import static com.emarsys.predict.api.model.RecommendationLogic.CART;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class ArrayUtil {
 

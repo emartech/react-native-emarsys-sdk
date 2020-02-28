@@ -1,5 +1,8 @@
 package com.emarsys.rnwrapper;
 
+import android.util.Log;
+
+import com.emarsys.predict.api.model.Product;
 import com.emarsys.predict.api.model.RecommendationFilter;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableArray;
@@ -9,22 +12,15 @@ import com.facebook.react.bridge.ReadableType;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 
-import com.emarsys.predict.api.model.Product;
-
-import android.util.Log;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.HashMap;
 import java.util.Iterator;
-
-import java.lang.Object;
-import java.lang.String;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONException;
+import java.util.List;
+import java.util.Map;
 
 public class MapUtil {
 
