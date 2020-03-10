@@ -2,10 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>aps-environment</key>
+	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:creativecode.by</string>
-		<string>applinks:www.creativecode.by</string>
+		<string>applinks:eduzatoni.github.io</string>
+		<string>applinks:www.eduzatoni.github.io</string>
 	</array>
 </dict>
 </plist>
