@@ -1,7 +1,11 @@
+//
+//  Copyright © 2019 Emarsys. All rights reserved.
+//
 
 #import "AppDelegate.h"
 
-#import "Emarsys.h"
+#import <EmarsysSDK/Emarsys.h>
+#import <EmarsysSDK/EMSConfig.h>
 
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
@@ -13,13 +17,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   
+  requestPushPermission();
+  
+  printf("Emarsys Config");
   EMSConfig *config = [EMSConfig makeWithBuilder:^(EMSConfigBuilder * builder) {
-    [builder setMobileEngageApplicationCode:@"EMS5C-F60E2"];
-    [builder setContactFieldId:@3];
-    [builder setMerchantId:@"1428C8EE286EC34B"];
+    [builder setMobileEngageApplicationCode:@"EMSF0-08862"];
+    [builder setContactFieldId:@100005878];
+    [builder setMerchantId:@"1DF86BF95CBE8F19"];
   }];
   
   [Emarsys setupWithConfig:config];
+  
+  Emarsys.inApp.eventHandler = self;
+  Emarsys.notificationCenterDelegate.eventHandler = self;
+  UNUserNotificationCenter.currentNotificationCenter.delegate = Emarsys.notificationCenterDelegate;
 
 	RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
 	RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"EmarsysApp" initialProperties:nil];
@@ -35,6 +46,20 @@
 	return YES;
 }
 
+void requestPushPermission() {
+  UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+  [center requestAuthorizationWithOptions:
+           (UNAuthorizationOptionAlert +
+            UNAuthorizationOptionSound)
+     completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        // Enable or disable features based on authorization.
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    });
+  }];
+}
+
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge {
 	#if DEBUG
 		return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
@@ -43,12 +68,20 @@
 	#endif
 }
 
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+  [Emarsys.push setPushToken:deviceToken];
+}
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
   return [RCTLinkingManager application:application openURL:url options:options];
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
 	return [RCTLinkingManager application:application continueUserActivity:userActivity restorationHandler:restorationHandler];
+}
+
+- (void)handleEvent:(nonnull NSString *)eventName payload:(nullable NSDictionary<NSString *,NSObject *> *)payload {
+  printf("handleEvent==========");
 }
 
 @end
