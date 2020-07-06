@@ -2,7 +2,7 @@ PODS:
   - boost-for-react-native (1.63.0)
   - DoubleConversion (1.1.6)
   - EmarsysNotificationService (2.4.0)
-  - EmarsysSDK (2.4.0)
+  - EmarsysSDK (2.5.4)
   - Folly (2018.10.22.00):
     - boost-for-react-native
     - DoubleConversion
