@@ -22,6 +22,7 @@
 		"lint": "eslint ."
 	},
 	"dependencies": {
+		"@react-native-community/toolbar-android": "0.1.0-rc.2",
 		"mobx": "^5.9.4",
 		"mobx-react": "^5.4.4",
 		"react": "16.8.6",

@@ -19,19 +19,14 @@
   
   requestPushPermission();
   
-  printf("Emarsys Config");
   EMSConfig *config = [EMSConfig makeWithBuilder:^(EMSConfigBuilder * builder) {
-    [builder setMobileEngageApplicationCode:@"EMSF0-08862"];
+    [builder setMobileEngageApplicationCode:@"EMS25-20071"];
     [builder setContactFieldId:@100005878];
     [builder setMerchantId:@"1DF86BF95CBE8F19"];
   }];
   
   [Emarsys setupWithConfig:config];
   
-  Emarsys.inApp.eventHandler = self;
-  Emarsys.notificationCenterDelegate.eventHandler = self;
-  UNUserNotificationCenter.currentNotificationCenter.delegate = Emarsys.notificationCenterDelegate;
-
 	RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
 	RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"EmarsysApp" initialProperties:nil];
 
@@ -78,10 +73,6 @@ void requestPushPermission() {
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
 	return [RCTLinkingManager application:application continueUserActivity:userActivity restorationHandler:restorationHandler];
-}
-
-- (void)handleEvent:(nonnull NSString *)eventName payload:(nullable NSDictionary<NSString *,NSObject *> *)payload {
-  printf("handleEvent==========");
 }
 
 @end

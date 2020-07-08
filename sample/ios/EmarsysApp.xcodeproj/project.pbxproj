@@ -18,6 +18,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* EmarsysAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EmarsysAppTests.m */; };
 		569DC311240FDBE100D095AC /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 569DC310240FDBE100D095AC /* NotificationService.m */; };
 		569DC315240FDBE100D095AC /* EmarsysAppNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 569DC30D240FDBE100D095AC /* EmarsysAppNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		56D6C8FB24B47DD2005D6A7C /* EMSEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D6C8F924B47DD2005D6A7C /* EMSEventEmitter.m */; };
 		6C85C978130CB3504962F05B /* libPods-EmarsysApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 81169F00E0FD850680173278 /* libPods-EmarsysApp.a */; };
 		913CFA6C927C02CB3A179F08 /* libPods-EmarsysAppNotificationService.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 353686C7D8CF585652DBF87C /* libPods-EmarsysAppNotificationService.a */; };
 		93C04B1225E38670AF07F2D9 /* libPods-EmarsysApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DDAED095C29DD7B7A116F29 /* libPods-EmarsysApp-tvOSTests.a */; };
@@ -98,6 +99,8 @@
 		569DC310240FDBE100D095AC /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
 		569DC312240FDBE100D095AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56B3031F09E3DD0CFCEE5D7D /* Pods-EmarsysAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysAppTests.debug.xcconfig"; path = "Target Support Files/Pods-EmarsysAppTests/Pods-EmarsysAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		56D6C8F924B47DD2005D6A7C /* EMSEventEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMSEventEmitter.m; sourceTree = "<group>"; };
+		56D6C8FA24B47DD2005D6A7C /* EMSEventEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMSEventEmitter.h; sourceTree = "<group>"; };
 		56DD0A7E240FC93E00A45228 /* libEmarsysNotificationService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEmarsysNotificationService.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		59B24565FC794482BFEA380F /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		731F7EE1C6DD49468BF41F95 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
@@ -194,6 +197,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				56D6C8FA24B47DD2005D6A7C /* EMSEventEmitter.h */,
+				56D6C8F924B47DD2005D6A7C /* EMSEventEmitter.m */,
 			);
 			name = EmarsysApp;
 			sourceTree = "<group>";
@@ -747,6 +752,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				56D6C8FB24B47DD2005D6A7C /* EMSEventEmitter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
