@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Linking, Platform, NativeEventEmitter, NativeModules } from 'react-native';
+import { Linking, Platform } from 'react-native';
 
 import { Provider as StoreProvider } from 'mobx-react';
 
@@ -11,25 +11,15 @@ import Routing from './Routing';
 
 import Navigation from './Navigation';
 
-const { EMSEventEmitter } = NativeModules;
-const emarsysEventEmitter = new NativeEventEmitter(EMSEventEmitter);
+import Emarsys from "react-native-emarsys-wrapper"
 
 export default class App extends Component {
 
   constructor() {
     super();
-
-    if (Platform.OS === 'ios') {
-      emarsysEventEmitter.addListener('handleEvent', result => 
-        this.handleEvent(result)
-      );
-    }
-  }
-
-  handleEvent(result) {
-    console.log("Event Name: ", result.eventName)
-    console.log("Payload: ", result.payload)
-    showAlert( result.eventName, result.payload['url'] )
+    Emarsys.setEventHandler(function (eventName, payload) {
+      showAlert(eventName, JSON.stringify(payload))
+    });
   }
 
   async componentDidMount() {

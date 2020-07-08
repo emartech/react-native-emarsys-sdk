@@ -1,7 +1,6 @@
 package com.emarsys.rnwrapper;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,13 +12,11 @@ import com.emarsys.Emarsys;
 import com.emarsys.core.api.result.CompletionListener;
 import com.emarsys.core.api.result.ResultListener;
 import com.emarsys.core.api.result.Try;
-import com.emarsys.mobileengage.api.event.EventHandler;
 import com.emarsys.predict.api.model.CartItem;
 import com.emarsys.predict.api.model.Logic;
 import com.emarsys.predict.api.model.Product;
 import com.emarsys.predict.api.model.RecommendationFilter;
 import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -204,16 +201,6 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
         } catch (Exception e) {
             promise.reject(TAG, "Error resume: ", e);
         }
-    }
-
-    @ReactMethod
-    public void setEventHandler(final Callback callback) {
-        Emarsys.getInApp().setEventHandler(new EventHandler() {
-            @Override
-            public void handleEvent(@NonNull Context context, @NonNull String eventName, @Nullable JSONObject payload) {
-                callback.invoke(eventName, MapUtil.jsonToWritableMap(payload));
-            }
-        });
     }
 
     @ReactMethod
@@ -595,6 +582,11 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
         } catch (Exception e) {
             promise.reject(TAG, "Error getContactFieldId: ", e);
         }
+    }
+
+    @ReactMethod
+    public void setEventHandler() {
+        RNEmarsysEventHandler.getInstance().provideReactContext(reactContext);
     }
 
     private void resolveProducts(final Promise promise, @NonNull Try<List<Product>> result, String methodName) {

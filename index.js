@@ -1,4 +1,4 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, NativeEventEmitter } from 'react-native';
 
 const { RNEmarsysWrapper } = NativeModules;
 
@@ -36,6 +36,21 @@ const Emarsys = {
 	*/		
 	trackCustomEvent(eventName, eventAttributes) {
 		return RNEmarsysWrapper.trackCustomEvent(eventName, eventAttributes ? eventAttributes : null)
+	},
+
+	/**
+	 * @desc Register an event handler to react to events triggered by Emarsys.
+	 * @param function (eventName, payload) callback function receiving events 
+	 * @return bool - success or failure
+	 */
+	setEventHandler(callback) {
+		console.log(`Registered for events`)
+		const eventEmitter = new NativeEventEmitter(RNEmarsysWrapper);
+		eventEmitter.addListener('handleEvent', function (result) {
+			console.log(`Got event ${result}`)
+			callback(result.eventName, result.payload);
+		});
+		RNEmarsysWrapper.setEventHandler();
 	},
 
 	/* Push ***************************************************************************************************************************************/
@@ -91,16 +106,6 @@ const Emarsys = {
 		 */
 		resume() {
 			return RNEmarsysWrapper.resume()
-		},
-
-		/**
-		 * @desc In order to react to an event, triggered from the InApp message, you can register for it using the setEventHandler method.
-
-		 * @param function (eventName, payload) callback function receiving events 
-		 * @return bool - success or failure
-		 */
-		setEventHandler(callback) {
-			return RNEmarsysWrapper.setEventHandler(callback)
 		},
 
 	},

@@ -1,5 +1,6 @@
 package com.emarsys.rnwrapper;
 
+import com.emarsys.Emarsys;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;

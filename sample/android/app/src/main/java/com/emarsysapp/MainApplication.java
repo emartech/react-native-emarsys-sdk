@@ -10,6 +10,7 @@ import androidx.multidex.MultiDexApplication;
 
 import com.emarsys.Emarsys;
 import com.emarsys.config.EmarsysConfig;
+import com.emarsys.rnwrapper.RNEmarsysEventHandler;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -61,6 +62,13 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     Emarsys.setup(config);
 
     SoLoader.init(this, /* native exopackage */ false);
+
+    // Has to come after SoLoader.init
+    RNEmarsysEventHandler eventHandler = RNEmarsysEventHandler.getInstance();
+    Emarsys.getInApp().setEventHandler(eventHandler);
+    Emarsys.getPush().setNotificationEventHandler(eventHandler);
+    Emarsys.getPush().setSilentMessageEventHandler(eventHandler);
+    Emarsys.getGeofence().setEventHandler(eventHandler);
   }
 
   private void createNotificationChannels() {

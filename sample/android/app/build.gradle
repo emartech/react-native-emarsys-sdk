@@ -184,7 +184,7 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     implementation "androidx.multidex:multidex:2.0.1"
 
-    implementation "com.emarsys:emarsys-sdk:2.4.0"
+    implementation "com.emarsys:emarsys-sdk:2.5.3"
 	
     // JSC from node_modules
     if (useIntlJsc) {
