@@ -1,0 +1,22 @@
+PODS:
+  - EmarsysSDK (2.5.4)
+  - React (0.11.0):
+    - React/Core (= 0.11.0)
+  - React/Core (0.11.0)
+
+DEPENDENCIES:
+  - EmarsysSDK
+  - React
+
+SPEC REPOS:
+  trunk:
+    - EmarsysSDK
+    - React
+
+SPEC CHECKSUMS:
+  EmarsysSDK: fa76d518012bc07657f3b67865d780382061aadb
+  React: ab1a2e21deb34965c38328d5ec40cc7d12c6050a
+
+PODFILE CHECKSUM: 948464eca1f81528a2a4c65d0a9dee376dbb9a9f
+
+COCOAPODS: 1.9.3
