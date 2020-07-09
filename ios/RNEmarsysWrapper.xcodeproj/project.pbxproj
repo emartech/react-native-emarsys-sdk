@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02DB0E4FAE6529A48236697C /* Pods_RNEmarsysWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7191CD152C14D3C868B30CE /* Pods_RNEmarsysWrapper.framework */; };
+		569A51A224B741F300860A85 /* RNEmarsysEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 569A51A124B741F300860A85 /* RNEmarsysEventHandler.m */; };
 		B3E7B58A1CC2AC0600A0062D /* RNEmarsysWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNEmarsysWrapper.m */; };
 /* End PBXBuildFile section */
 
@@ -24,8 +26,13 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNEmarsysWrapper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNEmarsysWrapper.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		569A51A024B741E700860A85 /* RNEmarsysEventHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNEmarsysEventHandler.h; sourceTree = "<group>"; };
+		569A51A124B741F300860A85 /* RNEmarsysEventHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNEmarsysEventHandler.m; sourceTree = "<group>"; };
+		67FAE13F57F4DB039387F9CF /* Pods-RNEmarsysWrapper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNEmarsysWrapper.release.xcconfig"; path = "Target Support Files/Pods-RNEmarsysWrapper/Pods-RNEmarsysWrapper.release.xcconfig"; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNEmarsysWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNEmarsysWrapper.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNEmarsysWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNEmarsysWrapper.m; sourceTree = "<group>"; };
+		B60584416EE05F8B05D9098A /* Pods-RNEmarsysWrapper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNEmarsysWrapper.debug.xcconfig"; path = "Target Support Files/Pods-RNEmarsysWrapper/Pods-RNEmarsysWrapper.debug.xcconfig"; sourceTree = "<group>"; };
+		F7191CD152C14D3C868B30CE /* Pods_RNEmarsysWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RNEmarsysWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02DB0E4FAE6529A48236697C /* Pods_RNEmarsysWrapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,13 +55,34 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		1651946F686FB47759419CA0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B60584416EE05F8B05D9098A /* Pods-RNEmarsysWrapper.debug.xcconfig */,
+				67FAE13F57F4DB039387F9CF /* Pods-RNEmarsysWrapper.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				569A51A024B741E700860A85 /* RNEmarsysEventHandler.h */,
+				569A51A124B741F300860A85 /* RNEmarsysEventHandler.m */,
 				B3E7B5881CC2AC0600A0062D /* RNEmarsysWrapper.h */,
 				B3E7B5891CC2AC0600A0062D /* RNEmarsysWrapper.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
+				1651946F686FB47759419CA0 /* Pods */,
+				D13B4667058ACAE79B7B1ABE /* Frameworks */,
 			);
+			sourceTree = "<group>";
+		};
+		D13B4667058ACAE79B7B1ABE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F7191CD152C14D3C868B30CE /* Pods_RNEmarsysWrapper.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -63,6 +92,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNEmarsysWrapper" */;
 			buildPhases = (
+				39D130025512C40EF49AC3E3 /* [CP] Check Pods Manifest.lock */,
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
 				58B511D91A9E6C8500147676 /* CopyFiles */,
@@ -108,11 +138,37 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		39D130025512C40EF49AC3E3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RNEmarsysWrapper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		58B511D71A9E6C8500147676 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				569A51A224B741F300860A85 /* RNEmarsysEventHandler.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNEmarsysWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,6 +277,7 @@
 		};
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B60584416EE05F8B05D9098A /* Pods-RNEmarsysWrapper.debug.xcconfig */;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -237,6 +294,7 @@
 		};
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67FAE13F57F4DB039387F9CF /* Pods-RNEmarsysWrapper.release.xcconfig */;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

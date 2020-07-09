@@ -6,6 +6,7 @@
 
 #import <EmarsysSDK/Emarsys.h>
 #import <EmarsysSDK/EMSConfig.h>
+#import <RNEmarsysWrapper/RNEmarsysEventHandler.h>
 
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
@@ -37,6 +38,13 @@
 	rootViewController.view = rootView;
 	self.window.rootViewController = rootViewController;
 	[self.window makeKeyAndVisible];
+  
+  RNEmarsysEventHandler *rnEMSEventHandler = [RNEmarsysEventHandler allocWithZone: nil];
+  Emarsys.inApp.eventHandler = rnEMSEventHandler;
+  Emarsys.notificationCenterDelegate.eventHandler = rnEMSEventHandler;
+  Emarsys.push.silentMessageEventHandler = rnEMSEventHandler;
+  Emarsys.geofence.eventHandler = rnEMSEventHandler;
+  UNUserNotificationCenter.currentNotificationCenter.delegate = Emarsys.notificationCenterDelegate;
 
 	return YES;
 }
