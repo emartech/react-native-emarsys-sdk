@@ -1,6 +1,0 @@
-framework module EmarsysSDK {
-  umbrella header "EmarsysSDK-umbrella.h"
-
-  export *
-  module * { export * }
-}
