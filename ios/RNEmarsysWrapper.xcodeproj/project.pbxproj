@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		02DB0E4FAE6529A48236697C /* Pods_RNEmarsysWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7191CD152C14D3C868B30CE /* Pods_RNEmarsysWrapper.framework */; };
 		569A51A224B741F300860A85 /* RNEmarsysEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 569A51A124B741F300860A85 /* RNEmarsysEventHandler.m */; };
+		56E0607124B8A70D005E9DF9 /* MapUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 56E0606D24B8A70D005E9DF9 /* MapUtil.m */; };
+		56E0607224B8A70D005E9DF9 /* LogicParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 56E0606F24B8A70D005E9DF9 /* LogicParser.m */; };
+		56E0607324B8A70E005E9DF9 /* ArrayUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 56E0607024B8A70D005E9DF9 /* ArrayUtil.m */; };
 		B3E7B58A1CC2AC0600A0062D /* RNEmarsysWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNEmarsysWrapper.m */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +31,12 @@
 		134814201AA4EA6300B7C361 /* libRNEmarsysWrapper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNEmarsysWrapper.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		569A51A024B741E700860A85 /* RNEmarsysEventHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNEmarsysEventHandler.h; sourceTree = "<group>"; };
 		569A51A124B741F300860A85 /* RNEmarsysEventHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNEmarsysEventHandler.m; sourceTree = "<group>"; };
+		56E0606B24B8A70D005E9DF9 /* ArrayUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayUtil.h; sourceTree = "<group>"; };
+		56E0606C24B8A70D005E9DF9 /* MapUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapUtil.h; sourceTree = "<group>"; };
+		56E0606D24B8A70D005E9DF9 /* MapUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapUtil.m; sourceTree = "<group>"; };
+		56E0606E24B8A70D005E9DF9 /* LogicParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogicParser.h; sourceTree = "<group>"; };
+		56E0606F24B8A70D005E9DF9 /* LogicParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogicParser.m; sourceTree = "<group>"; };
+		56E0607024B8A70D005E9DF9 /* ArrayUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayUtil.m; sourceTree = "<group>"; };
 		67FAE13F57F4DB039387F9CF /* Pods-RNEmarsysWrapper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNEmarsysWrapper.release.xcconfig"; path = "Target Support Files/Pods-RNEmarsysWrapper/Pods-RNEmarsysWrapper.release.xcconfig"; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNEmarsysWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNEmarsysWrapper.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNEmarsysWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNEmarsysWrapper.m; sourceTree = "<group>"; };
@@ -64,6 +73,19 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		56E0608124B8C1EA005E9DF9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				56E0606B24B8A70D005E9DF9 /* ArrayUtil.h */,
+				56E0607024B8A70D005E9DF9 /* ArrayUtil.m */,
+				56E0606E24B8A70D005E9DF9 /* LogicParser.h */,
+				56E0606F24B8A70D005E9DF9 /* LogicParser.m */,
+				56E0606C24B8A70D005E9DF9 /* MapUtil.h */,
+				56E0606D24B8A70D005E9DF9 /* MapUtil.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +93,7 @@
 				569A51A124B741F300860A85 /* RNEmarsysEventHandler.m */,
 				B3E7B5881CC2AC0600A0062D /* RNEmarsysWrapper.h */,
 				B3E7B5891CC2AC0600A0062D /* RNEmarsysWrapper.m */,
+				56E0608124B8C1EA005E9DF9 /* Utils */,
 				134814211AA4EA7D00B7C361 /* Products */,
 				1651946F686FB47759419CA0 /* Pods */,
 				D13B4667058ACAE79B7B1ABE /* Frameworks */,
@@ -169,7 +192,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				569A51A224B741F300860A85 /* RNEmarsysEventHandler.m in Sources */,
+				56E0607324B8A70E005E9DF9 /* ArrayUtil.m in Sources */,
+				56E0607124B8A70D005E9DF9 /* MapUtil.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNEmarsysWrapper.m in Sources */,
+				56E0607224B8A70D005E9DF9 /* LogicParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -3,9 +3,7 @@
 //
 
 #import "RNEmarsysEventHandler.h"
-
-static bool hasListeners = NO;
-static NSDictionary<NSString *,NSObject *> *body = nil;
+#import "RNEmarsysWrapper.h"
  
 @implementation RNEmarsysEventHandler
 
@@ -18,29 +16,9 @@ static NSDictionary<NSString *,NSObject *> *body = nil;
     return sharedInstance;
 }
 
-RCT_EXPORT_MODULE()
-
--(void)startObserving {
-    hasListeners = YES;
-    if (body != nil) {
-      [self sendEventWithName:@"handleEvent" body: body];
-    }
-}
-
--(void)stopObserving {
-    hasListeners = NO;
-}
-
-- (NSArray<NSString *> *)supportedEvents {
-    return @[@"handleEvent"];
-}
- 
 - (void)handleEvent:(nonnull NSString *)eventName payload:(nullable NSDictionary<NSString *,NSObject *> *)payload {
-    if (hasListeners) {
-      [self sendEventWithName:@"handleEvent" body:@{@"eventName": eventName, @"payload": payload}];
-    } else {
-      body = @{@"eventName": eventName, @"payload": payload};
-    }
+    RNEmarsysWrapper *wrapper = [RNEmarsysWrapper allocWithZone: nil];
+    [wrapper sendEvent:@{@"eventName": eventName, @"payload": payload}];
 }
 
 @end
