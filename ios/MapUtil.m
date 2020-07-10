@@ -3,6 +3,9 @@
 
 #import "EMSLogic.h"
 #import "EMSRecommendationFilter.h"
+#import "EMSProduct.h"
+#import "EMSProduct+Emarsys.h"
+#import "EMSProductBuilder.h"
 
 #import "RNEmarsysWrapper.h"
 
