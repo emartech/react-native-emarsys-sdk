@@ -505,11 +505,7 @@ RCT_EXPORT_METHOD(resume:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRej
 }
 
 RCT_EXPORT_METHOD(setEventHandler:(RCTResponseSenderBlock)callback) {
-    [Emarsys.inApp setEventHandler:self];
-        
-    self.handlerBlock = ^(NSString *eventName, NSDictionary<NSString *,NSObject *> *payload) {
-        callback(@[eventName, payload]);
-    };
+
 }
 
 RCT_EXPORT_METHOD(trackCart:(NSArray * _Nonnull)cartItems resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
