@@ -1,8 +1,8 @@
 PODS:
   - boost-for-react-native (1.63.0)
   - DoubleConversion (1.1.6)
-  - EmarsysNotificationService (2.4.0)
-  - EmarsysSDK (2.5.4)
+  - EmarsysNotificationService (2.5.5)
+  - EmarsysSDK (2.5.5)
   - Folly (2018.10.22.00):
     - boost-for-react-native
     - DoubleConversion
@@ -196,8 +196,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
-  EmarsysNotificationService: b7a86ac73e5cce5a8223dec66aa6a2da728b05d4
-  EmarsysSDK: fa76d518012bc07657f3b67865d780382061aadb
+  EmarsysNotificationService: 1577e9429d84d1f4fda646b2cfac4a355d1fdc47
+  EmarsysSDK: 7d487a7685ab6ed446430d31aae2a003bcbe8062
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   React: 4b3c068e793e96672dcd186a2b572fac43e4b031
