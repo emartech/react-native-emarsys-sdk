@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -27,36 +28,45 @@ public class MapUtil {
 	public static WritableMap convertProductToMap(Product product) {
 		WritableMap map = Arguments.createMap();
 
-		try {
-			map.putString("productId", product.getProductId());
-			map.putString("title", product.getTitle());
-			map.putString("linkUrl", product.getLinkUrl().toString());
-			map.putString("feature", product.getFeature());
-			map.putString("cohort", product.getCohort());
-			map.putString("imageUrl", product.getImageUrl().toString());
-			map.putString("zoomImageUrl", product.getZoomImageUrl().toString());
-			map.putString("categoryPath", product.getCategoryPath());
-			map.putString("productDescription", product.getProductDescription());
-			map.putString("album", product.getAlbum());
-			map.putString("actor", product.getActor());
-			map.putString("artist", product.getArtist());
-			map.putString("author", product.getAuthor());
-			map.putString("brand", product.getBrand());
-			map.putBoolean("available", product.getAvailable());
-			map.putDouble("price", product.getPrice());
-			map.putDouble("msrp", product.getMsrp());
-			map.putInt("year", product.getYear());
+		mapPutNullable(map, "productId", product.getProductId());
+		mapPutNullable(map, "title", product.getTitle());
+		mapPutNullable(map, "linkUrl", product.getLinkUrl().toString());
+		mapPutNullable(map, "feature", product.getFeature());
+		mapPutNullable(map, "cohort", product.getCohort());
+		mapPutNullable(map, "imageUrl", product.getImageUrl());
+		mapPutNullable(map, "zoomImageUrl", product.getZoomImageUrl());
+		mapPutNullable(map, "categoryPath", product.getCategoryPath());
+		mapPutNullable(map, "productDescription", product.getProductDescription());
+		mapPutNullable(map, "album", product.getAlbum());
+		mapPutNullable(map, "actor", product.getActor());
+		mapPutNullable(map, "artist", product.getArtist());
+		mapPutNullable(map, "author", product.getAuthor());
+		mapPutNullable(map, "brand", product.getBrand());
+		mapPutNullable(map, "available", product.getAvailable());
+		mapPutNullable(map, "price", product.getPrice());
+		mapPutNullable(map, "msrp", product.getMsrp());
+		mapPutNullable(map, "year", product.getYear());
 
-			Map<String, Object> customFields = new HashMap<>();
-			customFields.putAll(product.getCustomFields());
-
-			map.putMap("customFields", toWritableMap(customFields));
-
-		} catch (NullPointerException e) {
-			Log.d("Logs", "Product has null value");
-		}
+		Map<String, Object> customFields = new HashMap<String, Object>(product.getCustomFields());
+		map.putMap("customFields", toWritableMap(customFields));
 
 		return map;
+	}
+
+	public static void mapPutNullable(WritableMap map, String key, Object value) {
+		if (value == null) {
+			map.putNull(key);
+		} else if (value instanceof String) {
+			map.putString(key, (String) value);
+		} else if (value instanceof URL) {
+			map.putString(key, value.toString());
+		} else if (value instanceof Boolean) {
+			map.putBoolean(key, (Boolean) value);
+		} else if (value instanceof Integer) {
+			map.putInt(key, (Integer) value);
+		} else if (value instanceof Double) {
+			map.putDouble(key, (Double) value);
+		}
 	}
 
 	public static List<RecommendationFilter> mapToRecommendationFilter(ReadableMap map) {
