@@ -35,6 +35,7 @@
     [map setObject: product.price forKeyedSubscript: @"price"];
     [map setObject: product.msrp forKeyedSubscript: @"msrp"];
     [map setObject: product.year forKeyedSubscript: @"year"];
+    [map setObject: product.customFields forKeyedSubscript: @"customFields"];
     
     return map;
     
