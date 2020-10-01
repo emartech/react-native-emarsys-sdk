@@ -627,12 +627,12 @@ const Emarsys = {
 		return RNEmarsysWrapper.trackDeepLink(url ? url : null)
 	},
 
-	/* ApplicationCode and merchantId change ******************************************************************************************************/
+	/* ApplicationCode, applicationCode and merchantId change ******************************************************************************************************/
 
 	/**
 	  * @desc Emarsys SDK provides a solution for applicationCode change in a convenient way without restarting the SDK.
 	  * @param string applicationCodeChange - applicationCode for change
-	  * @param number customerFieldIdChange - customerFieldId for change (optional)
+	  * @param number customerFieldIdChange - customerFieldId for change
 	  * @return bool - success or failure
 	*/		
 	changeApplicationCode(applicationCodeChange, customerFieldIdChange) {

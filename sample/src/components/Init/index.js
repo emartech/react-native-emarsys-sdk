@@ -107,13 +107,14 @@ export default class Init extends Component {
 		}
 	}
 
-	// MARK: - ApplicationCode and merchantId change *************************************************************************************************************
+	// MARK: - ApplicationCode, contactFieldId and merchantId change *************************************************************************************************************
 
 	async wrapperChangeApplicationCode() {
 		let applicationCodeChange = "EMSF6-F532D"
+		let contactFieldId = 3
 
 		try {
-			let result = await Emarsys.changeApplicationCode(applicationCodeChange)
+			let result = await Emarsys.changeApplicationCode(applicationCodeChange, contactFieldId)
 			console.log("changeApplicationCode Done: ", result)
 			showAlert( "changeApplicationCode", "changeApplicationCode Done.")
 		} catch (e) {
