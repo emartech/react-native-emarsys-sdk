@@ -27,6 +27,16 @@
     else if([logic isEqualToString:@"POPULAR"]) {
         recommendedLogic = EMSLogic.popular;
     }
+    else if ([logic isEqualToString:@"HOME"]) {
+        recommendedLogic = EMSLogic.home;
+    }
+    else if ([logic isEqualToString:@"PERSONAL"]) {
+        recommendedLogic = EMSLogic.personal;
+    }
+    
+    return recommendedLogic;
+}
+
     
     return recommendedLogic;
 }
@@ -38,7 +48,6 @@
         NSArray<EMSCartItem *> *items = [ArrayUtil arrayToCartList:cartItems];
         recommendedLogic = [EMSLogic cartWithCartItems:[items copy]];
     }
-    
     else if([logic isEqualToString:@"RELATED"]) {
         recommendedLogic = EMSLogic.related;
     }
