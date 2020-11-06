@@ -37,6 +37,15 @@
     return recommendedLogic;
 }
 
++(EMSLogic *)parseLogic:(NSString *)logic variants:(NSArray<NSString *> *)variants  {
+    EMSLogic *recommendedLogic;
+    
+    if([logic isEqualToString:@"HOME"]) {
+        recommendedLogic = [EMSLogic homeWithVariants:variants];
+    }
+    else if([logic isEqualToString:@"PERSONAL"]) {
+        recommendedLogic = [EMSLogic personalWithVariants:variants];
+    }
     
     return recommendedLogic;
 }
