@@ -295,6 +295,18 @@ RCT_EXPORT_METHOD(recommendProductsCartItems:(NSString * _Nonnull)logic cartItem
     }
 }
 
+RCT_EXPORT_METHOD(recommendProductsVariants :(NSString * _Nonnull)logic variants:(NSArray * _Nonnull)variants resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        EMSLogic *recLogic = [LogicParser parseLogic:logic variants:[variants copy]];
+        [Emarsys.predict recommendProductsWithLogic:recLogic productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsVariants" withError:error];
+        }];
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
 RCT_EXPORT_METHOD(recommendProductsLimit:(NSString * _Nonnull)logic limit:(NSNumber * _Nonnull)limit resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         EMSLogic *recLogic = [LogicParser parseLogic:logic];
