@@ -225,22 +225,23 @@ public class MapUtil {
 			}
 		}
 
-		return new Product.Builder(productId, title, linkUrl, feature, cohort)
-			.imageUrl(imageUrl)
-			.zoomImageUrl(zoomImageUrl)
-			.categoryPath(categoryPath)
-			.productDescription(productDescription)
-			.album(album)
-			.actor(actor)
-			.artist(artist)
-			.author(author)
-			.brand(brand)
-			.customFields(customFields)
-			.available(available)
-			.price(price)
-			.msrp(msrp)
-			.year(year)
-			.build();
+		return new Product(productId, title, linkUrl, feature, cohort,
+				customFields,
+				imageUrl,
+				null,
+				zoomImageUrl,
+				null,
+				categoryPath,
+				available,
+				productDescription,
+				price,
+				msrp,
+				album,
+				actor,
+				artist,
+				author,
+				brand,
+				year);
 	}
 
 	private static Map<String, String> convertMap(Map<String, Object> oldMap) {
