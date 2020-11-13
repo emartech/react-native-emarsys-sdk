@@ -48,6 +48,21 @@ public class LogicParser {
 		return recommendedLogic;
 	}
 
+	public static Logic parse(String logic, List<String> variants) {
+		Logic recommendLogic;
+		switch (logic) {
+			case PERSONAL:
+				recommendLogic = RecommendationLogic.personal(variants);
+				break;
+			case HOME:
+				recommendLogic = RecommendationLogic.home(variants);
+				break;
+			default:
+				recommendLogic = RecommendationLogic.search();
+		}
+		return recommendLogic;
+	}
+
 	public static Logic parse(String logic, ReadableArray array) {
 		Logic recommendLogic;
 		switch (logic) {

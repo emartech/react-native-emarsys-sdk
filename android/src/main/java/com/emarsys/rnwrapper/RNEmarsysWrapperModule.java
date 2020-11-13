@@ -31,6 +31,7 @@ import com.facebook.react.bridge.WritableMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -332,6 +333,22 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void recommendProductsVariants(@NonNull String logic, @NonNull ReadableArray variants, final Promise promise) {
+        try {
+            List variantsList = Arrays.asList(ArrayUtil.toArray(variants));
+            Logic recLogic = LogicParser.parse(logic, variantsList);
+            Emarsys.getPredict().recommendProducts(recLogic, new ResultListener<Try<List<Product>>>() {
+                @Override
+                public void onResult(@NonNull Try<List<Product>> result) {
+                    resolveProducts(promise, result, "recommendProductsVariants");
+                }
+            });
+        } catch (Exception e) {
+            promise.reject(TAG, "Error recommendProductsVariants: ", e);
+        }
+    }
+
+    @ReactMethod
     public void recommendProductsLimit(@NonNull String logic, @NonNull Integer limit, final Promise promise) {
         try {
             Logic recLogic = LogicParser.parse(logic);
@@ -373,6 +390,22 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
             });
         } catch (Exception e) {
             promise.reject(TAG, "Error recommendProductsCartItemsLimit: ", e);
+        }
+    }
+
+    @ReactMethod
+    public void recommendProductsVariantsLimit(@NonNull String logic, @NonNull ReadableArray variants, @NonNull Integer limit, final Promise promise) {
+        try {
+            List variantsList = Arrays.asList(ArrayUtil.toArray(variants));
+            Logic recLogic = LogicParser.parse(logic, variantsList);
+            Emarsys.getPredict().recommendProducts(recLogic, limit, new ResultListener<Try<List<Product>>>() {
+                @Override
+                public void onResult(@NonNull Try<List<Product>> result) {
+                    resolveProducts(promise, result, "recommendProductsVariantsLimit");
+                }
+            });
+        } catch (Exception e) {
+            promise.reject(TAG, "Error recommendProductsVariantsLimit: ", e);
         }
     }
 
@@ -425,6 +458,23 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void recommendProductsVariantsFilters(@NonNull String logic, @NonNull ReadableArray variants, @NonNull ReadableMap filters, final Promise promise) {
+        try {
+            List variantsList = Arrays.asList(ArrayUtil.toArray(variants));
+            Logic recLogic = LogicParser.parse(logic, variantsList);
+            List<RecommendationFilter> recFilters = MapUtil.mapToRecommendationFilter(filters);
+            Emarsys.getPredict().recommendProducts(recLogic, recFilters, new ResultListener<Try<List<Product>>>() {
+                @Override
+                public void onResult(@NonNull Try<List<Product>> result) {
+                    resolveProducts(promise, result, "recommendProductsVariantsFilters");
+                }
+            });
+        } catch (Exception e) {
+            promise.reject(TAG, "Error recommendProductsVariantsFilters: ", e);
+        }
+    }
+
+    @ReactMethod
     public void recommendProductsLimitFilters(@NonNull String logic, @NonNull Integer limit, @NonNull ReadableMap filters, final Promise promise) {
         try {
             Logic recLogic = LogicParser.parse(logic);
@@ -460,6 +510,23 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     public void recommendProductsCartItemsLimitFilters(@NonNull String logic, @NonNull ReadableArray cartItems, @NonNull Integer limit, @NonNull ReadableMap filters, final Promise promise) {
         try {
             Logic recLogic = LogicParser.parse(logic, cartItems);
+            List<RecommendationFilter> recFilters = MapUtil.mapToRecommendationFilter(filters);
+            Emarsys.getPredict().recommendProducts(recLogic, recFilters, limit, new ResultListener<Try<List<Product>>>() {
+                @Override
+                public void onResult(@NonNull Try<List<Product>> result) {
+                    resolveProducts(promise, result, "recommendProductsCartItemsLimitFilters");
+                }
+            });
+        } catch (Exception e) {
+            promise.reject(TAG, "Error recommendProductsCartItemsLimitFilters: ", e);
+        }
+    }
+
+    @ReactMethod
+    public void recommendProductsVariantsLimitFilters(@NonNull String logic, @NonNull ReadableArray variants, @NonNull Integer limit, @NonNull ReadableMap filters, final Promise promise) {
+        try {
+            List variantsList = Arrays.asList(ArrayUtil.toArray(variants));
+            Logic recLogic = LogicParser.parse(logic, variantsList);
             List<RecommendationFilter> recFilters = MapUtil.mapToRecommendationFilter(filters);
             Emarsys.getPredict().recommendProducts(recLogic, recFilters, limit, new ResultListener<Try<List<Product>>>() {
                 @Override
