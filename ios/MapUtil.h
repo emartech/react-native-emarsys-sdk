@@ -1,8 +1,5 @@
 //
-//  MapUtil.h
-//  RNEmarsysWrapper
-//
-//  Created by Eduardo Zatoni on 10/07/2020.
+//  Copyright © 2020 Emarsys. All rights reserved.
 //
 
 @interface MapUtil : NSObject

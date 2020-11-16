@@ -27,6 +27,25 @@
     else if([logic isEqualToString:@"POPULAR"]) {
         recommendedLogic = EMSLogic.popular;
     }
+    else if ([logic isEqualToString:@"HOME"]) {
+        recommendedLogic = EMSLogic.home;
+    }
+    else if ([logic isEqualToString:@"PERSONAL"]) {
+        recommendedLogic = EMSLogic.personal;
+    }
+    
+    return recommendedLogic;
+}
+
++(EMSLogic *)parseLogic:(NSString *)logic variants:(NSArray<NSString *> *)variants  {
+    EMSLogic *recommendedLogic;
+    
+    if([logic isEqualToString:@"HOME"]) {
+        recommendedLogic = [EMSLogic homeWithVariants:variants];
+    }
+    else if([logic isEqualToString:@"PERSONAL"]) {
+        recommendedLogic = [EMSLogic personalWithVariants:variants];
+    }
     
     return recommendedLogic;
 }
@@ -38,7 +57,6 @@
         NSArray<EMSCartItem *> *items = [ArrayUtil arrayToCartList:cartItems];
         recommendedLogic = [EMSLogic cartWithCartItems:[items copy]];
     }
-    
     else if([logic isEqualToString:@"RELATED"]) {
         recommendedLogic = EMSLogic.related;
     }

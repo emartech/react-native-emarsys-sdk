@@ -20,7 +20,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "28.0.3"
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -42,5 +42,5 @@ repositories {
 
 dependencies {
     implementation "com.facebook.react:react-native:+"
-    implementation "com.emarsys:emarsys-sdk:2.8.0"
+    implementation "com.emarsys:emarsys-sdk:2.9.1"
 }

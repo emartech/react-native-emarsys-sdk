@@ -1,8 +1,8 @@
 PODS:
   - boost-for-react-native (1.63.0)
   - DoubleConversion (1.1.6)
-  - EmarsysNotificationService (2.8.0)
-  - EmarsysSDK (2.8.0)
+  - EmarsysNotificationService (2.9.1)
+  - EmarsysSDK (2.9.1)
   - Folly (2018.10.22.00):
     - boost-for-react-native
     - DoubleConversion
@@ -84,7 +84,7 @@ PODS:
     - React-Core (= 0.60.0)
     - React-fishhook (= 0.60.0)
   - RNEmarsysWrapper (1.0.1):
-    - EmarsysSDK (~> 2.5.4)
+    - EmarsysSDK (~> 2.9.1)
     - React (>= 0.60.0)
   - RNGestureHandler (1.6.1):
     - React
@@ -196,8 +196,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
-  EmarsysNotificationService: 1577e9429d84d1f4fda646b2cfac4a355d1fdc47
-  EmarsysSDK: 7d487a7685ab6ed446430d31aae2a003bcbe8062
+  EmarsysNotificationService: 7b5e5b033c552527e59cee5d0be27af0baa0a479
+  EmarsysSDK: 65bb677cf55eefdeac17fe330d271d62c74fb339
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   React: 4b3c068e793e96672dcd186a2b572fac43e4b031
@@ -218,7 +218,7 @@ SPEC CHECKSUMS:
   React-RCTText: 685fca2e13b024271048e7e247ef24476f28a41e
   React-RCTVibration: 4ee1cf208ab17a50fafb1c16ffe28fe594a64e4f
   React-RCTWebSocket: fca087d583724aa0e5fef7d911f0f2a28d0f2736
-  RNEmarsysWrapper: 430351ea4006bbb38fc711c50144d8fd7fbad72a
+  RNEmarsysWrapper: 6f72579100f9270f95e9d73af7dfab9e42094160
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReanimated: b5ccb50650ba06f6e749c7c329a1bc3ae0c88b43
   RNScreens: c526239bbe0e957b988dacc8d75ac94ec9cb19da

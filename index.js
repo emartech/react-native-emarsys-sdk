@@ -304,6 +304,31 @@ const Emarsys = {
 		 * 	POPULAR - based on categoryPath
 		 * 	PERSONAL - based on current browsing and activity
 		 * 	HOME - based on most recent browsing behaviour
+		 * 
+		 * 	@param variants
+		 *
+		 * 	Variants:
+		 * 	let variants = ["1", "2", "3"]
+		 * @return array - array of objects with recommended Products
+		 */
+
+		recommendProductsVariants(logic, variants) {
+			return RNEmarsysWrapper.recommendProductsVariants(logic, variants)
+		},
+
+		/**
+		 * @desc With the Emarsys SDK you can ask for product recommendations based on different parameters.
+
+		 * @param required string logic - For more information of the recommender logics, please visit [the official documentation].(https://help.emarsys.com/hc/en-us/articles/115004662189-Web-Recommender-logics "The Official Documentation")
+		 * The currently supported logics are:
+		 * 	SEARCH - based on searchTerm
+		 * 	CART - based on cartItems
+		 * 	RELATED - based on itemViewId
+		 * 	CATEGORY - based on categoryPath
+		 * 	ALSO_BOUGHT - based on itemViewId
+		 * 	POPULAR - based on categoryPath
+		 * 	PERSONAL - based on current browsing and activity
+		 * 	HOME - based on most recent browsing behaviour
 		 * @param required integer limit - You can limit the number of recommended products received by defining a limit. This is an optional parameter, by default its value is 5.
 		 * @return array - array of objects with recommended Products
 		 */
@@ -368,6 +393,32 @@ const Emarsys = {
 		 */
 		recommendProductsCartItemsLimit(logic, cartItems, limit) {
 			return RNEmarsysWrapper.recommendProductsCartItemsLimit(logic, cartItems, limit)
+		},
+
+		/**
+		 * @desc With the Emarsys SDK you can ask for product recommendations based on different parameters.
+
+		 * @param required string logic - For more information of the recommender logics, please visit [the official documentation].(https://help.emarsys.com/hc/en-us/articles/115004662189-Web-Recommender-logics "The Official Documentation")
+		 * The currently supported logics are:
+		 * 	SEARCH - based on searchTerm
+		 * 	CART - based on cartItems
+		 * 	RELATED - based on itemViewId
+		 * 	CATEGORY - based on categoryPath
+		 * 	ALSO_BOUGHT - based on itemViewId
+		 * 	POPULAR - based on categoryPath
+		 * 	PERSONAL - based on current browsing and activity
+		 * 	HOME - based on most recent browsing behaviour
+		 * 
+		 * 	@param variants
+		 *
+		 * 	Variants:
+		 * 	let variants = ["1", "2", "3"]
+		 *
+		 * @param required integer limit - You can limit the number of recommended products received by defining a limit. This is an optional parameter, by default its value is 5.
+		 * @return array - array of objects with recommended Products
+		 */
+ 		recommendProductsVariantsLimit(logic, variants, limit) {
+			return RNEmarsysWrapper.recommendProductsVariantsLimit(logic, variants, limit)
 		},
 
 		/**
@@ -486,6 +537,40 @@ const Emarsys = {
 		 * 	POPULAR - based on categoryPath
 		 * 	PERSONAL - based on current browsing and activity
 		 * 	HOME - based on most recent browsing behaviour
+		 * 
+		 * 	@param variants
+		 *
+		 * 	Variants:
+		 * 	let variants = ["1", "2", "3"]
+		 *
+ 		 * @param required object filters - You can filter product recommendations with the SDK by building RecommendationFilters. , please visit [https://dev.emarsys.com/v2/web-extend-command-reference/web-extend-exclude the official documentation].(https://help.emarsys.com/hc/en-us/articles/115004662189-Web-Recommender-logics "The Official Documentation")
+		 * 	@param required string type - There are two types of filters: exclude or include.
+		 * 	@param required string field - String extends Type of recommended logics.
+		 * 	@param required string comparison - In every case there are four types of comparators you can use to compare your chosen field to expectations:
+		 * 		is - checking if the field is matching the value
+		 * 		in - any of the values has a match with the field
+		 * 		has - One of the field values is equal to expectation value (applicable only to fields containing multiple values)
+		 * 		overlaps - One or more of the field values are found in expectation values (applicable only to fields containing multiple values)
+		 * 	@param required string/array expectations - String/Array of strings extends Comparison of recommended logics.* @return array - array of objects with recommended Products
+		 */
+
+		recommendProductsVariantsFilters(logic, variants, filters) {
+			return RNEmarsysWrapper.recommendProductsVariantsFilters(logic, variants, filters)
+		},
+
+		/**
+		 * @desc With the Emarsys SDK you can ask for product recommendations based on different parameters.
+
+		 * @param required string logic - For more information of the recommender logics, please visit [the official documentation].(https://help.emarsys.com/hc/en-us/articles/115004662189-Web-Recommender-logics "The Official Documentation")
+		 * The currently supported logics are:
+		 * 	SEARCH - based on searchTerm
+		 * 	CART - based on cartItems
+		 * 	RELATED - based on itemViewId
+		 * 	CATEGORY - based on categoryPath
+		 * 	ALSO_BOUGHT - based on itemViewId
+		 * 	POPULAR - based on categoryPath
+		 * 	PERSONAL - based on current browsing and activity
+		 * 	HOME - based on most recent browsing behaviour
 		 * @param required integer limit - You can limit the number of recommended products received by defining a limit. This is an optional parameter, by default its value is 5.
 		 * @param required object filters - You can filter product recommendations with the SDK by building RecommendationFilters. , please visit [https://dev.emarsys.com/v2/web-extend-command-reference/web-extend-exclude the official documentation].(https://help.emarsys.com/hc/en-us/articles/115004662189-Web-Recommender-logics "The Official Documentation")
 		 * 	@param required string type - There are two types of filters: exclude or include.
@@ -577,6 +662,42 @@ const Emarsys = {
 		 */
 		recommendProductsCartItemsLimitFilters(logic, cartItems, limit, filters) {
 			return RNEmarsysWrapper.recommendProductsCartItemsLimitFilters(logic, cartItems, limit, filters)
+		},
+
+		/**
+		 * @desc With the Emarsys SDK you can ask for product recommendations based on different parameters.
+
+		 * @param required string logic - For more information of the recommender logics, please visit [the official documentation].(https://help.emarsys.com/hc/en-us/articles/115004662189-Web-Recommender-logics "The Official Documentation")
+		 * The currently supported logics are:
+		 * 	SEARCH - based on searchTerm
+		 * 	CART - based on cartItems
+		 * 	RELATED - based on itemViewId
+		 * 	CATEGORY - based on categoryPath
+		 * 	ALSO_BOUGHT - based on itemViewId
+		 * 	POPULAR - based on categoryPath
+		 * 	PERSONAL - based on current browsing and activity
+		 * 	HOME - based on most recent browsing behaviour
+		 * 
+		 * 	@param variants
+		 *
+		 * 	Variants:
+		 * 	let variants = ["1", "2", "3"]
+		 *
+		 * @param required integer limit - You can limit the number of recommended products received by defining a limit. This is an optional parameter, by default its value is 5.
+		 * @param required object filters - You can filter product recommendations with the SDK by building RecommendationFilters. , please visit [https://dev.emarsys.com/v2/web-extend-command-reference/web-extend-exclude the official documentation].(https://help.emarsys.com/hc/en-us/articles/115004662189-Web-Recommender-logics "The Official Documentation")
+		 * 	@param required string type - There are two types of filters: exclude or include.
+		 * 	@param required string field - String extends Type of recommended logics.
+		 * 	@param required string comparison - In every case there are four types of comparators you can use to compare your chosen field to expectations:
+		 * 		is - checking if the field is matching the value
+		 * 		in - any of the values has a match with the field
+		 * 		has - One of the field values is equal to expectation value (applicable only to fields containing multiple values)
+		 * 		overlaps - One or more of the field values are found in expectation values (applicable only to fields containing multiple values)
+		 * 	@param required string/array expectations - String/Array of strings extends Comparison of recommended logics.
+		 * @return array - array of objects with recommended Products
+		 */
+
+		recommendProductsVariantsLimitFilters(logic, variants, limit, filters) {
+			return RNEmarsysWrapper.recommendProductsVariantsLimitFilters(logic, variants, limit, filters)
 		},
 
 		/**
