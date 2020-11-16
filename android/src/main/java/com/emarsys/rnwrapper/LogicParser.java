@@ -10,6 +10,8 @@ import java.util.List;
 import static com.emarsys.predict.api.model.RecommendationLogic.ALSO_BOUGHT;
 import static com.emarsys.predict.api.model.RecommendationLogic.CART;
 import static com.emarsys.predict.api.model.RecommendationLogic.CATEGORY;
+import static com.emarsys.predict.api.model.RecommendationLogic.HOME;
+import static com.emarsys.predict.api.model.RecommendationLogic.PERSONAL;
 import static com.emarsys.predict.api.model.RecommendationLogic.POPULAR;
 import static com.emarsys.predict.api.model.RecommendationLogic.RELATED;
 import static com.emarsys.predict.api.model.RecommendationLogic.SEARCH;
@@ -34,10 +36,31 @@ public class LogicParser {
 			case POPULAR:
 				recommendedLogic = RecommendationLogic.popular();
 				break;
+			case PERSONAL:
+				recommendedLogic = RecommendationLogic.personal();
+				break;
+			case HOME:
+				recommendedLogic = RecommendationLogic.home();
+				break;
 			default:
 				recommendedLogic = RecommendationLogic.search();
 		}
 		return recommendedLogic;
+	}
+
+	public static Logic parse(String logic, List<String> variants) {
+		Logic recommendLogic;
+		switch (logic) {
+			case PERSONAL:
+				recommendLogic = RecommendationLogic.personal(variants);
+				break;
+			case HOME:
+				recommendLogic = RecommendationLogic.home(variants);
+				break;
+			default:
+				recommendLogic = RecommendationLogic.search();
+		}
+		return recommendLogic;
 	}
 
 	public static Logic parse(String logic, ReadableArray array) {

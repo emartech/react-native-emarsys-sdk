@@ -295,6 +295,18 @@ RCT_EXPORT_METHOD(recommendProductsCartItems:(NSString * _Nonnull)logic cartItem
     }
 }
 
+RCT_EXPORT_METHOD(recommendProductsVariants :(NSString * _Nonnull)logic variants:(NSArray * _Nonnull)variants resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        EMSLogic *recLogic = [LogicParser parseLogic:logic variants:[variants copy]];
+        [Emarsys.predict recommendProductsWithLogic:recLogic productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsVariants" withError:error];
+        }];
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
 RCT_EXPORT_METHOD(recommendProductsLimit:(NSString * _Nonnull)logic limit:(NSNumber * _Nonnull)limit resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         EMSLogic *recLogic = [LogicParser parseLogic:logic];
@@ -325,6 +337,18 @@ RCT_EXPORT_METHOD(recommendProductsCartItemsLimit:(NSString * _Nonnull)logic car
         EMSLogic *recLogic = [LogicParser parseLogic:logic cartItems:[items copy]];
         [Emarsys.predict recommendProductsWithLogic:recLogic limit:limit productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
             [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsCartItemsLimit" withError:error];
+        }];
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
+RCT_EXPORT_METHOD(recommendProductsVariantsLimit:(NSString * _Nonnull)logic variants:(NSArray * _Nonnull)variants limit:(NSNumber * _Nonnull)limit resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        EMSLogic *recLogic = [LogicParser parseLogic:logic variants:[variants copy]];
+        [Emarsys.predict recommendProductsWithLogic:recLogic limit:limit productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsVariantsLimit" withError:error];
         }];
     }
     @catch (NSException *exception) {
@@ -372,6 +396,19 @@ RCT_EXPORT_METHOD(recommendProductsCartItemsFilters:(NSString * _Nonnull)logic c
     }
 }
 
+RCT_EXPORT_METHOD(recommendProductsVariantsFilters:(NSString * _Nonnull)logic variants:(NSArray * _Nonnull)variants filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        EMSLogic *recLogic = [LogicParser parseLogic:logic variants:[variants copy]];
+        NSArray<EMSRecommendationFilter *> *recFilters = [MapUtil mapToRecommendationFilter:filters];
+        [Emarsys.predict recommendProductsWithLogic:recLogic filters:recFilters productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsVariantsFilters" withError:error];
+        }];
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
 RCT_EXPORT_METHOD(recommendProductsLimitFilters:(NSString * _Nonnull)logic limit:(NSNumber * _Nonnull)limit filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         EMSLogic *recLogic = [LogicParser parseLogic:logic];
@@ -405,6 +442,19 @@ RCT_EXPORT_METHOD(recommendProductsCartItemsLimitFilters:(NSString * _Nonnull)lo
         NSArray<EMSRecommendationFilter *> *recFilters = [MapUtil mapToRecommendationFilter:filters];
         [Emarsys.predict recommendProductsWithLogic:recLogic filters:recFilters limit:limit productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
             [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsCartItemsLimitFilters" withError:error];
+        }];
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
+RCT_EXPORT_METHOD(recommendProductsVariantsLimitFilters:(NSString * _Nonnull)logic variants:(NSArray * _Nonnull)variants limit:(NSNumber * _Nonnull)limit filters:(NSDictionary * _Nonnull)filters resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        EMSLogic *recLogic = [LogicParser parseLogic:logic variants:[variants copy]];
+        NSArray<EMSRecommendationFilter *> *recFilters = [MapUtil mapToRecommendationFilter:filters];
+        [Emarsys.predict recommendProductsWithLogic:recLogic filters:recFilters limit:limit productsBlock:^(NSArray<EMSProduct *> *products, NSError *error) {
+            [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProductsVariantsLimitFilters" withError:error];
         }];
     }
     @catch (NSException *exception) {

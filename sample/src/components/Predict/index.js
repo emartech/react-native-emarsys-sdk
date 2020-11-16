@@ -234,6 +234,20 @@ export default class Predict extends Component {
 		}
 	}
 
+	async wrapperRecommendProductsVariants() {
+		let logic = "PERSONAL"
+		let variants = ["1", "2", "3"]
+
+		try {
+			let result = await Emarsys.predict.recommendProductsVariants(logic, variants)
+			console.log("wrapperRecommendProductsVariants Done: ", result)
+			showAlert( "wrapperRecommendProductsVariants", "wrapperRecommendProductsVariants Done.")
+		} catch (e) {
+			console.log("wrapperRecommendProductsVariants Fail: ", e)
+			showAlert( "wrapperRecommendProductsVariants", "wrapperRecommendProductsVariants Fail: ", e )
+		}
+	}
+
 	async wrapperRecommendProductsLimit() {
 		let logic = "RELATED"
 		let limit = 1
@@ -283,6 +297,21 @@ export default class Predict extends Component {
 		} catch (e) {
 			console.log("recommendProductsCartItemsLimit Fail: ", e)
 			showAlert( "recommendProductsCartItemsLimit", "recommendProductsCartItemsLimit Fail: ", e )
+		}
+	}
+
+	async wrapperRecommendProductsVariantsLimit() {
+		let logic = "PERSONAL"
+		let variants = ["1", "2", "3"]
+		let limit = 1
+
+		try {
+			let result = await Emarsys.predict.recommendProductsVariantsLimit(logic, variants, limit)
+			console.log("wrapperRecommendProductsVariantsLimit Done: ", result)
+			showAlert( "wrapperRecommendProductsVariantsLimit", "wrapperRecommendProductsVariantsLimit Done.")
+		} catch (e) {
+			console.log("wrapperRecommendProductsVariantsLimit Fail: ", e)
+			showAlert( "wrapperRecommendProductsVariantsLimit", "wrapperRecommendProductsVariantsLimit Fail: ", e )
 		}
 	}
 
@@ -348,6 +377,21 @@ export default class Predict extends Component {
 		}
 	}
 
+	async wrapperRecommendProductsVariantsFilters() {
+		let logic = "PERSONAL"
+		let variants = ["1", "2", "3"]
+		let filters = {}
+
+		try {
+			let result = await Emarsys.predict.recommendProductsVariantsFilters(logic, variants, filters)
+			console.log("wrapperRecommendProductsVariantsFilters Done: ", result)
+			showAlert( "wrapperRecommendProductsVariantsFilters", "wrapperRecommendProductsVariantsFilters Done.")
+		} catch (e) {
+			console.log("wrapperRecommendProductsVariantsFilters Fail: ", e)
+			showAlert( "wrapperRecommendProductsVariantsFilters", "wrapperRecommendProductsVariantsFilters Fail: ", e )
+		}
+	}
+
 	async wrapperRecommendProductsLimitFilters() {
 		let logic = "POPULAR"
 		let limit = 5
@@ -400,6 +444,22 @@ export default class Predict extends Component {
 		} catch (e) {
 			console.log("recommendProductsCartItemsLimitFilters Fail: ", e)
 			showAlert( "recommendProductsCartItemsLimitFilters", "recommendProductsCartItemsLimitFilters Fail: ", e )
+		}
+	}	
+
+	async wrapperRecommendProductsVariantsLimitFilters() {
+		let logic = "PERSONAL"
+		let variants = ["1", "2", "3"]
+		let limit = 1
+		let filters = {}
+
+		try {
+			let result = await Emarsys.predict.recommendProductsVariantsLimitFilters(logic, variants, limit, filters)
+			console.log("recommendProductsVariantsLimitFilters Done: ", result)
+			showAlert( "recommendProductsVariantsLimitFilters", "recommendProductsVariantsLimitFilters Done.")
+		} catch (e) {
+			console.log("recommendProductsVariantsLimitFilters Fail: ", e)
+			showAlert( "recommendProductsVariantsLimitFilters", "recommendProductsVariantsLimitFilters Fail: ", e )
 		}
 	}	
 
@@ -528,6 +588,7 @@ export default class Predict extends Component {
 								}}
 							/>
 						</View>
+
 						<View style={ styles.buttonPredict }>
 							 <Button
 								title="Recommend Products Query"
@@ -537,6 +598,7 @@ export default class Predict extends Component {
 								}}
 							/>
 						</View>
+
 						<View style={ styles.buttonPredict }>
 							 <Button
 								title="Recommend Products CartItems"
@@ -546,6 +608,17 @@ export default class Predict extends Component {
 								}}
 							/>
 						</View>
+
+						<View style={ styles.buttonPredict }>
+							 <Button
+								title="Recommend Products Variants"
+								color="#595959"
+								onPress={() => {
+									this.wrapperRecommendProductsVariants()
+								}}
+							/>
+						</View>
+
 						<View style={ styles.buttonPredict }>
 							 <Button
 								title="Recommend Products Limit"
@@ -572,6 +645,16 @@ export default class Predict extends Component {
 								color="#595959"
 								onPress={() => {
 									this.wrapperRecommendProductsCartItemsLimit()
+								}}
+							/>
+						</View>
+
+						<View style={ styles.buttonPredict }>
+							 <Button
+								title="Recommend Products Variants Limit"
+								color="#595959"
+								onPress={() => {
+									this.wrapperRecommendProductsVariantsLimit()
 								}}
 							/>
 						</View>
@@ -608,6 +691,16 @@ export default class Predict extends Component {
 
 						<View style={ styles.buttonPredict }>
 							 <Button
+								title="Recommend Products Variants Filters"
+								color="#595959"
+								onPress={() => {
+									this.wrapperRecommendProductsVariantsFilters()
+								}}
+							/>
+						</View>
+
+						<View style={ styles.buttonPredict }>
+							 <Button
 								title="Recommend Products Limit Filters"
 								color="#595959"
 								onPress={() => {
@@ -632,6 +725,16 @@ export default class Predict extends Component {
 								color="#595959"
 								onPress={() => {
 									this.wrapperRecommendProductsCartItemsLimitFilters()
+								}}
+							/>
+						</View>
+
+						<View style={ styles.buttonPredict }>
+							 <Button
+								title="Recommend Products Variants Limit Filters"
+								color="#595959"
+								onPress={() => {
+									this.wrapperRecommendProductsVariantsLimitFilters()
 								}}
 							/>
 						</View>
