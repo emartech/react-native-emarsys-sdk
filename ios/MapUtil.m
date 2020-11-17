@@ -32,6 +32,7 @@
     [map setObject: product.artist forKeyedSubscript: @"artist"];
     [map setObject: product.author forKeyedSubscript: @"author"];
     [map setObject: product.brand forKeyedSubscript: @"brand"];
+    [map setObject: product.available forKeyedSubscript: @"available"];
     [map setObject: product.price forKeyedSubscript: @"price"];
     [map setObject: product.msrp forKeyedSubscript: @"msrp"];
     [map setObject: product.year forKeyedSubscript: @"year"];
