@@ -83,7 +83,7 @@ PODS:
   - React-RCTWebSocket (0.60.0):
     - React-Core (= 0.60.0)
     - React-fishhook (= 0.60.0)
-  - RNEmarsysWrapper (1.0.1):
+  - RNEmarsysWrapper (1.1.0):
     - EmarsysSDK (~> 2.9.1)
     - React (>= 0.60.0)
   - RNGestureHandler (1.6.1):
@@ -218,7 +218,7 @@ SPEC CHECKSUMS:
   React-RCTText: 685fca2e13b024271048e7e247ef24476f28a41e
   React-RCTVibration: 4ee1cf208ab17a50fafb1c16ffe28fe594a64e4f
   React-RCTWebSocket: fca087d583724aa0e5fef7d911f0f2a28d0f2736
-  RNEmarsysWrapper: 6f72579100f9270f95e9d73af7dfab9e42094160
+  RNEmarsysWrapper: 9746e7e6f467a873aaf3a127e8f8a6a9a61b3d7a
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReanimated: b5ccb50650ba06f6e749c7c329a1bc3ae0c88b43
   RNScreens: c526239bbe0e957b988dacc8d75ac94ec9cb19da
