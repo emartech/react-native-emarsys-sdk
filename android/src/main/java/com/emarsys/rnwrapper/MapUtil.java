@@ -66,6 +66,8 @@ public class MapUtil {
 			map.putInt(key, (Integer) value);
 		} else if (value instanceof Double) {
 			map.putDouble(key, (Double) value);
+		} else if (value instanceof Float) {
+			map.putDouble(key, Double.valueOf(value.toString()));
 		}
 	}
 
