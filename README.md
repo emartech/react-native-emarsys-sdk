@@ -5,7 +5,7 @@
 
 ## Setup
 
-`$ npm install react-native-emarsys-wrapper --save`
+`$ npm install git+ssh://git@github.com/emartech/react-native-emarsys-sdk.git --save`
 
 ### Mostly automatic installation
 
