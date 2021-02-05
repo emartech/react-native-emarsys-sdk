@@ -3,6 +3,9 @@
 
 ## React Native wrapper for Emarsys SDK
 
+## Sample app
+We created a sample application to help in the integration and give an example. Find instructions for the build process <a href="https://github.com/emartech/react-native-emarsys-sdk/tree/master/sample" title="Sample app">here</a>.
+
 ## Setup
 
 `$ npm install git+ssh://git@github.com/emartech/react-native-emarsys-sdk.git --save`
@@ -10,9 +13,6 @@
 ### Mostly automatic installation
 
 `$ react-native link react-native-emarsys-wrapper`
-
-## Sample app
-We created a sample application to help in the integration and give an example. Find instructions for the build process <a href="https://github.com/emartech/react-native-emarsys-sdk/tree/master/sample" title="Sample app">here</a>.
 
 ### Manual installation
 
