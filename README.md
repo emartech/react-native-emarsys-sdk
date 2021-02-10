@@ -16,7 +16,7 @@ We created a sample application to help in the integration and give an example. 
 
 #### iOS
 
-Add to your Podfile in ios folder:
+Add to your Podfile in ios folder, above the `use_native_modules!` function if you use it:
 ```
 pod 'RNEmarsysWrapper', :podspec => '../node_modules/react-native-emarsys-wrapper/ios/RNEmarsysWrapper.podspec'
 ```
