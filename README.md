@@ -14,6 +14,14 @@ We created a sample application to help in the integration and give an example. 
 
 `$ react-native link react-native-emarsys-wrapper`
 
+#### iOS
+
+Add to your Podfile in ios folder:
+```
+pod 'RNEmarsysWrapper', :podspec => '../node_modules/react-native-emarsys-wrapper/ios/RNEmarsysWrapper.podspec'
+```
+
+
 ### Manual installation
 
 #### iOS
