@@ -792,6 +792,10 @@ const Emarsys = {
 	getContactFieldId() {
 		return RNEmarsysWrapper.getContactFieldId()
 	},
+
+	getHardwareId() {
+		return RNEmarsysWrapper.getHardwareId()
+	},
 };
 
 export default Emarsys;

@@ -652,6 +652,15 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void getHardwareId(Promise promise) {
+        try {
+            String hardwareId = Emarsys.getConfig().getHardwareId();
+            promise.resolve(hardwareId);
+        } catch (Exception e) {
+            promise.reject(TAG, "Error getHardwareId: ", e);
+        }
+    }
+    @ReactMethod
     public void setEventHandler() {
         RNEmarsysEventHandler.getInstance().provideReactContext(reactContext);
     }

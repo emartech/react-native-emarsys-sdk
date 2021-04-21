@@ -169,6 +169,16 @@ export default class Init extends Component {
 		}
 	}	
 
+	async wrapperGetHardwareId() {
+		try {
+			let hardwareId = await Emarsys.getHardwareId()
+			console.log("getHardwareId Done: ", hardwareId)
+			showAlert( "getHardwareId", "getHardwareId Done: ", hardwareId )
+		} catch (e) {
+			console.log("getHardwareId Fail: ", e)
+			showAlert( "getHardwareId", "getHardwareId Fail: ", e )
+		}
+	}
 	render() {
 		return (
 			<SafeAreaView style={styles.inbase}>

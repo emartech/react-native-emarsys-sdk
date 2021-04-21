@@ -557,6 +557,15 @@ RCT_EXPORT_METHOD(getContactFieldId:(RCTPromiseResolveBlock)resolve rejecter:(RC
     return @[@"handleEvent"];
 }
 
+RCT_EXPORT_METHOD(getHardwareId:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        NSString *hardwareId = [Emarsys.config hardwareId];
+        resolve(hardwareId);
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
 -(void)startObserving {
     hasListeners = YES;
     if (_body != nil) {
