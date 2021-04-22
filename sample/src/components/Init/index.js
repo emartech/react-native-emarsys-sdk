@@ -261,6 +261,15 @@ export default class Init extends Component {
 							/>
 						</View>	
 
+						<View style={ styles.buttonGoto }>
+							 <Button
+								title="Get HardwareId"
+								color="#ED5E21"
+								onPress={() => {
+									this.wrapperGetHardwareId()
+								}}
+							/>
+						</View>	
 					</View>
 				</ScrollView>
 			</SafeAreaView>
