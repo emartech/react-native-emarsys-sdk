@@ -577,6 +577,16 @@ RCT_EXPORT_METHOD(getLanguageCode:(RCTPromiseResolveBlock)resolve rejecter:(RCTP
     }
 }
 
+RCT_EXPORT_METHOD(getSdkVersion:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        NSString *sdkVersion = [Emarsys.config sdkVersion];
+        resolve(sdkVersion);
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
 -(void)startObserving {
     hasListeners = YES;
     if (_body != nil) {

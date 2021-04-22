@@ -672,6 +672,16 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void getSdkVersion(Promise promise) {
+        try {
+            String sdkVersion = Emarsys.getConfig().getSdkVersion();
+            promise.resolve(sdkVersion);
+        } catch (Exception e) {
+            promise.reject(TAG, "Error getSdkVersion: ", e);
+        }
+    }
+
+    @ReactMethod
     public void setEventHandler() {
         RNEmarsysEventHandler.getInstance().provideReactContext(reactContext);
     }

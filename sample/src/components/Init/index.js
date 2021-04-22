@@ -191,6 +191,17 @@ export default class Init extends Component {
 		}
 	}
 
+	async wrapperGetSdkVersion() {
+		try {
+			let sdkVersion = await Emarsys.getSdkVersion()
+			console.log("getSdkVersion Done: ", sdkVersion)
+			showAlert( "getSdkVersion", "getSdkVersion Done: ", sdkVersion )
+		} catch (e) {
+			console.log("getSdkVersion Fail: ", e)
+			showAlert( "getSdkVersion", "getSdkVersion Fail: ", e )
+		}
+	}
+
 	render() {
 		return (
 			<SafeAreaView style={styles.inbase}>
@@ -289,6 +300,16 @@ export default class Init extends Component {
 								color="#ED5E21"
 								onPress={() => {
 									this.wrapperGetLanguageCode()
+								}}
+							/>
+						</View>	
+
+						<View style={ styles.buttonGoto }>
+							 <Button
+								title="Get SdkVersion"
+								color="#ED5E21"
+								onPress={() => {
+									this.wrapperGetSdkVersion()
 								}}
 							/>
 						</View>	

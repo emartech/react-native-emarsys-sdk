@@ -801,6 +801,9 @@ const Emarsys = {
 		return RNEmarsysWrapper.getLanguageCode()
 	},
 
+	getSdkVersion() {
+		return RNEmarsysWrapper.getSdkVersion()
+	},
 };
 
 export default Emarsys;
