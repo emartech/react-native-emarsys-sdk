@@ -682,6 +682,16 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void getPushToken(Promise promise) {
+        try {
+            String pushToken = Emarsys.getPush().getPushToken();
+            promise.resolve(pushToken);
+        } catch (Exception e) {
+            promise.reject(TAG, "Error getPushToken: ", e);
+        }
+    }
+
+    @ReactMethod
     public void setEventHandler() {
         RNEmarsysEventHandler.getInstance().provideReactContext(reactContext);
     }

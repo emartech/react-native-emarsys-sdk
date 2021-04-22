@@ -85,6 +85,10 @@ const Emarsys = {
 		trackMessageOpen(messageId) {
 			return RNEmarsysWrapper.trackMessageOpen(messageId)
 		},
+
+		pushToken() {
+			return RNEmarsysWrapper.getPushToken()
+		},
 	},
 
 	/* InApp **************************************************************************************************************************************/

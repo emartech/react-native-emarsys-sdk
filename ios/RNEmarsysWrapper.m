@@ -587,6 +587,16 @@ RCT_EXPORT_METHOD(getSdkVersion:(RCTPromiseResolveBlock)resolve rejecter:(RCTPro
     }
 }
 
+RCT_EXPORT_METHOD(getPushToken:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        NSData *pushToken = [Emarsys.push pushToken];
+        resolve(pushToken);
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
 -(void)startObserving {
     hasListeners = YES;
     if (_body != nil) {
