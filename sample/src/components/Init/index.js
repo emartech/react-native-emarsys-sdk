@@ -179,6 +179,18 @@ export default class Init extends Component {
 			showAlert( "getHardwareId", "getHardwareId Fail: ", e )
 		}
 	}
+
+	async wrapperGetLanguageCode() {
+		try {
+			let languageCode = await Emarsys.getLanguageCode()
+			console.log("getLanguageCode Done: ", languageCode)
+			showAlert( "getLanguageCode", "getLanguageCode Done: ", languageCode )
+		} catch (e) {
+			console.log("getLanguageCode Fail: ", e)
+			showAlert( "getLanguageCode", "getLanguageCode Fail: ", e )
+		}
+	}
+
 	render() {
 		return (
 			<SafeAreaView style={styles.inbase}>
@@ -270,6 +282,17 @@ export default class Init extends Component {
 								}}
 							/>
 						</View>	
+
+						<View style={ styles.buttonGoto }>
+							 <Button
+								title="Get LanguageCode"
+								color="#ED5E21"
+								onPress={() => {
+									this.wrapperGetLanguageCode()
+								}}
+							/>
+						</View>	
+
 					</View>
 				</ScrollView>
 			</SafeAreaView>

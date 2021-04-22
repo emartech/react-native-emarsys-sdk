@@ -660,6 +660,17 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
             promise.reject(TAG, "Error getHardwareId: ", e);
         }
     }
+
+    @ReactMethod
+    public void getLanguageCode(Promise promise) {
+        try {
+            String languageCode = Emarsys.getConfig().getLanguage();
+            promise.resolve(languageCode);
+        } catch (Exception e) {
+            promise.reject(TAG, "Error getLanguageCode: ", e);
+        }
+    }
+
     @ReactMethod
     public void setEventHandler() {
         RNEmarsysEventHandler.getInstance().provideReactContext(reactContext);

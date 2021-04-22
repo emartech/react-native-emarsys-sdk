@@ -566,6 +566,17 @@ RCT_EXPORT_METHOD(getHardwareId:(RCTPromiseResolveBlock)resolve rejecter:(RCTPro
         reject(exception.name, exception.reason, nil);
     }
 }
+
+RCT_EXPORT_METHOD(getLanguageCode:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        NSString *languageCode = [Emarsys.config languageCode];
+        resolve(languageCode);
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
 -(void)startObserving {
     hasListeners = YES;
     if (_body != nil) {

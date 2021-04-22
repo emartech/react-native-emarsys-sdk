@@ -796,6 +796,11 @@ const Emarsys = {
 	getHardwareId() {
 		return RNEmarsysWrapper.getHardwareId()
 	},
+
+	getLanguageCode() {
+		return RNEmarsysWrapper.getLanguageCode()
+	},
+
 };
 
 export default Emarsys;
