@@ -98,6 +98,17 @@ export default class InApp extends Component {
 		}
 	}	
 	
+	async wrapperFetchMessages() {
+		try {
+			let inboxData = await Emarsys.inbox.fetchMessages()
+			console.log("fetchMessages Done: ", inboxData)
+			showAlert( "fetchMessages", "fetchMessages Done.")
+		} catch (e) {
+			console.log("fetchMessages Fail: ", e)
+			showAlert( "fetchMessages", "fetchMessages Fail: ", e )
+		}
+	}	
+
 	render() {
 		return (
 			<SafeAreaView style={styles.inbase}>
@@ -132,7 +143,16 @@ export default class InApp extends Component {
 									this.wrapperSetEventHandler()
 								}}
 							/>
-						</View>					
+						</View>		
+						<View style={ styles.buttonFetchMessages }>
+							 <Button
+								title="Fetch Inbox Messages"
+								color="#04446E"
+								onPress={() => {
+									this.wrapperFetchMessages()
+								}}
+							/>
+						</View>				
 					</View>
 				</ScrollView>
 			</SafeAreaView>
