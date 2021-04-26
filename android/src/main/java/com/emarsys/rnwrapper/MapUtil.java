@@ -409,7 +409,7 @@ public class MapUtil {
 		mapPutNullable(map, "receivedAt", message.getReceivedAt());
 		mapPutNullable(map, "updatedAt", message.getUpdatedAt());
 		mapPutNullable(map, "expiresAt", message.getExpiresAt());
-		mapPutNullable(map, "tags", message.getTags());
+
 		WritableArray tags = Arguments.fromList(message.getTags());
 		map.putArray("tags", tags);
 
