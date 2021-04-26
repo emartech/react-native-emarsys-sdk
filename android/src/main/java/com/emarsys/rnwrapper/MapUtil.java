@@ -10,6 +10,7 @@ import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.ReadableType;
+import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 
@@ -23,6 +24,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class MapUtil {
 
@@ -408,6 +410,8 @@ public class MapUtil {
 		mapPutNullable(map, "updatedAt", message.getUpdatedAt());
 		mapPutNullable(map, "expiresAt", message.getExpiresAt());
 		mapPutNullable(map, "tags", message.getTags());
+		WritableArray tags = Arguments.fromList(message.getTags());
+		map.putArray("tags", tags);
 
 		Map<String, Object> properties = new HashMap<String, Object>(message.getProperties());
 		map.putMap("properties", toWritableMap(properties));
