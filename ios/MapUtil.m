@@ -239,15 +239,15 @@
     
     [map setObject: message.id forKey: @"messageId"];
     [map setObject: message.campaignId forKey: @"campaignId"];
-    [map setObject: message.collapseId forKey: @"collapseId"];
+    [map setObject: message.collapseId ?: @"" forKey: @"collapseId"];
     [map setObject: message.title forKey: @"title"];
     [map setObject: message.body forKey: @"body"];
-    [map setObject: message.imageUrl forKey: @"imageUrl"];
+    [map setObject: message.imageUrl ?: @"" forKey: @"imageUrl"];
     [map setObject: message.receivedAt forKey: @"receivedAt"];
-    [map setObject: message.updatedAt forKey: @"updatedAt"];
-    [map setObject: message.expiresAt forKey: @"expiresAt"];
-    [map setObject: message.tags forKey: @"tags"];
-    [map setObject: message.properties forKey: @"properties"];
+    [map setObject: message.updatedAt ?: @"" forKey: @"updatedAt"];
+    [map setObject: message.expiresAt ?: @"" forKey: @"expiresAt"];
+    [map setObject: message.tags ?: @"" forKey: @"tags"];
+    [map setObject: message.properties ?: @"" forKey: @"properties"];
     
     return map;
 }
