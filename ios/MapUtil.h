@@ -6,4 +6,5 @@
 + (NSMutableDictionary *)convertProductToMap:(EMSProduct *)product;
 + (EMSProduct *)mapToProduct:(NSDictionary *)object;
 + (NSArray<EMSRecommendationFilter *> *)mapToRecommendationFilter:(NSDictionary *)map;
++ (NSMutableDictionary *)convertMessageToMap:(EMSMessage *)message;
 @end

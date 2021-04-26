@@ -553,10 +553,6 @@ RCT_EXPORT_METHOD(getContactFieldId:(RCTPromiseResolveBlock)resolve rejecter:(RC
     }
 }
 
-- (NSArray<NSString *> *)supportedEvents {
-    return @[@"handleEvent"];
-}
-
 RCT_EXPORT_METHOD(getHardwareId:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         NSString *hardwareId = [Emarsys.config hardwareId];
@@ -595,6 +591,41 @@ RCT_EXPORT_METHOD(getPushToken:(RCTPromiseResolveBlock)resolve rejecter:(RCTProm
     @catch (NSException *exception) {
         reject(exception.name, exception.reason, nil);
     }
+}
+
+- (void) resolveMessages:(NSArray * _Nonnull)messages resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject methodName: (NSString *) methodName withError: (NSError *) error {
+    if (messages) {
+        NSMutableArray *recMessages = [NSMutableArray array];
+        for (EMSMessage *message in messages) {
+            NSMutableDictionary<NSString *, NSString *> *recMessage = [MapUtil convertMessageToMap:message];
+            [recMessage jsonStringWithPrettyPrint:true];
+            [recMessages addObject:recMessage];
+        }
+        resolve(recMessages);
+    } else {
+        reject(@"RNEmarsysWrapper", [NSString stringWithFormat:@"%@", methodName], error);
+    }
+}
+
+RCT_EXPORT_METHOD(fetchMessages:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        [Emarsys.messageInbox fetchMessagesWithResultBlock:^(EMSInboxResult * _Nullable inboxResult, NSError * _Nullable error) {
+            if (NULL != error) {
+                reject(@"RNEmarsysWrapper", @"fetchMessages: ", error);
+            } else {
+                [Emarsys.messageInbox fetchMessagesWithResultBlock:^(EMSInboxResult * _Nullable inboxResult, NSError * _Nullable error) {
+                    [self resolveMessages:inboxResult.messages resolver:resolve rejecter:reject methodName:@"fetchMessages" withError:error];
+                }];
+            }
+        }];
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
+- (NSArray<NSString *> *)supportedEvents {
+    return @[@"handleEvent"];
 }
 
 -(void)startObserving {
