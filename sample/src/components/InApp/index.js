@@ -109,6 +109,34 @@ export default class InApp extends Component {
 		}
 	}	
 
+	async wrapperAddTag() {
+		try {
+			let tag = "seen"
+			let messageId = "3475573315"
+
+			let result = await Emarsys.inbox.addTag(tag, messageId)
+			console.log("addTag Done: ", result)
+			showAlert( "addTag", "addTag Done.")
+		} catch (e) {
+			console.log("addTag Fail: ", e)
+			showAlert( "addTag", "addTag Fail: ", e )
+		}
+	}
+
+	async wrapperRemoveTag() {
+		try {
+			let tag = "seen"
+			let messageId = "3475573315"
+
+			let result = await Emarsys.inbox.removeTag(tag, messageId)
+			console.log("removeTag Done: ", result)
+			showAlert( "removeTag", "removeTag Done.")
+		} catch (e) {
+			console.log("removeTag Fail: ", e)
+			showAlert( "removeTag", "removeTag Fail: ", e )
+		}
+	}		
+
 	render() {
 		return (
 			<SafeAreaView style={styles.inbase}>
@@ -150,6 +178,24 @@ export default class InApp extends Component {
 								color="#04446E"
 								onPress={() => {
 									this.wrapperFetchMessages()
+								}}
+							/>
+						</View>	
+						<View style={ styles.buttonAddTag }>
+							 <Button
+								title="Add Tag"
+								color="#04446E"
+								onPress={() => {
+									this.wrapperAddTag()
+								}}
+							/>
+						</View>	
+						<View style={ styles.buttonRemoveTag }>
+							 <Button
+								title="Remove Tag"
+								color="#04446E"
+								onPress={() => {
+									this.wrapperRemoveTag()
 								}}
 							/>
 						</View>				
