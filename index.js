@@ -114,6 +114,23 @@ const Emarsys = {
 
 	},
 
+	/* Inbox **************************************************************************************************************************************/
+
+	inbox: {
+		fetchMessages() {
+			return RNEmarsysWrapper.fetchMessages()
+		},
+
+		addTag() {
+			return RNEmarsysWrapper.addTag(tag, messageId)
+		},
+
+		removeTag() {
+			return RNEmarsysWrapper.removeTag(tag, messageId)
+		},
+
+	},
+
 	/* Predict ************************************************************************************************************************************/
 
 	predict: {
