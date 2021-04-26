@@ -100,12 +100,12 @@ export default class Push extends Component {
 
 	async wrapperGetPushToken() {
 		try {
-			let pushToken = await Emarsys.push.getPushToken()
-			console.log("getPushToken Done: ", pushToken)
-			showAlert( "getPushToken", "getPushToken Done.")
+			let pushToken = await Emarsys.push.pushToken()
+			console.log("pushToken Done: ", pushToken)
+			showAlert( "pushToken", "pushToken Done.")
 		} catch (e) {
-			console.log("getPushToken Fail: ", e)
-			showAlert( "getPushToken", "getPushToken Fail: ", e )
+			console.log("pushToken Fail: ", e)
+			showAlert( "pushToken", "pushToken Fail: ", e )
 		}
 	}
 	
