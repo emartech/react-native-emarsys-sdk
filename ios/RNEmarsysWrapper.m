@@ -624,6 +624,38 @@ RCT_EXPORT_METHOD(fetchMessages:(RCTPromiseResolveBlock)resolve rejecter:(RCTPro
     }
 }
 
+RCT_EXPORT_METHOD(addTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonnull)messageId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        [Emarsys.messageInbox addTag:tag forMessage:messageId completionBlock:^(NSError * _Nullable error) {
+            if (NULL != error) {
+                reject(@"RNEmarsysWrapper", @"fetchMessages: ", error);
+            } else {
+                resolve([NSNumber numberWithBool:YES]);
+            }
+        }];
+        
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
+RCT_EXPORT_METHOD(removeTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonnull)messageId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        [Emarsys.messageInbox removeTag:tag fromMessage:messageId completionBlock:^(NSError * _Nullable error) {
+            if (NULL != error) {
+                reject(@"RNEmarsysWrapper", @"fetchMessages: ", error);
+            } else {
+                resolve([NSNumber numberWithBool:YES]);
+            }
+        }];
+        
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
 - (NSArray<NSString *> *)supportedEvents {
     return @[@"handleEvent"];
 }
