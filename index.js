@@ -121,11 +121,11 @@ const Emarsys = {
 			return RNEmarsysWrapper.fetchMessages()
 		},
 
-		addTag() {
+		addTag(tag, messageId) {
 			return RNEmarsysWrapper.addTag(tag, messageId)
 		},
 
-		removeTag() {
+		removeTag(tag, messageId) {
 			return RNEmarsysWrapper.removeTag(tag, messageId)
 		},
 
