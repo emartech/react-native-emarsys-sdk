@@ -741,4 +741,40 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
             promise.reject(TAG, "Error " + methodName + ": ", result.getErrorCause());
         }
     }
+
+    @ReactMethod
+    public void addTag(@NonNull String tag, @NonNull String messageId, final Promise promise) {
+        try {
+            Emarsys.getMessageInbox().addTag(tag, messageId, new CompletionListener() {
+                @Override
+                public void onCompleted(@Nullable Throwable errorCause) {
+                    if (errorCause != null) {
+                        promise.reject(TAG, "Error addTag: ", errorCause);
+                    } else {
+                        promise.resolve(true);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            promise.reject(TAG, "Error trackPurchase: ", e);
+        }
+    }
+
+    @ReactMethod
+    public void removeTag(@NonNull String tag, @NonNull String messageId, final Promise promise) {
+        try {
+            Emarsys.getMessageInbox().removeTag(tag, messageId, new CompletionListener() {
+                @Override
+                public void onCompleted(@Nullable Throwable errorCause) {
+                    if (errorCause != null) {
+                        promise.reject(TAG, "Error removeTag: ", errorCause);
+                    } else {
+                        promise.resolve(true);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            promise.reject(TAG, "Error trackPurchase: ", e);
+        }
+    }
 }
