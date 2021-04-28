@@ -652,6 +652,46 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void getHardwareId(Promise promise) {
+        try {
+            String hardwareId = Emarsys.getConfig().getHardwareId();
+            promise.resolve(hardwareId);
+        } catch (Exception e) {
+            promise.reject(TAG, "Error getHardwareId: ", e);
+        }
+    }
+
+    @ReactMethod
+    public void getLanguageCode(Promise promise) {
+        try {
+            String languageCode = Emarsys.getConfig().getLanguage();
+            promise.resolve(languageCode);
+        } catch (Exception e) {
+            promise.reject(TAG, "Error getLanguageCode: ", e);
+        }
+    }
+
+    @ReactMethod
+    public void getSdkVersion(Promise promise) {
+        try {
+            String sdkVersion = Emarsys.getConfig().getSdkVersion();
+            promise.resolve(sdkVersion);
+        } catch (Exception e) {
+            promise.reject(TAG, "Error getSdkVersion: ", e);
+        }
+    }
+
+    @ReactMethod
+    public void getPushToken(Promise promise) {
+        try {
+            String pushToken = Emarsys.getPush().getPushToken();
+            promise.resolve(pushToken);
+        } catch (Exception e) {
+            promise.reject(TAG, "Error getPushToken: ", e);
+        }
+    }
+
+    @ReactMethod
     public void setEventHandler() {
         RNEmarsysEventHandler.getInstance().provideReactContext(reactContext);
     }

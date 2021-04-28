@@ -169,6 +169,39 @@ export default class Init extends Component {
 		}
 	}	
 
+	async wrapperGetHardwareId() {
+		try {
+			let hardwareId = await Emarsys.getHardwareId()
+			console.log("getHardwareId Done: ", hardwareId)
+			showAlert( "getHardwareId", "getHardwareId Done: ", hardwareId )
+		} catch (e) {
+			console.log("getHardwareId Fail: ", e)
+			showAlert( "getHardwareId", "getHardwareId Fail: ", e )
+		}
+	}
+
+	async wrapperGetLanguageCode() {
+		try {
+			let languageCode = await Emarsys.getLanguageCode()
+			console.log("getLanguageCode Done: ", languageCode)
+			showAlert( "getLanguageCode", "getLanguageCode Done: ", languageCode )
+		} catch (e) {
+			console.log("getLanguageCode Fail: ", e)
+			showAlert( "getLanguageCode", "getLanguageCode Fail: ", e )
+		}
+	}
+
+	async wrapperGetSdkVersion() {
+		try {
+			let sdkVersion = await Emarsys.getSdkVersion()
+			console.log("getSdkVersion Done: ", sdkVersion)
+			showAlert( "getSdkVersion", "getSdkVersion Done: ", sdkVersion )
+		} catch (e) {
+			console.log("getSdkVersion Fail: ", e)
+			showAlert( "getSdkVersion", "getSdkVersion Fail: ", e )
+		}
+	}
+
 	render() {
 		return (
 			<SafeAreaView style={styles.inbase}>
@@ -247,6 +280,36 @@ export default class Init extends Component {
 								color="#ED5E21"
 								onPress={() => {
 									this.wrapperGetContactFieldId()
+								}}
+							/>
+						</View>	
+
+						<View style={ styles.buttonGoto }>
+							 <Button
+								title="Get HardwareId"
+								color="#ED5E21"
+								onPress={() => {
+									this.wrapperGetHardwareId()
+								}}
+							/>
+						</View>	
+
+						<View style={ styles.buttonGoto }>
+							 <Button
+								title="Get LanguageCode"
+								color="#ED5E21"
+								onPress={() => {
+									this.wrapperGetLanguageCode()
+								}}
+							/>
+						</View>	
+
+						<View style={ styles.buttonGoto }>
+							 <Button
+								title="Get SdkVersion"
+								color="#ED5E21"
+								onPress={() => {
+									this.wrapperGetSdkVersion()
 								}}
 							/>
 						</View>	

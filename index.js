@@ -85,6 +85,10 @@ const Emarsys = {
 		trackMessageOpen(messageId) {
 			return RNEmarsysWrapper.trackMessageOpen(messageId)
 		},
+
+		pushToken() {
+			return RNEmarsysWrapper.getPushToken()
+		},
 	},
 
 	/* InApp **************************************************************************************************************************************/
@@ -791,6 +795,18 @@ const Emarsys = {
 	*/		
 	getContactFieldId() {
 		return RNEmarsysWrapper.getContactFieldId()
+	},
+
+	getHardwareId() {
+		return RNEmarsysWrapper.getHardwareId()
+	},
+
+	getLanguageCode() {
+		return RNEmarsysWrapper.getLanguageCode()
+	},
+
+	getSdkVersion() {
+		return RNEmarsysWrapper.getSdkVersion()
 	},
 };
 

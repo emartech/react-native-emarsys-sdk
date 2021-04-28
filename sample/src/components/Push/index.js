@@ -97,6 +97,17 @@ export default class Push extends Component {
 			showAlert( "trackMessageOpen", "trackMessageOpen Fail: ", e )
 		}
 	}
+
+	async wrapperGetPushToken() {
+		try {
+			let pushToken = await Emarsys.push.pushToken()
+			console.log("pushToken Done: ", pushToken)
+			showAlert( "pushToken", "pushToken Done.")
+		} catch (e) {
+			console.log("pushToken Fail: ", e)
+			showAlert( "pushToken", "pushToken Fail: ", e )
+		}
+	}
 	
 	render() {
 		return (
@@ -127,6 +138,15 @@ export default class Push extends Component {
 								color="#04446E"
 								onPress={() => {
 									this.wrapperTrackMessageOpen()
+								}}
+							/>
+						</View>	
+						<View style={ styles.buttonPushToken }>
+							 <Button
+								title="Push Token"
+								color="#076bae"
+								onPress={() => {
+									this.wrapperGetPushToken()
 								}}
 							/>
 						</View>					
