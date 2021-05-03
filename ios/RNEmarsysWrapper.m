@@ -613,9 +613,7 @@ RCT_EXPORT_METHOD(fetchMessages:(RCTPromiseResolveBlock)resolve rejecter:(RCTPro
             if (NULL != error) {
                 reject(@"RNEmarsysWrapper", @"fetchMessages: ", error);
             } else {
-                [Emarsys.messageInbox fetchMessagesWithResultBlock:^(EMSInboxResult * _Nullable inboxResult, NSError * _Nullable error) {
-                    [self resolveMessages:inboxResult.messages resolver:resolve rejecter:reject methodName:@"fetchMessages" withError:error];
-                }];
+                [self resolveMessages:inboxResult.messages resolver:resolve rejecter:reject methodName:@"fetchMessages" withError:error];
             }
         }];
     }
