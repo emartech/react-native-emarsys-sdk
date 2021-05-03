@@ -626,7 +626,7 @@ RCT_EXPORT_METHOD(addTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonnull
     @try {
         [Emarsys.messageInbox addTag:tag forMessage:messageId completionBlock:^(NSError * _Nullable error) {
             if (NULL != error) {
-                reject(@"RNEmarsysWrapper", @"fetchMessages: ", error);
+                reject(@"RNEmarsysWrapper", @"addTag: ", error);
             } else {
                 resolve([NSNumber numberWithBool:YES]);
             }
@@ -642,7 +642,7 @@ RCT_EXPORT_METHOD(removeTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonn
     @try {
         [Emarsys.messageInbox removeTag:tag fromMessage:messageId completionBlock:^(NSError * _Nullable error) {
             if (NULL != error) {
-                reject(@"RNEmarsysWrapper", @"fetchMessages: ", error);
+                reject(@"RNEmarsysWrapper", @"removeTag: ", error);
             } else {
                 resolve([NSNumber numberWithBool:YES]);
             }
