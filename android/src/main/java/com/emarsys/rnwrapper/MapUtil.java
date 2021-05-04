@@ -2,6 +2,7 @@ package com.emarsys.rnwrapper;
 
 import android.util.Log;
 
+import com.emarsys.mobileengage.api.inbox.Message;
 import com.emarsys.predict.api.model.Product;
 import com.emarsys.predict.api.model.RecommendationFilter;
 import com.facebook.react.bridge.Arguments;
@@ -9,6 +10,7 @@ import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.ReadableType;
+import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 
@@ -22,6 +24,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class MapUtil {
 
@@ -392,5 +395,27 @@ public class MapUtil {
 		}
 		
 		return writableMap;
+	}
+
+	public static WritableMap convertMessageToMap(Message message) {
+		WritableMap map = Arguments.createMap();
+
+		mapPutNullable(map, "id", message.getId());
+		mapPutNullable(map, "campaignId", message.getCampaignId());
+		mapPutNullable(map, "collapseId", message.getCollapseId());
+		mapPutNullable(map, "title", message.getTitle());
+		mapPutNullable(map, "body", message.getBody());
+		mapPutNullable(map, "imageUrl", message.getImageUrl());
+		mapPutNullable(map, "receivedAt", message.getReceivedAt());
+		mapPutNullable(map, "updatedAt", message.getUpdatedAt());
+		mapPutNullable(map, "expiresAt", message.getExpiresAt());
+
+		WritableArray tags = Arguments.fromList(message.getTags());
+		map.putArray("tags", tags);
+
+		Map<String, Object> properties = new HashMap<String, Object>(message.getProperties());
+		map.putMap("properties", toWritableMap(properties));
+
+		return map;
 	}
 }

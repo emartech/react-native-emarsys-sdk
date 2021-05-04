@@ -12,6 +12,8 @@ import com.emarsys.Emarsys;
 import com.emarsys.core.api.result.CompletionListener;
 import com.emarsys.core.api.result.ResultListener;
 import com.emarsys.core.api.result.Try;
+import com.emarsys.mobileengage.api.inbox.InboxResult;
+import com.emarsys.mobileengage.api.inbox.Message;
 import com.emarsys.predict.api.model.CartItem;
 import com.emarsys.predict.api.model.Logic;
 import com.emarsys.predict.api.model.Product;
@@ -692,6 +694,20 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void fetchMessages(final Promise promise) {
+        try {
+            Emarsys.getMessageInbox().fetchMessages(new ResultListener<Try<InboxResult>>() {
+                @Override
+                public void onResult(@NonNull Try<InboxResult> result) {
+                    resolveMessages(promise, result, "fetchMessages");
+                }
+            });
+        } catch (Exception e) {
+            promise.reject(TAG, "Error fetchMessages: ", e);
+        }
+    }
+
+    @ReactMethod
     public void setEventHandler() {
         RNEmarsysEventHandler.getInstance().provideReactContext(reactContext);
     }
@@ -708,6 +724,57 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
         }
         if (result.getErrorCause() != null) {
             promise.reject(TAG, "Error " + methodName + ": ", result.getErrorCause());
+        }
+    }
+
+    private void resolveMessages(final Promise promise, @NonNull Try<InboxResult> result, String methodName) {
+        if (result.getResult() != null) {
+            List<Message> inboxMessages = result.getResult().getMessages();
+            WritableArray messages = Arguments.createArray();
+            for (Message message : inboxMessages) {
+                WritableMap recMessage = MapUtil.convertMessageToMap(message);
+                messages.pushMap(recMessage);
+            }
+            promise.resolve(messages);
+        }
+        if (result.getErrorCause() != null) {
+            promise.reject(TAG, "Error " + methodName + ": ", result.getErrorCause());
+        }
+    }
+
+    @ReactMethod
+    public void addTag(@NonNull String tag, @NonNull String messageId, final Promise promise) {
+        try {
+            Emarsys.getMessageInbox().addTag(tag, messageId, new CompletionListener() {
+                @Override
+                public void onCompleted(@Nullable Throwable errorCause) {
+                    if (errorCause != null) {
+                        promise.reject(TAG, "Error addTag: ", errorCause);
+                    } else {
+                        promise.resolve(true);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            promise.reject(TAG, "Error trackPurchase: ", e);
+        }
+    }
+
+    @ReactMethod
+    public void removeTag(@NonNull String tag, @NonNull String messageId, final Promise promise) {
+        try {
+            Emarsys.getMessageInbox().removeTag(tag, messageId, new CompletionListener() {
+                @Override
+                public void onCompleted(@Nullable Throwable errorCause) {
+                    if (errorCause != null) {
+                        promise.reject(TAG, "Error removeTag: ", errorCause);
+                    } else {
+                        promise.resolve(true);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            promise.reject(TAG, "Error trackPurchase: ", e);
         }
     }
 }
