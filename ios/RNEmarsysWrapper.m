@@ -585,12 +585,25 @@ RCT_EXPORT_METHOD(getSdkVersion:(RCTPromiseResolveBlock)resolve rejecter:(RCTPro
 
 RCT_EXPORT_METHOD(getPushToken:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
-        NSData *pushToken = [Emarsys.push pushToken];
+        NSData *pushTokenData = [Emarsys.push pushToken];
+        NSString * pushToken = [self stringWithDeviceToken:pushTokenData];
+
         resolve(pushToken);
     }
     @catch (NSException *exception) {
         reject(exception.name, exception.reason, nil);
     }
+}
+
+- (NSString *)stringWithDeviceToken:(NSData *)deviceToken {
+    const char *data = [deviceToken bytes];
+    NSMutableString *token = [NSMutableString string];
+
+    for (NSUInteger i = 0; i < [deviceToken length]; i++) {
+        [token appendFormat:@"%02.2hhX", data[i]];
+    }
+
+    return [token copy];
 }
 
 - (void) resolveMessages:(NSArray * _Nonnull)messages resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject methodName: (NSString *) methodName withError: (NSError *) error {
