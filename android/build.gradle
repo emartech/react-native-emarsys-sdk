@@ -42,5 +42,5 @@ repositories {
 
 dependencies {
     implementation "com.facebook.react:react-native:+"
-    implementation "com.emarsys:emarsys-sdk:2.16.0"
+    implementation "com.emarsys:emarsys-sdk:3.0.0"
 }
