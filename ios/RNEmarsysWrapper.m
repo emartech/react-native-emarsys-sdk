@@ -6,7 +6,6 @@
 #import "EMSProduct+Emarsys.h"
 #import "EMSProductBuilder.h"
 
-#import "EMSEventHandler.h"
 #import "EMSInAppProtocol.h"
 
 #import "EMSLogic.h"

@@ -574,9 +574,9 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void changeMerchantId(@Nullable final String predictMerchantIdChange, Promise promise) {
+    public void changeMerchantId(@NonNull final String merchantId, Promise promise) {
         try {
-            Emarsys.getConfig().changeMerchantId(predictMerchantIdChange);
+            Emarsys.getConfig().changeMerchantId(merchantId);
             promise.resolve(true);
         } catch (Exception e) {
             promise.reject(TAG, "Error changeMerchantId: ", e);
