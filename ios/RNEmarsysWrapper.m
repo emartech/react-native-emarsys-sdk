@@ -78,9 +78,9 @@ static NSDictionary<NSString *,NSObject *> *_body = nil;
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(setContact:(NSString * _Nonnull)contactFieldValue resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
+RCT_EXPORT_METHOD(setContact:(NSNumber * _Nonnull)contactFieldId contactFieldValue:(NSString * _Nonnull)contactFieldValue resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
-        [Emarsys setContactWithContactFieldValue:contactFieldValue completionBlock:^(NSError *error) {
+        [Emarsys setContactWithContactFieldId:contactFieldId contactFieldValue:contactFieldValue completionBlock:^(NSError * _Nullable error) {
             if (NULL != error) {
                 reject(@"RNEmarsysWrapper", @"setContact: ", error);
             } else {

@@ -55,9 +55,9 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void setContact(@NonNull final String contactFieldValue, final Promise promise) {
+    public void setContact(@NonNull Integer contactFieldId, @NonNull final String contactFieldValue, final Promise promise) {
         try {
-            Emarsys.setContact(contactFieldValue, new CompletionListener() {
+            Emarsys.setContact(contactFieldId, contactFieldValue, new CompletionListener() {
                 @Override
                 public void onCompleted(@Nullable Throwable errorCause) {
                     if (errorCause != null) {
