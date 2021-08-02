@@ -76,6 +76,20 @@ const styles = StyleSheet.create({
 export default class Init extends Component {
 	
 	// MARK: - Init *************************************************************************************************************
+
+	async wrapperSetContact() {
+		let contactFieldId = 3
+		let contactFieldValue = "test@emarsys.com"
+		
+		try {
+			let result = await Emarsys.setContact(contactFieldId, contactFieldValue)
+			console.log("trackCustomEvent Done: ", result)
+			showAlert( "trackCustomEvent", "trackCustomEvent Done." )
+		} catch (e) {
+			console.log("trackCustomEvent Fail: ", e)
+			showAlert( "trackCustomEvent", "trackCustomEvent Fail: ", e )
+		}
+	}	
 	
 	async wrapperTrackCustomEvent() {
 		let eventName = "testingEventName"
@@ -107,14 +121,13 @@ export default class Init extends Component {
 		}
 	}
 
-	// MARK: - ApplicationCode, contactFieldId and merchantId change *************************************************************************************************************
+	// MARK: - ApplicationCode and merchantId change *************************************************************************************************************
 
 	async wrapperChangeApplicationCode() {
-		let applicationCodeChange = "EMSF6-F532D"
-		let contactFieldId = 3
+		let applicationCode = "EMSF6-F532D"
 
 		try {
-			let result = await Emarsys.changeApplicationCode(applicationCodeChange, contactFieldId)
+			let result = await Emarsys.changeApplicationCode(applicationCode)
 			console.log("changeApplicationCode Done: ", result)
 			showAlert( "changeApplicationCode", "changeApplicationCode Done.")
 		} catch (e) {
@@ -124,10 +137,10 @@ export default class Init extends Component {
 	}
 
 	async wrapperChangeMerchantId() {
-		let predictMerchantIdChange = null;
+		let merchantId = "";
 
 		try {
-			let result = await Emarsys.changeMerchantId(predictMerchantIdChange)
+			let result = await Emarsys.changeMerchantId(merchantId)
 			console.log("changeMerchantId Done: ", result)
 			showAlert( "changeMerchantId", "changeMerchantId Done.")
 		} catch (e) {
@@ -208,6 +221,18 @@ export default class Init extends Component {
 				<ScrollView contentContainerStyle={styles.scrollBase}>
 					<View style={ styles.base }>
 
+					<View style={ styles.buttonTrackCustomEvent }>
+							 <Button
+								title="Set Contact"
+								color="#595959"
+								onPress={() => {
+									this.wrapperSetContact()
+								}}
+							/>
+						</View>	
+
+						<View style={ styles.hr } />
+						
 						<View style={ styles.buttonTrackCustomEvent }>
 							 <Button
 								title="Track Custom Event"

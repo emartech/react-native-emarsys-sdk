@@ -44,9 +44,9 @@
 
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
-        <service android:name="com.emarsys.service.EmarsysMessagingService">
+        <service android:name="com.emarsys.service.EmarsysFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
