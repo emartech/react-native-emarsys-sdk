@@ -556,31 +556,18 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void changeApplicationCode(@Nullable final String applicationCodeChange, @Nullable final Integer contactFieldId, final Promise promise) {
+    public void changeApplicationCode(@NonNull final String applicationCode, final Promise promise) {
         try {
-            if (contactFieldId != null) {
-                Emarsys.getConfig().changeApplicationCode(applicationCodeChange, contactFieldId, new CompletionListener() {
-                    @Override
-                    public void onCompleted(@Nullable Throwable errorCause) {
-                        if (errorCause != null) {
-                            promise.reject(TAG, "Error changeApplicationCode: ", errorCause);
-                        } else {
-                            promise.resolve(true);
-                        }
+            Emarsys.getConfig().changeApplicationCode(applicationCode, new CompletionListener() {
+                @Override
+                public void onCompleted(@Nullable Throwable errorCause) {
+                    if (errorCause != null) {
+                        promise.reject(TAG, "Error changeApplicationCode: ", errorCause);
+                    } else {
+                        promise.resolve(true);
                     }
-                });
-            } else {
-                Emarsys.getConfig().changeApplicationCode(applicationCodeChange, new CompletionListener() {
-                    @Override
-                    public void onCompleted(@Nullable Throwable errorCause) {
-                        if (errorCause != null) {
-                            promise.reject(TAG, "Error changeApplicationCode: ", errorCause);
-                        } else {
-                            promise.resolve(true);
-                        }
-                    }
-                });
-            }
+                }
+            });
         } catch (Exception e) {
             promise.reject(TAG, "Error changeApplicationCode: ", e);
         }
