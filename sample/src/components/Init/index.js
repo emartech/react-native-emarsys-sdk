@@ -83,11 +83,11 @@ export default class Init extends Component {
 		
 		try {
 			let result = await Emarsys.setContact(contactFieldId, contactFieldValue)
-			console.log("trackCustomEvent Done: ", result)
-			showAlert( "trackCustomEvent", "trackCustomEvent Done." )
+			console.log("setContact Done: ", result)
+			showAlert( "setContact", "setContact Done." )
 		} catch (e) {
-			console.log("trackCustomEvent Fail: ", e)
-			showAlert( "trackCustomEvent", "trackCustomEvent Fail: ", e )
+			console.log("setContact Fail: ", e)
+			showAlert( "setContact", "setContact Fail: ", e )
 		}
 	}	
 	
