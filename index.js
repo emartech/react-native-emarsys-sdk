@@ -10,11 +10,12 @@ const Emarsys = {
 	  * @desc After application setup is finished, you can use setContact method to identify the user with a contactFieldValue. 
 	  * @desc Without setContact all events will be tracked as anonymous usage.
 	  
-	  * @param required string contactFieldValue - user/application identification e-mail
+	  * @param required string contactFieldValue - user identification
+	  * @param required integer contactFieldId - field used for identification
 	  * @return bool - success or failure
 	*/		
-	setContact(contactFieldValue) {
-		return RNEmarsysWrapper.setContact(contactFieldValue)
+	setContact(contactFieldId, contactFieldValue) {
+		return RNEmarsysWrapper.setContact(contactFieldId, contactFieldValue)
 	},
 
 	/**
