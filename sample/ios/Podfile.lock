@@ -1,8 +1,8 @@
 PODS:
   - boost-for-react-native (1.63.0)
   - DoubleConversion (1.1.6)
-  - EmarsysNotificationService (2.14.0)
-  - EmarsysSDK (2.14.0)
+  - EmarsysNotificationService (2.16.2)
+  - EmarsysSDK (2.16.2)
   - Folly (2018.10.22.00):
     - boost-for-react-native
     - DoubleConversion
@@ -83,14 +83,14 @@ PODS:
   - React-RCTWebSocket (0.60.0):
     - React-Core (= 0.60.0)
     - React-fishhook (= 0.60.0)
-  - RNEmarsysWrapper (1.1.1):
-    - EmarsysSDK (~> 2.14.0)
+  - RNEmarsysWrapper (1.3.1):
+    - EmarsysSDK (~> 2.16.0)
     - React (>= 0.60.0)
-  - RNGestureHandler (1.6.1):
-    - React
-  - RNReanimated (1.9.0):
-    - React
-  - RNScreens (2.9.0):
+  - RNGestureHandler (1.10.3):
+    - React-Core
+  - RNReanimated (1.13.3):
+    - React-Core
+  - RNScreens (2.11.0):
     - React
   - RNVectorIcons (6.7.0):
     - React
@@ -196,8 +196,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
-  EmarsysNotificationService: 0156e5848c52e8a8db22bd706cfed73b036a8b00
-  EmarsysSDK: 4737f2ba41e7ff9e4a815b495cbd21a196a921c1
+  EmarsysNotificationService: ccf61ce045566cc97dedb5ddb695d9f055d6eb73
+  EmarsysSDK: 0654e95905582256a88cc267ebf1922414bccfcb
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   React: 4b3c068e793e96672dcd186a2b572fac43e4b031
@@ -218,14 +218,14 @@ SPEC CHECKSUMS:
   React-RCTText: 685fca2e13b024271048e7e247ef24476f28a41e
   React-RCTVibration: 4ee1cf208ab17a50fafb1c16ffe28fe594a64e4f
   React-RCTWebSocket: fca087d583724aa0e5fef7d911f0f2a28d0f2736
-  RNEmarsysWrapper: dd818e2b812e25c59163e50651c59c01e8a14511
-  RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
-  RNReanimated: b5ccb50650ba06f6e749c7c329a1bc3ae0c88b43
-  RNScreens: c526239bbe0e957b988dacc8d75ac94ec9cb19da
+  RNEmarsysWrapper: 11413f4cc05869f9f5a6e04cd050e777b680544b
+  RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
+  RNReanimated: 514a11da3a2bcc6c3dfd9de32b38e2b9bf101926
+  RNScreens: 0e91da98ab26d5d04c7b59a9b6bd694124caf88c
   RNVectorIcons: 368d6d8b8301224e5ffb6254191f4f8876c2be0d
-  toolbar-android: 404f4450b203597e7b417f714ff417bed562a1be
+  toolbar-android: 85f3ef4d691469f2d304e7dee4bca013aa1ba1ff
   yoga: 616fde658be980aa60a2158835170f3f9c2d04b4
 
-PODFILE CHECKSUM: ac6b850ae22c44ad08c670e0bbfc6c5771b1c626
+PODFILE CHECKSUM: e42fd5db0c8bdbdaa19edc3d28ae0b13cc2d8eb8
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1
