@@ -160,33 +160,6 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void trackMessageOpen(@NonNull final String messageId, final Promise promise) {
-        try {
-            JSONObject userData = new JSONObject();
-            userData.put("sid", messageId);
-
-            Bundle userInfo = new Bundle();
-            userInfo.putString("u", userData.toString());
-
-            Intent payload = new Intent();
-            payload.putExtra("payload", userInfo);
-
-            Emarsys.getPush().trackMessageOpen(payload, new CompletionListener() {
-                @Override
-                public void onCompleted(@Nullable Throwable errorCause) {
-                    if (errorCause != null) {
-                        promise.reject(TAG, "Error trackMessageOpen: ", errorCause);
-                    } else {
-                        promise.resolve(true);
-                    }
-                }
-            });
-        } catch (JSONException e) {
-            promise.reject(TAG, "Error trackMessageOpen: ", e);
-        }
-    }
-
-    @ReactMethod
     public void pause(Promise promise) {
         try {
             Emarsys.getInApp().pause();

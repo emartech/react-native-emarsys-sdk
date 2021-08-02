@@ -153,24 +153,6 @@ RCT_EXPORT_METHOD(clearPushToken:(RCTPromiseResolveBlock)resolve rejecter:(RCTPr
     }
 }
 
-RCT_EXPORT_METHOD(trackMessageOpen:(NSString * _Nonnull)messageId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
-    @try {
-        NSDictionary *userData = @{@"sid":messageId};
-        NSDictionary *userInfo = @{@"u": userData};
-        
-        [Emarsys.push trackMessageOpenWithUserInfo:userInfo completionBlock:^(NSError *error) {
-            if (NULL != error) {
-                reject(@"RNEmarsysWrapper", @"trackMessageOpen: ", error);
-            } else {
-                resolve([NSNumber numberWithBool:YES]);
-            }
-        }];
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
-}
-
 RCT_EXPORT_METHOD(pause:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys.inApp pause];

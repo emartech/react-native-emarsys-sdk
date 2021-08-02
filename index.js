@@ -75,16 +75,6 @@ const Emarsys = {
 			return RNEmarsysWrapper.clearPushToken()
 		},
 
-		/**
-		 * @The Emarsys SDK automatically handles whether the push messages have been opened, however, if you want to track it manually the trackMessageOpen method should be used.
-
-		 * @param required string messageId - Push message ID
-		 * @return bool - success or failure
-		 */
-		trackMessageOpen(messageId) {
-			return RNEmarsysWrapper.trackMessageOpen(messageId)
-		},
-
 		pushToken() {
 			return RNEmarsysWrapper.getPushToken()
 		},
