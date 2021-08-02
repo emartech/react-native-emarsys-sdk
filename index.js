@@ -44,10 +44,8 @@ const Emarsys = {
 	 * @return bool - success or failure
 	 */
 	setEventHandler(callback) {
-		console.log(`Registered for events`)
 		const eventEmitter = new NativeEventEmitter(RNEmarsysWrapper);
 		eventEmitter.addListener('handleEvent', function (result) {
-			console.log(`Got event ${result}`)
 			callback(result.eventName, result.payload);
 		});
 		RNEmarsysWrapper.setEventHandler();
@@ -766,7 +764,7 @@ const Emarsys = {
 	  * @return bool - success or failure
 	*/		
 	trackDeepLink(url) {
-		return RNEmarsysWrapper.trackDeepLink(url ? url : null)
+		return RNEmarsysWrapper.trackDeepLink(url)
 	},
 
 	/* ApplicationCode, applicationCode and merchantId change ******************************************************************************************************/
@@ -783,11 +781,11 @@ const Emarsys = {
 
 	/**
 	  * @desc Emarsys SDK provides a solution for merchantId change in a convenient way without restarting the SDK.
-	  * @param string predictMerchantIdChange - predictMerchantId for change
+	  * @param string merchantId - merchantId for change
 	  * @return bool - success or failure
 	*/		
-	changeMerchantId(predictMerchantIdChange) {
-		return RNEmarsysWrapper.changeMerchantId(predictMerchantIdChange ? predictMerchantIdChange : null)
+	changeMerchantId(merchantId) {
+		return RNEmarsysWrapper.changeMerchantId(merchantId)
 	},
 
 	/**
