@@ -626,7 +626,7 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getLanguageCode(Promise promise) {
         try {
-            String languageCode = Emarsys.getConfig().getLanguage();
+            String languageCode = Emarsys.getConfig().getLanguageCode();
             promise.resolve(languageCode);
         } catch (Exception e) {
             promise.reject(TAG, "Error getLanguageCode: ", e);
