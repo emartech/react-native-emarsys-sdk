@@ -28,6 +28,11 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 repositories {
@@ -42,5 +47,5 @@ repositories {
 
 dependencies {
     implementation "com.facebook.react:react-native:+"
-    implementation "com.emarsys:emarsys-sdk:2.16.0"
+    implementation "com.emarsys:emarsys-sdk:3.0.0"
 }

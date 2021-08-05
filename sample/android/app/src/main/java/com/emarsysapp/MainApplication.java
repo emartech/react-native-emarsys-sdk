@@ -53,9 +53,9 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
 
     EmarsysConfig config = new EmarsysConfig.Builder()
             .application(this)
-            .mobileEngageApplicationCode("EMS5C-F60E2")
-            .contactFieldId(3)
-            .predictMerchantId("1428C8EE286EC34B")
+            .applicationCode("EMS25-20071")
+            .merchantId("1DF86BF95CBE8F19")
+            .enableVerboseConsoleLogging()
             .build();
 
     createNotificationChannels();
@@ -65,10 +65,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
 
     // Has to come after SoLoader.init
     RNEmarsysEventHandler eventHandler = RNEmarsysEventHandler.getInstance();
-    Emarsys.getInApp().setEventHandler(eventHandler);
-    Emarsys.getPush().setNotificationEventHandler(eventHandler);
-    Emarsys.getPush().setSilentMessageEventHandler(eventHandler);
-    Emarsys.getGeofence().setEventHandler(eventHandler);
+    eventHandler.setEventHandlers();
   }
 
   private void createNotificationChannels() {

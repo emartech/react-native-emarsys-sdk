@@ -23,10 +23,11 @@ import Auth from "./store/modules/Auth"
 import showAlert from "./components/Helpers"
 
 wrapperLogin = async ( callback ) => {
-	let contactFieldValue = "second@email-test.com"
-
+	let contactFieldId = 100005878
+	let contactFieldValue = "7c3df9f3"
+	
 	try {
-		let result = await Emarsys.setContact(contactFieldValue)
+		let result = await Emarsys.setContact(contactFieldId, contactFieldValue)
 		console.log("setContact Done: ", result)
 		showAlert( "setContact", "setContact Done.", false,  Boolean( callback ) && callback() )
 	} catch (e) {

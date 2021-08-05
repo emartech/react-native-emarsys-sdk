@@ -6,7 +6,6 @@
 #import "EMSProduct+Emarsys.h"
 #import "EMSProductBuilder.h"
 
-#import "EMSEventHandler.h"
 #import "EMSInAppProtocol.h"
 
 #import "EMSLogic.h"
@@ -78,9 +77,9 @@ static NSDictionary<NSString *,NSObject *> *_body = nil;
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(setContact:(NSString * _Nonnull)contactFieldValue resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
+RCT_EXPORT_METHOD(setContact:(NSNumber * _Nonnull)contactFieldId contactFieldValue:(NSString * _Nonnull)contactFieldValue resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
-        [Emarsys setContactWithContactFieldValue:contactFieldValue completionBlock:^(NSError *error) {
+        [Emarsys setContactWithContactFieldId:contactFieldId contactFieldValue:contactFieldValue completionBlock:^(NSError * _Nullable error) {
             if (NULL != error) {
                 reject(@"RNEmarsysWrapper", @"setContact: ", error);
             } else {
@@ -143,24 +142,6 @@ RCT_EXPORT_METHOD(clearPushToken:(RCTPromiseResolveBlock)resolve rejecter:(RCTPr
         [Emarsys.push clearPushTokenWithCompletionBlock:^(NSError *error) {
             if (NULL != error) {
                 reject(@"RNEmarsysWrapper", @"clearPushToken: ", error);
-            } else {
-                resolve([NSNumber numberWithBool:YES]);
-            }
-        }];
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
-}
-
-RCT_EXPORT_METHOD(trackMessageOpen:(NSString * _Nonnull)messageId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
-    @try {
-        NSDictionary *userData = @{@"sid":messageId};
-        NSDictionary *userInfo = @{@"u": userData};
-        
-        [Emarsys.push trackMessageOpenWithUserInfo:userInfo completionBlock:^(NSError *error) {
-            if (NULL != error) {
-                reject(@"RNEmarsysWrapper", @"trackMessageOpen: ", error);
             } else {
                 resolve([NSNumber numberWithBool:YES]);
             }
@@ -473,7 +454,7 @@ RCT_EXPORT_METHOD(trackRecommendationClick:(NSDictionary * _Nonnull)product reso
     }
 }
 
-RCT_EXPORT_METHOD(trackDeepLink:(NSString * _Nullable)userActivity resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(trackDeepLink:(NSString * _Nonnull)userActivity resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         if ( userActivity != nil ) {
             NSUserActivity* activity = [[NSUserActivity alloc] initWithActivityType:NSUserActivityTypeBrowsingWeb];
@@ -496,11 +477,9 @@ RCT_EXPORT_METHOD(trackDeepLink:(NSString * _Nullable)userActivity resolver:(RCT
     }
 }
 
-RCT_EXPORT_METHOD(changeApplicationCode:(NSString * _Nullable)applicationCode customerFieldId:(nonnull NSNumber *)customerFieldId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
+RCT_EXPORT_METHOD(changeApplicationCode:(NSString * _Nonnull)applicationCode resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
-        [Emarsys.config changeApplicationCode:applicationCode
-                               contactFieldId:customerFieldId
-                              completionBlock:^(NSError *error) {
+        [Emarsys.config changeApplicationCode:applicationCode completionBlock:^(NSError * _Nullable error) {
             if (NULL != error) {
                 reject(@"RNEmarsysWrapper", @"changeApplicationCode: ", error);
             } else {
@@ -513,7 +492,7 @@ RCT_EXPORT_METHOD(changeApplicationCode:(NSString * _Nullable)applicationCode cu
     }
 }
 
-RCT_EXPORT_METHOD(changeMerchantId:(NSString * _Nullable)merchantId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
+RCT_EXPORT_METHOD(changeMerchantId:(NSString * _Nonnull)merchantId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys.config changeMerchantId:merchantId ];
         resolve([NSNumber numberWithBool:YES]);

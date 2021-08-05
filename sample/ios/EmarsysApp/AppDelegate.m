@@ -18,15 +18,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   
-  requestPushPermission();
+  [self requestPushPermission];
   
   EMSConfig *config = [EMSConfig makeWithBuilder:^(EMSConfigBuilder * builder) {
     [builder setMobileEngageApplicationCode:@"EMS25-20071"];
-    [builder setContactFieldId:@100005878];
     [builder setMerchantId:@"1DF86BF95CBE8F19"];
   }];
   
   [Emarsys setupWithConfig:config];
+  
+  UNUserNotificationCenter.currentNotificationCenter.delegate = [Emarsys push];
+  RNEmarsysEventHandler *rnEMSEventHandler = [RNEmarsysEventHandler allocWithZone: nil];
+  [rnEMSEventHandler setEventHandlers];
   
 	RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
 	RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"EmarsysApp" initialProperties:nil];
@@ -38,18 +41,11 @@
 	rootViewController.view = rootView;
 	self.window.rootViewController = rootViewController;
 	[self.window makeKeyAndVisible];
-  
-  RNEmarsysEventHandler *rnEMSEventHandler = [RNEmarsysEventHandler allocWithZone: nil];
-  Emarsys.inApp.eventHandler = rnEMSEventHandler;
-  Emarsys.notificationCenterDelegate.eventHandler = rnEMSEventHandler;
-  Emarsys.push.silentMessageEventHandler = rnEMSEventHandler;
-  Emarsys.geofence.eventHandler = rnEMSEventHandler;
-  UNUserNotificationCenter.currentNotificationCenter.delegate = Emarsys.notificationCenterDelegate;
 
 	return YES;
 }
 
-void requestPushPermission() {
+- (void) requestPushPermission {
   UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
   [center requestAuthorizationWithOptions:
            (UNAuthorizationOptionAlert +

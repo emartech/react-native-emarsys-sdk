@@ -85,19 +85,6 @@ export default class Push extends Component {
 		}
 	}
 
-	async wrapperTrackMessageOpen() {
-		let messageId = "+43c_lODSmXqCvdOz"
-	
-		try {
-			let result = await Emarsys.push.trackMessageOpen( messageId )
-			console.log("trackMessageOpen Done: ", result)
-			showAlert( "trackMessageOpen", "trackMessageOpen Done.")
-		} catch (e) {
-			console.log("trackMessageOpen Fail: ", e)
-			showAlert( "trackMessageOpen", "trackMessageOpen Fail: ", e )
-		}
-	}
-
 	async wrapperGetPushToken() {
 		try {
 			let pushToken = await Emarsys.push.pushToken()

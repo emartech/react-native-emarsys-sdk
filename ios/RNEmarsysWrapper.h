@@ -6,8 +6,6 @@
 #endif
 #import <React/RCTEventEmitter.h>
 
-#import "EMSEventHandler.h"
-
 typedef void (^InAppHandlerBlock)(NSString *eventName, NSDictionary<NSString *, NSObject *> *payload);
 
 @interface RNEmarsysWrapper : RCTEventEmitter <RCTBridgeModule>

@@ -10,11 +10,12 @@ const Emarsys = {
 	  * @desc After application setup is finished, you can use setContact method to identify the user with a contactFieldValue. 
 	  * @desc Without setContact all events will be tracked as anonymous usage.
 	  
-	  * @param required string contactFieldValue - user/application identification e-mail
+	  * @param required string contactFieldValue - user identification
+	  * @param required integer contactFieldId - field used for identification
 	  * @return bool - success or failure
 	*/		
-	setContact(contactFieldValue) {
-		return RNEmarsysWrapper.setContact(contactFieldValue)
+	setContact(contactFieldId, contactFieldValue) {
+		return RNEmarsysWrapper.setContact(contactFieldId, contactFieldValue)
 	},
 
 	/**
@@ -44,10 +45,8 @@ const Emarsys = {
 	 * @return bool - success or failure
 	 */
 	setEventHandler(callback) {
-		console.log(`Registered for events`)
 		const eventEmitter = new NativeEventEmitter(RNEmarsysWrapper);
 		eventEmitter.addListener('handleEvent', function (result) {
-			console.log(`Got event ${result}`)
 			callback(result.eventName, result.payload);
 		});
 		RNEmarsysWrapper.setEventHandler();
@@ -74,16 +73,6 @@ const Emarsys = {
 		 */
 		clearPushToken() {
 			return RNEmarsysWrapper.clearPushToken()
-		},
-
-		/**
-		 * @The Emarsys SDK automatically handles whether the push messages have been opened, however, if you want to track it manually the trackMessageOpen method should be used.
-
-		 * @param required string messageId - Push message ID
-		 * @return bool - success or failure
-		 */
-		trackMessageOpen(messageId) {
-			return RNEmarsysWrapper.trackMessageOpen(messageId)
 		},
 
 		pushToken() {
@@ -766,28 +755,27 @@ const Emarsys = {
 	  * @return bool - success or failure
 	*/		
 	trackDeepLink(url) {
-		return RNEmarsysWrapper.trackDeepLink(url ? url : null)
+		return RNEmarsysWrapper.trackDeepLink(url)
 	},
 
 	/* ApplicationCode, applicationCode and merchantId change ******************************************************************************************************/
 
 	/**
 	  * @desc Emarsys SDK provides a solution for applicationCode change in a convenient way without restarting the SDK.
-	  * @param string applicationCodeChange - applicationCode for change
-	  * @param number customerFieldIdChange - customerFieldId for change
+	  * @param string applicationCode - applicationCode for change
 	  * @return bool - success or failure
 	*/		
-	changeApplicationCode(applicationCodeChange, customerFieldIdChange) {
-		return RNEmarsysWrapper.changeApplicationCode(applicationCodeChange ? applicationCodeChange : null, customerFieldIdChange ? customerFieldIdChange : null)
+	changeApplicationCode(applicationCode) {
+		return RNEmarsysWrapper.changeApplicationCode(applicationCode)
 	},
 
 	/**
 	  * @desc Emarsys SDK provides a solution for merchantId change in a convenient way without restarting the SDK.
-	  * @param string predictMerchantIdChange - predictMerchantId for change
+	  * @param string merchantId - merchantId for change
 	  * @return bool - success or failure
 	*/		
-	changeMerchantId(predictMerchantIdChange) {
-		return RNEmarsysWrapper.changeMerchantId(predictMerchantIdChange ? predictMerchantIdChange : null)
+	changeMerchantId(merchantId) {
+		return RNEmarsysWrapper.changeMerchantId(merchantId)
 	},
 
 	/**

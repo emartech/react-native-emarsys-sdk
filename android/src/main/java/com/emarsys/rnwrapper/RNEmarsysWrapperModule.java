@@ -55,9 +55,9 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void setContact(@NonNull final String contactFieldValue, final Promise promise) {
+    public void setContact(@NonNull Integer contactFieldId, @NonNull final String contactFieldValue, final Promise promise) {
         try {
-            Emarsys.setContact(contactFieldValue, new CompletionListener() {
+            Emarsys.setContact(contactFieldId, contactFieldValue, new CompletionListener() {
                 @Override
                 public void onCompleted(@Nullable Throwable errorCause) {
                     if (errorCause != null) {
@@ -156,33 +156,6 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
             });
         } catch (Exception e) {
             promise.reject(TAG, "Error clearPushToken: ", e);
-        }
-    }
-
-    @ReactMethod
-    public void trackMessageOpen(@NonNull final String messageId, final Promise promise) {
-        try {
-            JSONObject userData = new JSONObject();
-            userData.put("sid", messageId);
-
-            Bundle userInfo = new Bundle();
-            userInfo.putString("u", userData.toString());
-
-            Intent payload = new Intent();
-            payload.putExtra("payload", userInfo);
-
-            Emarsys.getPush().trackMessageOpen(payload, new CompletionListener() {
-                @Override
-                public void onCompleted(@Nullable Throwable errorCause) {
-                    if (errorCause != null) {
-                        promise.reject(TAG, "Error trackMessageOpen: ", errorCause);
-                    } else {
-                        promise.resolve(true);
-                    }
-                }
-            });
-        } catch (JSONException e) {
-            promise.reject(TAG, "Error trackMessageOpen: ", e);
         }
     }
 
@@ -583,40 +556,27 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void changeApplicationCode(@Nullable final String applicationCodeChange, @Nullable final Integer contactFieldId, final Promise promise) {
+    public void changeApplicationCode(@NonNull final String applicationCode, final Promise promise) {
         try {
-            if (contactFieldId != null) {
-                Emarsys.getConfig().changeApplicationCode(applicationCodeChange, contactFieldId, new CompletionListener() {
-                    @Override
-                    public void onCompleted(@Nullable Throwable errorCause) {
-                        if (errorCause != null) {
-                            promise.reject(TAG, "Error changeApplicationCode: ", errorCause);
-                        } else {
-                            promise.resolve(true);
-                        }
+            Emarsys.getConfig().changeApplicationCode(applicationCode, new CompletionListener() {
+                @Override
+                public void onCompleted(@Nullable Throwable errorCause) {
+                    if (errorCause != null) {
+                        promise.reject(TAG, "Error changeApplicationCode: ", errorCause);
+                    } else {
+                        promise.resolve(true);
                     }
-                });
-            } else {
-                Emarsys.getConfig().changeApplicationCode(applicationCodeChange, new CompletionListener() {
-                    @Override
-                    public void onCompleted(@Nullable Throwable errorCause) {
-                        if (errorCause != null) {
-                            promise.reject(TAG, "Error changeApplicationCode: ", errorCause);
-                        } else {
-                            promise.resolve(true);
-                        }
-                    }
-                });
-            }
+                }
+            });
         } catch (Exception e) {
             promise.reject(TAG, "Error changeApplicationCode: ", e);
         }
     }
 
     @ReactMethod
-    public void changeMerchantId(@Nullable final String predictMerchantIdChange, Promise promise) {
+    public void changeMerchantId(@NonNull final String merchantId, Promise promise) {
         try {
-            Emarsys.getConfig().changeMerchantId(predictMerchantIdChange);
+            Emarsys.getConfig().changeMerchantId(merchantId);
             promise.resolve(true);
         } catch (Exception e) {
             promise.reject(TAG, "Error changeMerchantId: ", e);
@@ -666,7 +626,7 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getLanguageCode(Promise promise) {
         try {
-            String languageCode = Emarsys.getConfig().getLanguage();
+            String languageCode = Emarsys.getConfig().getLanguageCode();
             promise.resolve(languageCode);
         } catch (Exception e) {
             promise.reject(TAG, "Error getLanguageCode: ", e);
