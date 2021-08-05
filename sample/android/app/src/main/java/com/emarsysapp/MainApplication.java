@@ -54,7 +54,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     EmarsysConfig config = new EmarsysConfig.Builder()
             .application(this)
             .applicationCode("EMS25-20071")
-            .merchantId("1428C8EE286EC34B")
+            .merchantId("1DF86BF95CBE8F19")
             .enableVerboseConsoleLogging()
             .build();
 

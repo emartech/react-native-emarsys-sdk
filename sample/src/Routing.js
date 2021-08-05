@@ -24,7 +24,7 @@ import showAlert from "./components/Helpers"
 
 wrapperLogin = async ( callback ) => {
 	let contactFieldId = 100005878
-	let contactFieldValue = "test@emarsys.com"
+	let contactFieldValue = "7c3df9f3"
 	
 	try {
 		let result = await Emarsys.setContact(contactFieldId, contactFieldValue)

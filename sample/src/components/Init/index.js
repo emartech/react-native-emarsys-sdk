@@ -78,8 +78,8 @@ export default class Init extends Component {
 	// MARK: - Init *************************************************************************************************************
 
 	async wrapperSetContact() {
-		let contactFieldId = 3
-		let contactFieldValue = "test@emarsys.com"
+		let contactFieldId = 100005878
+		let contactFieldValue = "7c3df9f3"
 		
 		try {
 			let result = await Emarsys.setContact(contactFieldId, contactFieldValue)
@@ -137,7 +137,7 @@ export default class Init extends Component {
 	}
 
 	async wrapperChangeMerchantId() {
-		let merchantId = "";
+		let merchantId = "1428C8EE286EC34B";
 
 		try {
 			let result = await Emarsys.changeMerchantId(merchantId)
