@@ -8,7 +8,7 @@ We created a sample application to help in the integration and give an example. 
 
 ## Setup
 
-`$ npm install git+ssh://git@github.com/emartech/react-native-emarsys-sdk.git#1.3.0 --save`
+`$ npm install git+ssh://git@github.com/emartech/react-native-emarsys-sdk.git#1.4.0 --save`
 
 ### Mostly automatic installation
 
