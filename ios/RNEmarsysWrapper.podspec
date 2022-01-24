@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
 	# s.license     = { :type => "MIT", :file => "FILE_LICENSE" }
 	s.author        = { "author" => "author@domain.cn" }
 	s.platform      = :ios, "11.0"
-	s.source        = { :git => "https://git@github.com/emartech/react-native-emarsys-sdk.git", :tag => "1.4.0" }
+	s.source = { :git => "https://git@github.com/emartech/react-native-emarsys-sdk.git%22,  :tag => "#{s.version}" }
 	s.source_files  = "ios/*.{h,m}"
 	s.requires_arc  = true
 	s.dependency "React", ">= 0.60.0"
