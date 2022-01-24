@@ -18,6 +18,6 @@ Pod::Spec.new do |s|
 	s.source_files  = "ios/*.{h,m}"
 	s.requires_arc  = true
 	s.dependency "React", ">= 0.60.0"
-	s.dependency "EmarsysSDK", "~> 3.0.0"
+	s.dependency "EmarsysSDK", "~> 3.2.0"
 
 end
