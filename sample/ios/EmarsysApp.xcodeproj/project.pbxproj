@@ -120,6 +120,7 @@
 		EEDFFA0532114EFEB7B11608 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		F20A6092ADE516F2FBAB5727 /* libPods-EmarsysApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmarsysApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCBB97FEE0E53505FEB6BF0E /* libPods-EmarsysAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmarsysAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		45CF78B8FEB24E799F69D440 /* RNEmarsysWrapper.xcodeproj */ = {isa = PBXFileReference; name = "RNEmarsysWrapper.xcodeproj"; path = "../node_modules/react-native-emarsys-wrapper/ios/RNEmarsysWrapper.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +271,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				45CF78B8FEB24E799F69D440 /* RNEmarsysWrapper.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -832,6 +834,10 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EmarsysApp.app/EmarsysApp";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-emarsys-wrapper/ios/**",
+				);
 			};
 			name = Debug;
 		};
@@ -856,6 +862,10 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EmarsysApp.app/EmarsysApp";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-emarsys-wrapper/ios/**",
+				);
 			};
 			name = Release;
 		};
@@ -880,6 +890,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.react.example.EmarsysApp;
 				PRODUCT_NAME = EmarsysApp;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-emarsys-wrapper/ios/**",
+				);
 			};
 			name = Debug;
 		};
@@ -903,6 +917,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.react.example.EmarsysApp;
 				PRODUCT_NAME = EmarsysApp;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-emarsys-wrapper/ios/**",
+				);
 			};
 			name = Release;
 		};
@@ -935,6 +953,10 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-emarsys-wrapper/ios/**",
+				);
 			};
 			name = Debug;
 		};
@@ -967,6 +989,10 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-emarsys-wrapper/ios/**",
+				);
 			};
 			name = Release;
 		};
@@ -997,6 +1023,10 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EmarsysApp-tvOS.app/EmarsysApp-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-emarsys-wrapper/ios/**",
+				);
 			};
 			name = Debug;
 		};
@@ -1027,6 +1057,10 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EmarsysApp-tvOS.app/EmarsysApp-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-emarsys-wrapper/ios/**",
+				);
 			};
 			name = Release;
 		};

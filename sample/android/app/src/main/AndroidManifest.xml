@@ -21,7 +21,8 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true">
 			
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,7 +45,8 @@
 
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
-        <service android:name="com.emarsys.service.EmarsysFirebaseMessagingService">
+        <service android:name="com.emarsys.service.EmarsysFirebaseMessagingService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
