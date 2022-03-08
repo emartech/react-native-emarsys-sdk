@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 	s.source = { :git => "https://git@github.com/emartech/react-native-emarsys-sdk.git",  :tag => "#{s.version}" }
 	s.source_files  = "ios/*.{h,m}"
 	s.requires_arc  = true
-	s.dependency "React", ">= 0.67.0"
+	s.dependency "React", ">= 0.67.3"
 	s.dependency "EmarsysSDK", "~> 3.2.0"
 
 end
