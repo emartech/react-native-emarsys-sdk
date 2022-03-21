@@ -22,30 +22,31 @@
 		"lint": "eslint ."
 	},
 	"dependencies": {
-		"@react-native-community/toolbar-android": "0.1.0-rc.2",
-		"mobx": "^5.9.4",
-		"mobx-react": "^5.4.4",
-		"react": "16.8.6",
-		"react-native": "0.60.0",
-		"react-native-emarsys-wrapper": "git+ssh://git@github.com/emartech/react-native-emarsys-sdk.git",
-		"react-native-gesture-handler": "^1.5.2",
-		"react-native-reanimated": "^1.4.0",
-		"react-native-screens": "2.11.0",
-		"react-native-vector-icons": "^6.6.0",
-		"react-navigation": "^4.2.2",
-		"react-navigation-stack": "^1.10.3",
-		"react-navigation-tabs": "^2.8.2"
+		"@react-native-community/toolbar-android": "0.2.1",
+		"mobx": "^6.4.2",
+		"mobx-react": "^7.3.0",
+		"react": "17.0.2",
+		"react-native": "0.67.3",
+		"react-native-emarsys-wrapper": "github:emartech/react-native-emarsys-sdk#1.5.0",
+		"react-native-gesture-handler": "^2.3.0",
+		"react-native-reanimated": "^2.4.1",
+		"react-native-safe-area-context": "^4.1.2",
+		"react-native-screens": "^3.13.1",
+		"react-native-vector-icons": "^9.1.0",
+		"react-navigation": "^4.4.4",
+		"react-navigation-stack": "^2.10.4",
+		"react-navigation-tabs": "^2.11.2"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.8.6",
-		"@babel/plugin-proposal-decorators": "^7.7.4",
-		"@babel/runtime": "^7.6.3",
-		"@react-native-community/eslint-config": "^0.0.5",
-		"babel-jest": "^24.9.0",
-		"eslint": "^6.5.1",
-		"jest": "^24.9.0",
-		"metro-react-native-babel-preset": "^0.56.0",
-		"react-test-renderer": "16.8.6"
+		"@babel/core": "^7.17.5",
+		"@babel/plugin-proposal-decorators": "^7.17.2",
+		"@babel/runtime": "^7.17.2",
+		"@react-native-community/eslint-config": "^3.0.1",
+		"babel-jest": "^27.5.1",
+		"eslint": "^8.10.0",
+		"jest": "^27.5.1",
+		"metro-react-native-babel-preset": "^0.69.0",
+		"react-test-renderer": "^17.0.2"
 	},
 	"jest": {
 		"preset": "react-native"

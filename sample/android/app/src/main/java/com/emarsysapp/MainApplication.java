@@ -13,6 +13,7 @@ import com.emarsys.config.EmarsysConfig;
 import com.emarsys.rnwrapper.RNEmarsysEventHandler;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.emarsys.rnwrapper.RNEmarsysWrapperPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;

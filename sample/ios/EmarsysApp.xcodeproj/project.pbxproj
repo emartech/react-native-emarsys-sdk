@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* EmarsysAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EmarsysAppTests.m */; };
+		096D5C7ABF251F830C30A2B9 /* libPods-EmarsysApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1451D082370D985442398155 /* libPods-EmarsysApp-tvOS.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -16,13 +17,12 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* EmarsysAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EmarsysAppTests.m */; };
+		304CB907A78DADCAC72E3FF2 /* libPods-EmarsysApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BB7FAFBA08CD25CB3A865C /* libPods-EmarsysApp.a */; };
+		3EE6415D29B303403735A09A /* libPods-EmarsysApp-EmarsysAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42612EDA0C35491B356011EE /* libPods-EmarsysApp-EmarsysAppTests.a */; };
 		569DC311240FDBE100D095AC /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 569DC310240FDBE100D095AC /* NotificationService.m */; };
 		569DC315240FDBE100D095AC /* EmarsysAppNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 569DC30D240FDBE100D095AC /* EmarsysAppNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		5C23F1E233D743DAFC73BB10 /* libPods-EmarsysApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3328E886BB5BA38204F13B15 /* libPods-EmarsysApp.a */; };
-		8B6B72248202385622CA23A9 /* libPods-EmarsysAppNotificationService.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD28B3DC250A5F22CF3F8446 /* libPods-EmarsysAppNotificationService.a */; };
-		BA4066676EAD49E4901BBF6E /* libPods-EmarsysApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F20A6092ADE516F2FBAB5727 /* libPods-EmarsysApp-tvOS.a */; };
-		C0D73C9C7B510CC923B78D1D /* libPods-EmarsysApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4248AFD08EF2445A3722B1EC /* libPods-EmarsysApp-tvOSTests.a */; };
-		DBD1D5CEC5FF7AA70F31801C /* libPods-EmarsysAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBB97FEE0E53505FEB6BF0E /* libPods-EmarsysAppTests.a */; };
+		AEAB91CB3F8EE77D8F385399 /* libPods-EmarsysAppNotificationService.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05539DB63CD4E7AE9ECB2FC9 /* libPods-EmarsysAppNotificationService.a */; };
+		D2E6BABCA7A6D7A4CA86287D /* libPods-EmarsysApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3150D62A650D4D2B15F7EA40 /* libPods-EmarsysApp-tvOSTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +39,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "EmarsysApp-tvOS";
+		};
+		5649BAEB27DA47A40019CFA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45CF78B8FEB24E799F69D440 /* RNEmarsysWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNEmarsysWrapper;
 		};
 		569DC313240FDBE100D095AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -69,6 +76,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* EmarsysAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmarsysAppTests.m; sourceTree = "<group>"; };
 		049187CED56144C4BA7534F9 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		05539DB63CD4E7AE9ECB2FC9 /* libPods-EmarsysAppNotificationService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmarsysAppNotificationService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* EmarsysApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmarsysApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = EmarsysApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = EmarsysApp/AppDelegate.m; sourceTree = "<group>"; };
@@ -76,31 +84,33 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = EmarsysApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = EmarsysApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = EmarsysApp/main.m; sourceTree = "<group>"; };
-		1E3C074046C3A1830AC32B8A /* Pods-EmarsysApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysApp.debug.xcconfig"; path = "Target Support Files/Pods-EmarsysApp/Pods-EmarsysApp.debug.xcconfig"; sourceTree = "<group>"; };
-		1EC9468216F6774C95A649CB /* Pods-EmarsysAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysAppTests.debug.xcconfig"; path = "Target Support Files/Pods-EmarsysAppTests/Pods-EmarsysAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1451D082370D985442398155 /* libPods-EmarsysApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmarsysApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		292A2220325B9DCBB747F254 /* Pods-EmarsysApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysApp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-EmarsysApp-tvOS/Pods-EmarsysApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		29626C0AC2B54AA0A0B5DD7F /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		299C2AFBC0AC610A37811B70 /* Pods-EmarsysApp-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysApp-tvOS.release.xcconfig"; path = "Target Support Files/Pods-EmarsysApp-tvOS/Pods-EmarsysApp-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* EmarsysApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EmarsysApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* EmarsysApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "EmarsysApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		30FE5381E63B9E746C16B7DE /* Pods-EmarsysAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysAppTests.release.xcconfig"; path = "Target Support Files/Pods-EmarsysAppTests/Pods-EmarsysAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		3328E886BB5BA38204F13B15 /* libPods-EmarsysApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmarsysApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3150D62A650D4D2B15F7EA40 /* libPods-EmarsysApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmarsysApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		380BE37F7709078278D892AC /* Pods-EmarsysAppNotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysAppNotificationService.debug.xcconfig"; path = "Target Support Files/Pods-EmarsysAppNotificationService/Pods-EmarsysAppNotificationService.debug.xcconfig"; sourceTree = "<group>"; };
 		3DBA1B5A621B4432B6227D8A /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
-		4248AFD08EF2445A3722B1EC /* libPods-EmarsysApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmarsysApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		42612EDA0C35491B356011EE /* libPods-EmarsysApp-EmarsysAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmarsysApp-EmarsysAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		45CF78B8FEB24E799F69D440 /* RNEmarsysWrapper.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNEmarsysWrapper.xcodeproj; path = "../node_modules/react-native-emarsys-wrapper/ios/RNEmarsysWrapper.xcodeproj"; sourceTree = "<group>"; };
 		471F7733C402469A86725F47 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		488BC53988B74F75AC5746BC /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
-		55583403D589072E499A5236 /* Pods-EmarsysApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysApp-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-EmarsysApp-tvOSTests/Pods-EmarsysApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4C9609740C1073844DDB1E3D /* Pods-EmarsysApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysApp.debug.xcconfig"; path = "Target Support Files/Pods-EmarsysApp/Pods-EmarsysApp.debug.xcconfig"; sourceTree = "<group>"; };
+		50F3B1ED0E37F55F78BF1808 /* Pods-EmarsysAppNotificationService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysAppNotificationService.release.xcconfig"; path = "Target Support Files/Pods-EmarsysAppNotificationService/Pods-EmarsysAppNotificationService.release.xcconfig"; sourceTree = "<group>"; };
 		558BE85D9AA54335B1BB6D15 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		5619541E278F68359AF152DA /* Pods-EmarsysApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysApp-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-EmarsysApp-tvOSTests/Pods-EmarsysApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5683A94CC94B4D62BAD606C0 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		569DC30D240FDBE100D095AC /* EmarsysAppNotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = EmarsysAppNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		569DC30F240FDBE100D095AC /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
 		569DC310240FDBE100D095AC /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
 		569DC312240FDBE100D095AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		56AE6EE8BADC384501260456 /* Pods-EmarsysApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysApp.release.xcconfig"; path = "Target Support Files/Pods-EmarsysApp/Pods-EmarsysApp.release.xcconfig"; sourceTree = "<group>"; };
 		56DD0A7E240FC93E00A45228 /* libEmarsysNotificationService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEmarsysNotificationService.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		57741017F73014EB1B864C14 /* Pods-EmarsysApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysApp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-EmarsysApp-tvOSTests/Pods-EmarsysApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		59B24565FC794482BFEA380F /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
-		5A22614B173109964595995D /* Pods-EmarsysApp-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysApp-tvOS.release.xcconfig"; path = "Target Support Files/Pods-EmarsysApp-tvOS/Pods-EmarsysApp-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		7171BEE0F962BFA8C5B26993 /* Pods-EmarsysApp-EmarsysAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysApp-EmarsysAppTests.release.xcconfig"; path = "Target Support Files/Pods-EmarsysApp-EmarsysAppTests/Pods-EmarsysApp-EmarsysAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		731F7EE1C6DD49468BF41F95 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
-		739E698C46307D6ED0EF5089 /* Pods-EmarsysAppNotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysAppNotificationService.debug.xcconfig"; path = "Target Support Files/Pods-EmarsysAppNotificationService/Pods-EmarsysAppNotificationService.debug.xcconfig"; sourceTree = "<group>"; };
+		7416C728C103D7F98B6C68B6 /* Pods-EmarsysApp-EmarsysAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysApp-EmarsysAppTests.debug.xcconfig"; path = "Target Support Files/Pods-EmarsysApp-EmarsysAppTests/Pods-EmarsysApp-EmarsysAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		765A507E4C2444DEAB9C2652 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		78C420AA238FCD5F00DED038 /* libRNEmarsysWrapper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNEmarsysWrapper.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		78C420AC2390054000DED038 /* EmarsysApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = EmarsysApp.entitlements; path = EmarsysApp/EmarsysApp.entitlements; sourceTree = "<group>"; };
@@ -108,18 +118,16 @@
 		78D39AF123672A92005A9BFC /* libEmarsysSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEmarsysSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		78D39B4623673320005A9BFC /* libEmarsysSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEmarsysSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		79D5DDA530AC432599626654 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		7A03DBA5B504EFD9D67E4F23 /* Pods-EmarsysApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysApp.release.xcconfig"; path = "Target Support Files/Pods-EmarsysApp/Pods-EmarsysApp.release.xcconfig"; sourceTree = "<group>"; };
 		92EF2FF6600C40A19BF589F0 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		9D90886B617949FBB385B571 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		AD28B3DC250A5F22CF3F8446 /* libPods-EmarsysAppNotificationService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmarsysAppNotificationService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0E4EC26D44385F70EA2DFE3 /* Pods-EmarsysApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysApp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-EmarsysApp-tvOS/Pods-EmarsysApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		D1BB7FAFBA08CD25CB3A865C /* libPods-EmarsysApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmarsysApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7759826B63D404CB75583B8 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		E6C6C1B2944F8BE3FAD207D3 /* Pods-EmarsysAppNotificationService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysAppNotificationService.release.xcconfig"; path = "Target Support Files/Pods-EmarsysAppNotificationService/Pods-EmarsysAppNotificationService.release.xcconfig"; sourceTree = "<group>"; };
+		DE895FD669EC817A64E0000D /* Pods-EmarsysApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmarsysApp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-EmarsysApp-tvOSTests/Pods-EmarsysApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		ED56002564614CA38EB4DB27 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		EEDFFA0532114EFEB7B11608 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
-		F20A6092ADE516F2FBAB5727 /* libPods-EmarsysApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmarsysApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCBB97FEE0E53505FEB6BF0E /* libPods-EmarsysAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmarsysAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBD1D5CEC5FF7AA70F31801C /* libPods-EmarsysAppTests.a in Frameworks */,
+				3EE6415D29B303403735A09A /* libPods-EmarsysApp-EmarsysAppTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C23F1E233D743DAFC73BB10 /* libPods-EmarsysApp.a in Frameworks */,
+				304CB907A78DADCAC72E3FF2 /* libPods-EmarsysApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,7 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA4066676EAD49E4901BBF6E /* libPods-EmarsysApp-tvOS.a in Frameworks */,
+				096D5C7ABF251F830C30A2B9 /* libPods-EmarsysApp-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,7 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0D73C9C7B510CC923B78D1D /* libPods-EmarsysApp-tvOSTests.a in Frameworks */,
+				D2E6BABCA7A6D7A4CA86287D /* libPods-EmarsysApp-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,7 +167,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B6B72248202385622CA23A9 /* libPods-EmarsysAppNotificationService.a in Frameworks */,
+				AEAB91CB3F8EE77D8F385399 /* libPods-EmarsysAppNotificationService.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,11 +216,11 @@
 				78D39AF123672A92005A9BFC /* libEmarsysSDK.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				3328E886BB5BA38204F13B15 /* libPods-EmarsysApp.a */,
-				F20A6092ADE516F2FBAB5727 /* libPods-EmarsysApp-tvOS.a */,
-				4248AFD08EF2445A3722B1EC /* libPods-EmarsysApp-tvOSTests.a */,
-				AD28B3DC250A5F22CF3F8446 /* libPods-EmarsysAppNotificationService.a */,
-				FCBB97FEE0E53505FEB6BF0E /* libPods-EmarsysAppTests.a */,
+				D1BB7FAFBA08CD25CB3A865C /* libPods-EmarsysApp.a */,
+				42612EDA0C35491B356011EE /* libPods-EmarsysApp-EmarsysAppTests.a */,
+				1451D082370D985442398155 /* libPods-EmarsysApp-tvOS.a */,
+				3150D62A650D4D2B15F7EA40 /* libPods-EmarsysApp-tvOSTests.a */,
+				05539DB63CD4E7AE9ECB2FC9 /* libPods-EmarsysAppNotificationService.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -240,6 +248,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		5649BAE827DA47A40019CFA1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5649BAEC27DA47A40019CFA1 /* libRNEmarsysWrapper.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		569DC30E240FDBE100D095AC /* EmarsysAppNotificationService */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,16 +269,16 @@
 		666748167B989420490DFDBC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1E3C074046C3A1830AC32B8A /* Pods-EmarsysApp.debug.xcconfig */,
-				56AE6EE8BADC384501260456 /* Pods-EmarsysApp.release.xcconfig */,
-				B0E4EC26D44385F70EA2DFE3 /* Pods-EmarsysApp-tvOS.debug.xcconfig */,
-				5A22614B173109964595995D /* Pods-EmarsysApp-tvOS.release.xcconfig */,
-				55583403D589072E499A5236 /* Pods-EmarsysApp-tvOSTests.debug.xcconfig */,
-				57741017F73014EB1B864C14 /* Pods-EmarsysApp-tvOSTests.release.xcconfig */,
-				739E698C46307D6ED0EF5089 /* Pods-EmarsysAppNotificationService.debug.xcconfig */,
-				E6C6C1B2944F8BE3FAD207D3 /* Pods-EmarsysAppNotificationService.release.xcconfig */,
-				1EC9468216F6774C95A649CB /* Pods-EmarsysAppTests.debug.xcconfig */,
-				30FE5381E63B9E746C16B7DE /* Pods-EmarsysAppTests.release.xcconfig */,
+				4C9609740C1073844DDB1E3D /* Pods-EmarsysApp.debug.xcconfig */,
+				7A03DBA5B504EFD9D67E4F23 /* Pods-EmarsysApp.release.xcconfig */,
+				7416C728C103D7F98B6C68B6 /* Pods-EmarsysApp-EmarsysAppTests.debug.xcconfig */,
+				7171BEE0F962BFA8C5B26993 /* Pods-EmarsysApp-EmarsysAppTests.release.xcconfig */,
+				292A2220325B9DCBB747F254 /* Pods-EmarsysApp-tvOS.debug.xcconfig */,
+				299C2AFBC0AC610A37811B70 /* Pods-EmarsysApp-tvOS.release.xcconfig */,
+				5619541E278F68359AF152DA /* Pods-EmarsysApp-tvOSTests.debug.xcconfig */,
+				DE895FD669EC817A64E0000D /* Pods-EmarsysApp-tvOSTests.release.xcconfig */,
+				380BE37F7709078278D892AC /* Pods-EmarsysAppNotificationService.debug.xcconfig */,
+				50F3B1ED0E37F55F78BF1808 /* Pods-EmarsysAppNotificationService.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -270,6 +286,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				45CF78B8FEB24E799F69D440 /* RNEmarsysWrapper.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -310,10 +327,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EmarsysAppTests" */;
 			buildPhases = (
-				E536A2D28B0CA4C030138C27 /* [CP] Check Pods Manifest.lock */,
+				0286F913477D3D0A4E24C573 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				8D03CABA71B410D16840BED9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -329,14 +347,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EmarsysApp" */;
 			buildPhases = (
-				1C8DBCB6211E404752BAEF01 /* [CP] Check Pods Manifest.lock */,
+				68B0A3F813FCF86176FA58B9 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				56DD0A5A240FC17900A45228 /* Embed App Extensions */,
-				A9AF71E1018830FA11859499 /* [CP] Copy Pods Resources */,
+				0D8365EED5CAE6C76783120E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -352,7 +370,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "EmarsysApp-tvOS" */;
 			buildPhases = (
-				E50CD8DC77B177E6FA77AA5E /* [CP] Check Pods Manifest.lock */,
+				D441929430E55340376F9129 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -372,7 +390,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "EmarsysApp-tvOSTests" */;
 			buildPhases = (
-				0916C4321CFCE886B6CFB0EB /* [CP] Check Pods Manifest.lock */,
+				AB9D78D2A0C4E182C0B034E9 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -391,7 +409,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 569DC316240FDBE100D095AC /* Build configuration list for PBXNativeTarget "EmarsysAppNotificationService" */;
 			buildPhases = (
-				AE675E8ACE0382EE735D70A3 /* [CP] Check Pods Manifest.lock */,
+				0BA6EFAC9F68A9C88C5095FE /* [CP] Check Pods Manifest.lock */,
 				569DC309240FDBE100D095AC /* Sources */,
 				569DC30A240FDBE100D095AC /* Frameworks */,
 				569DC30B240FDBE100D095AC /* Resources */,
@@ -453,6 +471,12 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5649BAE827DA47A40019CFA1 /* Products */;
+					ProjectRef = 45CF78B8FEB24E799F69D440 /* RNEmarsysWrapper.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* EmarsysApp */,
@@ -463,6 +487,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5649BAEC27DA47A40019CFA1 /* libRNEmarsysWrapper.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNEmarsysWrapper.a;
+			remoteRef = 5649BAEB27DA47A40019CFA1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
@@ -520,7 +554,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		0916C4321CFCE886B6CFB0EB /* [CP] Check Pods Manifest.lock */ = {
+		0286F913477D3D0A4E24C573 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -535,14 +569,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EmarsysApp-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-EmarsysApp-EmarsysAppTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1C8DBCB6211E404752BAEF01 /* [CP] Check Pods Manifest.lock */ = {
+		0BA6EFAC9F68A9C88C5095FE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -557,28 +591,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EmarsysApp-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-EmarsysAppNotificationService-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Bundle React Native Code And Images";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
-		};
-		A9AF71E1018830FA11859499 /* [CP] Copy Pods Resources */ = {
+		0D8365EED5CAE6C76783120E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -601,6 +621,7 @@
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -620,13 +641,28 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EmarsysApp/Pods-EmarsysApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AE675E8ACE0382EE735D70A3 /* [CP] Check Pods Manifest.lock */ = {
+		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native Code And Images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		68B0A3F813FCF86176FA58B9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -641,14 +677,86 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EmarsysAppNotificationService-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-EmarsysApp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E50CD8DC77B177E6FA77AA5E /* [CP] Check Pods Manifest.lock */ = {
+		8D03CABA71B410D16840BED9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EmarsysApp-EmarsysAppTests/Pods-EmarsysApp-EmarsysAppTests-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EmarsysApp-EmarsysAppTests/Pods-EmarsysApp-EmarsysAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB9D78D2A0C4E182C0B034E9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EmarsysApp-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D441929430E55340376F9129 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -664,28 +772,6 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-EmarsysApp-tvOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E536A2D28B0CA4C030138C27 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EmarsysAppTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -810,7 +896,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1EC9468216F6774C95A649CB /* Pods-EmarsysAppTests.debug.xcconfig */;
+			baseConfigurationReference = 7416C728C103D7F98B6C68B6 /* Pods-EmarsysApp-EmarsysAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Manual;
@@ -818,6 +904,10 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-emarsys-wrapper/ios/**",
 				);
 				INFOPLIST_FILE = EmarsysAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -837,12 +927,16 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30FE5381E63B9E746C16B7DE /* Pods-EmarsysAppTests.release.xcconfig */;
+			baseConfigurationReference = 7171BEE0F962BFA8C5B26993 /* Pods-EmarsysApp-EmarsysAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 424XYUJV68;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-emarsys-wrapper/ios/**",
+				);
 				INFOPLIST_FILE = EmarsysAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -861,7 +955,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1E3C074046C3A1830AC32B8A /* Pods-EmarsysApp.debug.xcconfig */;
+			baseConfigurationReference = 4C9609740C1073844DDB1E3D /* Pods-EmarsysApp.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -870,6 +964,10 @@
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 424XYUJV68;
 				FRAMEWORK_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-emarsys-wrapper/ios/**",
+				);
 				INFOPLIST_FILE = EmarsysApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -885,7 +983,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56AE6EE8BADC384501260456 /* Pods-EmarsysApp.release.xcconfig */;
+			baseConfigurationReference = 7A03DBA5B504EFD9D67E4F23 /* Pods-EmarsysApp.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -893,6 +991,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 424XYUJV68;
 				FRAMEWORK_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-emarsys-wrapper/ios/**",
+				);
 				INFOPLIST_FILE = EmarsysApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -908,7 +1010,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B0E4EC26D44385F70EA2DFE3 /* Pods-EmarsysApp-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 292A2220325B9DCBB747F254 /* Pods-EmarsysApp-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -922,6 +1024,10 @@
 				DEVELOPMENT_TEAM = 424XYUJV68;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-emarsys-wrapper/ios/**",
+				);
 				INFOPLIST_FILE = "EmarsysApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -934,13 +1040,13 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
 			};
 			name = Debug;
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5A22614B173109964595995D /* Pods-EmarsysApp-tvOS.release.xcconfig */;
+			baseConfigurationReference = 299C2AFBC0AC610A37811B70 /* Pods-EmarsysApp-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -954,6 +1060,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 424XYUJV68;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-emarsys-wrapper/ios/**",
+				);
 				INFOPLIST_FILE = "EmarsysApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -966,13 +1076,13 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
 			};
 			name = Release;
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55583403D589072E499A5236 /* Pods-EmarsysApp-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 5619541E278F68359AF152DA /* Pods-EmarsysApp-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -984,6 +1094,10 @@
 				DEVELOPMENT_TEAM = 424XYUJV68;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-emarsys-wrapper/ios/**",
+				);
 				INFOPLIST_FILE = "EmarsysApp-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1002,7 +1116,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57741017F73014EB1B864C14 /* Pods-EmarsysApp-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = DE895FD669EC817A64E0000D /* Pods-EmarsysApp-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1014,6 +1128,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 424XYUJV68;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-emarsys-wrapper/ios/**",
+				);
 				INFOPLIST_FILE = "EmarsysApp-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1032,7 +1150,7 @@
 		};
 		569DC317240FDBE100D095AC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 739E698C46307D6ED0EF5089 /* Pods-EmarsysAppNotificationService.debug.xcconfig */;
+			baseConfigurationReference = 380BE37F7709078278D892AC /* Pods-EmarsysAppNotificationService.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1045,7 +1163,7 @@
 				DEVELOPMENT_TEAM = 424XYUJV68;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = EmarsysAppNotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1058,7 +1176,7 @@
 		};
 		569DC318240FDBE100D095AC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6C6C1B2944F8BE3FAD207D3 /* Pods-EmarsysAppNotificationService.release.xcconfig */;
+			baseConfigurationReference = 50F3B1ED0E37F55F78BF1808 /* Pods-EmarsysAppNotificationService.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1072,7 +1190,7 @@
 				DEVELOPMENT_TEAM = 424XYUJV68;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = EmarsysAppNotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.react.example.EmarsysApp.EmarsysAppNotificationService;
@@ -1114,6 +1232,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1129,7 +1248,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1168,6 +1287,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1176,7 +1296,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
