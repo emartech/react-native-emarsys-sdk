@@ -556,7 +556,7 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void changeApplicationCode(@NonNull final String applicationCode, final Promise promise) {
+    public void changeApplicationCode(@Nullable final String applicationCode, final Promise promise) {
         try {
             Emarsys.getConfig().changeApplicationCode(applicationCode, new CompletionListener() {
                 @Override
