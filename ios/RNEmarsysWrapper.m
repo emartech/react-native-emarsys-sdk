@@ -477,7 +477,7 @@ RCT_EXPORT_METHOD(trackDeepLink:(NSString * _Nonnull)userActivity resolver:(RCTP
     }
 }
 
-RCT_EXPORT_METHOD(changeApplicationCode:(NSString * _Nonnull)applicationCode resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
+RCT_EXPORT_METHOD(changeApplicationCode:(NSString * _Nullable)applicationCode resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys.config changeApplicationCode:applicationCode completionBlock:^(NSError * _Nullable error) {
             if (NULL != error) {
