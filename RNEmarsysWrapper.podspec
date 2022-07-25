@@ -1,6 +1,6 @@
 require 'json'
 
-package = JSON.parse(File.read(File.join(__dir__, '..', 'package.json')))
+package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 
 Pod::Spec.new do |s|
 	s.name          = "RNEmarsysWrapper"
@@ -18,6 +18,6 @@ Pod::Spec.new do |s|
 	s.source_files  = "ios/*.{h,m}"
 	s.requires_arc  = true
 	s.dependency "React", ">= 0.67.3"
-	s.dependency "EmarsysSDK", "~> 3.2.2"
+	s.dependency "EmarsysSDK", "~> 3.2.3"
 
 end
