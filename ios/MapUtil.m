@@ -153,70 +153,61 @@
 }
 
 +(NSArray<EMSRecommendationFilter *> *)mapToRecommendationFilter:(NSDictionary *)map {
-    NSMutableArray<EMSRecommendationFilter *> *filters = [NSMutableArray array];
     NSString *type = @"";
     NSString *field = @"";
-    NSString *comprasion = @"";
+    NSString *comparison = @"";
     NSString *expectation = @"";
-    
     NSMutableArray<NSString *> *expectations = [NSMutableArray array];
-    
-    EMSRecommendationFilter *filter = [[EMSRecommendationFilter alloc] init];
     
     if ([map objectForKey:@"type"]) {
         type = [map objectForKey:@"type"];
     }
-    else if ([map objectForKey:@"field"]) {
-        type = [map objectForKey:@"field"];
+    if ([map objectForKey:@"field"]) {
+        field = [map objectForKey:@"field"];
     }
-    else if ([map objectForKey:@"comprasion"]) {
-        type = [map objectForKey:@"comprasion"];
+    if ([map objectForKey:@"comparison"]) {
+        comparison = [map objectForKey:@"comparison"];
     }
     
-    if ([map objectForKey:@"expectations"] && [[map objectForKey:@"expectations"] isMemberOfClass:[NSArray class]]) {
+    if ([[map objectForKey:@"expectations"] isKindOfClass:[NSString class]]) {
+        expectation = [map objectForKey:@"expectations"];
+    } else if ([[map objectForKey:@"expectations"] isKindOfClass:[NSArray class]]) {
         NSArray *expArray = [map mutableArrayValueForKey: @"expectations"];
         for (NSString *item in expArray) {
-            expectation = item;
             [expectations addObject:item];
         }
     }
     
-    if ([map objectForKey:@"expectations"] && [[map objectForKey:@"expectations"] isMemberOfClass:[NSArray class]]) {
-        NSArray *expArray = [map mutableArrayValueForKey: @"expectations"];
-        for (NSString *item in expArray) {
-            expectation = item;
-            [expectations addObject:item];
-        }
-    }
+    EMSRecommendationFilter *filter = [[EMSRecommendationFilter alloc] init];
     
-    if ([type caseInsensitiveCompare:@"include"]) {
-        if ([comprasion caseInsensitiveCompare:@"IS"]) {
+    if ([type caseInsensitiveCompare:@"include"] == NSOrderedSame) {
+        if ([comparison caseInsensitiveCompare:@"IS"] == NSOrderedSame) {
             filter = [EMSRecommendationFilter includeFilterWithField:(field) isValue: (expectation)];
         }
-        else if ([comprasion caseInsensitiveCompare:@"IN"]) {
+        else if ([comparison caseInsensitiveCompare:@"IN"] == NSOrderedSame) {
             filter = [EMSRecommendationFilter includeFilterWithField:(field) inValues: (expectations)];
         }
-        else if ([comprasion caseInsensitiveCompare:@"HAS"]) {
+        else if ([comparison caseInsensitiveCompare:@"HAS"] == NSOrderedSame) {
             filter = [EMSRecommendationFilter includeFilterWithField:(field) hasValue: (expectation)];
         }
-        else if ([comprasion caseInsensitiveCompare:@"OVERLAPS"]) {
+        else if ([comparison caseInsensitiveCompare:@"OVERLAPS"] == NSOrderedSame) {
             filter = [EMSRecommendationFilter includeFilterWithField:(field) overlapsValues: (expectations)];
         }
         else {
             NSLog(@"Not correct comparison value!");
         }
     }
-    else if ([type caseInsensitiveCompare:@"exclude"]) {
-        if ([comprasion caseInsensitiveCompare:@"IS"]) {
+    else if ([type caseInsensitiveCompare:@"exclude"] == NSOrderedSame) {
+        if ([comparison caseInsensitiveCompare:@"IS"] == NSOrderedSame) {
             filter = [EMSRecommendationFilter excludeFilterWithField:(field) isValue: (expectation)];
         }
-        else if ([comprasion caseInsensitiveCompare:@"IN"]) {
+        else if ([comparison caseInsensitiveCompare:@"IN"] == NSOrderedSame) {
             filter = [EMSRecommendationFilter excludeFilterWithField:(field) inValues: (expectations)];
         }
-        else if ([comprasion caseInsensitiveCompare:@"HAS"]) {
+        else if ([comparison caseInsensitiveCompare:@"HAS"] == NSOrderedSame) {
             filter = [EMSRecommendationFilter excludeFilterWithField:(field) hasValue: (expectation)];
         }
-        else if ([comprasion caseInsensitiveCompare:@"OVERLAPS"]) {
+        else if ([comparison caseInsensitiveCompare:@"OVERLAPS"] == NSOrderedSame) {
             filter = [EMSRecommendationFilter excludeFilterWithField:(field) overlapsValues: (expectations)];
         }
         else {
@@ -225,6 +216,8 @@
     } else {
         NSLog(@"Not correct type");
     }
+    
+    NSMutableArray<EMSRecommendationFilter *> *filters = [NSMutableArray array];
     
     if (filter != nil) {
         [filters addObject: filter];
