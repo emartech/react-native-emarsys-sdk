@@ -11,8 +11,6 @@ target 'EmarsysApp' do
     :hermes_enabled => false
   )
 
-  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
-
   # Enables Flipper.
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and

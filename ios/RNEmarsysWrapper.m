@@ -661,6 +661,21 @@ RCT_EXPORT_METHOD(removeTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonn
     }
 }
 
+RCT_EXPORT_METHOD(geofenceEnable:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        [Emarsys.geofence enableWithCompletionBlock:^(NSError * _Nullable error) {
+            if (NULL != error) {
+                reject(@"RNEmarsysWrapper", @"geofence.enable: ", error);
+            } else {
+                resolve([NSNumber numberWithBool:YES]);
+            }
+        }];
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
 - (NSArray<NSString *> *)supportedEvents {
     return @[@"handleEvent"];
 }

@@ -813,6 +813,20 @@ const Emarsys = {
 	getSdkVersion() {
 		return RNEmarsysWrapper.getSdkVersion()
 	},
+
+	/* Geofence **************************************************************************************************************************************/
+
+	geofence: {
+		/**
+		 * @desc Activates Geofence
+		 * @return bool - success or failure
+		 */
+		enable() {
+			return RNEmarsysWrapper.geofenceEnable()
+		},
+
+	},
+
 };
 
 export default Emarsys;
