@@ -57,8 +57,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Geofence</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Geofence</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

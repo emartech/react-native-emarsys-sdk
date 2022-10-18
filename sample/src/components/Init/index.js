@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
 		maxWidth: 420,
 	},
 	buttonTrackCustomEvent: {
+		marginTop: 24, 
 		width: "100%", 
 		maxWidth: 420,
 	},	

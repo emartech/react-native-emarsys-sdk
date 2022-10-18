@@ -9,7 +9,7 @@
 		"start": "node node_modules/react-native/local-cli/cli.js start",
 		"dev": "react-native start --reset-cache",
 		"dev:apk": "react-native run-android",
-		"dev:ipa": "react-native run-ios --simulator='iPhone 8'",
+		"dev:ipa": "react-native run-ios --simulator='iPhone 14'",
 		"log:apk": "react-native log-android",
 		"log:ipa": "react-native log-ios",
 		"clean:apk": "cd android && ./gradlew clean && gradle clean",

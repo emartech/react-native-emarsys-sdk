@@ -38,6 +38,13 @@ const styles = StyleSheet.create({
 		paddingLeft: 12, 
 		paddingRight: 12, 
 	},
+	hr: {
+		marginTop: 24, 
+		width: "100%",
+		height: 1,		
+		maxWidth: 420,
+		backgroundColor: "#595959", 
+	},
 	buttonPause: {
 		width: "100%", 
 		maxWidth: 420,
@@ -51,6 +58,11 @@ const styles = StyleSheet.create({
 		width: "100%", 
 		maxWidth: 420,
 	},	
+	button: {
+		marginTop: 24, 
+		width: "100%", 
+		maxWidth: 420,
+	},
 })
 
 @inject("auth")
@@ -98,6 +110,8 @@ export default class InApp extends Component {
 		}
 	}	
 	
+	// MARK: - Inbox *************************************************************************************************************
+
 	async wrapperFetchMessages() {
 		try {
 			let inboxData = await Emarsys.inbox.fetchMessages()
@@ -172,7 +186,10 @@ export default class InApp extends Component {
 								}}
 							/>
 						</View>		
-						<View style={ styles.buttonFetchMessages }>
+
+						<View style={ styles.hr } />
+
+						<View style={ styles.button }>
 							 <Button
 								title="Fetch Inbox Messages"
 								color="#04446E"
@@ -181,7 +198,7 @@ export default class InApp extends Component {
 								}}
 							/>
 						</View>	
-						<View style={ styles.buttonAddTag }>
+						<View style={ styles.button }>
 							 <Button
 								title="Add Tag"
 								color="#04446E"
@@ -190,7 +207,7 @@ export default class InApp extends Component {
 								}}
 							/>
 						</View>	
-						<View style={ styles.buttonRemoveTag }>
+						<View style={ styles.button }>
 							 <Button
 								title="Remove Tag"
 								color="#04446E"

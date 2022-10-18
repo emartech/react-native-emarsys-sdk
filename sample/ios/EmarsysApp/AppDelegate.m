@@ -6,6 +6,7 @@
 
 #import <EmarsysSDK/Emarsys.h>
 #import <EmarsysSDK/EMSConfig.h>
+#import <EmarsysSDK/EMSLogLevel.h>
 #import <RNEmarsysWrapper/RNEmarsysEventHandler.h>
 
 #import <React/RCTBridge.h>
@@ -45,6 +46,7 @@ static void InitializeFlipper(UIApplication *application) {
   EMSConfig *config = [EMSConfig makeWithBuilder:^(EMSConfigBuilder * builder) {
     [builder setMobileEngageApplicationCode:@"EMS25-20071"];
     [builder setMerchantId:@"1DF86BF95CBE8F19"];
+    [builder enableConsoleLogLevels:@[EMSLogLevel.trace, EMSLogLevel.debug, EMSLogLevel.info, EMSLogLevel.warn, EMSLogLevel.error, EMSLogLevel.basic]];
   }];
   
   [Emarsys setupWithConfig:config];
