@@ -818,11 +818,62 @@ const Emarsys = {
 
 	geofence: {
 		/**
-		 * @desc Activates Geofence
+		 * @desc The requestAlwaysAuthorization method is responsible for asking the required permissions from the user.
+		 * @return bool - success or failure
+		 */
+		requestAlwaysAuthorization() {
+			return RNEmarsysWrapper.requestAlwaysAuthorization()
+		},
+
+		/**
+		 * @desc Activate Geofence
 		 * @return bool - success or failure
 		 */
 		enable() {
 			return RNEmarsysWrapper.geofenceEnable()
+		},
+
+		/**
+		 * @desc Disable Geofence
+		 * @return bool - success or failure
+		 */
+		disable() {
+			return RNEmarsysWrapper.geofenceDisable()
+		},
+
+		/**
+		 * @desc Return if the geofencing is currently enabled or not
+		 * @return bool - geofencing is currently enabled or not
+		 */
+		isEnabled() {
+			return RNEmarsysWrapper.geofenceIsEnabled()
+		},
+
+		/**
+		 * @desc Return the initialEnterTriggerEnabled current value
+		 * @return bool - initialEnterTriggerEnabled current value
+		 */
+		 initialEnterTriggerEnabled() {
+			return RNEmarsysWrapper.geofenceInitialEnterTriggerEnabled()
+		},
+
+		/**
+		 * @desc When initialEnterTriggerEnabled is true, 
+		 *   Emarsys SDK will trigger all the affected geofences with Enter type triggers at the moment 
+		 *   when the geofence is enabled if the device is already inside that geofence
+		 * @param bool enabled - initialEnterTriggerEnabled value for change
+		 * @return bool - success or failure
+		*/
+		setInitialEnterTriggerEnabled(enabled) {
+			return RNEmarsysWrapper.geofenceSetInitialEnterTriggerEnabled(enabled)
+		},
+
+		/**
+		 * @desc Access the registered geofences from the device
+		 * @return array - array of registered geofences
+		*/
+		registeredGeofences() {
+			return RNEmarsysWrapper.registeredGeofences()
 		},
 
 	},

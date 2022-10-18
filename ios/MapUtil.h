@@ -7,4 +7,5 @@
 + (EMSProduct *)mapToProduct:(NSDictionary *)object;
 + (NSArray<EMSRecommendationFilter *> *)mapToRecommendationFilter:(NSDictionary *)map;
 + (NSMutableDictionary *)convertMessageToMap:(EMSMessage *)message;
++ (NSMutableDictionary *)convertGeofenceToMap:(EMSGeofence *)geofence;
 @end

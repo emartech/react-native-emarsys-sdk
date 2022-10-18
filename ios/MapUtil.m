@@ -7,6 +7,9 @@
 #import "EMSProduct+Emarsys.h"
 #import "EMSProductBuilder.h"
 
+#import "EMSGeofence.h"
+#import "EMSGeofenceTrigger.h"
+
 #import "RNEmarsysWrapper.h"
 
 #import "LogicParser.h"
@@ -241,6 +244,38 @@
     [map setObject: message.expiresAt ?: @"" forKey: @"expiresAt"];
     [map setObject: message.tags ?: @"" forKey: @"tags"];
     [map setObject: message.properties ?: @"" forKey: @"properties"];
+    
+    return map;
+}
+
++ (NSMutableDictionary *)convertGeofenceToMap:(EMSGeofence *)geofence {
+    
+    NSMutableDictionary<NSString *, NSObject *> *map = [[NSMutableDictionary alloc] init];
+    
+    [map setObject: geofence.id forKey: @"geofenceId"];
+    [map setObject: @(geofence.lat) forKey: @"lat"];
+    [map setObject: @(geofence.lon) forKey: @"lon"];
+    [map setObject: @(geofence.r) forKey: @"r"];
+    [map setObject: @(geofence.waitInterval) forKey: @"waitInterval"];
+    
+    NSMutableArray *recTriggers = [NSMutableArray array];
+    for (EMSGeofenceTrigger *trigger in geofence.triggers) {
+        NSMutableDictionary<NSString *, NSString *> *recTrigger = [MapUtil convertGeofenceTriggerToMap:trigger];
+        [recTriggers addObject:recTrigger];
+    }
+    [map setObject: recTriggers forKey: @"triggers"];
+    
+    return map;
+}
+
++ (NSMutableDictionary *)convertGeofenceTriggerToMap:(EMSGeofenceTrigger *)trigger {
+    
+    NSMutableDictionary<NSString *, NSObject *> *map = [[NSMutableDictionary alloc] init];
+    
+    [map setObject: trigger.id forKey: @"triggerId"];
+    [map setObject: trigger.type forKey: @"type"];
+    [map setObject: @(trigger.loiteringDelay) forKey: @"loiteringDelay"];
+    [map setObject: trigger.action forKey: @"action"];
     
     return map;
 }

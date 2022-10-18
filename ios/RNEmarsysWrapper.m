@@ -61,21 +61,9 @@ static NSDictionary<NSString *,NSObject *> *_body = nil;
     return dispatch_get_main_queue();
 }
 
-- (void)resolveProducts:(NSArray * _Nonnull)products resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject methodName: (NSString *) methodName withError: (NSError *) error {
-    if (products) {
-        NSMutableArray *recProducts = [NSMutableArray array];
-        for (EMSProduct *product in products) {
-            NSMutableDictionary<NSString *, NSString *> *recProduct = [MapUtil convertProductToMap:product];
-            [recProduct jsonStringWithPrettyPrint:true];
-            [recProducts addObject:recProduct];
-        }
-        resolve(recProducts);
-    } else {
-        reject(@"RNEmarsysWrapper", [NSString stringWithFormat:@"%@", methodName], error);
-    }
-}
-
 RCT_EXPORT_MODULE()
+
+// MARK: - Setup
 
 RCT_EXPORT_METHOD(setContact:(NSNumber * _Nonnull)contactFieldId contactFieldValue:(NSString * _Nonnull)contactFieldValue resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
@@ -167,6 +155,12 @@ RCT_EXPORT_METHOD(clearPushToken:(RCTPromiseResolveBlock)resolve rejecter:(RCTPr
     }
 }
 
+RCT_EXPORT_METHOD(setEventHandler) {
+    
+}
+
+// MARK: - In-app
+
 RCT_EXPORT_METHOD(pause:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys.inApp pause];
@@ -187,9 +181,7 @@ RCT_EXPORT_METHOD(resume:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRej
     }
 }
 
-RCT_EXPORT_METHOD(setEventHandler) {
-    
-}
+// MARK: - Predict
 
 RCT_EXPORT_METHOD(trackCart:(NSArray * _Nonnull)cartItems resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
@@ -253,6 +245,19 @@ RCT_EXPORT_METHOD(trackTag:(NSString * _Nonnull)tag withAttributes:(NSDictionary
     }
 }
 
+- (void)resolveProducts:(NSArray * _Nonnull)products resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject methodName: (NSString *) methodName withError: (NSError *) error {
+    if (products) {
+        NSMutableArray *recProducts = [NSMutableArray array];
+        for (EMSProduct *product in products) {
+            NSMutableDictionary<NSString *, NSString *> *recProduct = [MapUtil convertProductToMap:product];
+            [recProduct jsonStringWithPrettyPrint:true];
+            [recProducts addObject:recProduct];
+        }
+        resolve(recProducts);
+    } else {
+        reject(@"RNEmarsysWrapper", [NSString stringWithFormat:@"%@", methodName], error);
+    }
+}
 
 RCT_EXPORT_METHOD(recommendProducts:(NSString * _Nonnull)logic resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
@@ -469,6 +474,8 @@ RCT_EXPORT_METHOD(trackRecommendationClick:(NSDictionary * _Nonnull)product reso
     }
 }
 
+// MARK: - Config
+
 RCT_EXPORT_METHOD(trackDeepLink:(NSString * _Nonnull)userActivity resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         if ( userActivity != nil ) {
@@ -600,6 +607,8 @@ RCT_EXPORT_METHOD(getPushToken:(RCTPromiseResolveBlock)resolve rejecter:(RCTProm
     return [token copy];
 }
 
+// MARK: - Inbox
+
 - (void) resolveMessages:(NSArray * _Nonnull)messages resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject methodName: (NSString *) methodName withError: (NSError *) error {
     if (messages) {
         NSMutableArray *recMessages = [NSMutableArray array];
@@ -661,6 +670,18 @@ RCT_EXPORT_METHOD(removeTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonn
     }
 }
 
+// MARK: - Geofence
+
+RCT_EXPORT_METHOD(requestAlwaysAuthorization:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        [Emarsys.geofence requestAlwaysAuthorization];
+        resolve([NSNumber numberWithBool:YES]);
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
 RCT_EXPORT_METHOD(geofenceEnable:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         [Emarsys.geofence enableWithCompletionBlock:^(NSError * _Nullable error) {
@@ -675,6 +696,68 @@ RCT_EXPORT_METHOD(geofenceEnable:(RCTPromiseResolveBlock)resolve rejecter:(RCTPr
         reject(exception.name, exception.reason, nil);
     }
 }
+
+RCT_EXPORT_METHOD(geofenceDisable:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        [Emarsys.geofence disable];
+        resolve([NSNumber numberWithBool:YES]);
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
+RCT_EXPORT_METHOD(geofenceIsEnabled:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        bool isEnabled = [Emarsys.geofence isEnabled];
+        resolve([NSNumber numberWithBool:isEnabled]);
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
+RCT_EXPORT_METHOD(geofenceInitialEnterTriggerEnabled:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        bool isEnabled = [Emarsys.geofence initialEnterTriggerEnabled];
+        resolve([NSNumber numberWithBool:isEnabled]);
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
+RCT_EXPORT_METHOD(geofenceSetInitialEnterTriggerEnabled:(BOOL)enabled resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        Emarsys.geofence.initialEnterTriggerEnabled = enabled;
+        resolve([NSNumber numberWithBool:YES]);
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
+RCT_EXPORT_METHOD(registeredGeofences:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        NSArray<EMSGeofence *> *registeredGeofences = Emarsys.geofence.registeredGeofences;
+        [self resolveGeofences:registeredGeofences resolver:resolve];
+    }
+    @catch (NSException *exception) {
+        reject(exception.name, exception.reason, nil);
+    }
+}
+
+- (void) resolveGeofences:(NSArray * _Nonnull)geofences resolver:(RCTPromiseResolveBlock)resolve {
+    NSMutableArray *recGeofences = [NSMutableArray array];
+    for (EMSGeofence *geofence in geofences) {
+        NSMutableDictionary<NSString *, NSString *> *recGeofence = [MapUtil convertGeofenceToMap:geofence];
+        [recGeofence jsonStringWithPrettyPrint:true];
+        [recGeofences addObject:recGeofence];
+    }
+    resolve(recGeofences);
+}
+
+// MARK: -
 
 - (NSArray<NSString *> *)supportedEvents {
     return @[@"handleEvent"];
