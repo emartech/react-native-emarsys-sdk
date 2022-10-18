@@ -819,10 +819,11 @@ const Emarsys = {
 	geofence: {
 		/**
 		 * @desc The requestAlwaysAuthorization method is responsible for asking the required permissions from the user.
+		 *   Only available on iOS.
 		 * @return bool - success or failure
 		 */
 		requestAlwaysAuthorization() {
-			return RNEmarsysWrapper.requestAlwaysAuthorization()
+			return Platform.OS === 'ios' ? RNEmarsysWrapper.requestAlwaysAuthorization() : "Not supported on Android"
 		},
 
 		/**
@@ -830,7 +831,7 @@ const Emarsys = {
 		 * @return bool - success or failure
 		 */
 		enable() {
-			return RNEmarsysWrapper.geofenceEnable()
+			return Platform.OS === 'ios' ? RNEmarsysWrapper.geofenceEnable() : "Not supported on Android"
 		},
 
 		/**
@@ -838,7 +839,7 @@ const Emarsys = {
 		 * @return bool - success or failure
 		 */
 		disable() {
-			return RNEmarsysWrapper.geofenceDisable()
+			return Platform.OS === 'ios' ? RNEmarsysWrapper.geofenceDisable() : "Not supported on Android"
 		},
 
 		/**
@@ -846,7 +847,7 @@ const Emarsys = {
 		 * @return bool - geofencing is currently enabled or not
 		 */
 		isEnabled() {
-			return RNEmarsysWrapper.geofenceIsEnabled()
+			return Platform.OS === 'ios' ? RNEmarsysWrapper.geofenceIsEnabled() : "Not supported on Android"
 		},
 
 		/**
@@ -854,7 +855,7 @@ const Emarsys = {
 		 * @return bool - initialEnterTriggerEnabled current value
 		 */
 		 initialEnterTriggerEnabled() {
-			return RNEmarsysWrapper.geofenceInitialEnterTriggerEnabled()
+			return Platform.OS === 'ios' ? RNEmarsysWrapper.geofenceInitialEnterTriggerEnabled() : "Not supported on Android"
 		},
 
 		/**
@@ -865,7 +866,7 @@ const Emarsys = {
 		 * @return bool - success or failure
 		*/
 		setInitialEnterTriggerEnabled(enabled) {
-			return RNEmarsysWrapper.geofenceSetInitialEnterTriggerEnabled(enabled)
+			return Platform.OS === 'ios' ? RNEmarsysWrapper.geofenceSetInitialEnterTriggerEnabled(enabled) : "Not supported on Android"
 		},
 
 		/**
@@ -873,7 +874,7 @@ const Emarsys = {
 		 * @return array - array of registered geofences
 		*/
 		registeredGeofences() {
-			return RNEmarsysWrapper.registeredGeofences()
+			return Platform.OS === 'ios' ? RNEmarsysWrapper.registeredGeofences() : "Not supported on Android"
 		},
 
 	},
