@@ -197,17 +197,6 @@ export default class InApp extends Component {
 		}
 	}
 
-	async wrapperInitialEnterTriggerEnabled() {
-		try {
-			let result = await Emarsys.geofence.initialEnterTriggerEnabled()
-			console.log("geofence.initialEnterTrigger Done: ", result)
-			showAlert( "geofence.initialEnterTrigger", "geofence.initialEnterTrigger Done.")
-		} catch (e) {
-			console.log("geofence.initialEnterTrigger Fail: ", e)
-			showAlert( "geofence.initialEnterTrigger", "geofence.initialEnterTrigger Fail: ", e )
-		}
-	}
-
 	async wrapperSetInitialEnterTriggerEnabled() {
 		try {
 			let result = await Emarsys.geofence.setInitialEnterTriggerEnabled(true)
@@ -331,15 +320,6 @@ export default class InApp extends Component {
 								color="#04446E"
 								onPress={() => {
 									this.wrapperGeofenceIsEnabled()
-								}}
-							/>
-						</View>
-						<View style={ styles.button }>
-							 <Button
-								title="Initial Enter Trigger Enabled"
-								color="#04446E"
-								onPress={() => {
-									this.wrapperInitialEnterTriggerEnabled()
 								}}
 							/>
 						</View>

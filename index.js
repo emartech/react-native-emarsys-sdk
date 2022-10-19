@@ -851,17 +851,10 @@ const Emarsys = {
 		},
 
 		/**
-		 * @desc Return the initialEnterTriggerEnabled current value
-		 * @return bool - initialEnterTriggerEnabled current value
-		 */
-		 initialEnterTriggerEnabled() {
-			return Platform.OS === 'ios' ? RNEmarsysWrapper.geofenceInitialEnterTriggerEnabled() : "Not supported on Android"
-		},
-
-		/**
 		 * @desc When initialEnterTriggerEnabled is true, 
 		 *   Emarsys SDK will trigger all the affected geofences with Enter type triggers at the moment 
-		 *   when the geofence is enabled if the device is already inside that geofence
+		 *   when the geofence is enabled if the device is already inside that geofence.
+		 *   By default, this value is set to false.
 		 * @param bool enabled - initialEnterTriggerEnabled value for change
 		 * @return bool - success or failure
 		*/

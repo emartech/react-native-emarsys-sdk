@@ -717,16 +717,6 @@ RCT_EXPORT_METHOD(geofenceIsEnabled:(RCTPromiseResolveBlock)resolve rejecter:(RC
     }
 }
 
-RCT_EXPORT_METHOD(geofenceInitialEnterTriggerEnabled:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    @try {
-        bool isEnabled = [Emarsys.geofence initialEnterTriggerEnabled];
-        resolve([NSNumber numberWithBool:isEnabled]);
-    }
-    @catch (NSException *exception) {
-        reject(exception.name, exception.reason, nil);
-    }
-}
-
 RCT_EXPORT_METHOD(geofenceSetInitialEnterTriggerEnabled:(BOOL)enabled resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         Emarsys.geofence.initialEnterTriggerEnabled = enabled;
