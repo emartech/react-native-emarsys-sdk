@@ -128,7 +128,7 @@ export default class Push extends Component {
 								}}
 							/>
 						</View>	
-						<View style={ styles.buttonPushToken }>
+						<View style={ styles.buttonSetPushToken }>
 							 <Button
 								title="Push Token"
 								color="#076bae"

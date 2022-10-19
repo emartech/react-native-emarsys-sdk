@@ -38,6 +38,13 @@ const styles = StyleSheet.create({
 		paddingLeft: 12, 
 		paddingRight: 12, 
 	},
+	hr: {
+		marginTop: 24, 
+		width: "100%",
+		height: 1,		
+		maxWidth: 420,
+		backgroundColor: "#595959", 
+	},
 	buttonPause: {
 		width: "100%", 
 		maxWidth: 420,
@@ -51,6 +58,11 @@ const styles = StyleSheet.create({
 		width: "100%", 
 		maxWidth: 420,
 	},	
+	button: {
+		marginTop: 24, 
+		width: "100%", 
+		maxWidth: 420,
+	},
 })
 
 @inject("auth")
@@ -98,6 +110,8 @@ export default class InApp extends Component {
 		}
 	}	
 	
+	// MARK: - Inbox *************************************************************************************************************
+
 	async wrapperFetchMessages() {
 		try {
 			let inboxData = await Emarsys.inbox.fetchMessages()
@@ -137,6 +151,74 @@ export default class InApp extends Component {
 		}
 	}		
 
+	// MARK: - Geofence *************************************************************************************************************
+
+	async wrapperRequestAlwaysAuthorization() {
+		try {
+			let result = await Emarsys.geofence.requestAlwaysAuthorization()
+			console.log("requestAlwaysAuthorization Done: ", result)
+			showAlert( "requestAlwaysAuthorization", "requestAlwaysAuthorization Done.")
+		} catch (e) {
+			console.log("requestAlwaysAuthorization Fail: ", e)
+			showAlert( "requestAlwaysAuthorization", "requestAlwaysAuthorization Fail: ", e )
+		}
+	}
+
+	async wrapperGeofenceEnable() {
+		try {
+			let result = await Emarsys.geofence.enable()
+			console.log("geofence.enable Done: ", result)
+			showAlert( "geofence.enable", "geofence.enable Done.")
+		} catch (e) {
+			console.log("geofence.enable Fail: ", e)
+			showAlert( "geofence.enable", "geofence.enable Fail: ", e )
+		}
+	}
+
+	async wrapperGeofenceDisable() {
+		try {
+			let result = await Emarsys.geofence.disable()
+			console.log("geofence.disable Done: ", result)
+			showAlert( "geofence.disable", "geofence.disable Done.")
+		} catch (e) {
+			console.log("geofence.disable Fail: ", e)
+			showAlert( "geofence.disable", "geofence.disable Fail: ", e )
+		}
+	}
+
+	async wrapperGeofenceIsEnabled() {
+		try {
+			let result = await Emarsys.geofence.isEnabled()
+			console.log("geofence.isEnabled Done: ", result)
+			showAlert( "geofence.isEnabled", "geofence.isEnabled Done.")
+		} catch (e) {
+			console.log("geofence.isEnabled Fail: ", e)
+			showAlert( "geofence.isEnabled", "geofence.isEnabled Fail: ", e )
+		}
+	}
+
+	async wrapperSetInitialEnterTriggerEnabled() {
+		try {
+			let result = await Emarsys.geofence.setInitialEnterTriggerEnabled(true)
+			console.log("geofence.setInitialEnterTrigger Done: ", result)
+			showAlert( "geofence.setInitialEnterTrigger", "geofence.setInitialEnterTrigger Done.")
+		} catch (e) {
+			console.log("geofence.setInitialEnterTrigger Fail: ", e)
+			showAlert( "geofence.setInitialEnterTrigger", "geofence.setInitialEnterTrigger Fail: ", e )
+		}
+	}
+
+	async wrapperRegisteredGeofences() {
+		try {
+			let result = await Emarsys.geofence.registeredGeofences()
+			console.log("geofence.registeredGeofences Done: ", result)
+			showAlert( "geofence.registeredGeofences", "geofence.registeredGeofences Done.")
+		} catch (e) {
+			console.log("geofence.registeredGeofences Fail: ", e)
+			showAlert( "geofence.registeredGeofences", "geofence.registeredGeofences Fail: ", e )
+		}
+	}
+
 	render() {
 		return (
 			<SafeAreaView style={styles.inbase}>
@@ -172,7 +254,10 @@ export default class InApp extends Component {
 								}}
 							/>
 						</View>		
-						<View style={ styles.buttonFetchMessages }>
+
+						<View style={ styles.hr } />
+
+						<View style={ styles.button }>
 							 <Button
 								title="Fetch Inbox Messages"
 								color="#04446E"
@@ -181,7 +266,7 @@ export default class InApp extends Component {
 								}}
 							/>
 						</View>	
-						<View style={ styles.buttonAddTag }>
+						<View style={ styles.button }>
 							 <Button
 								title="Add Tag"
 								color="#04446E"
@@ -190,7 +275,7 @@ export default class InApp extends Component {
 								}}
 							/>
 						</View>	
-						<View style={ styles.buttonRemoveTag }>
+						<View style={ styles.button }>
 							 <Button
 								title="Remove Tag"
 								color="#04446E"
@@ -199,6 +284,63 @@ export default class InApp extends Component {
 								}}
 							/>
 						</View>				
+
+						<View style={ styles.hr } />
+
+						<View style={ styles.button }>
+							 <Button
+								title="Request Always Authorization"
+								color="#04446E"
+								onPress={() => {
+									this.wrapperRequestAlwaysAuthorization()
+								}}
+							/>
+						</View>
+						<View style={ styles.button }>
+							 <Button
+								title="Enable Geofence"
+								color="#04446E"
+								onPress={() => {
+									this.wrapperGeofenceEnable()
+								}}
+							/>
+						</View>
+						<View style={ styles.button }>
+							 <Button
+								title="Disable Geofence"
+								color="#04446E"
+								onPress={() => {
+									this.wrapperGeofenceDisable()
+								}}
+							/>
+						</View>
+						<View style={ styles.button }>
+							 <Button
+								title="Geofence isEnabled"
+								color="#04446E"
+								onPress={() => {
+									this.wrapperGeofenceIsEnabled()
+								}}
+							/>
+						</View>
+						<View style={ styles.button }>
+							 <Button
+								title="Set Initial Enter Trigger Enabled"
+								color="#04446E"
+								onPress={() => {
+									this.wrapperSetInitialEnterTriggerEnabled()
+								}}
+							/>
+						</View>
+						<View style={ styles.button }>
+							 <Button
+								title="Registered Geofences"
+								color="#04446E"
+								onPress={() => {
+									this.wrapperRegisteredGeofences()
+								}}
+							/>
+						</View>
 					</View>
 				</ScrollView>
 			</SafeAreaView>
