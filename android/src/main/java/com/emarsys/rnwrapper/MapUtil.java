@@ -2,6 +2,8 @@ package com.emarsys.rnwrapper;
 
 import android.util.Log;
 
+import com.emarsys.mobileengage.api.geofence.Geofence;
+import com.emarsys.mobileengage.api.geofence.Trigger;
 import com.emarsys.mobileengage.api.inbox.Message;
 import com.emarsys.predict.api.model.Product;
 import com.emarsys.predict.api.model.RecommendationFilter;
@@ -418,4 +420,35 @@ public class MapUtil {
 
 		return map;
 	}
+
+	public static WritableMap convertGeofenceToMap(Geofence geofence) {
+		WritableMap map = Arguments.createMap();
+
+		mapPutNullable(map, "id", geofence.getId());
+		mapPutNullable(map, "lat", geofence.getLat());
+		mapPutNullable(map, "lon", geofence.getLon());
+		mapPutNullable(map, "radius", geofence.getRadius());
+		mapPutNullable(map, "waitInterval", geofence.getWaitInterval());
+
+		WritableArray triggers = Arguments.createArray();
+		for (Trigger trigger : geofence.getTriggers()) {
+			WritableMap recTrigger = MapUtil.convertGeofenceTriggerToMap(trigger);
+			triggers.pushMap(recTrigger);
+		}
+		map.putArray("triggers", triggers);
+
+		return map;
+	}
+
+	public static WritableMap convertGeofenceTriggerToMap(Trigger trigger) {
+		WritableMap map = Arguments.createMap();
+
+		mapPutNullable(map, "id", trigger.getId());
+		mapPutNullable(map, "type", trigger.getType());
+		mapPutNullable(map, "loiteringDelay", trigger.getLoiteringDelay());
+		map.putMap("action", jsonToWritableMap(trigger.getAction()));
+
+		return map;
+	}
+
 }
