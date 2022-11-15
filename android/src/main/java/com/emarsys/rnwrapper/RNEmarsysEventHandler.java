@@ -1,20 +1,14 @@
 package com.emarsys.rnwrapper;
 
-import android.content.Context;
 import android.util.Log;
 
-
 import com.emarsys.Emarsys;
-import com.emarsys.config.EmarsysConfig;
-import com.emarsys.mobileengage.api.event.EventHandler;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
 
 import java.util.LinkedList;

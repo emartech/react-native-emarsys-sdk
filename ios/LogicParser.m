@@ -1,15 +1,8 @@
-#import "Emarsys.h"
-#import "EMSCartItem.h"
-
-#import "EMSLogic.h"
-#import "EMSRecommendationFilter.h"
-
 #import "LogicParser.h"
-#import "ArrayUtil.h"
 
 @implementation LogicParser
 
-+(EMSLogic *)parseLogic:(NSString *)logic {
++ (EMSLogic *)parseLogic:(NSString *)logic {
     EMSLogic *recommendedLogic;
     
     if([logic isEqualToString:@"SEARCH"]) {
@@ -43,7 +36,7 @@
     return recommendedLogic;
 }
 
-+(EMSLogic *)parseLogic:(NSString *)logic variants:(NSArray<NSString *> *)variants  {
++ (EMSLogic *)parseLogic:(NSString *)logic variants:(NSArray<NSString *> *)variants  {
     EMSLogic *recommendedLogic;
     
     if([logic isEqualToString:@"HOME"]) {
@@ -59,12 +52,11 @@
     return recommendedLogic;
 }
 
-+(EMSLogic *)parseLogic:(NSString *)logic cartItems:(NSArray *)cartItems  {
++ (EMSLogic *)parseLogic:(NSString *)logic cartItems:(NSArray *)cartItems  {
     EMSLogic *recommendedLogic;
     
     if([logic isEqualToString:@"CART"]) {
-        NSArray<EMSCartItem *> *items = [ArrayUtil arrayToCartList:cartItems];
-        recommendedLogic = [EMSLogic cartWithCartItems:[items copy]];
+        recommendedLogic = [EMSLogic cartWithCartItems:[cartItems copy]];
     }
     else {
         recommendedLogic = EMSLogic.search;
@@ -73,7 +65,7 @@
     return recommendedLogic;
 }
 
-+(EMSLogic *)parseLogic:(NSString *)logic query:(NSString *)query  {
++ (EMSLogic *)parseLogic:(NSString *)logic query:(NSString *)query  {
     EMSLogic *recommendedLogic;
     
     if([logic isEqualToString:@"SEARCH"]) {

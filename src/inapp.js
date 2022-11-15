@@ -1,6 +1,6 @@
 import { NativeModules } from 'react-native';
 
-const { RNEmarsysWrapper } = NativeModules;
+const { RNEmarsysInAppWrapper } = NativeModules;
 
 const InApp = {
 
@@ -10,7 +10,7 @@ const InApp = {
 		* @return bool - success or failure
 		*/
 	pause() {
-		return RNEmarsysWrapper.pause()
+		return RNEmarsysInAppWrapper.pause()
 	},
 
 	/**
@@ -19,7 +19,7 @@ const InApp = {
 		* @return bool - success or failure
 		*/
 	resume() {
-		return RNEmarsysWrapper.resume()
+		return RNEmarsysInAppWrapper.resume()
 	},
 
 };

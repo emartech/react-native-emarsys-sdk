@@ -1,19 +1,19 @@
 import { NativeModules } from 'react-native';
 
-const { RNEmarsysWrapper } = NativeModules;
+const { RNEmarsysInboxWrapper } = NativeModules;
 
 const Inbox = {
 
 	fetchMessages() {
-		return RNEmarsysWrapper.fetchMessages()
+		return RNEmarsysInboxWrapper.fetchMessages()
 	},
 
 	addTag(tag, messageId) {
-		return RNEmarsysWrapper.addTag(tag, messageId)
+		return RNEmarsysInboxWrapper.addTag(tag, messageId)
 	},
 
 	removeTag(tag, messageId) {
-		return RNEmarsysWrapper.removeTag(tag, messageId)
+		return RNEmarsysInboxWrapper.removeTag(tag, messageId)
 	},
 
 };

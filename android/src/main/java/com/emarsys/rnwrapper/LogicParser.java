@@ -1,12 +1,5 @@
 package com.emarsys.rnwrapper;
 
-import com.emarsys.predict.api.model.CartItem;
-import com.emarsys.predict.api.model.Logic;
-import com.emarsys.predict.api.model.RecommendationLogic;
-import com.facebook.react.bridge.ReadableArray;
-
-import java.util.List;
-
 import static com.emarsys.predict.api.model.RecommendationLogic.ALSO_BOUGHT;
 import static com.emarsys.predict.api.model.RecommendationLogic.CART;
 import static com.emarsys.predict.api.model.RecommendationLogic.CATEGORY;
@@ -15,6 +8,12 @@ import static com.emarsys.predict.api.model.RecommendationLogic.PERSONAL;
 import static com.emarsys.predict.api.model.RecommendationLogic.POPULAR;
 import static com.emarsys.predict.api.model.RecommendationLogic.RELATED;
 import static com.emarsys.predict.api.model.RecommendationLogic.SEARCH;
+
+import com.emarsys.predict.api.model.CartItem;
+import com.emarsys.predict.api.model.Logic;
+import com.emarsys.predict.api.model.RecommendationLogic;
+
+import java.util.List;
 
 public class LogicParser {
 
@@ -48,7 +47,7 @@ public class LogicParser {
 		return recommendedLogic;
 	}
 
-	public static Logic parse(String logic, List<String> variants) {
+	public static Logic parseWithVariants(String logic, List<String> variants) {
 		Logic recommendLogic;
 		switch (logic) {
 			case PERSONAL:
@@ -63,12 +62,11 @@ public class LogicParser {
 		return recommendLogic;
 	}
 
-	public static Logic parse(String logic, ReadableArray array) {
+	public static Logic parseWithCartItems(String logic, List<CartItem> cartItems) {
 		Logic recommendLogic;
 		switch (logic) {
 			case CART:
-				List<CartItem> items = ArrayUtil.arrayToCartList(array);
-				recommendLogic = RecommendationLogic.cart(items);
+				recommendLogic = RecommendationLogic.cart(cartItems);
 				break;
 			default:
 				recommendLogic = RecommendationLogic.search();
@@ -76,7 +74,7 @@ public class LogicParser {
 		return recommendLogic;
 	}
 
-	public static Logic parse(String logic, String query) {
+	public static Logic parseWithQuery(String logic, String query) {
 		Logic recommendedLogic;
 		switch (logic) {
 			case SEARCH:

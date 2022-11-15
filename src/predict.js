@@ -1,6 +1,6 @@
 import { NativeModules } from 'react-native';
 
-const { RNEmarsysWrapper } = NativeModules;
+const { RNEmarsysPredictWrapper } = NativeModules;
 
 const Predict = {
 
@@ -29,7 +29,7 @@ const Predict = {
 		* @return bool - success or failure
 		*/
 	trackCart(cartItems) {
-		return RNEmarsysWrapper.trackCart(cartItems)
+		return RNEmarsysPredictWrapper.trackCart(cartItems)
 	},
 
 	/**
@@ -57,7 +57,7 @@ const Predict = {
 		* @return bool - success or failure
 		*/
 	trackPurchase(orderId, cartItems) {
-		return RNEmarsysWrapper.trackPurchase(orderId, cartItems)
+		return RNEmarsysPredictWrapper.trackPurchase(orderId, cartItems)
 	},
 
 	/**
@@ -67,7 +67,7 @@ const Predict = {
 		* @return bool - success or failure
 		*/
 	trackItemView(itemId) {
-		return RNEmarsysWrapper.trackItemView(itemId)
+		return RNEmarsysPredictWrapper.trackItemView(itemId)
 	},
 
 	/**
@@ -77,7 +77,7 @@ const Predict = {
 		* @return bool - success or failure
 		*/
 	trackCategoryView(categoryPath) {
-		return RNEmarsysWrapper.trackCategoryView(categoryPath)
+		return RNEmarsysPredictWrapper.trackCategoryView(categoryPath)
 	},
 
 	/**
@@ -87,7 +87,7 @@ const Predict = {
 		* @return bool - success or failure
 		*/
 	trackSearchTerm(searchTerm) {
-		return RNEmarsysWrapper.trackSearchTerm(searchTerm)
+		return RNEmarsysPredictWrapper.trackSearchTerm(searchTerm)
 	},
 
 	/**
@@ -102,7 +102,7 @@ const Predict = {
 		* @return bool - success or failure
 		*/
 	trackTag(tagName, tagAttributes) {
-		return RNEmarsysWrapper.trackTag(tagName, tagAttributes ? tagAttributes : null)
+		return RNEmarsysPredictWrapper.trackTag(tagName, tagAttributes ? tagAttributes : null)
 	},
 
 	/**
@@ -121,7 +121,7 @@ const Predict = {
 		* @return array - array of objects with recommended Products
 		*/
 	recommendProducts(logic) {
-		return RNEmarsysWrapper.recommendProducts(logic)
+		return RNEmarsysPredictWrapper.recommendProducts(logic)
 	},
 
 	/**
@@ -141,7 +141,7 @@ const Predict = {
 		* @return array - array of objects with recommended Products
 		*/
 	recommendProductsQuery(logic, query) {
-		return RNEmarsysWrapper.recommendProductsQuery(logic, query)
+		return RNEmarsysPredictWrapper.recommendProductsQuery(logic, query)
 	},
 
 	/**
@@ -178,7 +178,7 @@ const Predict = {
 		* @return array - array of objects with recommended Products
 		*/
 	recommendProductsCartItems(logic, cartItems) {
-		return RNEmarsysWrapper.recommendProductsCartItems(logic, cartItems)
+		return RNEmarsysPredictWrapper.recommendProductsCartItems(logic, cartItems)
 	},
 
 	/**
@@ -203,7 +203,7 @@ const Predict = {
 		*/
 
 	recommendProductsVariants(logic, variants) {
-		return RNEmarsysWrapper.recommendProductsVariants(logic, variants)
+		return RNEmarsysPredictWrapper.recommendProductsVariants(logic, variants)
 	},
 
 	/**
@@ -223,7 +223,7 @@ const Predict = {
 		* @return array - array of objects with recommended Products
 		*/
 	recommendProductsLimit(logic, limit) {
-		return RNEmarsysWrapper.recommendProductsLimit(logic, limit)
+		return RNEmarsysPredictWrapper.recommendProductsLimit(logic, limit)
 	},
 
 	/**
@@ -244,7 +244,7 @@ const Predict = {
 		* @return array - array of objects with recommended Products
 		*/
 	recommendProductsQueryLimit(logic, query, limit) {
-		return RNEmarsysWrapper.recommendProductsQueryLimit(logic, query, limit)
+		return RNEmarsysPredictWrapper.recommendProductsQueryLimit(logic, query, limit)
 	},
 
 	/**
@@ -282,7 +282,7 @@ const Predict = {
 		* @return array - array of objects with recommended Products
 		*/
 	recommendProductsCartItemsLimit(logic, cartItems, limit) {
-		return RNEmarsysWrapper.recommendProductsCartItemsLimit(logic, cartItems, limit)
+		return RNEmarsysPredictWrapper.recommendProductsCartItemsLimit(logic, cartItems, limit)
 	},
 
 	/**
@@ -308,7 +308,7 @@ const Predict = {
 		* @return array - array of objects with recommended Products
 		*/
 	recommendProductsVariantsLimit(logic, variants, limit) {
-		return RNEmarsysWrapper.recommendProductsVariantsLimit(logic, variants, limit)
+		return RNEmarsysPredictWrapper.recommendProductsVariantsLimit(logic, variants, limit)
 	},
 
 	/**
@@ -336,7 +336,7 @@ const Predict = {
 		* @return array - array of objects with recommended Products
 		*/
 	recommendProductsFilters(logic, filters) {
-		return RNEmarsysWrapper.recommendProductsFilters(logic, filters)
+		return RNEmarsysPredictWrapper.recommendProductsFilters(logic, filters)
 	},
 
 	/**
@@ -365,7 +365,7 @@ const Predict = {
 		* @return array - array of objects with recommended Products
 		*/
 	recommendProductsQueryFilters(logic, query, filters) {
-		return RNEmarsysWrapper.recommendProductsQueryFilters(logic, query, filters)
+		return RNEmarsysPredictWrapper.recommendProductsQueryFilters(logic, query, filters)
 	},
 
 	/**
@@ -411,7 +411,7 @@ const Predict = {
 		* @return array - array of objects with recommended Products
 		*/
 	recommendProductsCartItemsFilters(logic, cartItems, filters) {
-		return RNEmarsysWrapper.recommendProductsCartItemsFilters(logic, cartItems, filters)
+		return RNEmarsysPredictWrapper.recommendProductsCartItemsFilters(logic, cartItems, filters)
 	},
 
 	/**
@@ -445,7 +445,7 @@ const Predict = {
 		*/
 
 	recommendProductsVariantsFilters(logic, variants, filters) {
-		return RNEmarsysWrapper.recommendProductsVariantsFilters(logic, variants, filters)
+		return RNEmarsysPredictWrapper.recommendProductsVariantsFilters(logic, variants, filters)
 	},
 
 	/**
@@ -474,7 +474,7 @@ const Predict = {
 		* @return array - array of objects with recommended Products
 		*/
 	recommendProductsLimitFilters(logic, limit, filters) {
-		return RNEmarsysWrapper.recommendProductsLimitFilters(logic, limit, filters)
+		return RNEmarsysPredictWrapper.recommendProductsLimitFilters(logic, limit, filters)
 	},
 
 	/**
@@ -504,7 +504,7 @@ const Predict = {
 		* @return array - array of objects with recommended Products
 		*/
 	recommendProductsQueryLimitFilters(logic, query, limit, filters) {
-		return RNEmarsysWrapper.recommendProductsQueryLimitFilters(logic, query, limit, filters)
+		return RNEmarsysPredictWrapper.recommendProductsQueryLimitFilters(logic, query, limit, filters)
 	},
 
 	/**
@@ -551,7 +551,7 @@ const Predict = {
 		* @return array - array of objects with recommended Products
 		*/
 	recommendProductsCartItemsLimitFilters(logic, cartItems, limit, filters) {
-		return RNEmarsysWrapper.recommendProductsCartItemsLimitFilters(logic, cartItems, limit, filters)
+		return RNEmarsysPredictWrapper.recommendProductsCartItemsLimitFilters(logic, cartItems, limit, filters)
 	},
 
 	/**
@@ -587,7 +587,7 @@ const Predict = {
 		*/
 
 	recommendProductsVariantsLimitFilters(logic, variants, limit, filters) {
-		return RNEmarsysWrapper.recommendProductsVariantsLimitFilters(logic, variants, limit, filters)
+		return RNEmarsysPredictWrapper.recommendProductsVariantsLimitFilters(logic, variants, limit, filters)
 	},
 
 	/**
@@ -622,7 +622,7 @@ const Predict = {
 		* @return bool - success or failure
 		*/
 	trackRecommendationClick(product) {
-		return RNEmarsysWrapper.trackRecommendationClick(product)
+		return RNEmarsysPredictWrapper.trackRecommendationClick(product)
 	},
 
 };

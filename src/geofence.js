@@ -1,6 +1,6 @@
 import { NativeModules } from 'react-native';
 
-const { RNEmarsysWrapper } = NativeModules;
+const { RNEmarsysGeofenceWrapper } = NativeModules;
 
 const Geofence = {
 
@@ -10,7 +10,7 @@ const Geofence = {
 	 * @return bool - success or failure
 	 */
 	requestAlwaysAuthorization() {
-		return Platform.OS === 'ios' ? RNEmarsysWrapper.requestAlwaysAuthorization() : "Not supported on Android"
+		return Platform.OS === 'ios' ? RNEmarsysGeofenceWrapper.requestAlwaysAuthorization() : "Not supported on Android"
 	},
 
 	/**
@@ -18,7 +18,7 @@ const Geofence = {
 	 * @return bool - success or failure
 	 */
 	enable() {
-		return RNEmarsysWrapper.geofenceEnable()
+		return RNEmarsysGeofenceWrapper.geofenceEnable()
 	},
 
 	/**
@@ -26,7 +26,7 @@ const Geofence = {
 	 * @return bool - success or failure
 	 */
 	disable() {
-		return RNEmarsysWrapper.geofenceDisable()
+		return RNEmarsysGeofenceWrapper.geofenceDisable()
 	},
 
 	/**
@@ -34,7 +34,7 @@ const Geofence = {
 	 * @return bool - geofencing is currently enabled or not
 	 */
 	isEnabled() {
-		return RNEmarsysWrapper.geofenceIsEnabled()
+		return RNEmarsysGeofenceWrapper.geofenceIsEnabled()
 	},
 
 	/**
@@ -46,7 +46,7 @@ const Geofence = {
 	 * @return bool - success or failure
 	*/
 	setInitialEnterTriggerEnabled(enabled) {
-		return RNEmarsysWrapper.geofenceSetInitialEnterTriggerEnabled(enabled)
+		return RNEmarsysGeofenceWrapper.geofenceSetInitialEnterTriggerEnabled(enabled)
 	},
 
 	/**
@@ -54,7 +54,7 @@ const Geofence = {
 	 * @return array - array of registered geofences
 	*/
 	registeredGeofences() {
-		return RNEmarsysWrapper.registeredGeofences()
+		return RNEmarsysGeofenceWrapper.registeredGeofences()
 	},
 
 };

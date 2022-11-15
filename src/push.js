@@ -1,6 +1,6 @@
 import { NativeModules } from 'react-native';
 
-const { RNEmarsysWrapper } = NativeModules;
+const { RNEmarsysPushWrapper } = NativeModules;
 
 const Push = {
 
@@ -12,7 +12,7 @@ const Push = {
 		* @return bool - success or failure
 		*/
 	setPushToken(pushToken) {
-		return RNEmarsysWrapper.setPushToken(pushToken)
+		return RNEmarsysPushWrapper.setPushToken(pushToken)
 	},
 
 	/**
@@ -21,11 +21,11 @@ const Push = {
 		* @return bool - success or failure
 		*/
 	clearPushToken() {
-		return RNEmarsysWrapper.clearPushToken()
+		return RNEmarsysPushWrapper.clearPushToken()
 	},
 
 	pushToken() {
-		return RNEmarsysWrapper.getPushToken()
+		return RNEmarsysPushWrapper.getPushToken()
 	},
 
 };
