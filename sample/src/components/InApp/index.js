@@ -4,7 +4,7 @@ import { toJS } from "mobx"
 
 import React, { Component } from "react"
 
-import { StyleSheet, View, Text, Button, ScrollView } from "react-native"
+import { StyleSheet, View, Text, Button, ScrollView, Platform, PermissionsAndroid } from "react-native"
 
 import { SafeAreaView } from "react-navigation"
 
@@ -154,13 +154,43 @@ export default class InApp extends Component {
 	// MARK: - Geofence *************************************************************************************************************
 
 	async wrapperRequestAlwaysAuthorization() {
-		try {
-			let result = await Emarsys.geofence.requestAlwaysAuthorization()
-			console.log("requestAlwaysAuthorization Done: ", result)
-			showAlert( "requestAlwaysAuthorization", "requestAlwaysAuthorization Done.")
-		} catch (e) {
-			console.log("requestAlwaysAuthorization Fail: ", e)
-			showAlert( "requestAlwaysAuthorization", "requestAlwaysAuthorization Fail: ", e )
+		if (Platform.OS === 'ios') {
+			try {
+				let result = await Emarsys.geofence.requestAlwaysAuthorization()
+				console.log("requestAlwaysAuthorization Done: ", result)
+				showAlert( "requestAlwaysAuthorization", "requestAlwaysAuthorization Done.")
+			} catch (e) {
+				console.log("requestAlwaysAuthorization Fail: ", e)
+				showAlert( "requestAlwaysAuthorization", "requestAlwaysAuthorization Fail: ", e )
+			}
+		} else if (Platform.OS === 'android') {
+			try {
+				var granted = true
+
+				var checkGranted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION)
+				if (!checkGranted) {
+					const requestGranted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION)
+					granted = granted && (requestGranted === PermissionsAndroid.RESULTS.GRANTED)
+				}
+
+				checkGranted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_BACKGROUND_LOCATION)
+				if (!checkGranted) {
+					const requestGranted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_BACKGROUND_LOCATION)
+					granted = granted && (requestGranted === PermissionsAndroid.RESULTS.GRANTED)
+				}
+
+				checkGranted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
+				if (!checkGranted) {
+					const requestGranted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
+					granted = granted && (requestGranted === PermissionsAndroid.RESULTS.GRANTED)
+				}
+
+				console.log("requestLocationPermissions Done: granted: ", granted)
+				showAlert( "requestLocationPermissions", "requestLocationPermissions Done.")
+			} catch (err) {
+				console.log("requestLocationPermissions Fail: ", e)
+				showAlert( "requestLocationPermissions", "requestLocationPermissions Fail: ", e )
+			}
 		}
 	}
 
@@ -289,7 +319,7 @@ export default class InApp extends Component {
 
 						<View style={ styles.button }>
 							 <Button
-								title="Request Always Authorization"
+								title={ Platform.OS === 'ios' ? "Request Always Authorization" : "Request location permissions" }
 								color="#04446E"
 								onPress={() => {
 									this.wrapperRequestAlwaysAuthorization()
