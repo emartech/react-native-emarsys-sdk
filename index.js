@@ -831,7 +831,7 @@ const Emarsys = {
 		 * @return bool - success or failure
 		 */
 		enable() {
-			return Platform.OS === 'ios' ? RNEmarsysWrapper.geofenceEnable() : "Not supported on Android"
+			return RNEmarsysWrapper.geofenceEnable()
 		},
 
 		/**
@@ -839,7 +839,7 @@ const Emarsys = {
 		 * @return bool - success or failure
 		 */
 		disable() {
-			return Platform.OS === 'ios' ? RNEmarsysWrapper.geofenceDisable() : "Not supported on Android"
+			return RNEmarsysWrapper.geofenceDisable()
 		},
 
 		/**
@@ -847,7 +847,7 @@ const Emarsys = {
 		 * @return bool - geofencing is currently enabled or not
 		 */
 		isEnabled() {
-			return Platform.OS === 'ios' ? RNEmarsysWrapper.geofenceIsEnabled() : "Not supported on Android"
+			return RNEmarsysWrapper.geofenceIsEnabled()
 		},
 
 		/**
@@ -859,7 +859,7 @@ const Emarsys = {
 		 * @return bool - success or failure
 		*/
 		setInitialEnterTriggerEnabled(enabled) {
-			return Platform.OS === 'ios' ? RNEmarsysWrapper.geofenceSetInitialEnterTriggerEnabled(enabled) : "Not supported on Android"
+			return RNEmarsysWrapper.geofenceSetInitialEnterTriggerEnabled(enabled)
 		},
 
 		/**
@@ -867,7 +867,7 @@ const Emarsys = {
 		 * @return array - array of registered geofences
 		*/
 		registeredGeofences() {
-			return Platform.OS === 'ios' ? RNEmarsysWrapper.registeredGeofences() : "Not supported on Android"
+			return RNEmarsysWrapper.registeredGeofences()
 		},
 
 	},

@@ -12,6 +12,7 @@ import com.emarsys.Emarsys;
 import com.emarsys.core.api.result.CompletionListener;
 import com.emarsys.core.api.result.ResultListener;
 import com.emarsys.core.api.result.Try;
+import com.emarsys.mobileengage.api.geofence.Geofence;
 import com.emarsys.mobileengage.api.inbox.InboxResult;
 import com.emarsys.mobileengage.api.inbox.Message;
 import com.emarsys.predict.api.model.CartItem;
@@ -53,6 +54,8 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     public String getName() {
         return TAG;
     }
+
+    // - Setup
 
     @ReactMethod
     public void setContact(@NonNull Integer contactFieldId, @NonNull final String contactFieldValue, final Promise promise) {
@@ -160,6 +163,13 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void setEventHandler() {
+        RNEmarsysEventHandler.getInstance().provideReactContext(reactContext);
+    }
+
+    // - In-app
+
+    @ReactMethod
     public void pause(Promise promise) {
         try {
             Emarsys.getInApp().pause();
@@ -178,6 +188,8 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
             promise.reject(TAG, "Error resume: ", e);
         }
     }
+
+    // - Predict
 
     @ReactMethod
     public void trackCart(@NonNull ReadableArray array, Promise promise) {
@@ -259,6 +271,21 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
 
         } catch (Exception e) {
             promise.reject(TAG, "Error trackTag: ", e);
+        }
+    }
+
+    private void resolveProducts(final Promise promise, @NonNull Try<List<Product>> result, String methodName) {
+        if (result.getResult() != null) {
+            List<Product> recommendedProducts = result.getResult();
+            WritableArray products = Arguments.createArray();
+            for (Product product : recommendedProducts) {
+                WritableMap recProduct = MapUtil.convertProductToMap(product);
+                products.pushMap(recProduct);
+            }
+            promise.resolve(products);
+        }
+        if (result.getErrorCause() != null) {
+            promise.reject(TAG, "Error " + methodName + ": ", result.getErrorCause());
         }
     }
 
@@ -526,6 +553,8 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
         }
     }
 
+    // - Config
+
     @ReactMethod
     public void trackDeepLink(@Nullable final String userActivity, final Promise promise) {
         try {
@@ -653,6 +682,8 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
         }
     }
 
+    // - Inbox
+
     @ReactMethod
     public void fetchMessages(final Promise promise) {
         try {
@@ -664,26 +695,6 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
             });
         } catch (Exception e) {
             promise.reject(TAG, "Error fetchMessages: ", e);
-        }
-    }
-
-    @ReactMethod
-    public void setEventHandler() {
-        RNEmarsysEventHandler.getInstance().provideReactContext(reactContext);
-    }
-
-    private void resolveProducts(final Promise promise, @NonNull Try<List<Product>> result, String methodName) {
-        if (result.getResult() != null) {
-            List<Product> recommendedProducts = result.getResult();
-            WritableArray products = Arguments.createArray();
-            for (Product product : recommendedProducts) {
-                WritableMap recProduct = MapUtil.convertProductToMap(product);
-                products.pushMap(recProduct);
-            }
-            promise.resolve(products);
-        }
-        if (result.getErrorCause() != null) {
-            promise.reject(TAG, "Error " + methodName + ": ", result.getErrorCause());
         }
     }
 
@@ -737,4 +748,74 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
             promise.reject(TAG, "Error trackPurchase: ", e);
         }
     }
+
+    // - Geofence
+
+    @ReactMethod
+    public void geofenceEnable(final Promise promise) {
+        try {
+            Emarsys.getGeofence().enable(new CompletionListener() {
+                @Override
+                public void onCompleted(@Nullable Throwable errorCause) {
+                    if (errorCause != null) {
+                        promise.reject(TAG, "Error geofenceEnable: ", errorCause);
+                    } else {
+                        promise.resolve(true);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            promise.reject(TAG, "Error geofenceEnable: ", e);
+        }
+    }
+
+    @ReactMethod
+    public void geofenceDisable(final Promise promise) {
+        try {
+            Emarsys.getGeofence().disable();
+            promise.resolve(true);
+        } catch (Exception e) {
+            promise.reject(TAG, "Error geofenceDisable: ", e);
+        }
+    }
+
+    @ReactMethod
+    public void geofenceIsEnabled(final Promise promise) {
+        try {
+            boolean isEnabled = Emarsys.getGeofence().isEnabled();
+            promise.resolve(isEnabled);
+        } catch (Exception e) {
+            promise.reject(TAG, "Error geofenceIsEnabled: ", e);
+        }
+    }
+
+    @ReactMethod
+    public void geofenceSetInitialEnterTriggerEnabled(boolean enabled, final Promise promise) {
+        try {
+            Emarsys.getGeofence().setInitialEnterTriggerEnabled(enabled);
+            promise.resolve(true);
+        } catch (Exception e) {
+            promise.reject(TAG, "Error geofenceSetInitialEnterTriggerEnabled: ", e);
+        }
+    }
+
+    @ReactMethod
+    public void registeredGeofences(final Promise promise) {
+        try {
+            List<Geofence> registeredGeofences = Emarsys.getGeofence().getRegisteredGeofences();
+            resolveGeofences(promise, registeredGeofences);
+        } catch (Exception e) {
+            promise.reject(TAG, "Error registeredGeofences: ", e);
+        }
+    }
+
+    private void resolveGeofences(final Promise promise, @NonNull List<Geofence> result) {
+        WritableArray geofences = Arguments.createArray();
+        for (Geofence geofence : result) {
+            WritableMap recGeofence = MapUtil.convertGeofenceToMap(geofence);
+            geofences.pushMap(recGeofence);
+        }
+        promise.resolve(geofences);
+    }
+
 }
