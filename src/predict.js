@@ -201,7 +201,6 @@ const Predict = {
 		* 	let variants = ["1", "2", "3"]
 		* @return array - array of objects with recommended Products
 		*/
-
 	recommendProductsVariants(logic, variants) {
 		return RNEmarsysPredictWrapper.recommendProductsVariants(logic, variants)
 	},
@@ -443,7 +442,6 @@ const Predict = {
 		* 		overlaps - One or more of the field values are found in expectation values (applicable only to fields containing multiple values)
 		* 	@param required string/array expectations - String/Array of strings extends Comparison of recommended logics.* @return array - array of objects with recommended Products
 		*/
-
 	recommendProductsVariantsFilters(logic, variants, filters) {
 		return RNEmarsysPredictWrapper.recommendProductsVariantsFilters(logic, variants, filters)
 	},
