@@ -14,45 +14,45 @@ import Emarsys from "react-native-emarsys-wrapper"
 
 const styles = StyleSheet.create({
 	inbase: {
-		flex: 1, 
-		width: "100%", 
-		backgroundColor: "#ffffff", 
-	}, 
+		flex: 1,
+		width: "100%",
+		backgroundColor: "#ffffff",
+	},
 	scrollBase: {
 		flexGrow: 1,
 		flexShrink: 0,
-		flexBasis: "auto", 
-		width: "100%", 
-		backgroundColor: "#ffffff", 
-	}, 
+		flexBasis: "auto",
+		width: "100%",
+		backgroundColor: "#ffffff",
+	},
 	base: {
-		flex: 1, 
-		width: "100%", 
-		justifyContent: "center", 
-		alignItems: "center", 
+		flex: 1,
+		width: "100%",
+		justifyContent: "center",
+		alignItems: "center",
 
-		backgroundColor: "#ffffff", 
-		
-		paddingTop: 16, 
-		paddingBottom: 24, 
-		paddingLeft: 12, 
-		paddingRight: 12, 
+		backgroundColor: "#ffffff",
+
+		paddingTop: 16,
+		paddingBottom: 24,
+		paddingLeft: 12,
+		paddingRight: 12,
 	},
 	buttonSetPushToken: {
-		marginTop: 24, 
-		width: "100%", 
+		marginTop: 24,
+		width: "100%",
 		maxWidth: 420,
-	},	
+	},
 	buttonClearPushToken: {
-		marginTop: 24, 
-		width: "100%", 
+		marginTop: 24,
+		width: "100%",
 		maxWidth: 420,
-	},	
+	},
 	buttonTrackMessageOpen: {
-		marginTop: 24, 
-		width: "100%", 
+		marginTop: 24,
+		width: "100%",
 		maxWidth: 420,
-	},	
+	},
 })
 
 @inject("auth")
@@ -95,7 +95,7 @@ export default class Push extends Component {
 			showAlert( "pushToken", "pushToken Fail: ", e )
 		}
 	}
-	
+
 	render() {
 		return (
 			<SafeAreaView style={styles.inbase}>
@@ -109,7 +109,7 @@ export default class Push extends Component {
 									this.wrapperSetPushToken()
 								}}
 							/>
-						</View>	
+						</View>
 						<View style={ styles.buttonClearPushToken }>
 							 <Button
 								title="Clear Push Token"
@@ -118,7 +118,7 @@ export default class Push extends Component {
 									this.wrapperClearPushToken()
 								}}
 							/>
-						</View>	
+						</View>
 						<View style={ styles.buttonTrackMessageOpen }>
 							 <Button
 								title="Track Message Open"
@@ -127,7 +127,7 @@ export default class Push extends Component {
 									this.wrapperTrackMessageOpen()
 								}}
 							/>
-						</View>	
+						</View>
 						<View style={ styles.buttonSetPushToken }>
 							 <Button
 								title="Push Token"
@@ -136,7 +136,7 @@ export default class Push extends Component {
 									this.wrapperGetPushToken()
 								}}
 							/>
-						</View>					
+						</View>
 					</View>
 				</ScrollView>
 			</SafeAreaView>

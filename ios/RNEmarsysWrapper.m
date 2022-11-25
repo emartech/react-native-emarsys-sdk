@@ -15,7 +15,8 @@ RCT_EXPORT_MODULE()
 
 // MARK: - Setup
 
-RCT_EXPORT_METHOD(setContact:(NSNumber * _Nonnull)contactFieldId contactFieldValue:(NSString * _Nonnull)contactFieldValue resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
+RCT_EXPORT_METHOD(setContact:(NSNumber * _Nonnull)contactFieldId contactFieldValue:(NSString * _Nonnull)contactFieldValue
+                  resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys setContactWithContactFieldId:contactFieldId contactFieldValue:contactFieldValue completionBlock:^(NSError * _Nullable error) {
             if (NULL != error) {
@@ -45,7 +46,8 @@ RCT_EXPORT_METHOD(clearContact:(RCTPromiseResolveBlock)resolve rejecter:(RCTProm
     }
 }
 
-RCT_EXPORT_METHOD(trackCustomEvent:(NSString * _Nonnull)eventName eventAttributes:(NSDictionary * _Nullable)eventAttributes resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
+RCT_EXPORT_METHOD(trackCustomEvent:(NSString * _Nonnull)eventName eventAttributes:(NSDictionary * _Nullable)eventAttributes
+                  resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys trackCustomEventWithName:eventName eventAttributes:eventAttributes completionBlock:^(NSError *error) {
             if (NULL != error) {

@@ -133,7 +133,7 @@ public class RNEmarsysPredictWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void recommendProducts(@NonNull String logic, final Promise promise) {
+    public void recommendProducts(@NonNull String logic, @Nullable ReadableMap logicOptions, @Nullable ReadableMap recommendationOptions, final Promise promise) {
         try {
             Logic recLogic = LogicParser.parse(logic);
             Emarsys.getPredict().recommendProducts(recLogic, new ResultListener<Try<List<Product>>>() {

@@ -14,74 +14,74 @@ import Emarsys from "react-native-emarsys-wrapper"
 
 const styles = StyleSheet.create({
 	inbase: {
-		flex: 1, 
-		width: "100%", 
-		backgroundColor: "#ffffff", 
-	}, 
+		flex: 1,
+		width: "100%",
+		backgroundColor: "#ffffff",
+	},
 	scrollBase: {
 		flexGrow: 1,
 		flexShrink: 0,
-		flexBasis: "auto", 
-		width: "100%", 
-		backgroundColor: "#ffffff", 
-	}, 
+		flexBasis: "auto",
+		width: "100%",
+		backgroundColor: "#ffffff",
+	},
 	base: {
-		flex: 1, 
-		width: "100%", 
-		justifyContent: "center", 
-		alignItems: "center", 
+		flex: 1,
+		width: "100%",
+		justifyContent: "center",
+		alignItems: "center",
 
-		backgroundColor: "#ffffff", 
-		
-		paddingTop: 16, 
-		paddingBottom: 24, 
-		paddingLeft: 12, 
-		paddingRight: 12, 
+		backgroundColor: "#ffffff",
+
+		paddingTop: 16,
+		paddingBottom: 24,
+		paddingLeft: 12,
+		paddingRight: 12,
 	},
 	hr: {
-		marginTop: 24, 
+		marginTop: 24,
 		width: "100%",
-		height: 1,		
+		height: 1,
 		maxWidth: 420,
-		backgroundColor: "#595959", 
+		backgroundColor: "#595959",
 	},
 	buttonInit: {
 		marginTop: 40,
-		width: "100%", 
+		width: "100%",
 		maxWidth: 420,
-	}, 
+	},
 	buttonLogin: {
-		marginTop: 24, 
-		width: "100%", 
+		marginTop: 24,
+		width: "100%",
 		maxWidth: 420,
-	}, 
+	},
 	buttonGoto: {
-		marginTop: 24, 
-		width: "100%", 
+		marginTop: 24,
+		width: "100%",
 		maxWidth: 420,
 	},
 	buttonTrackCustomEvent: {
-		marginTop: 24, 
-		width: "100%", 
+		marginTop: 24,
+		width: "100%",
 		maxWidth: 420,
-	},	
+	},
 	buttonDeepLink: {
-		marginTop: 24, 
-		width: "100%", 
+		marginTop: 24,
+		width: "100%",
 		maxWidth: 420,
-	}, 	
+	},
 })
 
 @inject("auth")
 @observer
 export default class Init extends Component {
-	
+
 	// MARK: - Init *************************************************************************************************************
 
 	async wrapperSetContact() {
 		let contactFieldId = 100005878
 		let contactFieldValue = "7c3df9f3"
-		
+
 		try {
 			let result = await Emarsys.setContact(contactFieldId, contactFieldValue)
 			console.log("setContact Done: ", result)
@@ -90,15 +90,15 @@ export default class Init extends Component {
 			console.log("setContact Fail: ", e)
 			showAlert( "setContact", "setContact Fail: ", e )
 		}
-	}	
-	
+	}
+
 	async wrapperTrackCustomEvent() {
 		let eventName = "testingEventName"
 		let eventAttributes = {
 			"customEvent-key1": "customEvent-value1",
 			"customEvent-key2": "customEvent-value2",
 		}
-		
+
 		try {
 			let result = await Emarsys.trackCustomEvent(eventName, eventAttributes)
 			console.log("trackCustomEvent Done: ", result)
@@ -107,8 +107,8 @@ export default class Init extends Component {
 			console.log("trackCustomEvent Fail: ", e)
 			showAlert( "trackCustomEvent", "trackCustomEvent Fail: ", e )
 		}
-	}	
-	
+	}
+
 	// MARK: - DeepLink *************************************************************************************************************
 
 	async wrapperTrackDeepLink(url) {
@@ -181,7 +181,7 @@ export default class Init extends Component {
 			console.log("getContactFieldId Fail: ", e)
 			showAlert( "getContactFieldId", "getContactFieldId Fail: ", e )
 		}
-	}	
+	}
 
 	async wrapperGetHardwareId() {
 		try {
@@ -230,10 +230,10 @@ export default class Init extends Component {
 									this.wrapperSetContact()
 								}}
 							/>
-						</View>	
+						</View>
 
 						<View style={ styles.hr } />
-						
+
 						<View style={ styles.buttonTrackCustomEvent }>
 							 <Button
 								title="Track Custom Event"
@@ -242,10 +242,10 @@ export default class Init extends Component {
 									this.wrapperTrackCustomEvent()
 								}}
 							/>
-						</View>	
-						
+						</View>
+
 						<View style={ styles.hr } />
-						
+
 						<View style={ styles.buttonDeepLink }>
 							 <Button
 								title={"Track DeepLink: " + ( toJS( this.props.auth.deepLink ) ? toJS( this.props.auth.deepLink ) : "No initial link" ) }
@@ -254,10 +254,10 @@ export default class Init extends Component {
 									this.wrapperTrackDeepLink( this.props.auth.deepLink )
 								}}
 							/>
-						</View>				
+						</View>
 
 						<View style={ styles.hr } />
-						
+
 						<View style={ styles.buttonLogin }>
 							 <Button
 								title="Change ApplicationCode"
@@ -266,7 +266,7 @@ export default class Init extends Component {
 									this.wrapperChangeApplicationCode()
 								}}
 							/>
-						</View>	
+						</View>
 
 						<View style={ styles.buttonLogin }>
 							 <Button
@@ -276,8 +276,8 @@ export default class Init extends Component {
 									this.wrapperChangeMerchantId()
 								}}
 							/>
-						</View>	
-						
+						</View>
+
 						<View style={ styles.hr } />
 
 						<View style={ styles.buttonGoto }>
@@ -288,7 +288,7 @@ export default class Init extends Component {
 									this.wrapperGetApplicationCode()
 								}}
 							/>
-						</View>	
+						</View>
 
 						<View style={ styles.buttonGoto }>
 							 <Button
@@ -298,7 +298,7 @@ export default class Init extends Component {
 									this.wrapperGetMerchantId()
 								}}
 							/>
-						</View>	
+						</View>
 
 						<View style={ styles.buttonGoto }>
 							 <Button
@@ -308,7 +308,7 @@ export default class Init extends Component {
 									this.wrapperGetContactFieldId()
 								}}
 							/>
-						</View>	
+						</View>
 
 						<View style={ styles.buttonGoto }>
 							 <Button
@@ -318,7 +318,7 @@ export default class Init extends Component {
 									this.wrapperGetHardwareId()
 								}}
 							/>
-						</View>	
+						</View>
 
 						<View style={ styles.buttonGoto }>
 							 <Button
@@ -328,7 +328,7 @@ export default class Init extends Component {
 									this.wrapperGetLanguageCode()
 								}}
 							/>
-						</View>	
+						</View>
 
 						<View style={ styles.buttonGoto }>
 							 <Button
@@ -338,7 +338,7 @@ export default class Init extends Component {
 									this.wrapperGetSdkVersion()
 								}}
 							/>
-						</View>	
+						</View>
 
 					</View>
 				</ScrollView>

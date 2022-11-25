@@ -25,7 +25,8 @@ RCT_EXPORT_METHOD(trackCart:(NSArray * _Nonnull)cartItems resolver:(RCTPromiseRe
     }
 }
 
-RCT_EXPORT_METHOD(trackPurchase:(NSString * _Nonnull)orderId items:(NSArray * _Nonnull)cartItems resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(trackPurchase:(NSString * _Nonnull)orderId items:(NSArray * _Nonnull)cartItems
+                  resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         NSArray<EMSCartItem *> *items = [self arrayToCartList:cartItems];
         [Emarsys.predict trackPurchaseWithOrderId:orderId items:[items copy]];
@@ -66,7 +67,8 @@ RCT_EXPORT_METHOD(trackSearchTerm:(NSString * _Nonnull)searchTerm resolver:(RCTP
     }
 }
 
-RCT_EXPORT_METHOD(trackTag:(NSString * _Nonnull)tag withAttributes:(NSDictionary * _Nullable)attributes resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(trackTag:(NSString * _Nonnull)tag withAttributes:(NSDictionary * _Nullable)attributes
+                  resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         [Emarsys.predict trackTag:tag withAttributes:attributes];
         resolve([NSNumber numberWithBool:YES]);
@@ -76,10 +78,18 @@ RCT_EXPORT_METHOD(trackTag:(NSString * _Nonnull)tag withAttributes:(NSDictionary
     }
 }
 
-RCT_EXPORT_METHOD(recommendProducts:(NSString * _Nonnull)logic resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(recommendProducts:(NSString * _Nonnull)logic logicOptions:(NSDictionary * _Nullable)logicOptions recommendationOptions:(NSDictionary * _Nullable)recommendationOptions
+                  resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
-        EMSLogic *recLogic = [LogicParser parseLogic:logic];
-        [Emarsys.predict recommendProductsWithLogic:recLogic productsBlock:^(NSArray<EMSProduct * >* products, NSError *error) {
+        EMSLogic *recLogic = [self parseLogic:logic options:logicOptions];
+        
+        NSString *availabilityZone = [recommendationOptions valueForKey:@"availabilityZone"];
+        NSNumber *limit = @([[recommendationOptions valueForKey:@"limit"] intValue]);
+        NSLog(@"%@", [recommendationOptions valueForKey:@"limit"]);
+        NSArray *filters = [self arrayToRecommendationFilters:[recommendationOptions objectForKey:@"filters"]];
+        
+        [Emarsys.predict recommendProductsWithLogic:recLogic filters:filters limit:limit availabilityZone:availabilityZone
+                                      productsBlock:^(NSArray<EMSProduct * >* products, NSError *error) {
             [self resolveProducts:products resolver:resolve rejecter:reject methodName:@"recommendProducts" withError:error];
         }];
     }
@@ -318,7 +328,128 @@ RCT_EXPORT_METHOD(trackRecommendationClick:(NSDictionary * _Nonnull)product reso
     return items;
 }
 
-- (void)resolveProducts:(NSArray * _Nonnull)products resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject methodName: (NSString *) methodName withError: (NSError *) error {
+- (EMSLogic *)parseLogic:(NSString *)logic options:(NSDictionary * _Nullable)options {
+    NSString *query = [options valueForKey:@"query"];
+    NSArray *cartItems = [options objectForKey:@"cartItems"];
+    NSArray *variants = [options objectForKey:@"variants"];
+    
+    if ([logic isEqualToString:@"SEARCH"]) {
+        if (query) { return [EMSLogic searchWithSearchTerm:query]; }
+        return EMSLogic.search;
+    }
+    else if ([logic isEqualToString:@"CART"]) {
+        if (cartItems) { return [EMSLogic cartWithCartItems:[self arrayToCartList:cartItems]]; }
+        return EMSLogic.cart;
+    }
+    else if ([logic isEqualToString:@"RELATED"]) {
+        if (query) { return [EMSLogic relatedWithViewItemId:query]; }
+        return EMSLogic.related;
+    }
+    else if ([logic isEqualToString:@"CATEGORY"]) {
+        if (query) { return [EMSLogic categoryWithCategoryPath:query]; }
+        return EMSLogic.category;
+    }
+    else if ([logic isEqualToString:@"ALSO_BOUGHT"]) {
+        if (query) { return [EMSLogic alsoBoughtWithViewItemId:query]; }
+        return EMSLogic.alsoBought;
+    }
+    else if ([logic isEqualToString:@"POPULAR"]) {
+        if (query) { return [EMSLogic popularWithCategoryPath:query]; }
+        return EMSLogic.popular;
+    }
+    else if ([logic isEqualToString:@"HOME"]) {
+        if (variants) { return [EMSLogic homeWithVariants:variants]; }
+        return EMSLogic.home;
+    }
+    else if ([logic isEqualToString:@"PERSONAL"]) {
+        if (variants) { return [EMSLogic personalWithVariants:variants]; }
+        return EMSLogic.personal;
+    }
+    else {
+        return EMSLogic.search;
+    }
+}
+
+- (NSArray<EMSRecommendationFilter *> *)arrayToRecommendationFilters:(NSArray *)array {
+    if (!array) { return nil; };
+    
+    NSMutableArray<EMSRecommendationFilter *> *filters = [NSMutableArray array];
+    
+    for (NSDictionary *map in array) {
+        NSString *type = @"";
+        NSString *field = @"";
+        NSString *comparison = @"";
+        NSString *expectation = @"";
+        NSMutableArray<NSString *> *expectations = [NSMutableArray array];
+        
+        if ([map objectForKey:@"type"]) {
+            type = [map objectForKey:@"type"];
+        }
+        if ([map objectForKey:@"field"]) {
+            field = [map objectForKey:@"field"];
+        }
+        if ([map objectForKey:@"comparison"]) {
+            comparison = [map objectForKey:@"comparison"];
+        }
+        
+        if ([[map objectForKey:@"expectations"] isKindOfClass:[NSString class]]) {
+            expectation = [map objectForKey:@"expectations"];
+        } else if ([[map objectForKey:@"expectations"] isKindOfClass:[NSArray class]]) {
+            NSArray *expArray = [map mutableArrayValueForKey: @"expectations"];
+            for (NSString *item in expArray) {
+                [expectations addObject:item];
+            }
+        }
+        
+        EMSRecommendationFilter *filter = nil;
+        
+        if ([type caseInsensitiveCompare:@"include"] == NSOrderedSame) {
+            if ([comparison caseInsensitiveCompare:@"IS"] == NSOrderedSame) {
+                filter = [EMSRecommendationFilter includeFilterWithField:(field) isValue: (expectation)];
+            }
+            else if ([comparison caseInsensitiveCompare:@"IN"] == NSOrderedSame) {
+                filter = [EMSRecommendationFilter includeFilterWithField:(field) inValues: (expectations)];
+            }
+            else if ([comparison caseInsensitiveCompare:@"HAS"] == NSOrderedSame) {
+                filter = [EMSRecommendationFilter includeFilterWithField:(field) hasValue: (expectation)];
+            }
+            else if ([comparison caseInsensitiveCompare:@"OVERLAPS"] == NSOrderedSame) {
+                filter = [EMSRecommendationFilter includeFilterWithField:(field) overlapsValues: (expectations)];
+            }
+            else {
+                NSLog(@"Not correct comparison value!");
+            }
+        }
+        else if ([type caseInsensitiveCompare:@"exclude"] == NSOrderedSame) {
+            if ([comparison caseInsensitiveCompare:@"IS"] == NSOrderedSame) {
+                filter = [EMSRecommendationFilter excludeFilterWithField:(field) isValue: (expectation)];
+            }
+            else if ([comparison caseInsensitiveCompare:@"IN"] == NSOrderedSame) {
+                filter = [EMSRecommendationFilter excludeFilterWithField:(field) inValues: (expectations)];
+            }
+            else if ([comparison caseInsensitiveCompare:@"HAS"] == NSOrderedSame) {
+                filter = [EMSRecommendationFilter excludeFilterWithField:(field) hasValue: (expectation)];
+            }
+            else if ([comparison caseInsensitiveCompare:@"OVERLAPS"] == NSOrderedSame) {
+                filter = [EMSRecommendationFilter excludeFilterWithField:(field) overlapsValues: (expectations)];
+            }
+            else {
+                NSLog(@"Not correct comparison value!");
+            }
+        } else {
+            NSLog(@"Not correct type");
+        }
+        
+        if (filter) {
+            [filters addObject:filter];
+        }
+    }
+    
+    return filters;
+}
+
+- (void)resolveProducts:(NSArray * _Nonnull)products resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject
+             methodName: (NSString *) methodName withError: (NSError *) error {
     if (products) {
         NSMutableArray *recProducts = [NSMutableArray array];
         for (EMSProduct *product in products) {

@@ -8,8 +8,8 @@ export default showAlert = ( title, desc, extra, callback ) => {
         desc + ( extra ? extra : "" ), [{
             text: "OK",
             onPress: () => Boolean( callback ) && callback(),
-        }], { 
-            cancelable: true 
+        }], {
+            cancelable: true
         },
     )
 }
