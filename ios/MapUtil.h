@@ -3,9 +3,7 @@
 //
 
 @interface MapUtil : NSObject
-+ (NSMutableDictionary *)convertProductToMap:(EMSProduct *)product;
-+ (EMSProduct *)mapToProduct:(NSDictionary *)object;
-+ (NSArray<EMSRecommendationFilter *> *)mapToRecommendationFilter:(NSDictionary *)map;
-+ (NSMutableDictionary *)convertMessageToMap:(EMSMessage *)message;
-+ (NSMutableDictionary *)convertGeofenceToMap:(EMSGeofence *)geofence;
+
++ (NSString*) toJsonString:(NSDictionary *)dict WithPrettyPrint:(BOOL) prettyPrint;
+
 @end

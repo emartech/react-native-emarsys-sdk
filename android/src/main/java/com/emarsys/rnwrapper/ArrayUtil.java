@@ -1,9 +1,7 @@
 package com.emarsys.rnwrapper;
 
-import com.emarsys.predict.api.model.CartItem;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableArray;
-import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableType;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableNativeArray;
@@ -12,33 +10,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class ArrayUtil {
-
-	public static List<CartItem> arrayToCartList(ReadableArray array) {
-		int size = array.size();
-		List<CartItem> items = new ArrayList<>();
-		
-		for (int i = 0; i < size; i++) {
-			ReadableMap map = array.getMap(i);
-			
-			String itemId = "emptyId";
-			double price = 0.0;
-			double quantity = 0.0;
-			
-			if (map.hasKey("itemId")) itemId = map.getString("itemId");
-			if (map.hasKey("price")) price = map.getDouble("price");
-			if (map.hasKey("quantity")) quantity = map.getDouble("quantity");
-
-			CartItem item = new CartItemImp(itemId, price, quantity);
-			items.add(item);
-		}
-		
-		return items;
-	}
 
 	public static JSONArray toJSONArray(ReadableArray readableArray) throws JSONException {
 		JSONArray jsonArray = new JSONArray();

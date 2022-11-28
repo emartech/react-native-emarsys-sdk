@@ -1,4 +1,3 @@
-
 #if __has_include("RCTBridgeModule.h")
 #import "RCTBridgeModule.h"
 #else
@@ -6,10 +5,8 @@
 #endif
 #import <React/RCTEventEmitter.h>
 
-typedef void (^InAppHandlerBlock)(NSString *eventName, NSDictionary<NSString *, NSObject *> *payload);
-
 @interface RNEmarsysWrapper : RCTEventEmitter <RCTBridgeModule>
 
-@property(nonatomic, strong) InAppHandlerBlock handlerBlock;
 - (void)sendEvent:(NSDictionary<NSString *, NSObject *> *)body;
+
 @end

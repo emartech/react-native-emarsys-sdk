@@ -14,7 +14,13 @@ import java.util.List;
 public class RNEmarsysWrapperPackage implements ReactPackage {
 	@Override
 	public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-		return Arrays.<NativeModule>asList(new RNEmarsysWrapperModule(reactContext));
+		return Arrays.<NativeModule>asList(
+				new RNEmarsysWrapperModule(reactContext),
+				new RNEmarsysPushWrapperModule(reactContext),
+				new RNEmarsysInAppWrapperModule(reactContext),
+				new RNEmarsysInboxWrapperModule(reactContext),
+				new RNEmarsysGeofenceWrapperModule(reactContext),
+				new RNEmarsysPredictWrapperModule(reactContext));
 	}
 
 	// Deprecated from RN 0.47

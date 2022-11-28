@@ -3,8 +3,10 @@
 //
 
 #import "RNEmarsysEventHandler.h"
-#import "RNEmarsysWrapper.h"
+
 #import "Emarsys.h"
+
+#import "RNEmarsysWrapper.h"
  
 @implementation RNEmarsysEventHandler
 

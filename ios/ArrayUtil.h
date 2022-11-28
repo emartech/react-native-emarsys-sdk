@@ -3,5 +3,7 @@
 //
 
 @interface ArrayUtil : NSObject
-+ (NSArray<EMSCartItem *> *)arrayToCartList:(NSArray *)array;
+
++ (NSString*) toJsonString:(NSArray *)array withPrettyPrint:(BOOL) prettyPrint;
+
 @end
