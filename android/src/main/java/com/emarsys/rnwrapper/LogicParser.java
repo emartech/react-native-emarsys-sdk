@@ -57,7 +57,7 @@ public class LogicParser {
 				recommendLogic = RecommendationLogic.home(variants);
 				break;
 			default:
-				recommendLogic = RecommendationLogic.search();
+				recommendLogic = parse(logic);
 		}
 		return recommendLogic;
 	}
@@ -69,7 +69,7 @@ public class LogicParser {
 				recommendLogic = RecommendationLogic.cart(cartItems);
 				break;
 			default:
-				recommendLogic = RecommendationLogic.search();
+				recommendLogic = parse(logic);
 		}
 		return recommendLogic;
 	}
@@ -93,7 +93,7 @@ public class LogicParser {
 				recommendedLogic = RecommendationLogic.popular(query);
 				break;
 			default:
-				recommendedLogic = RecommendationLogic.search();
+				recommendedLogic = parse(logic);
 		}
 		return recommendedLogic;
 	}

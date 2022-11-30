@@ -1,5 +1,13 @@
 package com.emarsys.rnwrapper;
 
+import static com.emarsys.predict.api.model.RecommendationLogic.ALSO_BOUGHT;
+import static com.emarsys.predict.api.model.RecommendationLogic.CART;
+import static com.emarsys.predict.api.model.RecommendationLogic.CATEGORY;
+import static com.emarsys.predict.api.model.RecommendationLogic.HOME;
+import static com.emarsys.predict.api.model.RecommendationLogic.PERSONAL;
+import static com.emarsys.predict.api.model.RecommendationLogic.POPULAR;
+import static com.emarsys.predict.api.model.RecommendationLogic.RELATED;
+import static com.emarsys.predict.api.model.RecommendationLogic.SEARCH;
 import static com.emarsys.rnwrapper.MapUtil.mapPutNullable;
 import static com.emarsys.rnwrapper.MapUtil.toWritableMap;
 
@@ -15,6 +23,7 @@ import com.emarsys.predict.api.model.CartItem;
 import com.emarsys.predict.api.model.Logic;
 import com.emarsys.predict.api.model.Product;
 import com.emarsys.predict.api.model.RecommendationFilter;
+import com.emarsys.predict.api.model.RecommendationLogic;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -135,13 +144,39 @@ public class RNEmarsysPredictWrapperModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void recommendProducts(@NonNull String logic, @Nullable ReadableMap logicOptions, @Nullable ReadableMap recommendationOptions, final Promise promise) {
         try {
-            Logic recLogic = LogicParser.parse(logic);
-            Emarsys.getPredict().recommendProducts(recLogic, new ResultListener<Try<List<Product>>>() {
+            Logic recLogic = parse(logic, logicOptions);
+
+            String availabilityZone = recommendationOptions != null ?
+                    recommendationOptions.getString("availabilityZone") : null;
+            Integer limit = recommendationOptions != null && recommendationOptions.hasKey("limit") ?
+                    recommendationOptions.getInt("limit") : null;
+            List<RecommendationFilter> filters = recommendationOptions != null ?
+                    arrayToRecommendationFilters(recommendationOptions.getArray("filters")) : null;
+
+            ResultListener resultListener = new ResultListener<Try<List<Product>>>() {
                 @Override
                 public void onResult(@NonNull Try<List<Product>> result) {
                     resolveProducts(promise, result, "recommendProducts");
                 }
-            });
+            };
+
+            if (filters != null && limit != null && availabilityZone != null) {
+                Emarsys.getPredict().recommendProducts(recLogic, filters, limit, availabilityZone, resultListener);
+            } else if (filters != null && limit != null) {
+                Emarsys.getPredict().recommendProducts(recLogic, filters, limit, resultListener);
+            } else if (filters != null && availabilityZone != null) {
+                Emarsys.getPredict().recommendProducts(recLogic, filters, availabilityZone, resultListener);
+            } else if (limit != null && availabilityZone != null) {
+                Emarsys.getPredict().recommendProducts(recLogic, limit, availabilityZone, resultListener);
+            } else if (filters != null) {
+                Emarsys.getPredict().recommendProducts(recLogic, filters, resultListener);
+            } else if (limit != null) {
+                Emarsys.getPredict().recommendProducts(recLogic, limit, resultListener);
+            } else if (availabilityZone != null) {
+                Emarsys.getPredict().recommendProducts(recLogic, availabilityZone, resultListener);
+            } else {
+                Emarsys.getPredict().recommendProducts(recLogic, resultListener);
+            }
         } catch (Exception e) {
             promise.reject(TAG, "Error recommendProducts: ", e);
         }
@@ -420,6 +455,126 @@ public class RNEmarsysPredictWrapperModule extends ReactContextBaseJavaModule {
         }
 
         return items;
+    }
+
+    private Logic parse(String logic, ReadableMap options) {
+        String query = options != null ? options.getString("query") : null;
+        ReadableArray cartItems = options != null ? options.getArray("cartItems") : null;
+        ReadableArray variants = options != null ? options.getArray("variants") : null;
+
+        switch (logic) {
+            case SEARCH:
+                if (query != null) {
+                    return RecommendationLogic.search(query);
+                }
+                return RecommendationLogic.search();
+            case CART:
+                if (cartItems != null) {
+                    List<CartItem> cartItemsList = arrayToCartList(cartItems);
+                    return RecommendationLogic.cart(cartItemsList);
+                }
+                return RecommendationLogic.cart();
+            case RELATED:
+                if (query != null) {
+                    return RecommendationLogic.related(query);
+                }
+                return RecommendationLogic.related();
+            case CATEGORY:
+                if (query != null) {
+                    return RecommendationLogic.category(query);
+                }
+                return RecommendationLogic.category();
+            case ALSO_BOUGHT:
+                if (query != null) {
+                    return RecommendationLogic.alsoBought(query);
+                }
+                return RecommendationLogic.alsoBought();
+            case POPULAR:
+                if (query != null) {
+                    return RecommendationLogic.popular(query);
+                }
+                return RecommendationLogic.popular();
+            case PERSONAL:
+                if (variants != null) {
+                    List variantsList = Arrays.asList(ArrayUtil.toArray(variants));
+                    return RecommendationLogic.personal(variantsList);
+                }
+                return RecommendationLogic.personal();
+            case HOME:
+                if (variants != null) {
+                    List variantsList = Arrays.asList(ArrayUtil.toArray(variants));
+                    return RecommendationLogic.home(variantsList);
+                }
+                return RecommendationLogic.home();
+            default:
+                return RecommendationLogic.search();
+        }
+    }
+
+    private List<RecommendationFilter> arrayToRecommendationFilters(ReadableArray array) {
+        if (array == null) { return null; }
+
+        List<RecommendationFilter> filters = new ArrayList<>();
+
+        for (int i = 0; i < array.size(); i++) {
+            ReadableMap map = array.getMap(i);
+
+            String type = "";
+            String field = "";
+            String comparison = "";
+            String expectation = "";
+            List<String> expectations = new ArrayList<>();
+
+            if (map.hasKey("type")) type = map.getString("type");
+            if (map.hasKey("field")) field = map.getString("field");
+            if (map.hasKey("comparison")) comparison = map.getString("comparison");
+
+            if (map.hasKey("expectations") && map.getType("expectations") == ReadableType.String) {
+                expectation = map.getString("expectations");
+            } else if (map.hasKey("expectations") && map.getType("expectations") == ReadableType.Array) {
+                ReadableArray expArray = map.getArray("expectations");
+                for (int j = 0; j < expArray.size(); j++) {
+                    expectation = expArray.getString(j);
+                    expectations.add(expectation);
+                }
+            }
+
+            RecommendationFilter filter = null;
+
+            if (type.equalsIgnoreCase("include")) {
+                if (comparison.equalsIgnoreCase("IS")) {
+                    filter = RecommendationFilter.include(field).isValue(expectation);
+                } else if (comparison.equalsIgnoreCase("IN")) {
+                    filter = RecommendationFilter.include(field).inValues(expectations);
+                } else if (comparison.equalsIgnoreCase("HAS")) {
+                    filter = RecommendationFilter.include(field).hasValue(expectation);
+                } else if (comparison.equalsIgnoreCase("OVERLAPS")) {
+                    filter = RecommendationFilter.include(field).overlapsValues(expectations);
+                } else {
+                    Log.d("Logs", "Not correct comparison value!");
+                }
+            } else if (type.equalsIgnoreCase("exclude")) {
+                if (comparison.equalsIgnoreCase("IS")) {
+                    filter = RecommendationFilter.exclude(field).isValue(expectation);
+                } else if (comparison.equalsIgnoreCase("IN")) {
+                    filter = RecommendationFilter.exclude(field).inValues(expectations);
+                } else if (comparison.equalsIgnoreCase("HAS")) {
+                    filter = RecommendationFilter.exclude(field).hasValue(expectation);
+                } else if (comparison.equalsIgnoreCase("OVERLAPS")) {
+                    filter = RecommendationFilter.exclude(field).overlapsValues(expectations);
+                } else {
+                    Log.d("Logs", "Not correct comparison value!");
+                }
+            } else {
+                Log.d("Logs", "Not correct type!");
+            }
+
+            if (filter != null) {
+                filters.add(filter);
+            }
+        }
+
+        return filters;
     }
 
     private void resolveProducts(final Promise promise, @NonNull Try<List<Product>> result, String methodName) {

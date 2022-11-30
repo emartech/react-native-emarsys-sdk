@@ -85,7 +85,6 @@ RCT_EXPORT_METHOD(recommendProducts:(NSString * _Nonnull)logic logicOptions:(NSD
         
         NSString *availabilityZone = [recommendationOptions valueForKey:@"availabilityZone"];
         NSNumber *limit = @([[recommendationOptions valueForKey:@"limit"] intValue]);
-        NSLog(@"%@", [recommendationOptions valueForKey:@"limit"]);
         NSArray *filters = [self arrayToRecommendationFilters:[recommendationOptions objectForKey:@"filters"]];
         
         [Emarsys.predict recommendProductsWithLogic:recLogic filters:filters limit:limit availabilityZone:availabilityZone
