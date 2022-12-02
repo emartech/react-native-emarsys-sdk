@@ -10,6 +10,11 @@ import com.emarsys.Emarsys;
 import com.emarsys.core.api.result.CompletionListener;
 import com.emarsys.core.api.result.ResultListener;
 import com.emarsys.core.api.result.Try;
+import com.emarsys.mobileengage.api.action.ActionModel;
+import com.emarsys.mobileengage.api.action.AppEventActionModel;
+import com.emarsys.mobileengage.api.action.CustomEventActionModel;
+import com.emarsys.mobileengage.api.action.DismissActionModel;
+import com.emarsys.mobileengage.api.action.OpenExternalUrlActionModel;
 import com.emarsys.mobileengage.api.inbox.InboxResult;
 import com.emarsys.mobileengage.api.inbox.Message;
 import com.facebook.react.bridge.Arguments;
@@ -123,6 +128,39 @@ public class RNEmarsysInboxWrapperModule extends ReactContextBaseJavaModule {
 
         Map<String, Object> properties = new HashMap<String, Object>(message.getProperties());
         map.putMap("properties", toWritableMap(properties));
+
+        WritableArray actions = Arguments.createArray();
+        if (message.getActions() != null) {
+            for (ActionModel messageAction : message.getActions()) {
+                WritableMap action = convertActionToMap(messageAction);
+                actions.pushMap(action);
+            }
+        }
+        map.putArray("actions", actions);
+
+        return map;
+    }
+
+    private WritableMap convertActionToMap(ActionModel action) {
+        WritableMap map = Arguments.createMap();
+
+        mapPutNullable(map, "id", action.getId());
+        mapPutNullable(map, "title", action.getType());
+        mapPutNullable(map, "type", action.getType());
+
+        if (action instanceof AppEventActionModel) {
+            mapPutNullable(map, "name", ((AppEventActionModel) action).getName());
+            Map<String, Object> payload = new HashMap<String, Object>(((AppEventActionModel) action).getPayload());
+            map.putMap("payload", toWritableMap(payload));
+        } else if (action instanceof OpenExternalUrlActionModel) {
+            mapPutNullable(map, "url", ((OpenExternalUrlActionModel) action).getUrl());
+        } else if (action instanceof CustomEventActionModel) {
+            mapPutNullable(map, "name", ((CustomEventActionModel) action).getName());
+            Map<String, Object> payload = new HashMap<String, Object>(((CustomEventActionModel) action).getPayload());
+            map.putMap("payload", toWritableMap(payload));
+        } else if (action instanceof DismissActionModel) {
+            // no additional fields
+        }
 
         return map;
     }
