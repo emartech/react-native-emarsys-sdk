@@ -46,7 +46,7 @@
         recommendedLogic = [EMSLogic personalWithVariants:variants];
     }
     else {
-        recommendedLogic = EMSLogic.search;
+        recommendedLogic = [self parseLogic: logic];
     }
     
     return recommendedLogic;
@@ -59,7 +59,7 @@
         recommendedLogic = [EMSLogic cartWithCartItems:[cartItems copy]];
     }
     else {
-        recommendedLogic = EMSLogic.search;
+        recommendedLogic = [self parseLogic: logic];
     }
     
     return recommendedLogic;
@@ -84,7 +84,7 @@
         recommendedLogic = [EMSLogic popularWithCategoryPath:query];
     }
     else {
-        recommendedLogic = EMSLogic.search;
+        recommendedLogic = [self parseLogic: logic];
     }
     
     return recommendedLogic;

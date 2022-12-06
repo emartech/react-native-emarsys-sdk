@@ -1,7 +1,7 @@
 import Auth from "./modules/Auth"
 
 const store = {
-	auth: Auth, 
+	auth: Auth,
 }
 
 export default store

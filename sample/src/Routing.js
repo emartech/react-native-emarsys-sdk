@@ -18,14 +18,14 @@ import Push from "./components/Push"
 import InApp from "./components/InApp"
 import Predict from "./components/Predict"
 
-import Auth from "./store/modules/Auth" 
+import Auth from "./store/modules/Auth"
 
 import showAlert from "./components/Helpers"
 
 wrapperLogin = async ( callback ) => {
 	let contactFieldId = 100005878
 	let contactFieldValue = "7c3df9f3"
-	
+
 	try {
 		let result = await Emarsys.setContact(contactFieldId, contactFieldValue)
 		console.log("setContact Done: ", result)
@@ -45,66 +45,66 @@ wrapperLogout = async ( callback ) => {
 		console.log("clearContact Fail: ", e)
 		showAlert( "clearContact", "clearContact Fail: ", e )
 	}
-}	
+}
 
 const styles = StyleSheet.create({
 	headerBtnBox: {
-		flex: 1, 
-		padding: 14, 
-		textAlign: "center", 
-		justifyContent: "center", 
-		alignItems: "center", 
+		flex: 1,
+		padding: 14,
+		textAlign: "center",
+		justifyContent: "center",
+		alignItems: "center",
 	},
 	headerBtnBoxIOS: {
-		flex: 1, 
-		padding: 10, 
-		textAlign: "center", 
-		justifyContent: "center", 
-		alignItems: "center", 
+		flex: 1,
+		padding: 10,
+		textAlign: "center",
+		justifyContent: "center",
+		alignItems: "center",
 	},
 	headerBtnIcon: {
-		fontSize: 26, 
-		lineHeight: 26, 
-		width: 26, 
-		height: 26, 
-		textAlign: "center", 
-		color: "#ffffff", 
-		textAlignVertical: "top", 
+		fontSize: 26,
+		lineHeight: 26,
+		width: 26,
+		height: 26,
+		textAlign: "center",
+		color: "#ffffff",
+		textAlignVertical: "top",
 	},
 	headerBtnIconIOS: {
-		fontSize: 22, 
-		lineHeight: 22, 
-		width: 22, 
-		height: 22, 
-		textAlign: "center", 
-		color: "#ffffff", 
-		textAlignVertical: "top", 
+		fontSize: 22,
+		lineHeight: 22,
+		width: 22,
+		height: 22,
+		textAlign: "center",
+		color: "#ffffff",
+		textAlignVertical: "top",
 	},
 	headerTitleStyle: {
-		fontSize: 20, 
-		color: "#ffffff", 
-		fontWeight: "600", 
+		fontSize: 20,
+		color: "#ffffff",
+		fontWeight: "600",
 		lineHeight: 28,
-		textAlign: "center", 
-		alignSelf: "center", 
-		justifyContent: "center", 
-		flex: 1, 
-		textAlignVertical: "center", 
+		textAlign: "center",
+		alignSelf: "center",
+		justifyContent: "center",
+		flex: 1,
+		textAlignVertical: "center",
 	},
 	headerTitleStyleIOS: {
-		fontSize: 16, 
-		color: "#ffffff", 
-		fontWeight: "600", 
+		fontSize: 16,
+		color: "#ffffff",
+		fontWeight: "600",
 		lineHeight: 24,
-		textAlign: "center", 
-		alignSelf: "center", 
-		justifyContent: "center", 
-		flex: 1, 
-		textAlignVertical: "center", 
+		textAlign: "center",
+		alignSelf: "center",
+		justifyContent: "center",
+		flex: 1,
+		textAlignVertical: "center",
 	},
 	headerStyle: {
 		backgroundColor: "#076bae",
-	}, 
+	},
 })
 
 const btnPreload = navigation => {
@@ -117,7 +117,7 @@ const btnPreload = navigation => {
 			activeOpacity={0.8}
 			onPress={() => {
 				navigation.navigate("Preload", {
-					cache: Date.now(), 
+					cache: Date.now(),
 				})
 			}}
 		>

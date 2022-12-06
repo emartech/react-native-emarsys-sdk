@@ -66,7 +66,7 @@ export default class Predict extends Component {
 			price: 2.88,
 			quantity: 56.5,
 		}]
-		
+
 		try {
 			let result = await Emarsys.predict.trackCart(cartItems)
 			console.log("trackCart Done: ", result)
@@ -79,7 +79,7 @@ export default class Predict extends Component {
 
 	async wrapperTrackEmptyCart() {
 		let emptyCartItems = []
-		
+
 		try {
 			let result = await Emarsys.predict.trackCart(emptyCartItems)
 			console.log("trackCart Empty Done: ", result)
@@ -104,7 +104,7 @@ export default class Predict extends Component {
 				quantity: 5.6,
 			},
 		]
-		
+
 		try {
 			let result = await Emarsys.predict.trackPurchase(orderId, cartItems)
 			console.log("trackPurchase Done: ", result)
@@ -118,7 +118,7 @@ export default class Predict extends Component {
 	async wrapperTrackEmptyPurchase() {
 		let emptyOrderId = "TrackPurchase-Empty-OrderID-77"
 		let emptyCartItems = []
-		
+
 		try {
 			let result = await Emarsys.predict.trackPurchase(emptyOrderId, emptyCartItems)
 			console.log("trackPurchase Empty Done: ", result)
@@ -131,11 +131,11 @@ export default class Predict extends Component {
 
 	async wrapperTrackItemView() {
 		let itemId = "TrackItemId-Test-111"
-		
+
 		try {
 			let result = await Emarsys.predict.trackItemView(itemId)
 			console.log("trackItemView Done: ", result)
-			showAlert( "trackItemView", "trackItemView Done.")	
+			showAlert( "trackItemView", "trackItemView Done.")
 		} catch (e) {
 			console.log("trackItemView Fail: ", e)
 			showAlert( "trackItemView", "trackItemView Fail: ", e )
@@ -186,10 +186,32 @@ export default class Predict extends Component {
 	}
 
 	async wrapperRecommendProducts() {
-		let logic = "CATEGORY"
+		let logic = "HOME"
 
 		try {
-			let result = await Emarsys.predict.recommendProducts(logic)
+			let result = await Emarsys.predict.recommendProducts(logic, {
+				// query: "DEALS",
+				// cartItems: [{
+				// 	itemId: "2531",
+				// 	price: 50,
+				// 	quantity: 2,
+				// }],
+				variants: ["1", "2", "3"],
+			}, {
+				// availabilityZone: "es",
+				limit: 3,
+				// filters: [{ 
+				// 	type: "include", 
+				// 	field: "category",
+				// 	comparison: "is",
+				// 	expectations: "Shoes>Pump"
+				// },{
+				// 	type: "exclude",
+				// 	field: "category",
+				// 	comparison: "IN",
+				// 	expectations: [ "Shoes>Pump", "For Women>Shoes>Golf"]
+				// }]
+			})
 			console.log("recommendProducts Done: ", result)
 			showAlert( "recommendProducts", "recommendProducts Done.")
 		} catch (e) {
@@ -317,10 +339,10 @@ export default class Predict extends Component {
 
 	async wrapperRecommendProductsFilters() {
 		let logic = "POPULAR"
-		let filters = { 
-			type: "include", 
-			field: "category", 
-			comparison: "is", 
+		let filters = {
+			type: "include",
+			field: "category",
+			comparison: "is",
 			expectations: "For Women",
 		}
 
@@ -337,10 +359,10 @@ export default class Predict extends Component {
 	async wrapperRecommendProductsQueryFilters() {
 		let logic = "CATEGORY"
 		let query = "Shoes>Pump"
-		let filters = { 
-			type: "include", 
-			field: "category", 
-			comparison: "IN", 
+		let filters = {
+			type: "include",
+			field: "category",
+			comparison: "IN",
 			expectations: [ "Shoes>Pump", "For Women>Shoes>Golf"],
 		}
 
@@ -445,7 +467,7 @@ export default class Predict extends Component {
 			console.log("recommendProductsCartItemsLimitFilters Fail: ", e)
 			showAlert( "recommendProductsCartItemsLimitFilters", "recommendProductsCartItemsLimitFilters Fail: ", e )
 		}
-	}	
+	}
 
 	async wrapperRecommendProductsVariantsLimitFilters() {
 		let logic = "PERSONAL"
@@ -461,7 +483,7 @@ export default class Predict extends Component {
 			console.log("recommendProductsVariantsLimitFilters Fail: ", e)
 			showAlert( "recommendProductsVariantsLimitFilters", "recommendProductsVariantsLimitFilters Fail: ", e )
 		}
-	}	
+	}
 
 	async wrapperTrackRecommendationClick() {
 		let product = {

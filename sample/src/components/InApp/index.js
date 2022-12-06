@@ -14,53 +14,53 @@ import Emarsys from "react-native-emarsys-wrapper"
 
 const styles = StyleSheet.create({
 	inbase: {
-		flex: 1, 
-		width: "100%", 
-		backgroundColor: "#ffffff", 
-	}, 
+		flex: 1,
+		width: "100%",
+		backgroundColor: "#ffffff",
+	},
 	scrollBase: {
 		flexGrow: 1,
 		flexShrink: 0,
-		flexBasis: "auto", 
-		width: "100%", 
-		backgroundColor: "#ffffff", 
-	}, 
+		flexBasis: "auto",
+		width: "100%",
+		backgroundColor: "#ffffff",
+	},
 	base: {
-		flex: 1, 
-		width: "100%", 
-		justifyContent: "center", 
-		alignItems: "center", 
+		flex: 1,
+		width: "100%",
+		justifyContent: "center",
+		alignItems: "center",
 
-		backgroundColor: "#ffffff", 
-		
-		paddingTop: 16, 
-		paddingBottom: 24, 
-		paddingLeft: 12, 
-		paddingRight: 12, 
+		backgroundColor: "#ffffff",
+
+		paddingTop: 16,
+		paddingBottom: 24,
+		paddingLeft: 12,
+		paddingRight: 12,
 	},
 	hr: {
-		marginTop: 24, 
+		marginTop: 24,
 		width: "100%",
-		height: 1,		
+		height: 1,
 		maxWidth: 420,
-		backgroundColor: "#595959", 
+		backgroundColor: "#595959",
 	},
 	buttonPause: {
-		width: "100%", 
+		width: "100%",
 		maxWidth: 420,
-	},	
+	},
 	buttonResume: {
-		width: "100%", 
+		width: "100%",
 		maxWidth: 420,
-	},	
+	},
 	buttonSetEventHandler: {
-		marginTop: 24, 
-		width: "100%", 
+		marginTop: 24,
+		width: "100%",
 		maxWidth: 420,
-	},	
+	},
 	button: {
-		marginTop: 24, 
-		width: "100%", 
+		marginTop: 24,
+		width: "100%",
 		maxWidth: 420,
 	},
 })
@@ -68,16 +68,16 @@ const styles = StyleSheet.create({
 @inject("auth")
 @observer
 export default class InApp extends Component {
-	
+
 	// MARK: - InApp *************************************************************************************************************
 
 	async wrapperPause() {
 		try {
 			let result = await Emarsys.inApp.pause()
 			console.log("pause Done: ", result)
-			
+
 			this.props.auth.isPaused = true
-			
+
 			showAlert( "pause", "pause Done.")
 		} catch (e) {
 			console.log("pause Fail: ", e)
@@ -89,7 +89,7 @@ export default class InApp extends Component {
 		try {
 			let result = await Emarsys.inApp.resume()
 			console.log("resume Done: ", result)
-			
+
 			this.props.auth.isPaused = false
 
 			showAlert( "resume", "resume Done.")
@@ -108,8 +108,8 @@ export default class InApp extends Component {
 			console.log("setEventHandler Fail: ", e)
 			showAlert( "setEventHandler", "setEventHandler Fail: ", e )
 		}
-	}	
-	
+	}
+
 	// MARK: - Inbox *************************************************************************************************************
 
 	async wrapperFetchMessages() {
@@ -121,7 +121,7 @@ export default class InApp extends Component {
 			console.log("fetchMessages Fail: ", e)
 			showAlert( "fetchMessages", "fetchMessages Fail: ", e )
 		}
-	}	
+	}
 
 	async wrapperAddTag() {
 		try {
@@ -149,7 +149,7 @@ export default class InApp extends Component {
 			console.log("removeTag Fail: ", e)
 			showAlert( "removeTag", "removeTag Fail: ", e )
 		}
-	}		
+	}
 
 	// MARK: - Geofence *************************************************************************************************************
 
@@ -263,7 +263,7 @@ export default class InApp extends Component {
 										this.wrapperResume()
 									}}
 								/>
-							</View>	
+							</View>
 						) : (
 							<View style={ styles.buttonPause }>
 								 <Button
@@ -273,7 +273,7 @@ export default class InApp extends Component {
 										this.wrapperPause()
 									}}
 								/>
-							</View>	
+							</View>
 						)}
 						<View style={ styles.buttonSetEventHandler }>
 							 <Button
@@ -283,7 +283,7 @@ export default class InApp extends Component {
 									this.wrapperSetEventHandler()
 								}}
 							/>
-						</View>		
+						</View>
 
 						<View style={ styles.hr } />
 
@@ -295,7 +295,7 @@ export default class InApp extends Component {
 									this.wrapperFetchMessages()
 								}}
 							/>
-						</View>	
+						</View>
 						<View style={ styles.button }>
 							 <Button
 								title="Add Tag"
@@ -304,7 +304,7 @@ export default class InApp extends Component {
 									this.wrapperAddTag()
 								}}
 							/>
-						</View>	
+						</View>
 						<View style={ styles.button }>
 							 <Button
 								title="Remove Tag"
@@ -313,7 +313,7 @@ export default class InApp extends Component {
 									this.wrapperRemoveTag()
 								}}
 							/>
-						</View>				
+						</View>
 
 						<View style={ styles.hr } />
 

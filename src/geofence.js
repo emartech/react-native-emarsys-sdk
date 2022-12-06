@@ -6,7 +6,7 @@ const Geofence = {
 
 	/**
 	 * @desc The requestAlwaysAuthorization method is responsible for asking the required permissions from the user.
-	 *   Only available on iOS.
+	 *	Only available on iOS.
 	 * @return bool - success or failure
 	 */
 	requestAlwaysAuthorization() {
@@ -38,13 +38,13 @@ const Geofence = {
 	},
 
 	/**
-	 * @desc When initialEnterTriggerEnabled is true, 
-	 *   Emarsys SDK will trigger all the affected geofences with Enter type triggers at the moment 
-	 *   when the geofence is enabled if the device is already inside that geofence.
-	 *   By default, this value is set to false.
+	 * @desc When initialEnterTriggerEnabled is true,
+	 * 	Emarsys SDK will trigger all the affected geofences with Enter type triggers at the moment
+	 * 	when the geofence is enabled if the device is already inside that geofence.
+	 * 	By default, this value is set to false.
 	 * @param bool enabled - initialEnterTriggerEnabled value for change
 	 * @return bool - success or failure
-	*/
+	 */
 	setInitialEnterTriggerEnabled(enabled) {
 		return RNEmarsysGeofenceWrapper.geofenceSetInitialEnterTriggerEnabled(enabled)
 	},
@@ -52,7 +52,7 @@ const Geofence = {
 	/**
 	 * @desc Access the registered geofences from the device
 	 * @return array - array of registered geofences
-	*/
+	 */
 	registeredGeofences() {
 		return RNEmarsysGeofenceWrapper.registeredGeofences()
 	},

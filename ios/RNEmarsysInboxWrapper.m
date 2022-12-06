@@ -22,7 +22,8 @@ RCT_EXPORT_METHOD(fetchMessages:(RCTPromiseResolveBlock)resolve rejecter:(RCTPro
     }
 }
 
-RCT_EXPORT_METHOD(addTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonnull)messageId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(addTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonnull)messageId
+                  resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         [Emarsys.messageInbox addTag:tag forMessage:messageId completionBlock:^(NSError * _Nullable error) {
             if (NULL != error) {
@@ -38,7 +39,8 @@ RCT_EXPORT_METHOD(addTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonnull
     }
 }
 
-RCT_EXPORT_METHOD(removeTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonnull)messageId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(removeTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonnull)messageId
+                  resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         [Emarsys.messageInbox removeTag:tag fromMessage:messageId completionBlock:^(NSError * _Nullable error) {
             if (NULL != error) {
@@ -54,7 +56,8 @@ RCT_EXPORT_METHOD(removeTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonn
     }
 }
 
-- (void) resolveMessages:(NSArray * _Nonnull)messages resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject methodName: (NSString *) methodName withError: (NSError *) error {
+- (void) resolveMessages:(NSArray * _Nonnull)messages resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject
+              methodName: (NSString *) methodName withError: (NSError *) error {
     if (messages) {
         NSMutableArray *recMessages = [NSMutableArray array];
         for (EMSMessage *message in messages) {

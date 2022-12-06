@@ -7,7 +7,7 @@
 #import "Emarsys.h"
 
 #import "RNEmarsysWrapper.h"
- 
+
 @implementation RNEmarsysEventHandler
 
 + (id)allocWithZone:(NSZone *)zone {
