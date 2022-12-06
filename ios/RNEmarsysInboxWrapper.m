@@ -2,6 +2,10 @@
 
 #import "Emarsys.h"
 #import "EMSMessage.h"
+#import "EMSAppEventActionModel.h"
+#import "EMSOpenExternalUrlActionModel.h"
+#import "EMSCustomEventActionModel.h"
+#import "EMSDismissActionModel.h"
 
 @implementation RNEmarsysInboxWrapper
 
@@ -85,6 +89,35 @@ RCT_EXPORT_METHOD(removeTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonn
     [map setObject: message.expiresAt ?: @"" forKey: @"expiresAt"];
     [map setObject: message.tags ?: @"" forKey: @"tags"];
     [map setObject: message.properties ?: @"" forKey: @"properties"];
+    
+    NSMutableArray *actions = [NSMutableArray array];
+    for (id<EMSActionModelProtocol> messageAction in message.actions) {
+        NSMutableDictionary<NSString *, NSString *> *action = [self convertActionToMap:messageAction];
+        [actions addObject:action];
+    }
+    [map setObject: actions forKey: @"actions"];
+    
+    return map;
+}
+
+- (NSMutableDictionary *)convertActionToMap:(id<EMSActionModelProtocol>)action {
+    NSMutableDictionary<NSString *, NSObject *> *map = [[NSMutableDictionary alloc] init];
+    
+    [map setObject: action.id forKey: @"id"];
+    [map setObject: action.title forKey: @"title"];
+    [map setObject: action.type forKey: @"type"];
+    
+    if ([action isKindOfClass:[EMSAppEventActionModel class]]) {
+        [map setObject: ((EMSAppEventActionModel *)action).name forKey: @"name"];
+        [map setObject: ((EMSAppEventActionModel *)action).payload forKey: @"payload"];
+    } else if ([action isKindOfClass:[EMSOpenExternalUrlActionModel class]]) {
+        [map setObject: ((EMSOpenExternalUrlActionModel *)action).url.absoluteString forKey: @"url"];
+    } else if ([action isKindOfClass:[EMSCustomEventActionModel class]]) {
+        [map setObject: ((EMSCustomEventActionModel *)action).name forKey: @"name"];
+        [map setObject: ((EMSCustomEventActionModel *)action).payload forKey: @"payload"];
+    } else if ([action isKindOfClass:[EMSDismissActionModel class]]) {
+        // no additional fields
+    }
     
     return map;
 }
