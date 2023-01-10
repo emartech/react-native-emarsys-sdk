@@ -112,6 +112,16 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
         RNEmarsysEventHandler.getInstance().provideReactContext(reactContext);
     }
 
+    @ReactMethod
+    public void addListener(String eventName) {
+
+    }
+
+    @ReactMethod
+    public void removeListeners(Integer count) {
+
+    }
+
     // - DeepLink
 
     @ReactMethod
