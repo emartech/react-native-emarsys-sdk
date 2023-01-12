@@ -7,21 +7,15 @@
 
 Getting Started with [React Native](https://facebook.github.io/react-native/docs/getting-started "React Native").
 
-`$ npm install`
-
-### Mostly automatic installation
-
-`$ react-native link`
+1. `$ npm install`
+2. `$ npm run dev`
 
 #### iOS
-1. `$ npm run bundle:ipa`
-2. `$ cd ios`
-3. `$ pod install`
-4. `$ npm run dev:ipa`
+1. `$ cd ios && pod install && cd ..`
+2. `$ npm run dev:ipa`
 
 #### Android
-1. `$ npm run bundle:apk`
-2. `$ npm run dev:apk`
+1. `$ npm run dev:apk`
 
 
 ### Requirements

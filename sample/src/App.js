@@ -61,8 +61,6 @@ export default class App extends Component {
   };
 
   render() {
-    console.disableYellowBox = true;
-
     return (
       <StoreProvider {...store}>
         <Routing
@@ -70,7 +68,7 @@ export default class App extends Component {
             // console.log("prevState", prevState)
             // console.log("currentState", currentState)
           }}
-          ref={navigatorRef => {
+          innerRef={navigatorRef => {
             Navigation.setTopLevelNavigator(navigatorRef);
           }}
         />
