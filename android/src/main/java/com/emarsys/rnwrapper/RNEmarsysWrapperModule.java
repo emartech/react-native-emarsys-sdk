@@ -112,6 +112,18 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
         RNEmarsysEventHandler.getInstance().provideReactContext(reactContext);
     }
 
+    @ReactMethod
+    public void addListener(String eventName) {
+        // Required for RN built in Event Emitter Calls.
+        // WARN  `new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.
+    }
+
+    @ReactMethod
+    public void removeListeners(Integer count) {
+        // Required for RN built in Event Emitter Calls.
+        // WARN  `new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.
+    }
+
     // - DeepLink
 
     @ReactMethod
