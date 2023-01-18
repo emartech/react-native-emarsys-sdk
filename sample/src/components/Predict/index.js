@@ -1,8 +1,6 @@
 import React, { Component } from "react"
 
-import { StyleSheet, View, Text, Button, ScrollView } from "react-native"
-
-import { SafeAreaView } from "react-navigation"
+import { StyleSheet, View, Button, ScrollView, SafeAreaView } from "react-native"
 
 import showAlert from "../Helpers"
 
