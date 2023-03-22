@@ -51,11 +51,6 @@ const styles = StyleSheet.create({
 		width: "100%",
 		maxWidth: 420,
 	},
-	buttonSetEventHandler: {
-		marginTop: 24,
-		width: "100%",
-		maxWidth: 420,
-	},
 	button: {
 		marginTop: 24,
 		width: "100%",
@@ -247,6 +242,14 @@ export default class InApp extends Component {
 		}
 	}
 
+	constructor(props) {
+		super(props);
+		this.inlineInAppView = React.createRef();
+		this.state = {
+			inlineInAppViewHeight: 0
+		}
+	}
+
 	render() {
 		return (
 			<SafeAreaView style={styles.inbase}>
@@ -273,7 +276,7 @@ export default class InApp extends Component {
 								/>
 							</View>
 						)}
-						<View style={ styles.buttonSetEventHandler }>
+						<View style={ styles.button }>
 							 <Button
 								title="Set Event Handler"
 								color="#04446E"
@@ -282,6 +285,31 @@ export default class InApp extends Component {
 								}}
 							/>
 						</View>
+
+						<View style={ styles.button }>
+							 <Button
+								title="Load Inline InApp"
+								color="#04446E"
+								onPress={() => {
+									this.inlineInAppView.current.loadInApp('view-id')
+								}}
+							/>
+						</View>
+						<Emarsys.InlineInAppView ref={this.inlineInAppView}
+							style={{width: "100%", height: this.state.inlineInAppViewHeight}}
+							onAppEvent={(eventName, payload) => {
+								showAlert(eventName, JSON.stringify(payload))
+							}}
+							onCompleted={error => {
+								if (error == null) {
+									this.setState({ inlineInAppViewHeight: 125 })
+								} else {
+									console.log(error)
+								}
+							}}
+							onClose={_ => {
+								this.setState({ inlineInAppViewHeight: 0 })
+							}} />
 
 						<View style={ styles.hr } />
 
