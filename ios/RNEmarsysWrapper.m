@@ -77,12 +77,11 @@ RCT_EXPORT_METHOD(trackDeepLink:(NSString * _Nonnull)userActivity resolver:(RCTP
                 activity.webpageURL = activityURL;
                 
                 [Emarsys trackDeepLinkWithUserActivity:activity sourceHandler:^(NSString *source) {
-                    NSLog(@"trackDeepLink. Source url: %@", source);
                     resolve([NSNumber numberWithBool:YES]);
                 }];
             }
             @catch (NSException *ex) {
-                NSLog(@"RNEmarsysWrapper trackDeepLink: %@ %@", ex.name, ex.reason);
+                reject(ex.name, ex.reason, nil);
             }
         }
     }

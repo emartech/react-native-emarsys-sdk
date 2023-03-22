@@ -1,7 +1,5 @@
 package com.emarsys.rnwrapper;
 
-import android.util.Log;
-
 import com.emarsys.Emarsys;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
@@ -72,7 +70,6 @@ public class RNEmarsysEventHandler implements LifecycleEventListener {
     }
 
     public void provideReactContext(ReactContext reactContext) {
-        Log.d(this.getClass().getSimpleName(), "Registered for events.");
         this.reactContext = reactContext;
         eventEmitter = reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
         reactContext.addLifecycleEventListener(this);

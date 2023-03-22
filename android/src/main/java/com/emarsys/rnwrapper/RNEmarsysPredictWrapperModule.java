@@ -635,7 +635,6 @@ public class RNEmarsysPredictWrapperModule extends ReactContextBaseJavaModule {
             ReadableType type = map.getType(key);
             switch (type) {
                 case Null:
-                    Log.d("Logs", "Received null in map");
                     break;
                 case Boolean:
                     available = map.getBoolean(key);
