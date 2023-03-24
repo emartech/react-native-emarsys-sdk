@@ -22,8 +22,8 @@ android {
     defaultConfig {
         minSdkVersion 24
         targetSdkVersion 31
-        versionCode 12
-        versionName "1.12"
+        versionCode 13
+        versionName "1.13"
     }
     lintOptions {
         abortOnError false
@@ -46,5 +46,5 @@ repositories {
 
 dependencies {
     implementation "com.facebook.react:react-native:+"
-    implementation "com.emarsys:emarsys-sdk:3.4.+"
+    implementation "com.emarsys:emarsys-sdk:3.5.+"
 }
