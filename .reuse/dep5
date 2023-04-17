@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: react-native-emarsys-sdk
+Upstream-Contact: g-gsuite-mobileengineers@emarsys.com
+Source: https://github.com/emartech/react-native-emarsys-sdk
+
+Files: *
+Copyright: 2023 Emarsys
+License: Apache-2.0
