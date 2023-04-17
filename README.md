@@ -1,6 +1,8 @@
 
 # react-native-emarsys-wrapper
 
+[![REUSE status](https://api.reuse.software/badge/github.com/emartech/react-native-emarsys-sdk)](https://api.reuse.software/info/github.com/emartech/react-native-emarsys-sdk)
+
 React Native wrapper for Emarsys SDK.
 
 For further information about how to use the wrapper please visit our [Documentation](https://github.com/emartech/react-native-emarsys-sdk/wiki "Wiki").
