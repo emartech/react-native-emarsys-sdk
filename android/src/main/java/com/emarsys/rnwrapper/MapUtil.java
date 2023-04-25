@@ -36,15 +36,6 @@ public class MapUtil {
 		}
 	}
 
-	private static Map<String, String> convertMap(Map<String, Object> oldMap) {
-		Map<String, String> ret = new HashMap<>();
-		
-		for (String key : oldMap.keySet()) {
-			ret.put(key, oldMap.get(key).toString());
-		}
-		return ret;
-	}
-
 	public static JSONObject toJSONObject(ReadableMap readableMap) throws JSONException {
 		JSONObject jsonObject = new JSONObject();
 
@@ -106,7 +97,6 @@ public class MapUtil {
 
 		while (iterator.hasNextKey()) {
 			String key = iterator.nextKey();
-			ReadableType type = readableMap.getType(key);
 			map.put(key, readableMap.getString(key));
 		}
 
@@ -156,8 +146,8 @@ public class MapUtil {
 			return null;
 		}
 
-		try {
-			while (iterator.hasNext()) {
+		while (iterator.hasNext()) {
+			try {
 				String key = iterator.next();
 				Object value = jsonObject.get(key);
 				
@@ -176,9 +166,9 @@ public class MapUtil {
 				} else if (value instanceof JSONArray) {
 					writableMap.putArray(key, ArrayUtil.jsonArrayToWritableArray((JSONArray) value));
 				}
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
-		} catch (JSONException ex){
-			// Do nothing and fail silently
 		}
 		
 		return writableMap;
