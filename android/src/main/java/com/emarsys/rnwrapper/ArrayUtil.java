@@ -104,23 +104,17 @@ public class ArrayUtil {
 
 			if (value == null) {
 				writableArray.pushNull();
-			}
-			if (value instanceof Boolean) {
+			} else if (value instanceof Boolean) {
 				writableArray.pushBoolean((Boolean) value);
-			}
-			if (value instanceof Double) {
+			} else if (value instanceof Double) {
 				writableArray.pushDouble((Double) value);
-			}
-			if (value instanceof Integer) {
+			} else if (value instanceof Integer) {
 				writableArray.pushInt((Integer) value);
-			}
-			if (value instanceof String) {
+			} else if (value instanceof String) {
 				writableArray.pushString((String) value);
-			}
-			if (value instanceof Map) {
+			} else if (value instanceof Map) {
 				writableArray.pushMap(MapUtil.toWritableMap((Map<String, Object>) value));
-			}
-			if (value.getClass().isArray()) {
+			} else if (value.getClass() != null && value.getClass().isArray()) {
 				writableArray.pushArray(ArrayUtil.toWritableArray((Object[]) value));
 			}
 		}
@@ -131,16 +125,16 @@ public class ArrayUtil {
 	public static WritableArray jsonArrayToWritableArray(JSONArray jsonArray) {
 		WritableArray writableArray = new WritableNativeArray();
 
-		try {
-			if (jsonArray == null) {
-				return null;
-			}
+		if (jsonArray == null) {
+			return null;
+		}
 
-			if (jsonArray.length() <= 0) {
-				return null;
-			}
+		if (jsonArray.length() <= 0) {
+			return null;
+		}
 
-			for (int i = 0 ; i < jsonArray.length(); i++) {
+		for (int i = 0 ; i < jsonArray.length(); i++) {
+			try {
 				Object value = jsonArray.get(i);
 				
 				if (value == null) {
@@ -158,9 +152,9 @@ public class ArrayUtil {
 				} else if (value instanceof JSONArray) {
 					writableArray.pushArray(jsonArrayToWritableArray((JSONArray) value));
 				}
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
-		} catch (JSONException e) {
-			// Do nothing and fail silently
 		}
 		
 		return writableArray;
