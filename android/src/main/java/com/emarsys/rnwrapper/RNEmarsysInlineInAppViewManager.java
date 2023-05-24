@@ -1,5 +1,7 @@
 package com.emarsys.rnwrapper;
 
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -31,7 +33,8 @@ public class RNEmarsysInlineInAppViewManager extends SimpleViewManager<InlineInA
 
     @Override
     public InlineInAppView createViewInstance(ThemedReactContext context) {
-        InlineInAppView view = new InlineInAppView(reactContext);
+        InlineInAppView view = new InlineInAppView(reactContext,
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         view.setOnAppEventListener((property, json) -> {
             WritableMap event = Arguments.createMap();
             event.putString("eventName", property);
