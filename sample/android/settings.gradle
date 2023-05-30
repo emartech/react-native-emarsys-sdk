@@ -2,4 +2,5 @@ rootProject.name = 'EmarsysApp'
 include ':react-native-emarsys-wrapper'
 project(':react-native-emarsys-wrapper').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-emarsys-wrapper/android')
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+includeBuild('../node_modules/react-native-gradle-plugin')
 include ':app'
