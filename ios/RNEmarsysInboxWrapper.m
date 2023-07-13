@@ -79,7 +79,7 @@ RCT_EXPORT_METHOD(removeTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonn
     NSMutableDictionary<NSString *, NSObject *> *map = [[NSMutableDictionary alloc] init];
     
     [map setObject: message.id forKey: @"id"];
-    [map setObject: message.id forKey: @"messageId"];
+    [map setObject: message.id forKey: @"messageId"]; // deprecated. to be removed
     [map setObject: message.campaignId forKey: @"campaignId"];
     [map setObject: message.collapseId ?: @"" forKey: @"collapseId"];
     [map setObject: message.title forKey: @"title"];
