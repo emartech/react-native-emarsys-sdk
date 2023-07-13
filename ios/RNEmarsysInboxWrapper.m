@@ -78,7 +78,8 @@ RCT_EXPORT_METHOD(removeTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonn
     
     NSMutableDictionary<NSString *, NSObject *> *map = [[NSMutableDictionary alloc] init];
     
-    [map setObject: message.id forKey: @"messageId"];
+    [map setObject: message.id forKey: @"id"];
+    [map setObject: message.id forKey: @"messageId"]; // deprecated. to be removed
     [map setObject: message.campaignId forKey: @"campaignId"];
     [map setObject: message.collapseId ?: @"" forKey: @"collapseId"];
     [map setObject: message.title forKey: @"title"];
@@ -109,12 +110,12 @@ RCT_EXPORT_METHOD(removeTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonn
     
     if ([action isKindOfClass:[EMSAppEventActionModel class]]) {
         [map setObject: ((EMSAppEventActionModel *)action).name forKey: @"name"];
-        [map setObject: ((EMSAppEventActionModel *)action).payload forKey: @"payload"];
+        [map setObject: (((EMSAppEventActionModel *)action).payload ?: [NSDictionary dictionary]) forKey: @"payload"];
     } else if ([action isKindOfClass:[EMSOpenExternalUrlActionModel class]]) {
         [map setObject: ((EMSOpenExternalUrlActionModel *)action).url.absoluteString forKey: @"url"];
     } else if ([action isKindOfClass:[EMSCustomEventActionModel class]]) {
         [map setObject: ((EMSCustomEventActionModel *)action).name forKey: @"name"];
-        [map setObject: ((EMSCustomEventActionModel *)action).payload forKey: @"payload"];
+        [map setObject: (((EMSCustomEventActionModel *)action).payload ?: [NSDictionary dictionary]) forKey: @"payload"];
     } else if ([action isKindOfClass:[EMSDismissActionModel class]]) {
         // no additional fields
     }
