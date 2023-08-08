@@ -1,6 +1,6 @@
 {
     "name": "react-native-emarsys-wrapper",
-    "version": "1.14.0",
+    "version": "1.15.0",
     "description": "React Native wrapper for Emarsys SDK",
     "main": "index.js",
     "scripts": {
