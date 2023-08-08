@@ -145,7 +145,7 @@ public class RNEmarsysInboxWrapperModule extends ReactContextBaseJavaModule {
         WritableMap map = Arguments.createMap();
 
         mapPutNullable(map, "id", action.getId());
-        mapPutNullable(map, "title", action.getType());
+        mapPutNullable(map, "title", action.getTitle());
         mapPutNullable(map, "type", action.getType());
 
         if (action instanceof AppEventActionModel) {
