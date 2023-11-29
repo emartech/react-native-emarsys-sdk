@@ -1,8 +1,9 @@
 {
     "name": "react-native-emarsys-wrapper",
-    "version": "1.15.0",
+    "version": "1.16.0",
     "description": "React Native wrapper for Emarsys SDK",
     "main": "index.js",
+    "type": "module",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -10,7 +11,7 @@
         "react-native",
         "Emarsys"
     ],
-    "author": "Aliaksandr Andreyeu",
+    "author": "emarsys",
     "license": "MIT",
     "peerDependencies": {
         "react": ">=17.0.2",
