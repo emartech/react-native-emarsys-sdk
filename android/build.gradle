@@ -17,13 +17,13 @@ buildscript {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 32
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 33
+    buildToolsVersion "33.0.0"
     defaultConfig {
         minSdkVersion 24
         targetSdkVersion 31
-        versionCode 15
-        versionName "1.15"
+        versionCode 16
+        versionName "1.16"
     }
     lintOptions {
         abortOnError false
@@ -46,5 +46,5 @@ repositories {
 
 dependencies {
     implementation "com.facebook.react:react-native:+"
-    implementation "com.emarsys:emarsys-sdk:3.5.+"
+    implementation "com.emarsys:emarsys-sdk:3.6.+"
 }

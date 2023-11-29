@@ -2,7 +2,7 @@
 	"name": "EmarsysApp",
 	"version": "1.0.1",
 	"description": "React Native Application for Emarsys SDK wrapper testing",
-	"author": "Aliaksandr Andreyeu",
+	"author": "emarsys",
 	"license": "MIT",
 	"private": true,
 	"scripts": {
