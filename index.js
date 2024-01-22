@@ -3,7 +3,7 @@ import { NativeModules, NativeEventEmitter } from 'react-native';
 const { RNEmarsysWrapper } = NativeModules;
 
 import Push from './src/push';
-import InApp from './src/inapp';
+import InApp, { InlineInAppView } from './src/inapp';
 import Inbox from './src/inbox';
 import Predict from './src/predict';
 import Geofence from './src/geofence';
@@ -124,6 +124,7 @@ const Emarsys = {
 
 	push: Push,
 	inApp: InApp,
+	InlineInAppView,
 	inbox: Inbox,
 	predict: Predict,
 	geofence: Geofence,

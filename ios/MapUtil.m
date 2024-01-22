@@ -9,7 +9,6 @@
                                                          error:&error];
     
     if (! jsonData) {
-        NSLog(@"error");
         return @"{}";
     } else {
         return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
