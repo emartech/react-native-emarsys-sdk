@@ -132,3 +132,6 @@ const Emarsys = {
 };
 
 export default Emarsys;
+
+import { version } from './package.json';
+RNEmarsysWrapper.trackCustomEvent('wrapper:init', { type: 'react-native', version })
