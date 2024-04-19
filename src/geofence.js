@@ -1,62 +1,60 @@
-import { NativeModules } from 'react-native';
+import { NativeModules } from "react-native";
 
 const { RNEmarsysGeofenceWrapper } = NativeModules;
 
 const Geofence = {
+  /**
+   * The `requestAlwaysAuthorization()` method is responsible for asking the required permissions from the user. Only available on iOS.
+   * @returns {Promise<boolean | "Not supported on Android">} Promise with success/failure boolean or error string on Android.
+   */
+  requestAlwaysAuthorization() {
+    return Platform.OS === "ios" ? RNEmarsysGeofenceWrapper.requestAlwaysAuthorization() : "Not supported on Android";
+  },
 
-	/**
-	 * @desc The requestAlwaysAuthorization method is responsible for asking the required permissions from the user.
-	 *	Only available on iOS.
-	 * @return bool - success or failure
-	 */
-	requestAlwaysAuthorization() {
-		return Platform.OS === 'ios' ? RNEmarsysGeofenceWrapper.requestAlwaysAuthorization() : "Not supported on Android"
-	},
+  /**
+   * Enables Geofence.
+   * @returns {Promise<boolean>} Promise with success or failure boolean.
+   */
+  enable() {
+    return RNEmarsysGeofenceWrapper.geofenceEnable();
+  },
 
-	/**
-	 * @desc Activate Geofence
-	 * @return bool - success or failure
-	 */
-	enable() {
-		return RNEmarsysGeofenceWrapper.geofenceEnable()
-	},
+  /**
+   * Disables Geofence.
+   * @returns {Promise<boolean>} Promise with success or failure boolean.
+   */
+  disable() {
+    return RNEmarsysGeofenceWrapper.geofenceDisable();
+  },
 
-	/**
-	 * @desc Disable Geofence
-	 * @return bool - success or failure
-	 */
-	disable() {
-		return RNEmarsysGeofenceWrapper.geofenceDisable()
-	},
+  /**
+   * Returns whether or not geofencing is currently enabled.
+   * @returns {Promise<boolean>} Promise with a boolean indicating the geofencing status.
+   */
+  isEnabled() {
+    return RNEmarsysGeofenceWrapper.geofenceIsEnabled();
+  },
 
-	/**
-	 * @desc Return if the geofencing is currently enabled or not
-	 * @return bool - geofencing is currently enabled or not
-	 */
-	isEnabled() {
-		return RNEmarsysGeofenceWrapper.geofenceIsEnabled()
-	},
+  /**
+   * When `initialEnterTriggerEnabled` is `true`,
+   * Emarsys SDK will trigger all the affected geofences with `Enter` type triggers at the moment
+   * when the geofence is enabled if the device is already inside that geofence.
+   *
+   * By default, this value is set to `false`.
+   * @param {boolean} enabled - New `initialEnterTriggerEnabled` value to change for.
+   * @returns {Promise<boolean>} Promise with success or failure boolean.
+   */
+  setInitialEnterTriggerEnabled(enabled) {
+    return RNEmarsysGeofenceWrapper.geofenceSetInitialEnterTriggerEnabled(enabled);
+  },
 
-	/**
-	 * @desc When initialEnterTriggerEnabled is true,
-	 * 	Emarsys SDK will trigger all the affected geofences with Enter type triggers at the moment
-	 * 	when the geofence is enabled if the device is already inside that geofence.
-	 * 	By default, this value is set to false.
-	 * @param bool enabled - initialEnterTriggerEnabled value for change
-	 * @return bool - success or failure
-	 */
-	setInitialEnterTriggerEnabled(enabled) {
-		return RNEmarsysGeofenceWrapper.geofenceSetInitialEnterTriggerEnabled(enabled)
-	},
-
-	/**
-	 * @desc Access the registered geofences from the device
-	 * @return array - array of registered geofences
-	 */
-	registeredGeofences() {
-		return RNEmarsysGeofenceWrapper.registeredGeofences()
-	},
-
+  /**
+   * Accesses the registered geofences from the device.
+   * @returns {Promise<unknown[]>} Promise with the array of registered geofences.
+   */
+  registeredGeofences() {
+    return RNEmarsysGeofenceWrapper.registeredGeofences();
+  },
 };
 
 export default Geofence;
