@@ -26,7 +26,6 @@ DerivedData
 
 *.xcuserstate
 
-
 *.hprof
 
 # Android/IntelliJ
@@ -43,7 +42,6 @@ local.properties
 
 npm-debug.log
 yarn-error.log
-
 
 # BUCK
 buck-out/
@@ -66,3 +64,4 @@ buck-out/
 *.bundle
 sample/ios/Podfile.lock
 sample/android/app/google-services.json
+typescript/*
