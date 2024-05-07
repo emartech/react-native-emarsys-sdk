@@ -1,7 +1,8 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
-  // Tells TypeScript where to look for files to work with.
+  // Tells TypeScript where to look (or not) for files to work with.
   "include": ["index.js", "src/**/*"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
     // Tells TypeScript to read JS files, as normally they are ignored as source files.
     "allowJs": true,
