@@ -1,0 +1,19 @@
+{
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  // Tells TypeScript where to look for files to work with.
+  "include": ["index.js", "src/**/*"],
+  "compilerOptions": {
+    // Tells TypeScript to read JS files, as normally they are ignored as source files.
+    "allowJs": true,
+    // Ask Typescript to generate .d.ts declaration files.
+    "noEmit": false,
+    "declaration": true,
+    // This compiler run should only output .d.ts files.
+    "emitDeclarationOnly": true,
+    // Types should go into this directory.
+    // Removing this option will place the .d.ts files next to their .js source files.
+    "outDir": "typescript",
+    // Generate declaration files to go to js file when using IDE functions like "Go to Definition".
+    "declarationMap": true
+  }
+}

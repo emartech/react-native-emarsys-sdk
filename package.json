@@ -1,20 +1,29 @@
 {
-    "name": "react-native-emarsys-wrapper",
-    "version": "1.17.0",
-    "description": "React Native wrapper for Emarsys SDK",
-    "main": "index.js",
-    "type": "module",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [
-        "react-native",
-        "Emarsys"
-    ],
-    "author": "emarsys",
-    "license": "MIT",
-    "peerDependencies": {
-        "react": ">=17.0.2",
-        "react-native": ">=0.67.3"
-    }
+  "name": "react-native-emarsys-wrapper",
+  "version": "1.17.0",
+  "description": "React Native wrapper for Emarsys SDK",
+  "main": "index.js",
+  "types": "typescript/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "prepare": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native",
+    "Emarsys"
+  ],
+  "author": "emarsys",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": ">=3.7.2"
+  },
+  "peerDependencies": {
+    "@types/jest": "*",
+    "@types/react": "*",
+    "@tsconfig/react-native": "*",
+    "@types/react-test-renderer": "*",
+    "react": ">=17.0.2",
+    "react-native": ">=0.67.3"
+  }
 }
