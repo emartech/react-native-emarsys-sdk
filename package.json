@@ -6,7 +6,7 @@
   "types": "typescript/index.d.ts",
   "type": "module",
   "scripts": {
-    "prepare": "tsc",
+    "postinstall": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
