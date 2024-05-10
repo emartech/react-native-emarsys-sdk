@@ -6,7 +6,7 @@
   "types": "typescript/index.d.ts",
   "type": "module",
   "scripts": {
-    "prepare": "tsc",
+    "postinstall": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -19,10 +19,6 @@
     "typescript": ">=3.7.2"
   },
   "peerDependencies": {
-    "@types/jest": "*",
-    "@types/react": "*",
-    "@tsconfig/react-native": "*",
-    "@types/react-test-renderer": "*",
     "react": ">=17.0.2",
     "react-native": ">=0.67.3"
   }
