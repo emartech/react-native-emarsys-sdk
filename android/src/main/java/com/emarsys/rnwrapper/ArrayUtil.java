@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class ArrayUtil {
@@ -119,6 +120,32 @@ public class ArrayUtil {
 			}
 		}
 		
+		return writableArray;
+	}
+
+	public static WritableArray arrayListToWritableArray(ArrayList array) {
+		WritableArray writableArray = Arguments.createArray();
+
+		for (int i = 0; i < array.size(); i++) {
+			Object value = array.get(i);
+
+			if (value == null) {
+				writableArray.pushNull();
+			} else if (value instanceof Boolean) {
+				writableArray.pushBoolean((Boolean) value);
+			} else if (value instanceof Double) {
+				writableArray.pushDouble((Double) value);
+			} else if (value instanceof Integer) {
+				writableArray.pushInt((Integer) value);
+			} else if (value instanceof String) {
+				writableArray.pushString((String) value);
+			} else if (value instanceof Map) {
+				writableArray.pushMap(MapUtil.toWritableMap((Map<String, Object>) value));
+			} else if (value instanceof ArrayList) {
+				writableArray.pushArray(ArrayUtil.arrayListToWritableArray((ArrayList) value));
+			}
+		}
+
 		return writableArray;
 	}
 
