@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -125,6 +126,8 @@ public class MapUtil {
 				writableMap.putString((String) pair.getKey(), (String) value);
 			} else if (value instanceof Map) {
 				writableMap.putMap((String) pair.getKey(), MapUtil.toWritableMap((Map<String, Object>) value));
+			} else if (value instanceof ArrayList) {
+				writableMap.putArray((String) pair.getKey(), ArrayUtil.arrayListToWritableArray((ArrayList) value));
 			} else if (value.getClass() != null && value.getClass().isArray()) {
 				writableMap.putArray((String) pair.getKey(), ArrayUtil.toWritableArray((Object[]) value));
 			}
