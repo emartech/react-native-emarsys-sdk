@@ -12,7 +12,9 @@ We created a sample application to help in the integration and give an example. 
 
 ## Setup
 
-`$ npm install "git+ssh://git@github.com/emartech/react-native-emarsys-sdk.git#1.20.0" --save`
+`$ npm install "git+ssh://git@github.com/emartech/react-native-emarsys-sdk.git#<version>" --save`
+
+Check the latest version [here](https://github.com/emartech/react-native-emarsys-sdk/releases)
 
 ## Requirements
 
