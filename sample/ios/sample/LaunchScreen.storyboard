@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uIf-Ns-1eA">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="Nfk-Ah-zEZ">
+            <objects>
+                <viewController id="uIf-Ns-1eA" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7Rf-Mu-bQr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ck9-KA-EbF">
+                                <rect key="frame" x="67.5" y="147.5" width="240" height="323"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SAP_Emarsys" translatesAutoresizingMaskIntoConstraints="NO" id="Z0Q-8F-f0S">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="323"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="323" id="0aX-uR-ezO"/>
+                                            <constraint firstAttribute="width" constant="240" id="5D7-aN-9Pc"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Gaq-yG-HAG"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Ck9-KA-EbF" firstAttribute="centerX" secondItem="Gaq-yG-HAG" secondAttribute="centerX" id="4Rx-CU-D7G"/>
+                            <constraint firstItem="Ck9-KA-EbF" firstAttribute="centerY" secondItem="Gaq-yG-HAG" secondAttribute="centerY" multiplier="0.9" id="ZZ1-Bw-fM5"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sUg-jf-4M3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="SAP_Emarsys" width="297" height="283"/>
+    </resources>
+</document>

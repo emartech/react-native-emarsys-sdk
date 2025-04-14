@@ -1,50 +1,33 @@
-require_relative '../node_modules/react-native/scripts/react_native_pods'
-require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+# Resolve react_native_pods.rb with node to allow for hoisting
+require Pod::Executable.execute_command('node', ['-p',
+  'require.resolve(
+    "react-native/scripts/react_native_pods.rb",
+    {paths: [process.argv[1]]},
+  )', __dir__]).strip
 
-platform :ios, '14.0'
+platform :ios, '15.1'
+prepare_react_native_project!
 
-target 'EmarsysApp' do
+use_frameworks!
+
+target 'sample' do
   config = use_native_modules!
+
   use_react_native!(
     :path => config[:reactNativePath],
-    # to enable hermes on iOS, change `false` to `true` and then install pods
-    :hermes_enabled => false
+    # An absolute path to your application root.
+    :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
-
-  # Enables Flipper.
-  #
-  # Note that if you have use_frameworks! enabled, Flipper will not work and
-  # you should uncomment the next line.
-  #
-  # use_flipper!({ 'Flipper-Folly' => '2.5.3', 'Flipper' => '0.87.0', 'Flipper-RSocket' => '1.3.1' })
-
-  # Note that if you have use_frameworks! enabled, RNEmarsysWrapper will not work and
-  # you should uncomment the following lines.
-  #
-  # pod 'RNEmarsysWrapper', :path => '../node_modules/react-native-emarsys-wrapper'
-  # pre_install do |installer|
-  #   installer.pod_targets.each do |pod|
-  #     if pod.name.eql?('RNEmarsysWrapper')
-  #       def pod.build_type
-  #         Pod::BuildType.static_library
-  #       end
-  #     end
-  #   end
-  # end
 
   use_native_modules!
 
   post_install do |installer|
-    react_native_post_install(installer)
-    __apply_Xcode_12_5_M1_post_install_workaround(installer)
-    installer.pods_project.targets.each do |target|
-      target.build_configurations.each do |config|
-        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)', '_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION']
-      end
-    end
+    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+    react_native_post_install(
+      installer,
+      config[:reactNativePath],
+      :mac_catalyst_enabled => false,
+      # :ccache_enabled => true
+    )
   end
-end
-
-target "EmarsysAppNotificationService" do
-  pod 'EmarsysNotificationService'
 end
