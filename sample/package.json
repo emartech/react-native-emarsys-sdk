@@ -17,7 +17,7 @@
     "@react-navigation/native": "^7.1.6",
     "react": "19.0.0",
     "react-native": "0.79.0",
-    "react-native-emarsys-wrapper": "github:emartech/react-native-emarsys-sdk",
+    "react-native-emarsys-wrapper": "github:emartech/react-native-emarsys-sdk#MV-931",
     "react-native-gesture-handler": "^2.25.0",
     "react-native-reanimated": "^3.17.3",
     "react-native-safe-area-context": "^5.3.0",
