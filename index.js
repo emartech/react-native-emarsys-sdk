@@ -145,4 +145,5 @@ const Emarsys = {
 export default Emarsys;
 
 import { version } from "./package.json";
-RNEmarsysWrapper.trackCustomEvent("wrapper:init", { type: "react-native", version });
+import { version as frameworkVersion } from 'react-native/package.json';
+RNEmarsysWrapper.trackCustomEvent("wrapper:init", { type: "react-native", version, frameworkVersion });
