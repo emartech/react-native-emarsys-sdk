@@ -14,7 +14,7 @@
     "Emarsys"
   ],
   "author": "emarsys",
-  "license": "MIT",
+  "license": "Apache 2.0",
   "devDependencies": {
     "typescript": ">=3.7.2"
   },
