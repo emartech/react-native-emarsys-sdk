@@ -31,3 +31,7 @@ target 'sample' do
     )
   end
 end
+
+target 'EMSNotificationService' do
+    pod 'EmarsysNotificationService'
+end

@@ -3,14 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		567811146C94827E8182008F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
-		7C36787DFC4F45ACFBDFE545 /* Pods_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46E415E28654971C9D5C44B /* Pods_sample.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		C85075A02DAD340D00EC008F /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C85075992DAD340D00EC008F /* Foundation.ttf */; };
 		C85075A12DAD340D00EC008F /* FontAwesome6_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C85075952DAD340D00EC008F /* FontAwesome6_Brands.ttf */; };
@@ -31,17 +30,47 @@
 		C85075B02DAD340D00EC008F /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C85075942DAD340D00EC008F /* FontAwesome5_Solid.ttf */; };
 		C85075B12DAD340D00EC008F /* FontAwesome6_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C85075972DAD340D00EC008F /* FontAwesome6_Solid.ttf */; };
 		C85075B22DAD340D00EC008F /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C850758D2DAD340D00EC008F /* AntDesign.ttf */; };
+		C85C72342E6EFE1C003B37E1 /* EMSNotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C85C722D2E6EFE1C003B37E1 /* EMSNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D83E49EE36322432E8530DCB /* Pods_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB612A48803EA40AA57EC5E4 /* Pods_sample.framework */; };
+		E63CA95873BA3E7C8E35B1F6 /* Pods_EMSNotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FBE6441AA8084218388CF5 /* Pods_EMSNotificationService.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C85C72322E6EFE1C003B37E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C85C722C2E6EFE1C003B37E1;
+			remoteInfo = EMSNotificationService;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C85C72242E6ED903003B37E1 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C85C72342E6EFE1C003B37E1 /* EMSNotificationService.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		086B1FA74F69F20C7619BC6E /* Pods-EMSNotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMSNotificationService.debug.xcconfig"; path = "Target Support Files/Pods-EMSNotificationService/Pods-EMSNotificationService.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = sample/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = sample/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = sample/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		6F702C47BB79F3564128AA10 /* Pods-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sample.release.xcconfig"; path = "Target Support Files/Pods-sample/Pods-sample.release.xcconfig"; sourceTree = "<group>"; };
+		1DD9B3B347BB57787FC4264A /* Pods-EMSNotificationService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMSNotificationService.release.xcconfig"; path = "Target Support Files/Pods-EMSNotificationService/Pods-EMSNotificationService.release.xcconfig"; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = sample/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = sample/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A4001935BC7FA2C33ADABAE4 /* Pods-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sample.debug.xcconfig"; path = "Target Support Files/Pods-sample/Pods-sample.debug.xcconfig"; sourceTree = "<group>"; };
+		92FBE6441AA8084218388CF5 /* Pods_EMSNotificationService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EMSNotificationService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8AA541D1ED920CDC4B52F56 /* Pods-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sample.release.xcconfig"; path = "Target Support Files/Pods-sample/Pods-sample.release.xcconfig"; sourceTree = "<group>"; };
+		C2806D39CE5F5CCFA50AE8DB /* Pods-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sample.debug.xcconfig"; path = "Target Support Files/Pods-sample/Pods-sample.debug.xcconfig"; sourceTree = "<group>"; };
 		C850758C2DA8F16400EC008F /* sample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = sample.entitlements; path = sample/sample.entitlements; sourceTree = "<group>"; };
 		C850758D2DAD340D00EC008F /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
 		C850758E2DAD340D00EC008F /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
@@ -62,16 +91,46 @@
 		C850759D2DAD340D00EC008F /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		C850759E2DAD340D00EC008F /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		C850759F2DAD340D00EC008F /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
-		D46E415E28654971C9D5C44B /* Pods_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C85C722D2E6EFE1C003B37E1 /* EMSNotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = EMSNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB612A48803EA40AA57EC5E4 /* Pods_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C85C72352E6EFE1C003B37E1 /* Exceptions for "EMSNotificationService" folder in "EMSNotificationService" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = C85C722C2E6EFE1C003B37E1 /* EMSNotificationService */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		C85C722E2E6EFE1C003B37E1 /* EMSNotificationService */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C85C72352E6EFE1C003B37E1 /* Exceptions for "EMSNotificationService" folder in "EMSNotificationService" target */,
+			);
+			path = EMSNotificationService;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C36787DFC4F45ACFBDFE545 /* Pods_sample.framework in Frameworks */,
+				D83E49EE36322432E8530DCB /* Pods_sample.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C85C722A2E6EFE1C003B37E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E63CA95873BA3E7C8E35B1F6 /* Pods_EMSNotificationService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,7 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				D46E415E28654971C9D5C44B /* Pods_sample.framework */,
+				92FBE6441AA8084218388CF5 /* Pods_EMSNotificationService.framework */,
+				DB612A48803EA40AA57EC5E4 /* Pods_sample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -113,6 +173,7 @@
 				C85075B32DAD377A00EC008F /* Fonts */,
 				13B07FAE1A68108700A75B9A /* sample */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				C85C722E2E6EFE1C003B37E1 /* EMSNotificationService */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
@@ -126,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* sample.app */,
+				C85C722D2E6EFE1C003B37E1 /* EMSNotificationService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,8 +195,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A4001935BC7FA2C33ADABAE4 /* Pods-sample.debug.xcconfig */,
-				6F702C47BB79F3564128AA10 /* Pods-sample.release.xcconfig */,
+				086B1FA74F69F20C7619BC6E /* Pods-EMSNotificationService.debug.xcconfig */,
+				1DD9B3B347BB57787FC4264A /* Pods-EMSNotificationService.release.xcconfig */,
+				C2806D39CE5F5CCFA50AE8DB /* Pods-sample.debug.xcconfig */,
+				A8AA541D1ED920CDC4B52F56 /* Pods-sample.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -172,22 +236,45 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "sample" */;
 			buildPhases = (
-				521322499639CFC1974253F9 /* [CP] Check Pods Manifest.lock */,
+				7AEB15ECB86AF9843ED6BC53 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				F700FE686CA6399807FE3373 /* [CP] Embed Pods Frameworks */,
-				F70AFE6D103576B4A27B13AF /* [CP] Copy Pods Resources */,
+				C85C72242E6ED903003B37E1 /* Embed Foundation Extensions */,
+				83414EB226BC2B420839C209 /* [CP] Embed Pods Frameworks */,
+				99B1548EC1E138206AE8968F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C85C72332E6EFE1C003B37E1 /* PBXTargetDependency */,
 			);
 			name = sample;
 			productName = sample;
 			productReference = 13B07F961A680F5B00A75B9A /* sample.app */;
 			productType = "com.apple.product-type.application";
+		};
+		C85C722C2E6EFE1C003B37E1 /* EMSNotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C85C72362E6EFE1C003B37E1 /* Build configuration list for PBXNativeTarget "EMSNotificationService" */;
+			buildPhases = (
+				6CE2E3C36F600E5612CD36E0 /* [CP] Check Pods Manifest.lock */,
+				C85C72292E6EFE1C003B37E1 /* Sources */,
+				C85C722A2E6EFE1C003B37E1 /* Frameworks */,
+				C85C722B2E6EFE1C003B37E1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C85C722E2E6EFE1C003B37E1 /* EMSNotificationService */,
+			);
+			name = EMSNotificationService;
+			productName = EMSNotificationService;
+			productReference = C85C722D2E6EFE1C003B37E1 /* EMSNotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -195,15 +282,18 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1120;
 					};
+					C85C722C2E6EFE1C003B37E1 = {
+						CreatedOnToolsVersion = 16.4;
+					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "sample" */;
-			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -211,11 +301,13 @@
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* sample */,
+				C85C722C2E6EFE1C003B37E1 /* EMSNotificationService */,
 			);
 		};
 /* End PBXProject section */
@@ -250,6 +342,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C85C722B2E6EFE1C003B37E1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -269,7 +368,29 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		521322499639CFC1974253F9 /* [CP] Check Pods Manifest.lock */ = {
+		6CE2E3C36F600E5612CD36E0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EMSNotificationService-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7AEB15ECB86AF9843ED6BC53 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -291,7 +412,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F700FE686CA6399807FE3373 /* [CP] Embed Pods Frameworks */ = {
+		83414EB226BC2B420839C209 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -308,7 +429,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-sample/Pods-sample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F70AFE6D103576B4A27B13AF /* [CP] Copy Pods Resources */ = {
+		99B1548EC1E138206AE8968F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -336,12 +457,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C85C72292E6EFE1C003B37E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C85C72332E6EFE1C003B37E1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C85C722C2E6EFE1C003B37E1 /* EMSNotificationService */;
+			targetProxy = C85C72322E6EFE1C003B37E1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A4001935BC7FA2C33ADABAE4 /* Pods-sample.debug.xcconfig */;
+			baseConfigurationReference = C2806D39CE5F5CCFA50AE8DB /* Pods-sample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -352,7 +488,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = sample/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Emarsys RN App";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -379,7 +515,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F702C47BB79F3564128AA10 /* Pods-sample.release.xcconfig */;
+			baseConfigurationReference = A8AA541D1ED920CDC4B52F56 /* Pods-sample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -389,7 +525,7 @@
 				DEVELOPMENT_TEAM = 4J5FXBB97U;
 				INFOPLIST_FILE = sample/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Emarsys RN App";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -587,6 +723,89 @@
 			};
 			name = Release;
 		};
+		C85C72372E6EFE1C003B37E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 086B1FA74F69F20C7619BC6E /* Pods-EMSNotificationService.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4J5FXBB97U;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EMSNotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = EMSNotificationService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = ems.react.example.EmarsysApp.EMSNotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C85C72382E6EFE1C003B37E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1DD9B3B347BB57787FC4264A /* Pods-EMSNotificationService.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 4J5FXBB97U;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EMSNotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = EMSNotificationService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = ems.react.example.EmarsysApp.EMSNotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -604,6 +823,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C85C72362E6EFE1C003B37E1 /* Build configuration list for PBXNativeTarget "EMSNotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C85C72372E6EFE1C003B37E1 /* Debug */,
+				C85C72382E6EFE1C003B37E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
