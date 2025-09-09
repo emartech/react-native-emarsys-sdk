@@ -1,3 +1,7 @@
+//
+//  Copyright © 2025. Emarsys. All rights reserved.
+//
+
 import UIKit
 import RNEmarsysWrapper
 import React
