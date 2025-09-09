@@ -7,6 +7,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.emarsys.Emarsys
 import com.emarsys.config.EmarsysConfig
+import com.emarsys.rnwrapper.RNEmarsysEventHandler
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost
@@ -17,7 +18,6 @@ import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.soloader.OpenSourceMergedSoMapping
 import com.facebook.soloader.SoLoader
-
 
 class MainApplication : Application(), ReactApplication {
 
@@ -50,6 +50,9 @@ class MainApplication : Application(), ReactApplication {
         merchantId = "1DF86BF95CBE8F19",
         verboseConsoleLoggingEnabled = true)
     Emarsys.setup(config)
+
+    val eventHandler = RNEmarsysEventHandler.getInstance()
+    eventHandler.setEventHandlers()
 
     SoLoader.init(this, OpenSourceMergedSoMapping)
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
