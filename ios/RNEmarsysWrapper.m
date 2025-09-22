@@ -2,6 +2,8 @@
 
 #import "Emarsys.h"
 
+#import "StorageUtil.h"
+
 static bool hasListeners = NO;
 static NSDictionary<NSString *,NSObject *> *_body = nil;
 
@@ -98,6 +100,7 @@ RCT_EXPORT_METHOD(changeApplicationCode:(NSString * _Nullable)applicationCode re
             if (NULL != error) {
                 reject(@"RNEmarsysWrapper", @"changeApplicationCode: ", error);
             } else {
+                [StorageUtil setString:(applicationCode ?: @"") forKey: @"applicationCode"];
                 resolve([NSNumber numberWithBool:YES]);
             }
         }];

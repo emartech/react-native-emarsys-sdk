@@ -166,6 +166,8 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
                     if (errorCause != null) {
                         promise.reject(TAG, "Error changeApplicationCode: ", errorCause);
                     } else {
+                        StorageUtil.setString(reactContext.getApplicationContext(),
+                            "applicationCode", applicationCode != null ? applicationCode : "");
                         promise.resolve(true);
                     }
                 }
