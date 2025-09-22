@@ -166,6 +166,8 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
                     if (errorCause != null) {
                         promise.reject(TAG, "Error changeApplicationCode: ", errorCause);
                     } else {
+                        StorageUtil.setString(reactContext.getApplicationContext(),
+                            "applicationCode", applicationCode != null ? applicationCode : "");
                         promise.resolve(true);
                     }
                 }
@@ -176,9 +178,11 @@ public class RNEmarsysWrapperModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void changeMerchantId(@NonNull final String merchantId, Promise promise) {
+    public void changeMerchantId(@Nullable final String merchantId, Promise promise) {
         try {
             Emarsys.getConfig().changeMerchantId(merchantId);
+            StorageUtil.setString(reactContext.getApplicationContext(),
+                "merchantId", merchantId != null ? merchantId : "");
             promise.resolve(true);
         } catch (Exception e) {
             promise.reject(TAG, "Error changeMerchantId: ", e);
