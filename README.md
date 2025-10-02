@@ -16,12 +16,6 @@ We created a sample application to help in the integration and give an example. 
 
 Check the latest version [here](https://github.com/emartech/react-native-emarsys-sdk/releases)
 
-### Expo
-
-To handle native system events, ensure the native module is properly exposed. See the [Expo documentation](https://docs.expo.dev/modules/appdelegate-subscribers/) for details.
-
-`$ npx expo prebuild --clean`
-
 ## Requirements
 
 - React Native version 0.67.3 or higher.
