@@ -2,6 +2,8 @@
 
 #import "Emarsys.h"
 
+#import "StorageUtil.h"
+
 static bool hasListeners = NO;
 static NSDictionary<NSString *,NSObject *> *_body = nil;
 
@@ -98,6 +100,7 @@ RCT_EXPORT_METHOD(changeApplicationCode:(NSString * _Nullable)applicationCode re
             if (NULL != error) {
                 reject(@"RNEmarsysWrapper", @"changeApplicationCode: ", error);
             } else {
+                [StorageUtil setString:(applicationCode ?: @"") forKey: @"applicationCode"];
                 resolve([NSNumber numberWithBool:YES]);
             }
         }];
@@ -107,9 +110,10 @@ RCT_EXPORT_METHOD(changeApplicationCode:(NSString * _Nullable)applicationCode re
     }
 }
 
-RCT_EXPORT_METHOD(changeMerchantId:(NSString * _Nonnull)merchantId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
+RCT_EXPORT_METHOD(changeMerchantId:(NSString * _Nullable)merchantId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject ) {
     @try {
         [Emarsys.config changeMerchantId:merchantId ];
+        [StorageUtil setString:(merchantId ?: @"") forKey: @"merchantId"];
         resolve([NSNumber numberWithBool:YES]);
     }
     @catch (NSException *exception) {
