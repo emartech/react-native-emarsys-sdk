@@ -1,0 +1,71 @@
+name: Create Release Draft
+permissions:
+  contents: write
+
+on:
+  push:
+  pull_request:
+    types: [closed]
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  create-release:
+    if: ${{ (contains(github.event.pull_request.title, '[Release]') && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Get version from changelog
+      id: get-version
+      run: |
+          VERSION=$(grep -E "^# [0-9]+\.[0-9]+\.[0-9]+" CHANGELOG.md | head -1 | grep -oE "[0-9]+\.[0-9]+\.[0-9]+")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Found version: $VERSION"
+          
+          # Extract changelog content for this version (without the version header)
+          # Find the line with the version header and get content until next version or end of file
+          awk "/^# $VERSION/{flag=1; next} /^# [0-9]/{flag=0} flag" CHANGELOG.md > changelog_body.md
+          echo "Changelog content extracted for version $VERSION"
+
+    - name: Check if tag exists
+      id: check-tag
+      run: |
+        if git rev-parse "${{ steps.get-version.outputs.version }}" >/dev/null 2>&1; then
+          echo "tag-exists=true" >> $GITHUB_OUTPUT
+          echo "Tag ${{ steps.get-version.outputs.version }} already exists"
+        else
+          echo "tag-exists=false" >> $GITHUB_OUTPUT
+          echo "Tag ${{ steps.get-version.outputs.version }} does not exist"
+        fi
+
+    - name: Create Git Tag
+      id: create-tag
+      run: |
+        if [ "${{ steps.check-tag.outputs.tag-exists }}" == "false" ]; then
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag -a "${{ steps.get-version.outputs.version }}" -m "Release version ${{ steps.get-version.outputs.version }}"
+          git push origin "${{ steps.get-version.outputs.version }}"
+          echo "tag-created=true" >> $GITHUB_OUTPUT
+          echo "Created new tag ${{ steps.get-version.outputs.version }}"
+        else
+          echo "tag-created=false" >> $GITHUB_OUTPUT
+          echo "Tag already exists, skipping creation"
+        fi
+
+    - name: Create GitHub Release
+      if: steps.create-tag.outputs.tag-created == 'true'
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.get-version.outputs.version }}
+        release_name: ${{ steps.get-version.outputs.version }}
+        body_path: changelog_body.md
+        draft: true
+        prerelease: false
