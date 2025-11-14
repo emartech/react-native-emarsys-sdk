@@ -144,6 +144,21 @@ const Emarsys = {
 
 export default Emarsys;
 
-import { version } from "./package.json";
-import { version as frameworkVersion } from 'react-native/package.json';
-RNEmarsysWrapper.trackCustomEvent("wrapper:init", { type: "react-native", version, frameworkVersion });
+(async () => {
+  let type = "react-native";
+  let { version } = require("./package.json");
+  let { version: frameworkVersion } = require("react-native/package.json");
+
+  try {
+    // check if expo plugin exist
+    const { version: ver } = require("expo-emarsys-plugin/package.json");
+    const { version: frameworkVer } = require("expo/package.json");
+    type = "expo";
+    version = ver;
+    frameworkVersion = frameworkVer;
+  } catch (error) {
+    // no expo plugin
+  }
+
+  RNEmarsysWrapper.trackCustomEvent("wrapper:init", { type, version, frameworkVersion });
+})();
