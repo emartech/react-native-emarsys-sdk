@@ -5,7 +5,7 @@ import android.content.pm.PackageManager;
 
 public class StorageUtil {
 
-	private static final String STORE_NAME = "com.emarsys.rnwrapper";
+	private static final String STORE_NAME = "com.emarsys.reactnative";
 
 	public static String getString (Context context, String key) {
 		return context.getSharedPreferences(STORE_NAME, Context.MODE_PRIVATE)
