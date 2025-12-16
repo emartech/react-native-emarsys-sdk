@@ -1,6 +1,6 @@
 #import "StorageUtil.h"
 
-#define STORE_NAME @"com.emarsys.rnwrapper"
+#define STORE_NAME @"com.emarsys.reactnative"
 
 @implementation StorageUtil
 

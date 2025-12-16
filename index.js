@@ -151,7 +151,7 @@ export default Emarsys;
 
   try {
     // check if expo plugin exist
-    const { version: ver } = require("expo-emarsys-plugin/package.json");
+    const { version: ver } = require("expo-plugin-for-sap-emarsys/package.json");
     const { version: frameworkVer } = require("expo/package.json");
     type = "expo";
     version = ver;
