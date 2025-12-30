@@ -16,6 +16,11 @@ We created a sample application to help in the integration and give an example. 
 
 Check the latest version [here](https://github.com/emartech/react-native-emarsys-sdk/releases)
 
+## ⚠️ Known issue: React Native New Architecture
+
+Inline in-app view is not compatible with React Native's [New Architecture](https://reactnative.dev/docs/the-new-architecture/landing-page) (Fabric / Turbo) introduced in React Native 0.68+.  
+This implementation is based on the legacy native UI system and **will not be updated to support the New Architecture**.
+
 ## Requirements
 
 - React Native version 0.67.3 or higher.
