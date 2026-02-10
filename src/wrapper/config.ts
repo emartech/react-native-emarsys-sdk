@@ -1,6 +1,6 @@
 import NativeEmarsysConfig from './native/NativeEmarsysConfig';
 
-NativeEmarsysConfig.getRNPluginVersion = () => {
+NativeEmarsysConfig.getRNWrapperVersion = () => {
   return require('../../package.json').version;
 };
 

@@ -19,7 +19,7 @@ config.resolver.nodeModulesPaths = [
 ];
 
 config.resolver.extraNodeModules = {
-  'expo-plugin-for-sap-emarsys': '..',
+  'react-native-emarsys-sdk': '..',
 };
 
 config.watchFolders = [path.resolve(__dirname, '..')];

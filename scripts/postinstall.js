@@ -2,12 +2,12 @@ const fs = require('fs').promises;
 
 (async () => {
   // Copy podspec for react native
-  let podspec = await fs.readFile('ios/ExpoPluginForSAPEmarsys.podspec', { encoding: 'utf8' });
+  let podspec = await fs.readFile('ios/RNEmarsysSDK.podspec', { encoding: 'utf8' });
   podspec = podspec.replace("'..', 'package.json'", "'package.json'");
   podspec = podspec.replace("s.dependency 'ExpoModulesCore'", "");
   podspec = podspec.replace("s.source_files = '", "s.source_files = 'ios/");
   podspec = podspec.replace("s.exclude_files = '", "s.exclude_files = 'ios/");
-  await fs.writeFile('ExpoPluginForSAPEmarsys.podspec', podspec);
+  await fs.writeFile('RNEmarsysSDK.podspec', podspec);
 
   // Check if expo exist
   let expoExist = true;

@@ -3,7 +3,7 @@ import { EventSubscription } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import Emarsys, { type Event } from 'expo-plugin-for-sap-emarsys';
+import Emarsys, { type Event } from 'react-native-emarsys-sdk';
 import ConfigScreen from './screens/ConfigScreen';
 import PushScreen from './screens/PushScreen';
 import InAppScreen from './screens/InAppScreen';

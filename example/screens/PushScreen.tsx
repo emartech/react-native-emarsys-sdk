@@ -1,6 +1,6 @@
 import { Platform, PermissionsAndroid } from 'react-native';
 import * as Notifications from 'expo-notifications';
-import Emarsys from 'expo-plugin-for-sap-emarsys';
+import Emarsys from 'react-native-emarsys-sdk';
 import { ScrollView, Button, Alert, Separator, SectionTitle } from '../components';
 
 export default function PushScreen() {

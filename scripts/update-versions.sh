@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Interactive Version Updater for Expo Emarsys Plugin
+# Interactive Version Updater for React Native Emarsys SDK
 # This script walks you through updating versions step by step
 
 set -e
@@ -22,7 +22,7 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 # File paths
 PACKAGE_JSON_PATH="$PROJECT_ROOT/package.json"
 ANDROID_GRADLE_PATH="$PROJECT_ROOT/android/build.gradle"
-IOS_PODSPEC_PATH="$PROJECT_ROOT/ios/ExpoEmarsysPlugin.podspec"
+IOS_PODSPEC_PATH="$PROJECT_ROOT/ios/RNEmarsysSDK.podspec"
 CHANGELOG_PATH="$PROJECT_ROOT/CHANGELOG.md"
 
 # Function to get current versions
@@ -346,7 +346,7 @@ check_git_status() {
 }
 
 # Main script
-echo -e "${BOLD}${GREEN}🚀 Expo Emarsys Plugin - Version Updater${NC}"
+echo -e "${BOLD}${GREEN}🚀 React Native Emarsys SDK - Version Updater${NC}"
 echo -e "${WHITE}This tool will guide you through updating package and Android versions.${NC}"
 echo ""
 
@@ -682,7 +682,7 @@ fi
 
 # Update iOS podspec
 if [ "$CURRENT_IOS_SDK" != "$NEW_IOS_SDK" ]; then
-    echo -ne "${WHITE}   📝 Updating ExpoEmarsysPlugin.podspec... ${NC}"
+    echo -ne "${WHITE}   📝 Updating RNEmarsysSDK.podspec... ${NC}"
     if sed -i.tmp "s/'EmarsysSDK', '~> $CURRENT_IOS_SDK'/'EmarsysSDK', '~> $NEW_IOS_SDK'/" "$IOS_PODSPEC_PATH" 2>/dev/null; then
         rm "$IOS_PODSPEC_PATH.tmp"
         echo -e "${GREEN}✓${NC}"

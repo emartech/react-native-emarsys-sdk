@@ -1,3 +1,4 @@
-# 0.0.1
+# 2.0.0-beta.0
 
-* Initial release of the Expo Plugin for SAP Emarsys.
+* Support Expo.
+* Support React Native New Architecture.
