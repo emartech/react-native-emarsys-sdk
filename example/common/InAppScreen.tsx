@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import Emarsys, { InlineInAppView, Message, Tag } from 'react-native-emarsys-sdk';
-import { ScrollView, Button, Alert, Separator, SectionTitle } from '../components';
+import { ScrollView, Button, Alert, Separator, SectionTitle } from './Components';
 
 let inboxMessages: Message[] | null | undefined = undefined
 

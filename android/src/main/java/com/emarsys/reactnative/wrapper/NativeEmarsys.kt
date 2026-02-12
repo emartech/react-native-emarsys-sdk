@@ -69,7 +69,7 @@ class NativeEmarsys(reactContext: ReactApplicationContext) : NativeEmarsysSpec(r
 
   override fun trackDeepLink(url: String, promise: Promise) {
     try {
-      val activity = currentActivity
+      val activity = getReactApplicationContext().getCurrentActivity()
       val intent = activity?.intent
       val uri = intent?.data.toString()
       if (activity != null && intent != null && uri == url) {

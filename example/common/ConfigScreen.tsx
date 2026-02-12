@@ -1,5 +1,5 @@
 import Emarsys from 'react-native-emarsys-sdk';
-import { ScrollView, Button, Separator } from '../components';
+import { ScrollView, Button, Separator } from './Components';
 
 export default function ConfigScreen() {
   return (

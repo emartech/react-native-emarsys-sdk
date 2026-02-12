@@ -1,7 +1,12 @@
-// Learn more https://docs.expo.io/guides/customizing-metro
-const { getDefaultConfig } = require('expo/metro-config');
+const { getDefaultConfig } = require('@react-native/metro-config');
 const path = require('path');
 
+/**
+ * Metro configuration
+ * https://reactnative.dev/docs/metro
+ *
+ * @type {import('@react-native/metro-config').MetroConfig}
+ */
 const config = getDefaultConfig(__dirname);
 
 // npm v7+ will install ../node_modules/react and ../node_modules/react-native because of peerDependencies.

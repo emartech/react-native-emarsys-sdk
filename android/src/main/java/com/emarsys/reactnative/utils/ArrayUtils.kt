@@ -38,6 +38,7 @@ object ArrayUtils {
     return list
   }
 
+  @Suppress("UNCHECKED_CAST")
   fun List<Any?>.toWritableArray(): WritableArray {
     val writableArray = Arguments.createArray()
     for (value in this) {

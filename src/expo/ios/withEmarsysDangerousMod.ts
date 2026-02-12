@@ -36,7 +36,7 @@ export const withEmarsysDangerousMod: ConfigPlugin<EMSOptions> = (config, _optio
 target '${NOTIFICATION_SERVICE_TARGET}' do
   use_frameworks!
 
-  pod 'EmarsysNotificationService'
+  pod 'EmarsysNotificationService', '~> 3.9.0'
 end
 `       );
       }

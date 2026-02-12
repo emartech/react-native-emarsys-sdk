@@ -141,7 +141,7 @@ describe('withEmarsysDangerousMod', () => {
 target 'NotificationService' do
   use_frameworks!
 
-  pod 'EmarsysNotificationService'
+  pod 'EmarsysNotificationService', '~> 3.9.0'
 end
 `;
 
