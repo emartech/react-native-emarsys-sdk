@@ -9,7 +9,7 @@ export interface Spec extends TurboModule {
   getClientId(): Promise<string>;
   getLanguageCode(): Promise<string>;
   getSdkVersion(): Promise<string>;
-  getRNPluginVersion(): Promise<string>;
+  getRNWrapperVersion(): Promise<string>;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>(

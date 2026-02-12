@@ -103,7 +103,7 @@ RCT_EXPORT_MODULE()
   }
 }
 
-- (void)getRNPluginVersion:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+- (void)getRNWrapperVersion:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
   // Overridden and implemented in src/wrapper/config.ts
 }
 

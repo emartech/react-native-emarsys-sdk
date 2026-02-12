@@ -35,8 +35,8 @@ jobs:
       working-directory: example/ios
       run: |
         xcodebuild build-for-testing \
-          -workspace expoemarsyspluginexample.xcworkspace \
-          -scheme expoemarsyspluginexample \
+          -workspace reactnativeemarsyssdkexample.xcworkspace \
+          -scheme reactnativeemarsyssdkexample \
           -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=18.6' \
           -quiet
 
@@ -44,6 +44,6 @@ jobs:
       working-directory: example/ios
       run: |
         xcodebuild test \
-          -workspace expoemarsyspluginexample.xcworkspace \
-          -scheme ExpoPluginForSAPEmarsysTest \
+          -workspace reactnativeemarsyssdkexample.xcworkspace \
+          -scheme RNEmarsysSDKTest \
           -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=18.6'

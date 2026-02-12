@@ -2,7 +2,7 @@ const { withDangerousMod, withXcodeProject } = require('expo/config-plugins');
 const fs = require('fs');
 const path = require('path');
 
-const TEST_TARGET_NAME = 'ExpoPluginForSAPEmarsysTest';
+const TEST_TARGET_NAME = 'RNEmarsysSDKTest';
 
 // Copy test files from ios/test into the iOS project during prebuild
 const withTestFiles = (config) => {
@@ -10,8 +10,8 @@ const withTestFiles = (config) => {
     'ios',
     (config) => {
       const projectRoot = config.modRequest.projectRoot;
-      const pluginDir = `${projectRoot}/node_modules/expo-plugin-for-sap-emarsys`;
-      const sourceTestsDir = path.join(pluginDir, 'ios', 'test');
+      const packageDir = `${projectRoot}/node_modules/react-native-emarsys-sdk`;
+      const sourceTestsDir = path.join(packageDir, 'ios', 'test');
       const targetTestsDir = path.join(projectRoot, 'ios', TEST_TARGET_NAME);
 
       if (!fs.existsSync(sourceTestsDir)) {
@@ -29,12 +29,12 @@ const withTestFiles = (config) => {
         let podfileContent = fs.readFileSync(podfilePath, 'utf8');
         
         if (!podfileContent.includes(`target '${TEST_TARGET_NAME}'`)) {
-          const mainTargetRegex = /target\s+'expoemarsyspluginexample'\s+do([\s\S]*?)(\nend)/;
+          const mainTargetRegex = /target\s+'reactnativeemarsyssdkexample'\s+do([\s\S]*?)(\nend)/;
           const match = podfileContent.match(mainTargetRegex);
           
           if (match) {
             const testTarget = `\n\n  target '${TEST_TARGET_NAME}' do\n    inherit! :complete\n  end`;
-            const replacement = `target 'expoemarsyspluginexample' do${match[1]}${testTarget}${match[2]}`;
+            const replacement = `target 'reactnativeemarsyssdkexample' do${match[1]}${testTarget}${match[2]}`;
             podfileContent = podfileContent.replace(mainTargetRegex, replacement);
             fs.writeFileSync(podfilePath, podfileContent, 'utf8');
           }
@@ -160,7 +160,7 @@ const withTestTarget = (config) => {
           }
           buildSettings['INFOPLIST_FILE'] = `${TEST_TARGET_NAME}/Test-Info.plist`;
           buildSettings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.1';
-          buildSettings['TEST_HOST'] = '"$(BUILT_PRODUCTS_DIR)/expoemarsyspluginexample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/expoemarsyspluginexample"';
+          buildSettings['TEST_HOST'] = '"$(BUILT_PRODUCTS_DIR)/reactnativeemarsyssdkexample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/reactnativeemarsyssdkexample"';
           buildSettings['BUNDLE_LOADER'] = '"$(TEST_HOST)"';
         }
       }

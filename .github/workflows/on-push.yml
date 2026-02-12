@@ -1,4 +1,4 @@
-name: Run Expo Plugin Tests
+name: Run Tests
 
 on:
   push:

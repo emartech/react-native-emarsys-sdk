@@ -92,7 +92,7 @@ class NativeEmarsysConfig(reactContext: ReactApplicationContext) : NativeEmarsys
     }
   }
 
-  override fun getRNPluginVersion(promise: Promise) {
+  override fun getRNWrapperVersion(promise: Promise) {
     // Overridden and implemented in src/wrapper/config.ts
   }
 

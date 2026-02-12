@@ -3,7 +3,7 @@ require 'json'
 package = JSON.parse(File.read(File.join(__dir__, '..', 'package.json')))
 
 Pod::Spec.new do |s|
-  s.name           = 'ExpoPluginForSAPEmarsys'
+  s.name           = 'RNEmarsysSDK'
   s.version        = package['version']
   s.summary        = package['description']
   s.description    = package['description']
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
     :tvos => '15.1'
   }
   s.swift_version  = '5.4'
-  s.source         = { git: 'https://github.com/emartech/expo-plugin-for-sap-emarsys' }
+  s.source         = { git: 'https://github.com/emartech/react-native-emarsys-sdk' }
   s.static_framework = true
 
   # Swift/Objective-C compatibility

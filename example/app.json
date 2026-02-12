@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expo-emarsys-plugin-example",
-    "slug": "expo-emarsys-plugin-example",
+    "name": "react-native-emarsys-sdk-example",
+    "slug": "react-native-emarsys-sdk-example",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,7 +14,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "expo.emarsysplugin.example",
+      "bundleIdentifier": "com.emarsysapp",
       "entitlements": {
         "aps-environment": "development"
       },
@@ -30,7 +30,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "expo.modules.emarsysplugin.example",
+      "package": "com.emarsysapp",
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
@@ -42,12 +42,12 @@
     },
     "plugins": [
       [
-        "expo-plugin-for-sap-emarsys",
+        "react-native-emarsys-sdk",
         {
           "applicationCode": "EMS25-20071",
           "merchantId": "1DF86BF95CBE8F19",
           "enableConsoleLogging": true,
-          "androidSharedPackageNames": ["expo.modules.emarsysplugin.example"],
+          "androidSharedPackageNames": ["com.emarsysanotherapp"],
           "androidSharedSecret": "emsSecret",
           "iosSharedKeychainAccessGroup": "4J5FXBB97U.com.ems.EmarsysShared"
         }

@@ -6,7 +6,7 @@ module.exports = async (env, argv) => {
     {
       ...env,
       babel: {
-        dangerouslyAddModulePathsToTranspile: ['expo-plugin-for-sap-emarsys'],
+        dangerouslyAddModulePathsToTranspile: ['react-native-emarsys-sdk'],
       },
     },
     argv

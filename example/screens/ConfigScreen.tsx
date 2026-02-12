@@ -1,4 +1,4 @@
-import Emarsys from 'expo-plugin-for-sap-emarsys';
+import Emarsys from 'react-native-emarsys-sdk';
 import { ScrollView, Button, Separator } from '../components';
 
 export default function ConfigScreen() {
@@ -18,7 +18,7 @@ export default function ConfigScreen() {
         await Emarsys.trackCustomEvent(eventName, eventAttributes);
       }} />
       <Button title="Track Deeplink" action={async () => {
-        const url = 'https://github.com/emartech/expo-plugin-for-sap-emarsys?ems_dl=test';
+        const url = 'https://github.com/emartech/react-native-emarsys-sdk?ems_dl=test';
         Emarsys.trackDeepLink(url);
       }} />
 
@@ -50,8 +50,8 @@ export default function ConfigScreen() {
       <Button title="Get SDK Version" action={async () => {
         return await Emarsys.config.getSdkVersion();
       }} printResult />
-      <Button title="Get RN Plugin Version" action={async () => {
-        return await Emarsys.config.getRNPluginVersion();
+      <Button title="Get RN Wrapper Version" action={async () => {
+        return await Emarsys.config.getRNWrapperVersion();
       }} printResult />
 
     </ScrollView>

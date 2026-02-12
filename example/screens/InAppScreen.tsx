@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import Emarsys, { InlineInAppView, Message, Tag } from 'expo-plugin-for-sap-emarsys';
+import Emarsys, { InlineInAppView, Message, Tag } from 'react-native-emarsys-sdk';
 import { ScrollView, Button, Alert, Separator, SectionTitle } from '../components';
 
 let inboxMessages: Message[] | null | undefined = undefined

@@ -1,4 +1,4 @@
-import Emarsys, { type CartItem, Logic, Filter, type Product } from 'expo-plugin-for-sap-emarsys';
+import Emarsys, { type CartItem, Logic, Filter, type Product } from 'react-native-emarsys-sdk';
 import { ScrollView, Button } from '../components';
 
 let recommendedProducts: Product[] | null | undefined = undefined

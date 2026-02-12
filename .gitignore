@@ -58,4 +58,4 @@ yarn-error.log
 
 # Build
 build/
-/ExpoPluginForSAPEmarsys.podspec
+/RNEmarsysSDK.podspec
