@@ -21,18 +21,18 @@ jobs:
       run: npm ci
 
     - name: Install example dependencies
-      working-directory: example
+      working-directory: example/expo
       run: npm install
 
     - name: Prebuild iOS project
-      working-directory: example
+      working-directory: example/expo
       run: npm run prebuild:ios
 
     - name: Use Xcode 16.4
       run: sudo xcode-select -switch /Applications/Xcode_16.4.app
 
     - name: Build app for testing
-      working-directory: example/ios
+      working-directory: example/expo/ios
       run: |
         xcodebuild build-for-testing \
           -workspace reactnativeemarsyssdkexample.xcworkspace \
@@ -41,7 +41,7 @@ jobs:
           -quiet
 
     - name: Run iOS Tests
-      working-directory: example/ios
+      working-directory: example/expo/ios
       run: |
         xcodebuild test \
           -workspace reactnativeemarsyssdkexample.xcworkspace \

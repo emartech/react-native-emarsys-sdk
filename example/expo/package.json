@@ -1,0 +1,37 @@
+{
+  "name": "react-native-emarsys-sdk-example",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "prebuild": "expo prebuild --clean",
+    "prebuild:ios": "expo prebuild --platform ios --clean",
+    "prebuild:android": "expo prebuild --platform android --clean",
+    "prepare:android": "cd android && ./gradlew generateCodegenArtifactsFromSchema && cd ..",
+    "prepare:ios": "cd ios && pod install && cd ..",
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
+  },
+  "dependencies": {
+    "@react-navigation/bottom-tabs": "^7.4.0",
+    "@react-navigation/native": "^7.1.8",
+    "expo": "~53.0.20",
+    "expo-notifications": "~0.31.4",
+    "react": "19.0.0",
+    "react-native": "0.79.5",
+    "react-native-emarsys-sdk": "file:../../",
+    "react-native-safe-area-context": "^5.6.0",
+    "react-native-screens": "^4.16.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@types/react": "^19.0.10",
+    "typescript": "^5.8.3"
+  },
+  "private": true,
+  "expo": {
+    "autolinking": {
+      "nativeModulesDir": "../.."
+    }
+  }
+}

@@ -27,16 +27,16 @@ jobs:
       run: npm ci
 
     - name: Install example dependencies
-      working-directory: example
+      working-directory: example/expo
       run: npm install
 
     - name: Create google-services.json
-      run: echo '${{ secrets.GOOGLE_SERVICE_JSON }}' > example/assets/google-services.json
+      run: echo '${{ secrets.GOOGLE_SERVICE_JSON }}' > example/expo/assets/google-services.json
 
     - name: Prebuild Android project
-      working-directory: example
+      working-directory: example/expo
       run: npm run prebuild:android
 
     - name: Run Android Tests
-      working-directory: example/android
+      working-directory: example/expo/android
       run: ./gradlew :react-native-emarsys-sdk:test

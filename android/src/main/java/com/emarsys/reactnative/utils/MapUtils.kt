@@ -25,6 +25,7 @@ object MapUtils {
     return map
   }
 
+  @Suppress("UNCHECKED_CAST")
   fun WritableMap.put(key: String, value: Any?) {
     when (value) {
       is String -> this.putString(key, value)
