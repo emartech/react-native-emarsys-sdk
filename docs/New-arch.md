@@ -2,28 +2,29 @@
 
 #### Contents
 
-- [Native Integration](#native-integration)
-  - [Setup](#setup)
-    - [iOS](#ios)
-      - [SDK Initialisation](#sdk-initialisation)
-    - [Android](#android)
-      - [Firebase](#firebase)
-      - [Emarsys SDK dependency](#emarsys-sdk-dependency)
-      - [Messaging service](#messaging-service)
-      - [SDK Initialisation](#sdk-initialisation-1)
-  - [Push](#push)
-    - [Android](#android-1)
-    - [iOS](#ios-1)
-    - [Rich Push Notifications](#rich-push-notifications)
-    - [iOS](#ios-2)
-    - [Silent Push](#silent-push)
-    - [iOS](#ios-3)
-  - [Geofence](#geofence)
-    - [iOS](#ios-4)
-    - [Android](#android-2)
-      - [Limitations](#limitations)
-- [React Native Integration](#react-native-integration)
-  - [Usage](#usage)
+- [Installation](#installation)
+  - [Expo](#expo)
+  - [Bare React Native](#bare-react-native)
+    - [Setup](#setup)
+      - [iOS](#ios)
+        - [SDK Initialisation](#sdk-initialisation)
+      - [Android](#android)
+        - [Firebase](#firebase)
+        - [Messaging service](#messaging-service)
+        - [SDK Initialisation](#sdk-initialisation-1)
+    - [Push](#push)
+      - [Android](#android-1)
+      - [iOS](#ios-1)
+      - [Rich Push Notifications](#rich-push-notifications)
+        - [iOS](#ios-2)
+      - [Silent Push](#silent-push)
+        - [iOS](#ios-3)
+    - [Geofence](#geofence)
+      - [iOS](#ios-4)
+      - [Android](#android-2)
+        - [Limitations](#limitations)
+- [React Native API Interface](#react-native-api-interface)
+  - [Import](#import)
   - [Contact Management](#contact-management)
     - [1. Set Contact](#1-set-contact)
     - [2. Clear Contact](#2-clear-contact)
@@ -38,7 +39,6 @@
       - [1.1. Pause](#11-pause)
       - [1.2. Resume](#12-resume)
     - [2. Inline InApp](#2-inline-inapp)
-      - [⚠️ Known issue: React Native New Architecture](#️-known-issue-react-native-new-architecture)
       - [2.1. Load InApp](#21-load-inapp)
   - [Predict](#predict)
     - [1. Initialization](#1-initialization)
@@ -50,25 +50,26 @@
     - [7. Track Tag](#7-track-tag)
     - [8. Recommend Products](#8-recommend-products)
       - [8.1 Logic](#81-logic)
-      - [8.2 Logic options](#82-logic-options)
-      - [8.3 Recommendation options](#83-recommendation-options)
+      - [8.2 Recommendation options](#82-recommendation-options)
     - [9. Track Recommendation Click](#9-track-recommendation-click)
   - [DeepLink](#deeplink)
     - [1. Track Deep Link](#1-track-deep-link)
   - [Config](#config)
-    - [1. Change ApplicationCode](#1-change-applicationcode)
-    - [2. Change MerchantId](#2-change-merchantid)
-    - [3. Get ApplicationCode](#3-get-applicationcode)
-    - [4. Get MerchantId](#4-get-merchantid)
-    - [5. Get ContactFieldId](#5-get-contactfieldid)
-    - [6. Get HardwareId](#6-get-hardwareid)
-    - [7. Get LanguageCode](#7-get-languagecode)
-    - [8. Get SdkVersion](#8-get-sdkversion)
+    - [1. Change Application Code](#1-change-application-code)
+    - [2. Change Merchant ID](#2-change-merchant-id)
+    - [3. Get Application Code](#3-get-application-code)
+    - [4. Get Merchant ID](#4-get-merchant-id)
+    - [5. Get Contact Field ID](#5-get-contact-field-id)
+    - [6. Get Client ID](#6-get-client-id)
+    - [7. Get Language Code](#7-get-language-code)
+    - [8. Get SDK Version](#8-get-sdk-version)
+    - [9. Get RN Wrapper Version](#9-get-rn-wrapper-version)
   - [Inbox](#inbox)
     - [1. Fetch Messages](#1-fetch-messages)
     - [2. Message Tag](#2-message-tag)
-      - [2.1 Add Tag](#21-add-tag)
-      - [2. Remove Tag](#2-remove-tag)
+      - [2.1 Tags](#21-tags)
+      - [2.2 Add Tag](#22-add-tag)
+      - [2.3 Remove Tag](#23-remove-tag)
   - [Geofence](#geofence-1)
     - [Currently supported triggers](#currently-supported-triggers)
     - [1. Request Always Authorization](#1-request-always-authorization)
@@ -78,17 +79,58 @@
     - [5. Set Initial Enter Trigger Enabled](#5-set-initial-enter-trigger-enabled)
     - [6. Registered Geofences](#6-registered-geofences)
 
-# Native Integration
+# Installation
 
-## Setup
-Emarsys SDK setup should be implemented nativity to ensure `setup` method is the first thing to be called. 
+## Expo
+The React Native wrapper for SAP Emarsys SDK automatically integrates the **Emarsys SDK** into your Expo app’s native modules.
 
-### iOS
+1. Add the plugin config options to your `app.json` with your own values:
+
+```json
+{
+  "expo": {
+    ...
+    "plugins": [
+      ...
+      [
+        "react-native-emarsys-sdk",
+        {
+          "applicationCode": <APPLICATION_CODE: STRING>,
+          "merchantId": <MERCHANT_ID: STRING>,
+          "enableConsoleLogging": <ENABLE_CONSOLE_LOGGING: BOOL>,
+          "androidSharedPackageNames": <ANDROID_SHARED_PACKAGE_NAMES: LIST>,
+          "androidSharedSecret": <ANDROID_SHARED_SECRET: STRING>,
+          "iosSharedKeychainAccessGroup": <IOS_SHARED_KEYCHAIN_ACCESS_GROUP: STRING>
+        }
+      ]
+    ]
+    ...
+  }
+}
+```
+
+2. Add your `google-services.json` file into the app’s assets folder.
+3. *(Optional)* Provide a custom Android **push notification icon**:
+   - Place an image named **`mobile_engage_logo_icon.jpg`** inside the app’s `assets` folder.
+   - During build, it will be copied into the correct Android resources directory (`res/drawable`).
+
+4. Run prebuild to apply the changes:
+
+```bash
+npx expo prebuild
+```
+
+## Bare React Native
+
+### Setup
+Emarsys SDK setup should be implemented natively to ensure `setup` method is the first thing to be called. 
+
+#### iOS
 Please, follow the steps on the Emarsys SDK [documentation](https://github.com/emartech/ios-emarsys-sdk#1-installation-with-cocoapods) to install the SDK in your iOS project.
 
 > :warning: **If you are using RN version 0.62 or higher**: Make sure to place Emarsys SDK imports outside `#ifdef FB_SONARKIT_ENABLED` condition!
 
-#### SDK Initialisation
+##### SDK Initialisation
 
 The SDK initialisation should be done in `didFinishLaunchingWithOptions` in `AppDelegate`.
 
@@ -96,23 +138,21 @@ objective-c
 ```objective-c
 #import <EmarsysSDK/Emarsys.h>
 #import <EmarsysSDK/EMSConfig.h>
-#import <RNEmarsysWrapper/RNEmarsysEventHandler.h>
+#import <RNEmarsysSDK/RNEmarsys.h>
 ```
 
 ```objective-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   //...
   EMSConfig *config = [EMSConfig makeWithBuilder:^(EMSConfigBuilder * builder) {
-    [builder setMobileEngageApplicationCode:@<APPLICATION_CODE>]; // your application code
-    [builder setMerchantId:@<MERCHANT_ID>];  // your predict merchant ID
+    [builder setMobileEngageApplicationCode:@<APPLICATION_CODE: STRING>]; // your application code
+    [builder setMerchantId:@<MERCHANT_ID: STRING>];  // your predict merchant ID
+    [builder enableConsoleLogLevels:<ENABLE_CONSOLE_LOG_LEVELS: ARRAY>];
+    [builder setSharedKeychainAccessGroup:@<IOS_SHARED_KEYCHAIN_ACCESS_GROUP: STRING>];
   }];
   [Emarsys setupWithConfig:config];
-
-  // enable the SDK to automatically handle the arrived push messages
   UNUserNotificationCenter.currentNotificationCenter.delegate = [Emarsys push];
-
-  RNEmarsysEventHandler *rnEMSEventHandler = [RNEmarsysEventHandler allocWithZone: nil];
-  [rnEMSEventHandler setEventHandlers];
+  [RNEmarsys setup];
   //...
   return YES;
 }
@@ -121,57 +161,43 @@ objective-c
 swift
 ```swift
 import EmarsysSDK
-import RNEmarsysWrapper
+import RNEmarsysSDK
 ```
 
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
   //...
   let config = EMSConfig.make { (build) in 
-    build.setMobileEngageApplicationCode(<APPLICATION_CODE>)
-    build.setMerchantId(<MERCHANT_ID>)
-    build.enableConsoleLogLevels([EMSLogLevel.basic, EMSLogLevel.error, EMSLogLevel.info, EMSLogLevel.debug])
+    build.setMobileEngageApplicationCode(<APPLICATION_CODE: String>)
+    build.setMerchantId(<MERCHANT_ID: String>)
+    build.enableConsoleLogLevels(<ENABLE_CONSOLE_LOG_LEVELS: Array>)
+    build.setSharedKeychainAccessGroup(<IOS_SHARED_KEYCHAIN_ACCESS_GROUP: String>)
   }
   Emarsys.setup(config: config)
-  
-  // enable the SDK to automatically handle the arrived push messages
   UNUserNotificationCenter.current().delegate = Emarsys.push
-
-  let rnEMSEventHandler = RNEmarsysEventHandler()
-  rnEMSEventHandler.setEventHandlers()
+  RNEmarsys.setup()
   //...
   return true
 }
 ```
 
-### Android
+#### Android
 
-#### Firebase
+##### Firebase
 
 Follow Google's instructions to add the Google Play Services gradle plugin to your project: https://developers.google.com/android/guides/google-services-plugin
 
 In order for push notifications to work, you need to obtain Firebase Cloud Messaging credentials for your app. Follow the instruction for the native SDK here: https://github.com/emartech/android-emarsys-sdk/wiki/Obtaining-Firebase-Cloud-Messaging-credentials, then copy the `google-services.json` file to the `android/app` directory of your React Native project.
 
-#### Emarsys SDK dependency
-
-For the SDK initialization to work, an Emarsys SDK version corresponding to the one used by the wrapper has to be added to the Android project as a dependency. In the `dependencies` section of the `android/app/build.gradle`, add:
-
-```groovy
-dependencies {
-  implementation "com.emarsys:emarsys-sdk:‹emarsys-sdk_version_used_by_wrapper›"
-  implementation "com.emarsys:emarsys-firebase:‹emarsys-sdk_version_used_by_wrapper›"
-}
-```
-
-#### Messaging service
+##### Messaging service
 
 When the push token arrives from Firebase, we need to set it using `Emarsys.push.setPushToken()`. The recommended way of using the Android SDK is to enable the SDK to automatically handle `setPushToken` and `trackMessageOpen` calls for you, please register the service in your `android/app/AndroidManifest.xml` file.
 
 ```xml
-<service android:name="com.emarsys.service.EmarsysFirebaseMessagingService">
+<service android:name="com.emarsys.service.EmarsysFirebaseMessagingService" android:exported="false">
   <intent-filter>
-    <action android:name="com.google.firebase.MESSAGING_EVENT" />
-  </intent-filter>
+		<action android:name="com.google.firebase.MESSAGING_EVENT" />
+	</intent-filter>
 </service>
 ```
 
@@ -184,65 +210,79 @@ android:resource="@drawable/notification_icon"
 >
 ```
 
-#### SDK Initialisation
+##### SDK Initialisation
 
 For receiving push notifications in the background to work, the SDK has to be initialised in the `onCreate` method of the `MainApplication`.
 
 java
 ```java
+import com.emarsys.Emarsys;
+import com.emarsys.config.EmarsysConfig;
+import com.emarsys.reactnative.RNEmarsys;
+```
+
+```java
 public void onCreate() {
-    super.onCreate();
-    //...
-    EmarsysConfig config = new EmarsysConfig.Builder()
-        .application(this)
-        .applicationCode("EMSAA-00000") // your application code
-        .merchantId("XXXXXXXXXXXXX") // your predict merchant ID
-        .enableVerboseConsoleLogging()
-        .build();
-    Emarsys.setup(config);
+  super.onCreate();
+  //...
+  EmarsysConfig config = new EmarsysConfig.Builder()
+    .application(this)
+    .applicationCode(<APPLICATION_CODE: STRING>)
+    .merchantId(<MERCHANT_ID: STRING>)
+    .enableVerboseConsoleLogging()
+    .sharedPackageNames(<SHARED_PACKAGE_NAMES: LIST>)
+    .sharedSecret(<SHARED_SECRET: STRING>)
+    .build();
+  Emarsys.setup(config);
+  RNEmarsys.setup()
 
-    RNEmarsysEventHandler eventHandler = RNEmarsysEventHandler.getInstance();
-    eventHandler.setEventHandlers();
-
-    createNotificationChannels();
-    //...
+  createNotificationChannels();
+  //...
 }
 ```
 
 kotlin
 ```kotlin
+import com.emarsys.Emarsys
+import com.emarsys.config.EmarsysConfig
+import com.emarsys.reactnative.RNEmarsys
+```
+
+```kotlin
 override fun onCreate() {
   super.onCreate()
   //...
   val config = EmarsysConfig(
-      application = this,
-      applicationCode = "EMSAA-00000", // your application code
-      merchantId = "XXXXXXXXXXXXX", // your predict merchant ID
-      verboseConsoleLoggingEnabled = true)
+    application = this,
+    applicationCode = <APPLICATION_CODE: STRING>,
+    merchantId = <MERCHANT_ID: STRING>,
+    verboseConsoleLoggingEnabled = <VERBOSE_CONSOLE_LOGGING_ENABLED: BOOLEAN>,
+    sharedPackageNames = <SHARED_PACKAGE_NAMES: LIST>,
+    sharedSecret = <SHARED_SECRET: STRING>)
   Emarsys.setup(config)
-
-  val eventHandler = RNEmarsysEventHandler.getInstance()
-  eventHandler.setEventHandlers()
+  RNEmarsys.setup()
 
   createNotificationChannels()
   //...
 }
 ```
 
-## Push
+### Push
 
-### Android
+#### Android
 The Emarsys SDK automatically handles `setPushToken` for the device and it is recommended to leave this to the SDK. However if you have your custom implementation of `MessagingService`, please use the `setPushToken()` method, to set the push token.
 
-### iOS
+For Android 8.0 (API level 26) and higher, you need to create notification channels. Please refer to the [Android Oreo Channels documentation](https://github.com/emartech/android-emarsys-sdk/wiki/Android-Oreo-Channels) for detailed instructions.
+
+#### iOS
 The push token has to be set natively when it arrives in `didRegisterForRemoteNotificationsWithDeviceToken` in the `AppDelegate`:
 
 objective-c
 ```objective-c
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [Emarsys.push setPushToken:deviceToken
-               completionBlock:^(NSError *error) {
-               }];
+  [Emarsys.push setPushToken:deviceToken
+              completionBlock:^(NSError *error) {
+              }];
 }
 ```
 
@@ -253,9 +293,9 @@ func application(_ application: UIApplication, didRegisterForRemoteNotifications
 }
 ```
 
-### Rich Push Notifications
+#### Rich Push Notifications
 
-### iOS
+##### iOS
 
 Push notification could show media content and action buttons besides the title and body. Push notifications with these types of contents are called Rich Notifications.
 
@@ -296,36 +336,40 @@ class NotificationService: EMSNotificationService {
 }
 ```
 
-### Silent Push
+> `Note`
+>
+> The `NotificationService` class should remain empty. All functionality is handled by the `EMSNotificationService` base class.
 
-### iOS
+#### Silent Push
+
+##### iOS
 
 Silent messages arrives in `application:didReceivedRemoteNotification:fetchCompletionHandler:`, so in order to be able to handle them, call `handleMessageWithUserInfo:` method there
 
 objective-c
 ```objective-c
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-    fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
-    [Emarsys.push handleMessageWithUserInfo:userInfo];
-    completionHandler(UIBackgroundFetchResultNewData);
+  fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
+  [Emarsys.push handleMessageWithUserInfo:userInfo];
+  completionHandler(UIBackgroundFetchResultNewData);
 }
 ```
 
 swift
 ```swift
 override func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-  Emarsys.push.handleMessage(userInfo: userInfo)
-  completionHandler(.newData)
-    }
+	Emarsys.push.handleMessage(userInfo: userInfo)
+	completionHandler(.newData)
+}
 ```
 
-## Geofence
+### Geofence
 
-### iOS
+#### iOS
 
 For the location permissions the applications `Info.plist` must be extended with the following keys:
 
-```javascript
+```xml
 <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 <string>AlwaysUsage is a must have for region monitoring (or some description of your choice)</string>
 <key>NSLocationWhenInUseUsageDescription</key>
@@ -333,11 +377,11 @@ For the location permissions the applications `Info.plist` must be extended with
 ```
 Make sure that your app is requesting the required permissions from the user. To make it easier, you can call our `requestAlwaysAuthorization` method.
 
-### Android
+#### Android
 
 For the location permissions the applications `AndroidManifest.xml` must be extended with the following permissions:
 
-```javascript
+```xml
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -345,19 +389,18 @@ For the location permissions the applications `AndroidManifest.xml` must be exte
 
 Make sure that your app is requesting the required permissions from the user. From Android 12, the `ACCESS_FINE_LOCATION` also needs the `ACCESS_COARSE_LOCATION` permission, since the user can now prevent applications from accessing the precise location of the phone. In response to this, both `android.permission.ACCESS_COARSE_LOCATION` and `android.permission.ACCESS_FINE_LOCATION` permissions are mandatory for geofences to work.
 
-#### Limitations
+##### Limitations
 
 From Android 12, when the `ACCESS_FINE_LOCATION` permission is granted to the Application, the geofencing will work as before. If only `ACCESS_COARSE_LOCATION` is granted, then we can't guarantee that the geofences will trigger at the correct times.
 
-> `Important Note:` Geofencing is disabled on devices, that does not have Google Play Services!
+> `Important Note:` Geofencing is disabled on devices that do not have Google Play Services!
 
 
+# React Native API Interface
 
-# React Native Integration
-
-## Usage
+## Import
 ```javascript
-import Emarsys from "react-native-emarsys-wrapper";
+import Emarsys from "react-native-emarsys-sdk";
 ```
 
 ## Contact Management
@@ -369,16 +412,9 @@ import Emarsys from "react-native-emarsys-wrapper";
 After the application setup is finished, you can use `setContact` method to identify the user with `contactFieldId` and `contactFieldValue`. Without `setContact` all events will be tracked as anonymous usage. 
 
 ```javascript
-async setContact() {
-  let contactFieldId = 100010824;
-  let contactFieldValue = "7c3df9f3";
-
-  try {
-    let result = await Emarsys.setContact(contactFieldId, contactFieldValue);
-  } catch (e) {
-    console.log(e);
-  }
-}
+const contactFieldId = 987654321;
+const contactFieldValue = '123456789';
+await Emarsys.setContact(contactFieldId, contactFieldValue);
 ```
 
 ### 2. Clear Contact
@@ -390,13 +426,7 @@ When the user signs out, we should use the `clearContact` method. The method is 
 > No need to call `clearContact` every time, even if the user isn't logged in. Just make sure it is called when the user logs out of the application.
 
 ```javascript
-async clearContact() {
-  try {
-    let result = await Emarsys.clearContact();
-  } catch (e) {
-    console.log(e);
-  }
-}
+await Emarsys.clearContact();
 ```
 
 ## Tracking Custom Events
@@ -404,31 +434,26 @@ async clearContact() {
 If you want to track custom events, the trackCustomEvent method should be used, where the eventName parameter is required, but the `eventAttributes` are optional.
 
 ```javascript
-async trackCustomEvent() {
-  let eventName = "customEventName";
-  let eventAttributes = {
-    "customEvent-key1": "customEvent-value1",
-    "customEvent-key2": "customEvent-value2",
-  }
-  try {
-    let result = await Emarsys.trackCustomEvent(eventName, eventAttributes);
-  } catch (e) {
-    console.log(e);
-  }
-}
+const eventName = 'test-event';
+const eventAttributes = { k1: 'v1', k2: 'v2' };
+await Emarsys.trackCustomEvent(eventName, eventAttributes);
 ```
 
 ## Event Handler
-
-Add `setEventHandler` to your `App.js` constructor.
+<!-- TODO: confirm with Bianca -->
+Add `setEventHandler` to the `useEffect` in your `App.js`.
 
 ```javascript
-constructor() {
-  super();
-  Emarsys.setEventHandler(function (eventName, payload) {
-    showAlert(eventName, JSON.stringify(payload))
-  });
-}
+  useEffect(() => {
+    eventHandlerSubscription.current = Emarsys.setEventHandler((event: Event) => {
+      Alert('Event', `${event.name}: ${JSON.stringify(event.payload)}`);
+    });
+
+    return  () => {
+      eventHandlerSubscription.current?.remove();
+      eventHandlerSubscription.current = null;
+    }
+  }, []);
 ```
 
 ## Push
@@ -439,19 +464,14 @@ The push token is automatically handled by the native integration. No additional
 
 If needed, you can manually update the token calling `setPushToken()`:
 ```javascript
-async setPushToken() {
-  try {
-    let result = await Emarsys.push.setPushToken(deviceToken);
-  } catch (e) {
-    console.log(e);
-  }
-}
+const pushToken = '1234567890'; // Should retrieve the actual push token here
+await Emarsys.push.setPushToken(pushToken);
 ```
 
 > [!CAUTION]  
 > If your app is already live and you add the Emarsys SDK, existing installations will not be opted in automatically.
 > 
-> You must retrieve the existing push tokens and set them mannualy:
+> You must retrieve the existing push tokens and set them manually:
 > - **Android:** via Firebase Cloud Messaging
 > - **iOS:** via APNs registration
 
@@ -460,27 +480,15 @@ async setPushToken() {
 If you want to remove the push token for the contact, please use `clearPushToken()` method.
 
 ```javascript
-async clearPushToken() {
-  try {
-    let result = await Emarsys.push.clearPushToken();
-  } catch (e) {
-    console.log(e);
-  }
-}
+await Emarsys.push.clearPushToken();
 ```
 
 ### 3. Get Push Token
 
-If you want to get the push token for the contact, please use `pushToken()` method.
+If you want to get the push token for the contact, please use `getPushToken()` method.
 
 ```javascript
-async pushToken() {
-  try {
-    let pushToken = await Emarsys.push.pushToken();
-  } catch (e) {
-    console.log(e);
-  }
-}
+const pushToken = await Emarsys.push.getPushToken();
 ```
 
 ## InApp
@@ -492,13 +500,7 @@ async pushToken() {
 When a critical activity starts and should not be interrupted by in-app, use `pause()` to pause in-app messages.
 
 ```javascript
-async pause() {
-  try {
-    let result = await Emarsys.inApp.pause();
-  } catch (e) {
-    console.log(e);
-  }
-}
+await Emarsys.inApp.pause();
 ```
 
 #### 1.2. Resume
@@ -506,42 +508,38 @@ async pause() {
 In order to show in-app messages after being paused, use the `resume()` method.
 
 ```javascript
-async resume() {
-  try {
-    let result = await Emarsys.inApp.resume();
-  } catch (e) {
-    console.log(e);
-  }
-}
+await Emarsys.inApp.resume();
 ```
 
 ### 2. Inline InApp
 
+<!-- TODO: confirm with Bianca -->
 In-App message, that takes place in the application's view hierarchy. Multiple inline in-app components are allowed in one screen.
 
-#### ⚠️ Known issue: React Native New Architecture
-
-Inline in-app view is not compatible with React Native's [New Architecture](https://reactnative.dev/docs/the-new-architecture/landing-page) (Fabric / Turbo) introduced in React Native 0.68+.  
-This implementation is based on the legacy native UI system and **will not be updated to support the New Architecture**.
-
-Create the view with component `Emarsys.InlineInAppView`.
-
+Import the `InlineInAppView` component.
 ```javascript
-<Emarsys.InlineInAppView ref={this.inlineInAppView}
-  style={{width: "100%", height: this.state.inlineInAppViewHeight}}
-  onAppEvent={(eventName, payload) => {
-    showAlert(eventName, JSON.stringify(payload))
+import { InlineInAppView } from 'react-native-emarsys-sdk';
+```
+
+Create the view with component `InlineInAppView`.
+```javascript
+<InlineInAppView
+  ref={inlineInAppView}
+  style={{ width: '100%', height: inlineInAppViewHeight }}
+  onEvent={(event) => {
+    showAlert(event.nativeEvent.name, JSON.stringify(event.nativeEvent.payload))
   }}
-  onCompleted={error => {
-    if (error == null) {
-      this.setState({ inlineInAppViewHeight: 125 })
+  onCompletion={(event) => {
+    if (!event.nativeEvent.error) {
+      setInlineInAppViewHeight(125);
     } else {
-      console.log(error)
+      console.log(event.nativeEvent.error)
     }
   }}
-  onClose={_ => {
-    this.setState({ inlineInAppViewHeight: 0 })
-  }} />
+  onClose={() => {
+    setInlineInAppViewHeight(0);
+  }}
+/>
 ```
 
 #### 2.1. Load InApp
@@ -549,7 +547,7 @@ Create the view with component `Emarsys.InlineInAppView`.
 In order to load the inline in-app, `loadInApp(<String>)` must be called with the corresponding viewId.
 
 ```javascript
-this.inlineInAppView.current.loadInApp('view-id')
+Emarsys.inApp.loadInlineInApp(inlineInAppView.current, viewId);
 ```
 
 ## Predict
@@ -565,37 +563,18 @@ To use the Predict functionality you have to setup your `merchantId` during the 
 When you want to track the cart items in the basket, you can call the `trackCart()` method with a list of `CartItem`. `CartItem` is an interface that can be used in your application for your own `CartItem` and then simply use the same items with the SDK.
 
 ```javascript
-async trackCart() {
-  let cartItems = [{
-    itemId: "cartId-1", 
-    price: 1.66, 
-    quantity: 26.4, 
-  }, {
-    itemId: "cartId-2", 
-    price: 2.88, 
-    quantity: 56.5, 
-  }];
-
-  try {
-    let result = await Emarsys.predict.trackCart(cartItems);
-  } catch (e) {
-    console.log(e);
-  }
-}
+const items: CartItem[] = [
+  { itemId: 'item1', price: 1.1, quantity: 1 },
+  { itemId: 'item2', price: 2.2, quantity: 2 }
+];
+await Emarsys.predict.trackCart(items);
 ```
 
 When you want to track empty basket.
 
 ```javascript
-async trackEmptyCart() {
-  let emptyCartItems = [];
-
-  try {
-    let result = await Emarsys.predict.trackCart(emptyCartItems)
-  } catch (e) {
-    console.log(e);
-  }
-}
+const emptyCartItems: CartItem[] = [];
+await Emarsys.predict.trackCart(emptyCartItems)
 ```
 
 ### 3. Track Purchase
@@ -603,39 +582,20 @@ async trackEmptyCart() {
 To report a purchase event, you should call `trackPurchase()` with the items purchased and with an `orderId`.
 
 ```javascript
-async trackPurchase() {
-  let orderId = "TrackPurchase-OrderID";
-  let cartItems = [{
-    itemId: "cartId-1",
-    price: 2.22,
-    quantity: 27.56,
-  }, {
-    itemId: "cartId-2",
-    price: 28.11,
-    quantity: 5.6,
-  }];
-
-  try {
-    let result = await Emarsys.predict.trackPurchase(orderId, cartItems);
-  } catch (e) {
-    console.log(e);
-  }
-}
+const orderId = 'order1';
+const items: CartItem[] = [
+  { itemId: 'item1', price: 1.1, quantity: 1 },
+  { itemId: 'item2', price: 2.2, quantity: 2 }
+];
+await Emarsys.predict.trackPurchase(orderId, items);
 ```
 
 To report a purchase event with empty basket.
 
 ```javascript
-async trackEmptyPurchase() {
-  let emptyOrderId = "TrackPurchase-Empty-OrderID";
-  let emptyCartItems = [];
-
-  try {
-    let result = await Emarsys.predict.trackPurchase(emptyOrderId, emptyCartItems);
-  } catch (e) {
-    console.log(e);
-  }
-}
+const orderId = 'order2';
+const items: CartItem[] = [];
+await Emarsys.predict.trackPurchase(orderId, items);
 ```
 
 ### 4. Track Item View
@@ -643,15 +603,8 @@ async trackEmptyPurchase() {
 If an item was viewed, use the `trackItemView()` method with an `itemId` as required parameter.
 
 ```javascript
-async trackItemView() {
-  let itemId = "TrackItemId";
-
-  try {
-    let result = await Emarsys.predict.trackItemView(itemId);
-  } catch (e) {
-    console.log(e);
-  }
-}
+const itemId = 'item1';
+await Emarsys.predict.trackItemView(itemId);
 ```
 
 ### 5. Track Category View
@@ -659,15 +612,8 @@ async trackItemView() {
 When the user navigates between the categories, you should call `trackCategoryView()` in every navigation. Be aware to send `categoryPath` in the required format. Please visit Predict's documentation for more information.
 
 ```javascript
-async trackCategoryView() {
-  let categoryPath = "Bikes > Road Bikes";
-
-  try {
-    let result = await Emarsys.predict.trackCategoryView(categoryPath);
-  } catch (e) {
-    console.log(e);
-  }
-}
+const categoryPath = 'category1';
+await Emarsys.predict.trackCategoryView(categoryPath);
 ```
 
 ### 6. Track Search Term
@@ -675,15 +621,8 @@ async trackCategoryView() {
 To report search terms entered by the contact, use `trackSearchTerm()` method.
 
 ```javascript
-async trackSearchTerm() {
-  let searchTerm = "searchTerm";
-
-  try {
-    let result = await Emarsys.predict.trackSearchTerm(searchTerm);
-  } catch (e) {
-    console.log(e);
-  }
-}
+const searchTerm = 'search1';
+await Emarsys.predict.trackSearchTerm(searchTerm);
 ```
 
 ### 7. Track Tag
@@ -691,19 +630,9 @@ async trackSearchTerm() {
 To track custom tags, use the `trackTag()` method, where, the `eventName` parameter is required, but the `tagAttributes` is optional.
 
 ```javascript
-async trackTag() {
-  let tagName = "tagName";
-  let tagAttributes = {
-    "tag-key1": "tag-value1",
-    "tag-key2": "tag-value2",
-  }
-
-  try {
-    let result = await Emarsys.predict.trackTag(tagName, tagAttributes);
-  } catch (e) {
-    console.log(e);
-  }
-}
+const tag = 'tag1';
+const attributes = { k1: 'v1', k2: 'v2' };
+await Emarsys.predict.trackTag(tag, attributes);
 ```
 
 ### 8. Recommend Products
@@ -711,33 +640,11 @@ async trackTag() {
 With the Emarsys SDK you can ask for product recommendations based on different recommendation parameters.
 
 ```javascript
-async recommendProducts() {
-  let logic = "HOME";
-  let logicOptions = {
-    variants: ["1", "2", "3"],
-  };
-  let recommendationOptions = {
-    availabilityZone: "es",
-    limit: 10,
-    filters: [{ 
-      type: "include", 
-      field: "category",
-      comparison: "is",
-      expectations: "Shoes>Pump"
-    },{
-      type: "exclude",
-      field: "category",
-      comparison: "IN",
-      expectations: [ "Shoes>Golf", "For Women>Shoes>Golf"]
-    }]
-  }
-
-  try {
-    let result = await Emarsys.predict.recommendProducts(logic, logicOptions, recommendationOptions)
-  } catch (e) {
-    console.log(e);
-  }
-}
+const logic = Logic.home(['1', '2']);
+const filters = [Filter.exclude.isValue('field', 'value')];
+const limit = 5;
+const availabilityZone = 'en';
+const recommendedProducts: Product[] = await Emarsys.predict.recommendProducts(logic, filters, limit, availabilityZone);
 ```
 
 #### 8.1 Logic
@@ -747,49 +654,59 @@ async recommendProducts() {
 > For more information of the recommender logics, please visit [documentation](https://help.emarsys.com/hc/en-us/articles/115004662189-Web-Recommender-logics "The Official Documentation").
 
 The currently supported logics are:
-- `SEARCH` - based on `searchTerm`
-- `CART` - based on `cartItems`
-- `RELATED` - based on `itemViewId`
-- `CATEGORY` - based on `categoryPath`
-- `ALSO_BOUGHT` - based on `itemViewId`
-- `POPULAR` - based on `categoryPath`
-- `PERSONAL` - based on current browsing and activity
-- `HOME` - based on most recent browsing behaviour
 
-#### 8.2 Logic options
-
-This is an optional parameter.
-
-Either `query`, `cartItems`, or `variants`
-- `query` - Query string extends recommended logics. For logics: `SEARCH`, `RELATED`, `CATEGORY`, `ALSO_BOUGHT`, `POPULAR`
-- `cartItems` - Array of `cartItems`, can be empty. For logic: `CART`
-- `variants` - Array of `variants`. For logics: `HOME`, `PERSONAL`
-
+Search logic - based on `searchTerm`
 ```javascript
-let logicOptions = {
-  query: "Shoes>Pump"
-}
-```
-```javascript
-let logicOptions = {
-  cartItems: [{
-    itemId: "ID of the Cart Item 1",
-    price: 1.66,
-    quantity: 26.4,
-  }, {
-    itemId: "ID of the Cart Item 2",
-    price: 2.88,
-    quantity: 56.5,
-  }]
-}
-```
-```javascript
-let logicOptions = {
-  variants: ["1", "2", "3"]
-}
+const searchTerm = "searchTerm"
+const logic = Logic.search(searchTerm);
 ```
 
-#### 8.3 Recommendation options
+Cart logic - based on `cartItems`
+```javascript
+const items: CartItem[] = [
+  { itemId: 'item1', price: 1.1, quantity: 1 },
+  { itemId: 'item2', price: 2.2, quantity: 2 }
+];
+const logic = Logic.cart(items);
+```
+
+Related logic - based on `itemViewId`
+```javascript
+const itemId = 12345
+const logic = Logic.related(itemId);
+```
+
+Category logic - based on `categoryPath`
+```javascript
+const categoryPath = "Shoes>Pump"
+const logic = Logic.category(categoryPath);
+```
+
+Also bought logic - based on `itemViewId`
+```javascript
+const itemId = 12345
+const logic = Logic.alsoBought(itemId);
+```
+
+Popular logic - based on `categoryPath`
+```javascript
+const categoryPath = "Shoes>Pump"
+const logic = Logic.popular(categoryPath);
+```
+
+Personal logic - based on current browsing and activity
+```javascript
+const variants = ["1", "2"]
+const logic = Logic.personal(variants);
+```
+
+Home logic - based on most recent browsing behaviour
+```javascript
+const variants = ["1", "2"]
+const logic = Logic.home(variants);
+```
+
+#### 8.2 Recommendation options
 
 This is an optional parameter.
 
@@ -810,39 +727,32 @@ This is an optional parameter.
 The Emarsys SDK doesn't track automatically `recommendationClicks`, so you have to call manually `trackRecommendationClick()` when an interaction happens with any of the recommended products.
 
 ```javascript
-async trackRecommendationClick() {
-  let product = {
-    productId: "productId",
-    title: "title", 
-    linkUrl: "http://linkUrl.com/test",
-    feature: "feature",
-    cohort: "awesome",
-    imageUrl: "http://productURL.com/imageUrl", 
-    zoomImageUrl: "http://productURL.com/zoomImageUrl",
-    categoryPath: "productCategoryPath",
-    productDescription: "productDescription",
-    album: "productAlbum",
-    actor: "productActor",
-    artist: "productArtist",
-    author: "productAuthor",
-    brand: "productBrand",
-    customFields: {
-      productTestKey1: "productTestValue1",
-      productTestKey2: "productTestValue2",
-      productTestKey3: "productTestValue3",
-    },
-    available: true,
-    price: 45.67, 
-    msrp: 2.45, 
-    year: 2019, 
-  };
-
-  try {
-    let result = await Emarsys.predict.trackRecommendationClick(product);
-  } catch (e) {
-    console.log(e);
-  }
-}
+const product = {
+  productId: "productId",
+  title: "title", 
+  linkUrl: "http://linkUrl.com/test",
+  feature: "feature",
+  cohort: "awesome",
+  imageUrl: "http://productURL.com/imageUrl", 
+  zoomImageUrl: "http://productURL.com/zoomImageUrl",
+  categoryPath: "productCategoryPath",
+  productDescription: "productDescription",
+  album: "productAlbum",
+  actor: "productActor",
+  artist: "productArtist",
+  author: "productAuthor",
+  brand: "productBrand",
+  customFields: {
+    productTestKey1: "productTestValue1",
+    productTestKey2: "productTestValue2",
+    productTestKey3: "productTestValue3",
+  },
+  available: true,
+  price: 45.67, 
+  msrp: 2.45, 
+  year: 2019, 
+};
+await Emarsys.predict.trackRecommendationClick(product);
 ```
 
 
@@ -852,149 +762,123 @@ In order to track email link clicks that open the application directly with the 
 
 ### 1. Track Deep Link
 ```javascript
-async trackDeepLink(url) {
-  try {
-    let result = await Emarsys.trackDeepLink(url);
-  } catch (e) {
-    console.log(e);
-  }
-}
+const url = 'https://github.com/emartech/react-native-emarsys-sdk?ems_dl=test';
+Emarsys.trackDeepLink(url);
 ```
 
 
 ## Config
 
-### 1. Change ApplicationCode
+### 1. Change Application Code
 
 Emarsys SDK provides a solution for `applicationCode` change in a convenient way, without restarting the SDK.
 
 ```javascript
-async changeApplicationCode() {
-  let applicationCode = "applicationCode";
-
-  try {
-    let result = await Emarsys.changeApplicationCode(applicationCode);
-  } catch (e) {
-    console.log(e);
-  }
-}
+const applicationCode = 'applicationCode';
+await Emarsys.config.changeApplicationCode(applicationCode);
 ```
 
-### 2. Change MerchantId
+### 2. Change Merchant ID
 
 Emarsys SDK provides a solution for `merchantId` change in a convenient way, without restarting the SDK.
 
 ```javascript
-async changeMerchantId() {
-  let merchantId = "merchantId";
-
-  try {
-    let result = await Emarsys.changeMerchantId(merchantId);
-  } catch (e) {
-    console.log(e);
-  }
-}
+const merchantId = 'merchantId';
+await Emarsys.config.changeMerchantId(merchantId);
 ```
 
-### 3. Get ApplicationCode
+### 3. Get Application Code
 
 Provides what is the actual `applicationCode` set in the SDK.
 
 ```javascript
-async getApplicationCode() {
-  try {
-    let applicationCode = await Emarsys.getApplicationCode();
-  } catch (e) {
-    console.log(e);
-  }
-}
+const applicationCode = await Emarsys.config.getApplicationCode();
 ```
 
-### 4. Get MerchantId
+### 4. Get Merchant ID
 
 Provides what is the actual `merchantId` set in the SDK.
 
 ```javascript
-async getMerchantId() {
-  try {
-    let merchantId = await Emarsys.getMerchantId();
-  } catch (e) {
-    console.log(e);
-  }
-}
+const merchantId = await Emarsys.config.getMerchantId();
 ```
 
-### 5. Get ContactFieldId
+### 5. Get Contact Field ID
 
 Provides what is the actual `contactFieldId` set in the SDK.
 
 ```javascript
-async getContactFieldId() {
-  try {
-    let contactFieldId = await Emarsys.getContactFieldId();
-  } catch (e) {
-    console.log(e);
-  }
-}
+const contactFieldId = await Emarsys.config.getContactFieldId();
 ```
 
-### 6. Get HardwareId
+### 6. Get Client ID
 
-Provides what is the actual `hardwareId` set in the SDK.
+Provides what is the actual `clientId` set in the SDK.
 
 ```javascript
-async getHardwareId() {
-  try {
-    let hardwareId = await Emarsys.getHardwareId();
-  } catch (e) {
-    console.log(e);
-  }
-}
+const clientId = await Emarsys.config.getClientId();
 ```
 
-### 7. Get LanguageCode
+### 7. Get Language Code
 
 Provides what is the actual language code set in the SDK.
 
 ```javascript
-async getLanguageCode() {
-  try {
-    let languageCode = await Emarsys.getLanguageCode();
-  } catch (e) {
-    console.log(e);
-  }
-}
+const languageCode = await Emarsys.config.getLanguageCode();
 ```
 
-### 8. Get SdkVersion
+### 8. Get SDK Version
 
 Provides what is the actual sdk version in the SDK.
 
 ```javascript
-async getSdkVersion() {
-  try {
-    let sdkVersion = await Emarsys.getSdkVersion();
-  } catch (e) {
-    console.log(e);
-  }
-}
+const SDKVersion = await Emarsys.config.getSdkVersion();
+```
+
+### 9. Get RN Wrapper Version
+
+Provides what is the actual RN wrapper version.
+
+```javascript
+const RNWrapperVersion = await Emarsys.config.getRNWrapperVersion();
 ```
 
 ## Inbox
-
 
 ### 1. Fetch Messages
 
 In order to receive the message Inbox content, you can use the `fetchMessages()` method.
 
 ```javascript
-async fetchMessages() {
-  try {
-    let inboxData = await Emarsys.inbox.fetchMessages()
-  } catch (e) {
-    console.log(e);
-  }
-}
+import Emarsys, { Message } from 'react-native-emarsys-sdk';
+const inboxMessages: Message[] = await Emarsys.inbox.fetchMessages();
+```
+
+```javascript
+export type Message = {
+  id: string;
+  campaignId: string;
+  collapseId?: string | null;
+  title: string;
+  body: string;
+  imageUrl?: string | null;
+  imageAltText?: string | null;
+  receivedAt: number;
+  updatedAt?: number | null;
+  expiresAt?: string | null;
+  tags?: Tag[] | null;
+  properties?: UnsafeObject | null;
+  actions?: ActionModel[] | null;
+};
+
+export type ActionModel = {
+  id: string;
+  title: string;
+  type: string;
+  name?: string | null;
+  payload?: UnsafeObject | null;
+  url?: string | null;
+};
 ```
 
 ### 2. Message Tag
@@ -1011,38 +895,36 @@ Tags are to be used to set the status of the inbox message, e.g. opened, seen et
 | Seen | seen | Inbox messages visible in the app inbox but not opened | Mobile App via the SDK
 | Opened | opened | Messages opened on the app | Mobile App via the SDK
 | Pinned | pinned | Messages that are pinned as favourite by the contact | Mobile App via the SDK
-| Deleted | deleted | Messages that are deleted in the app UI | Both SAP Engagement Cloud system and/or Mobile App via the SDK
+| Deleted | deleted | Messages that are deleted in the app's user interface | Both SAP Engagement Cloud system and/or Mobile App via the SDK
 
-#### 2.1 Add Tag
-
-To label a message with a tag, you can use `addTag()` method. (for example: `OPENED`, `SEEN` etc)
-
+#### 2.1 Tags
 ```javascript
-async addTag() {
-  let tag = "seen"
-  let messageId = "12345"
-  try {
-    let result = await Emarsys.inbox.addTag(tag, messageId)
-  } catch (e) {
-    console.log(e)
-  }
-}
+import { Tag } from 'react-native-emarsys-sdk';
+
+const seenTag = Tag.seen
+const openedTag = Tag.opened
+const pinnedTag = Tag.pinned
+const deletedTag = Tag.deleted
 ```
 
-#### 2. Remove Tag
+#### 2.2 Add Tag
+
+To label a message with a tag, you can use `addTag()` method.
+
+```javascript
+const tag = Tag.seen;
+const messageId = "12345";
+await Emarsys.inbox.addTag(tag, messageId);
+```
+
+#### 2.3 Remove Tag
 
 To remove a label from a message, you can use `removeTag()` method.
 
 ```javascript
-async removeTag() {
-  let tag = "seen"
-  let messageId = "12345"
-  try {
-    let result = await Emarsys.inbox.removeTag(tag, messageId)
-  } catch (e) {
-    console.log(e)
-  }
-}
+const tag = Tag.seen;
+const messageId = "12345"
+await Emarsys.inbox.removeTag(tag, messageId);
 ```
 
 ## Geofence
@@ -1075,13 +957,7 @@ The `requestAlwaysAuthorization()` method is responsible for asking the required
 
 
 ```javascript
-async requestAlwaysAuthorization() {
-  try {
-    let result = await Emarsys.geofence.requestAlwaysAuthorization()
-  } catch (e) {
-    console.log(e);
-  }
-}
+await Emarsys.geofence.requestAlwaysAuthorization();
 ```
 
 ### 2. Enable
@@ -1089,13 +965,7 @@ async requestAlwaysAuthorization() {
 The `enable()` method is responsible for the activation of this feature
 
 ```javascript
-async enable() {
-  try {
-    let result = await Emarsys.geofence.enable()
-  } catch (e) {
-    console.log(e)
-  }
-}
+await Emarsys.geofence.enable();
 ```
 
 ### 3. Disable
@@ -1103,13 +973,7 @@ async enable() {
 The `disable()` method is responsible for disabling this feature
 
 ```javascript
-async disable() {
-  try {
-    let result = await Emarsys.geofence.disable()
-  } catch (e) {
-    console.log(e)
-  }
-}
+await Emarsys.geofence.disable();
 ```
 
 ### 4. Is Enabled
@@ -1117,39 +981,21 @@ async disable() {
 The `isEnabled()` method returns if the geofencing is currently enabled or not
 
 ```javascript
-async isEnabled() {
-  try {
-    let result = await Emarsys.geofence.isEnabled()
-  } catch (e) {
-    console.log(e)
-  }
-}
+const isEnabled = await Emarsys.geofence.isEnabled();
 ```
 
 ### 5. Set Initial Enter Trigger Enabled
 
-When `initialEnterTriggerEnabled()` is `true`, Emarsys SDK will trigger all the affected geofences with `Enter` type triggers at the moment when the geofence is enabled if the device is already inside that geofence. By default, this value is set to `false`.
+When `setInitialEnterTriggerEnabled()` is `true`, Emarsys SDK will trigger all the affected geofences with `Enter` type triggers at the moment when the geofence is enabled if the device is already inside that geofence. By default, this value is set to `false`. 
 
 ```javascript
-async setInitialEnterTriggerEnabled() {
-  try {
-    let result = await Emarsys.geofence.setInitialEnterTriggerEnabled(true)
-  } catch (e) {
-    console.log(e)
-  }
-}
+await Emarsys.geofence.setInitialEnterTriggerEnabled(true);
 ```
 
 ### 6. Registered Geofences
 
-You can access the registered geofences from the device using the `registeredGeofences()` method.
+You can access the registered geofences from the device using the `getRegisteredGeofences()` method.
 
 ```javascript
-async registeredGeofences() {
-  try {
-    let registeredGeofences = await Emarsys.geofence.registeredGeofences()
-  } catch (e) {
-    console.log(e)
-  }
-}
+const geofences = await Emarsys.geofence.getRegisteredGeofences();
 ```
