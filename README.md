@@ -5,7 +5,7 @@
 > **Important**  
 > This wrapper is in Pilot release. Please contact your Client Success Manager before starting the implementation.
 
-For further information about how to use the wrapper please visit our [Documentation](https://github.com/emartech/react-native-emarsys-sdk/wiki "Wiki").
+For further information about how to use the wrapper please visit our [Documentation](https://github.com/emartech/react-native-emarsys-sdk/wiki/New-arch "Wiki").
 
 ## Installation
 
@@ -61,7 +61,7 @@ npx expo prebuild
 
 ### Without Expo (Bare React Native)
 
-Please follow our [Documentation](https://github.com/emartech/react-native-emarsys-sdk/wiki#native-integration "Native integration") to set up SAP Emarsys SDK natively into your app’s native modules.
+Please follow our [Documentation](https://github.com/emartech/react-native-emarsys-sdk/wiki/New-arch#bare-react-native) to set up SAP Emarsys SDK natively into your app’s native modules.
 
 ---
 

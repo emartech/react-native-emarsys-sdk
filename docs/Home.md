@@ -1,5 +1,3 @@
-
-
 #### Contents
 
 - [Native Integration](#native-integration)

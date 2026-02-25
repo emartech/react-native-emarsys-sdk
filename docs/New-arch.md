@@ -1,5 +1,3 @@
-
-
 #### Contents
 
 - [Installation](#installation)
@@ -126,11 +124,10 @@ npx expo prebuild
 Emarsys SDK setup should be implemented natively to ensure `setup` method is the first thing to be called. 
 
 #### iOS
-Please, follow the steps on the Emarsys SDK [documentation](https://github.com/emartech/ios-emarsys-sdk#1-installation-with-cocoapods) to install the SDK in your iOS project.
-
-> :warning: **If you are using RN version 0.62 or higher**: Make sure to place Emarsys SDK imports outside `#ifdef FB_SONARKIT_ENABLED` condition!
 
 ##### SDK Initialisation
+
+> :warning: **If you are using RN version 0.62 or higher**: Make sure to place Emarsys SDK imports outside `#ifdef FB_SONARKIT_ENABLED` condition!
 
 The SDK initialisation should be done in `didFinishLaunchingWithOptions` in `AppDelegate`.
 
@@ -146,7 +143,7 @@ objective-c
   //...
   EMSConfig *config = [EMSConfig makeWithBuilder:^(EMSConfigBuilder * builder) {
     [builder setMobileEngageApplicationCode:@<APPLICATION_CODE: STRING>]; // your application code
-    [builder setMerchantId:@<MERCHANT_ID: STRING>];  // your predict merchant ID
+    [builder setMerchantId:@<MERCHANT_ID: STRING>]; // your predict merchant ID
     [builder enableConsoleLogLevels:<ENABLE_CONSOLE_LOG_LEVELS: ARRAY>];
     [builder setSharedKeychainAccessGroup:@<IOS_SHARED_KEYCHAIN_ACCESS_GROUP: STRING>];
   }];
@@ -212,7 +209,7 @@ android:resource="@drawable/notification_icon"
 
 ##### SDK Initialisation
 
-For receiving push notifications in the background to work, the SDK has to be initialised in the `onCreate` method of the `MainApplication`.
+The SDK has to be initialised in the `onCreate` method of the `MainApplication`.
 
 java
 ```java
@@ -280,9 +277,7 @@ The push token has to be set natively when it arrives in `didRegisterForRemoteNo
 objective-c
 ```objective-c
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-  [Emarsys.push setPushToken:deviceToken
-              completionBlock:^(NSError *error) {
-              }];
+  [Emarsys.push setPushToken:deviceToken];
 }
 ```
 
@@ -303,10 +298,6 @@ Push notification could show media content and action buttons besides the title 
 
 2. Add the `EmarsysNotificationService` to this target in the `Podfile`.
 ```
-target 'Emarsys Sample' do
-  pod 'EmarsysSDK'
-end
-
 target 'EMSNotificationService' do
   pod 'EmarsysNotificationService'
 end
@@ -317,6 +308,7 @@ end
 4. Open the `NotificationService.h` in the target, then:
   - Import the <EmarsysNotificationService/EMSNotificationService.h>.
   - Extend the class EMSNotificationService instead of UNNotificationServiceExtension.
+  - Remove all default implementation in the class.
 
 objective-c
 ```objective-c
@@ -400,7 +392,7 @@ From Android 12, when the `ACCESS_FINE_LOCATION` permission is granted to the Ap
 
 ## Import
 ```javascript
-import Emarsys from "react-native-emarsys-sdk";
+import Emarsys from 'react-native-emarsys-sdk';
 ```
 
 ## Contact Management
@@ -440,20 +432,24 @@ await Emarsys.trackCustomEvent(eventName, eventAttributes);
 ```
 
 ## Event Handler
-<!-- TODO: confirm with Bianca -->
 Add `setEventHandler` to the `useEffect` in your `App.js`.
+`setEventHandler` returns React Native `EventSubscription`, which could be unsubscribed (`remove()`) when needed, e.g. in the cleanup function.
 
 ```javascript
-  useEffect(() => {
-    eventHandlerSubscription.current = Emarsys.setEventHandler((event: Event) => {
-      Alert('Event', `${event.name}: ${JSON.stringify(event.payload)}`);
-    });
+import { type Event } from 'react-native-emarsys-sdk';
 
-    return  () => {
-      eventHandlerSubscription.current?.remove();
-      eventHandlerSubscription.current = null;
-    }
-  }, []);
+const eventHandlerSubscription = useRef<EventSubscription | null>(null);
+
+useEffect(() => {
+  eventHandlerSubscription.current = Emarsys.setEventHandler((event: Event) => {
+    Alert('Event', `${event.name}: ${JSON.stringify(event.payload)}`);
+  });
+
+  return  () => {
+    eventHandlerSubscription.current?.remove();
+    eventHandlerSubscription.current = null;
+  }
+}, []);
 ```
 
 ## Push
@@ -513,21 +509,20 @@ await Emarsys.inApp.resume();
 
 ### 2. Inline InApp
 
-<!-- TODO: confirm with Bianca -->
 In-App message, that takes place in the application's view hierarchy. Multiple inline in-app components are allowed in one screen.
-
-Import the `InlineInAppView` component.
-```javascript
-import { InlineInAppView } from 'react-native-emarsys-sdk';
-```
 
 Create the view with component `InlineInAppView`.
 ```javascript
+import { InlineInAppView } from 'react-native-emarsys-sdk';
+
+const inlineInAppView = useRef<any>(null);
+const [inlineInAppViewHeight, setInlineInAppViewHeight] = useState(0);
+
 <InlineInAppView
   ref={inlineInAppView}
   style={{ width: '100%', height: inlineInAppViewHeight }}
   onEvent={(event) => {
-    showAlert(event.nativeEvent.name, JSON.stringify(event.nativeEvent.payload))
+    Alert(event.nativeEvent.name, JSON.stringify(event.nativeEvent.payload))
   }}
   onCompletion={(event) => {
     if (!event.nativeEvent.error) {
@@ -544,7 +539,7 @@ Create the view with component `InlineInAppView`.
 
 #### 2.1. Load InApp
 
-In order to load the inline in-app, `loadInApp(<String>)` must be called with the corresponding viewId.
+In order to load the inline in-app, `loadInApp(<ViewRef>, <String>)` must be called with the corresponding viewId.
 
 ```javascript
 Emarsys.inApp.loadInlineInApp(inlineInAppView.current, viewId);
@@ -563,6 +558,8 @@ To use the Predict functionality you have to setup your `merchantId` during the 
 When you want to track the cart items in the basket, you can call the `trackCart()` method with a list of `CartItem`. `CartItem` is an interface that can be used in your application for your own `CartItem` and then simply use the same items with the SDK.
 
 ```javascript
+import { type CartItem } from 'react-native-emarsys-sdk';
+
 const items: CartItem[] = [
   { itemId: 'item1', price: 1.1, quantity: 1 },
   { itemId: 'item2', price: 2.2, quantity: 2 }
@@ -573,8 +570,8 @@ await Emarsys.predict.trackCart(items);
 When you want to track empty basket.
 
 ```javascript
-const emptyCartItems: CartItem[] = [];
-await Emarsys.predict.trackCart(emptyCartItems)
+const items: CartItem[] = [];
+await Emarsys.predict.trackCart(items)
 ```
 
 ### 3. Track Purchase
@@ -612,7 +609,7 @@ await Emarsys.predict.trackItemView(itemId);
 When the user navigates between the categories, you should call `trackCategoryView()` in every navigation. Be aware to send `categoryPath` in the required format. Please visit Predict's documentation for more information.
 
 ```javascript
-const categoryPath = 'category1';
+const categoryPath = 'Shoes>Pump';
 await Emarsys.predict.trackCategoryView(categoryPath);
 ```
 
@@ -621,7 +618,7 @@ await Emarsys.predict.trackCategoryView(categoryPath);
 To report search terms entered by the contact, use `trackSearchTerm()` method.
 
 ```javascript
-const searchTerm = 'search1';
+const searchTerm = 'searchTerm';
 await Emarsys.predict.trackSearchTerm(searchTerm);
 ```
 
@@ -640,6 +637,8 @@ await Emarsys.predict.trackTag(tag, attributes);
 With the Emarsys SDK you can ask for product recommendations based on different recommendation parameters.
 
 ```javascript
+import { Logic, Filter, type Product } from 'react-native-emarsys-sdk';
+
 const logic = Logic.home(['1', '2']);
 const filters = [Filter.exclude.isValue('field', 'value')];
 const limit = 5;
@@ -657,7 +656,7 @@ The currently supported logics are:
 
 Search logic - based on `searchTerm`
 ```javascript
-const searchTerm = "searchTerm"
+const searchTerm = 'searchTerm';
 const logic = Logic.search(searchTerm);
 ```
 
@@ -670,88 +669,65 @@ const items: CartItem[] = [
 const logic = Logic.cart(items);
 ```
 
-Related logic - based on `itemViewId`
+Related logic - based on `itemId`
 ```javascript
-const itemId = 12345
+const itemId = 'item1';
 const logic = Logic.related(itemId);
 ```
 
 Category logic - based on `categoryPath`
 ```javascript
-const categoryPath = "Shoes>Pump"
+const categoryPath = 'Shoes>Pump';
 const logic = Logic.category(categoryPath);
 ```
 
-Also bought logic - based on `itemViewId`
+Also bought logic - based on `itemId`
 ```javascript
-const itemId = 12345
+const itemId = 'item1';
 const logic = Logic.alsoBought(itemId);
 ```
 
 Popular logic - based on `categoryPath`
 ```javascript
-const categoryPath = "Shoes>Pump"
+const categoryPath = 'Shoes>Pump';
 const logic = Logic.popular(categoryPath);
 ```
 
 Personal logic - based on current browsing and activity
 ```javascript
-const variants = ["1", "2"]
+const variants = ['1', '2'];
 const logic = Logic.personal(variants);
 ```
 
 Home logic - based on most recent browsing behaviour
 ```javascript
-const variants = ["1", "2"]
+const variants = ['1', '2'];
 const logic = Logic.home(variants);
 ```
 
-#### 8.2 Recommendation options
+#### 8.2 Filter
 
-This is an optional parameter.
+The currently supported filters are:
 
-- `availabilityZone` - You can personalize the recommendation further by setting the `availabilityZone` parameter of the recommendation, to only recommend the locally available products. This is an optional parameter.
-- `limit` - You can limit the number of recommended products received by defining a `limit`. This is an optional parameter, by default its value is 5.
-- `filters` - You can filter product recommendations with the SDK by building `RecommendationFilters`. This is an optional parameter.
-    - `type` - There are two types of filters: `exclude` or `include`.
-    - `field` - String extends Type of recommended logics.
-    - `comparison` - In every case there are four types of comparators you can use to compare your chosen field to expectations:
-        - `is` - checking if the field is matching the value.
-        - `in` - any of the values has a match with the field.
-        - `has` - One of the field values is equal to expectation value (applicable only to fields containing multiple values).
-        - `overlaps` - One or more of the field values are found in expectation values (applicable only to fields containing multiple values).
-    - `expectations` - String/Array of strings extends Comparison of recommended logics.
+```javascript
+const filters = [
+  Filter.exclude.isValue('field', 'value')
+  Filter.include.inValues('field', ['value1', 'value2']),
+  Filter.include.hasValue('field', 'value'),
+  Filter.include.overlapsValues('field', ['value1', 'value2']),
+  Filter.exclude.isValue('field', 'value'),
+  Filter.exclude.inValues('field', ['value1', 'value2']),
+  Filter.exclude.hasValue('field', 'value'),
+  Filter.exclude.overlapsValues('field', ['value1', 'value2'])
+]
+```
 
 ### 9. Track Recommendation Click
 
 The Emarsys SDK doesn't track automatically `recommendationClicks`, so you have to call manually `trackRecommendationClick()` when an interaction happens with any of the recommended products.
 
 ```javascript
-const product = {
-  productId: "productId",
-  title: "title", 
-  linkUrl: "http://linkUrl.com/test",
-  feature: "feature",
-  cohort: "awesome",
-  imageUrl: "http://productURL.com/imageUrl", 
-  zoomImageUrl: "http://productURL.com/zoomImageUrl",
-  categoryPath: "productCategoryPath",
-  productDescription: "productDescription",
-  album: "productAlbum",
-  actor: "productActor",
-  artist: "productArtist",
-  author: "productAuthor",
-  brand: "productBrand",
-  customFields: {
-    productTestKey1: "productTestValue1",
-    productTestKey2: "productTestValue2",
-    productTestKey3: "productTestValue3",
-  },
-  available: true,
-  price: 45.67, 
-  msrp: 2.45, 
-  year: 2019, 
-};
+const product = recommendedProducts[i];
 await Emarsys.predict.trackRecommendationClick(product);
 ```
 
@@ -762,7 +738,6 @@ In order to track email link clicks that open the application directly with the 
 
 ### 1. Track Deep Link
 ```javascript
-const url = 'https://github.com/emartech/react-native-emarsys-sdk?ems_dl=test';
 Emarsys.trackDeepLink(url);
 ```
 
@@ -850,40 +825,13 @@ const RNWrapperVersion = await Emarsys.config.getRNWrapperVersion();
 In order to receive the message Inbox content, you can use the `fetchMessages()` method.
 
 ```javascript
-import Emarsys, { Message } from 'react-native-emarsys-sdk';
+import { type Message } from 'react-native-emarsys-sdk';
+
 const inboxMessages: Message[] = await Emarsys.inbox.fetchMessages();
-```
-
-```javascript
-export type Message = {
-  id: string;
-  campaignId: string;
-  collapseId?: string | null;
-  title: string;
-  body: string;
-  imageUrl?: string | null;
-  imageAltText?: string | null;
-  receivedAt: number;
-  updatedAt?: number | null;
-  expiresAt?: string | null;
-  tags?: Tag[] | null;
-  properties?: UnsafeObject | null;
-  actions?: ActionModel[] | null;
-};
-
-export type ActionModel = {
-  id: string;
-  title: string;
-  type: string;
-  name?: string | null;
-  payload?: UnsafeObject | null;
-  url?: string | null;
-};
 ```
 
 ### 2. Message Tag
 Tags are to be used to set the status of the inbox message, e.g. opened, seen etc. There are 6 tags in total and the details are confirmed in the table below. App developers can add the tags `seen`, `opened`, `pinned` and `deleted`. It is important to note all the tags though as they will be included in the message payload in the SDK tag field. Depending on the tag included in the message, the message could be handled differently by the app. An example would be that messages tagged with `high` (for High Priority) could be visible flagged/highlighted by the contact.
-
 
 > [!WARNING]  
 > Only the tags specified below are supported. Any custom tags created will not work.
@@ -900,11 +848,6 @@ Tags are to be used to set the status of the inbox message, e.g. opened, seen et
 #### 2.1 Tags
 ```javascript
 import { Tag } from 'react-native-emarsys-sdk';
-
-const seenTag = Tag.seen
-const openedTag = Tag.opened
-const pinnedTag = Tag.pinned
-const deletedTag = Tag.deleted
 ```
 
 #### 2.2 Add Tag
@@ -913,7 +856,7 @@ To label a message with a tag, you can use `addTag()` method.
 
 ```javascript
 const tag = Tag.seen;
-const messageId = "12345";
+const messageId = inboxMessages[i].id;
 await Emarsys.inbox.addTag(tag, messageId);
 ```
 
@@ -923,7 +866,7 @@ To remove a label from a message, you can use `removeTag()` method.
 
 ```javascript
 const tag = Tag.seen;
-const messageId = "12345"
+const messageId = inboxMessages[i].id;
 await Emarsys.inbox.removeTag(tag, messageId);
 ```
 
@@ -997,5 +940,7 @@ await Emarsys.geofence.setInitialEnterTriggerEnabled(true);
 You can access the registered geofences from the device using the `getRegisteredGeofences()` method.
 
 ```javascript
-const geofences = await Emarsys.geofence.getRegisteredGeofences();
+import { type Geofence } from 'react-native-emarsys-sdk';
+
+const geofences: Geofence[] = await Emarsys.geofence.getRegisteredGeofences();
 ```
