@@ -48,7 +48,7 @@
     - [7. Track Tag](#7-track-tag)
     - [8. Recommend Products](#8-recommend-products)
       - [8.1 Logic](#81-logic)
-      - [8.2 Recommendation options](#82-recommendation-options)
+      - [8.2 Filter](#82-filter)
     - [9. Track Recommendation Click](#9-track-recommendation-click)
   - [DeepLink](#deeplink)
     - [1. Track Deep Link](#1-track-deep-link)
@@ -78,6 +78,9 @@
     - [6. Registered Geofences](#6-registered-geofences)
 
 # Installation
+
+> **Important**  
+> New Archtecture and Expo framework are in Pilot release. Please contact your Client Success Manager before starting the implementation.
 
 ## Expo
 The React Native wrapper for SAP Emarsys SDK automatically integrates the **Emarsys SDK** into your Expo app’s native modules.
