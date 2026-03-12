@@ -68,7 +68,7 @@ RNEmarsysEventHandler *rnEMSEventHandler = [RNEmarsysEventHandler allocWithZone:
 [rnEMSEventHandler setEventHandlers];
 ```
 
-#### New Initialization (New-arch.md)
+#### New Initialization (New-Architecture-and-Expo-framework.md)
 ```objective-c
 EMSConfig *config = [EMSConfig makeWithBuilder:^(EMSConfigBuilder * builder) {
   [builder setMobileEngageApplicationCode:@<APPLICATION_CODE: STRING>];
@@ -114,7 +114,7 @@ RNEmarsysEventHandler eventHandler = RNEmarsysEventHandler.getInstance();
 eventHandler.setEventHandlers();
 ```
 
-#### New Initialization (New-arch.md)
+#### New Initialization (New-Architecture-and-Expo-framework.md)
 ```java
 EmarsysConfig config = new EmarsysConfig.Builder()
     .application(this)
