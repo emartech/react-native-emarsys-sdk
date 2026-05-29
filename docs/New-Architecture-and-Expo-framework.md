@@ -115,7 +115,37 @@ The React Native wrapper for SAP Emarsys SDK automatically integrates the **Emar
    - Place an image named **`mobile_engage_logo_icon.jpg`** inside the app’s `assets` folder.
    - During build, it will be copied into the correct Android resources directory (`res/drawable`).
 
-4. Run prebuild to apply the changes:
+4. *(Optional)* If you are building your app with Expo Application Services (EAS), add the EAS Build config options to your `app.json` with your own values:
+
+```json
+{
+  "expo": {
+    ...
+    "extra": {
+      ...
+      "eas": {
+        ...
+        "build": {
+          "experimental": {
+            "ios": {
+              "appExtensions": [
+                {
+                  "targetName": "NotificationService",
+                  "bundleIdentifier": "<IOS_BUNDLE_ID: STRING>.NotificationService"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+    ...
+  }
+}
+
+```
+
+5. Run prebuild to apply the changes:
 
 ```bash
 npx expo prebuild

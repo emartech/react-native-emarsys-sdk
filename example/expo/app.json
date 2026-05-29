@@ -53,6 +53,22 @@
         }
       ],
       ["./plugins/ios/withNativeTest.ts"]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "build": {
+          "experimental": {
+            "ios": {
+              "appExtensions": [
+                {
+                  "targetName": "NotificationService",
+                  "bundleIdentifier": "com.emarsysapp.NotificationService"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
   }
 }
