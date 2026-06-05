@@ -8,9 +8,10 @@ export interface Spec extends TurboModule {
   trackCategoryView(categoryPath: string): Promise<void>;
   trackSearchTerm(searchTerm: string): Promise<void>;
   trackTag(tag: string, attributes?: UnsafeObject | null): Promise<void>;
-  // Union `UnsafeObject` to convert to `NSDictionary` instead of `JS::NativeEmarsys::{type}` on iOS, for better mapper processing
-  recommendProducts(logic: Logic | UnsafeObject, filters?: Filter[] | null, limit?: number | null, availabilityZone?: string | null): Promise<Product[]>;
-  trackRecommendationClick(product: Product | UnsafeObject): Promise<void>;
+  // Use `UnsafeObject` to convert to `NSDictionary` instead of `JS::NativeEmarsys::{type}` on iOS, for better mapper processing
+  // Guard `logic` / `product` type in the external API
+  recommendProducts(logic: UnsafeObject, filters?: Filter[] | null, limit?: number | null, availabilityZone?: string | null): Promise<Product[]>;
+  trackRecommendationClick(product: UnsafeObject): Promise<void>;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>(
