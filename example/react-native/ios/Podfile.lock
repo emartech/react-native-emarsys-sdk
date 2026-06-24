@@ -2,7 +2,7 @@ PODS:
   - boost (1.84.0)
   - DoubleConversion (1.1.6)
   - EmarsysNotificationService (3.9.0)
-  - EmarsysSDK (3.9.0)
+  - EmarsysSDK (3.10.0)
   - fast_float (8.0.0)
   - FBLazyVector (0.82.1)
   - fmt (11.0.2)
@@ -2413,10 +2413,10 @@ PODS:
     - SocketRocket
   - RNCPushNotificationIOS (1.12.0):
     - React-Core
-  - RNEmarsysSDK (2.0.0-beta.0):
+  - RNEmarsysSDK (2.0.0-beta.1):
     - boost
     - DoubleConversion
-    - EmarsysSDK (~> 3.9.0)
+    - EmarsysSDK (~> 3.10.0)
     - fast_float
     - fmt
     - glog
@@ -2756,7 +2756,7 @@ SPEC CHECKSUMS:
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
   EmarsysNotificationService: bd5264d72007906c673c91efeac0bd3a3c6e8f18
-  EmarsysSDK: 77c5a8ff4c5cdfd6b5bfb7d08c62fcb4aac2e2b5
+  EmarsysSDK: 3450866e0fb1ca7b5fa3c0e949f814e73e0ac99f
   fast_float: b32c788ed9c6a8c584d114d0047beda9664e7cc6
   FBLazyVector: 0aa6183b9afe3c31fc65b5d1eeef1f3c19b63bfa
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
@@ -2830,7 +2830,7 @@ SPEC CHECKSUMS:
   ReactCodegen: 0bce2d209e2e802589f4c5ff76d21618200e74cb
   ReactCommon: 801eff8cb9c940c04d3a89ce399c343ee3eff654
   RNCPushNotificationIOS: 85957a0534fd1309b4c028ccbe5b1baf9ab5cf57
-  RNEmarsysSDK: ff6a7ddd75617461619b67b468b81647cd777007
+  RNEmarsysSDK: 4089a1360bf82dfe2ecabc0d554936b2c53a97dc
   RNScreens: 199799bdab32fa1e17ebf938b06fec52033e81e5
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 526f25666395d30c297d53154398ffd249eaf9e1

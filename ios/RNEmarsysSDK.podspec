@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
 
   install_modules_dependencies(s)
   s.dependency 'ExpoModulesCore'
-  s.dependency 'EmarsysSDK', '~> 3.9.0'
+  s.dependency 'EmarsysSDK', '~> 3.10.0'
 
   s.source_files = '**/*.{h,m,mm,swift,hpp,cpp}'
   s.exclude_files = 'test/**/*'
