@@ -30,8 +30,8 @@ project.android {
 android {
   namespace "com.emarsys.reactnative"
   defaultConfig {
-    versionCode 1
-    versionName "2.0.0-beta.0"
+    versionCode 2
+    versionName "2.0.0-beta.1"
   }
   kotlinOptions {
     jvmTarget = '17'
@@ -52,8 +52,8 @@ tasks.withType(Test) {
 dependencies {
   implementation "androidx.core:core-ktx:1.16.0"
   implementation "com.facebook.react:react-native:+"
-  api "com.emarsys:emarsys-sdk:3.10.+"
-  api "com.emarsys:emarsys-firebase:3.10.+"
+  api "com.emarsys:emarsys-sdk:3.11.+"
+  api "com.emarsys:emarsys-firebase:3.11.+"
   
   // Test dependencies
   testImplementation "junit:junit:4.13.2"
