@@ -4,10 +4,6 @@ import {
   useColorScheme,
 } from 'react-native';
 
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
-
 import Emarsys from 'react-native-emarsys-wrapper';
 import showAlert from './components/Helpers';
 import Navigation from './Navigation';
@@ -25,15 +21,10 @@ function App(): React.JSX.Element {
     };
   }, []);
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
     <>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
       />
       <Navigation />
     </>
