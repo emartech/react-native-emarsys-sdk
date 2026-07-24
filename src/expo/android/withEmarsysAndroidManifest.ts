@@ -12,19 +12,19 @@ export const withEmarsysAndroidManifest: ConfigPlugin<EMSOptions> = (config, opt
     const app = applicationArray[0];
 
     if (options.applicationCode) {
-      setMetaData(app, `${STORE_NAME}.applicationCode`, options.applicationCode);
+      setMetaData(app, `${STORE_NAME}.applicationCode`, { value: options.applicationCode });
     }
     if (options.merchantId) {
-      setMetaData(app, `${STORE_NAME}.merchantId`, options.merchantId);
+      setMetaData(app, `${STORE_NAME}.merchantId`, { value: options.merchantId });
     }
     if (options.enableConsoleLogging) {
-      setMetaData(app, `${STORE_NAME}.enableConsoleLogging`, 'true');
+      setMetaData(app, `${STORE_NAME}.enableConsoleLogging`, { value: 'true' });
     }
     if (options.androidSharedPackageNames && options.androidSharedPackageNames.length > 0) {
-      setMetaData(app, `${STORE_NAME}.sharedPackageNames`, options.androidSharedPackageNames);
+      setMetaData(app, `${STORE_NAME}.sharedPackageNames`, { value: options.androidSharedPackageNames });
     }
     if (options.androidSharedSecret) {
-      setMetaData(app, `${STORE_NAME}.sharedSecret`, options.androidSharedSecret);
+      setMetaData(app, `${STORE_NAME}.sharedSecret`, { value: options.androidSharedSecret });
     }
 
     addEmarsysMessagingService(app);

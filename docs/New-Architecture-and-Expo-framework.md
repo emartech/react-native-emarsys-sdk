@@ -99,6 +99,7 @@ The React Native wrapper for SAP Emarsys SDK automatically integrates the **Emar
           "applicationCode": <APPLICATION_CODE: STRING>,
           "merchantId": <MERCHANT_ID: STRING>,
           "enableConsoleLogging": <ENABLE_CONSOLE_LOGGING: BOOL>,
+          "androidSmallNotificationIconPath": <ANDROID_SMALL_NOTIFICATION_ICON_PATH: STRING>,
           "androidSharedPackageNames": <ANDROID_SHARED_PACKAGE_NAMES: LIST>,
           "androidSharedSecret": <ANDROID_SHARED_SECRET: STRING>,
           "iosSharedKeychainAccessGroup": <IOS_SHARED_KEYCHAIN_ACCESS_GROUP: STRING>
@@ -112,7 +113,7 @@ The React Native wrapper for SAP Emarsys SDK automatically integrates the **Emar
 
 2. Add your `google-services.json` file into the app’s assets folder.
 3. *(Optional)* Provide a custom Android **push notification icon**:
-   - Place an image named **`mobile_engage_logo_icon.jpg`** inside the app’s `assets` folder.
+   - Place an image in the app project, and update the plugin config option `androidSmallNotificationIconPath` with its relative path.
    - During build, it will be copied into the correct Android resources directory (`res/drawable`).
 
 4. *(Optional)* If you are building your app with Expo Application Services (EAS), add the EAS Build config options to your `app.json` with your own values:
