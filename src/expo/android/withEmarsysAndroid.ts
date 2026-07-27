@@ -3,7 +3,7 @@ import { type EMSOptions } from '../withEmarsysPlugin';
 import { withEmarsysProjectBuildGradle } from './withEmarsysProjectBuildGradle';
 import { withEmarsysAppBuildGradle } from './withEmarsysAppBuildGradle';
 import { withEmarsysAndroidManifest } from './withEmarsysAndroidManifest';
-import { withEmarsysPushMessageLogoIcon } from './withEmarsysPushMessageLogoIcon';
+import { withEmarsysSmallNotificationIcon } from './withEmarsysSmallNotificationIcon';
 import { withEmarsysGoogleServicesJson } from './withEmarsysGoogleServicesJson';
 
 export const withEmarsysAndroid: ConfigPlugin<EMSOptions> = (config, options) => {
@@ -11,6 +11,6 @@ export const withEmarsysAndroid: ConfigPlugin<EMSOptions> = (config, options) =>
   config = withEmarsysAppBuildGradle(config);
   config = withEmarsysAndroidManifest(config, options);
   config = withEmarsysGoogleServicesJson(config);
-  config = withEmarsysPushMessageLogoIcon(config);
+  config = withEmarsysSmallNotificationIcon(config, options);
   return config;
 };
