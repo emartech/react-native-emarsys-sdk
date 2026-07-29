@@ -10,7 +10,7 @@ export const withEmarsysAndroid: ConfigPlugin<EMSOptions> = (config, options) =>
   config = withEmarsysProjectBuildGradle(config);
   config = withEmarsysAppBuildGradle(config);
   config = withEmarsysAndroidManifest(config, options);
-  config = withEmarsysGoogleServicesJson(config);
+  config = withEmarsysGoogleServicesJson(config, options);
   config = withEmarsysSmallNotificationIcon(config, options);
   return config;
 };

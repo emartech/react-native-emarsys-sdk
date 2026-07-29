@@ -28,6 +28,7 @@ The SDK now supports Expo through a plugin configuration in `app.json`:
           "applicationCode": <APPLICATION_CODE: STRING>,
           "merchantId": <MERCHANT_ID: STRING>,
           "enableConsoleLogging": <ENABLE_CONSOLE_LOGGING: BOOL>,
+          "androidGoogleServicesJsonPath": <ANDROID_GOOGLE_SERVICES_JSON_PATH: STRING>,
           "androidSmallNotificationIconPath": <ANDROID_SMALL_NOTIFICATION_ICON_PATH: STRING>,
           "androidSharedPackageNames": <ANDROID_SHARED_PACKAGE_NAMES: LIST>,
           "androidSharedSecret": <ANDROID_SHARED_SECRET: STRING>,

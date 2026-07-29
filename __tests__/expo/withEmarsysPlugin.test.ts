@@ -10,6 +10,7 @@ describe('withEmarsysPlugin', () => {
     applicationCode: 'TEST_APP_CODE',
     merchantId: 'TEST_MERCHANT_ID',
     enableConsoleLogging: true,
+    androidGoogleServicesJsonPath: '',
     androidSmallNotificationIconPath: '',
     androidSharedPackageNames: [],
     androidSharedSecret: '',
