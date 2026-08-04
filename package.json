@@ -10,7 +10,7 @@
     "lint": "expo-module lint",
     "lint:all": "eslint src __tests__",
     "prepublishOnly": "expo-module prepublishOnly",
-    "prepare": "expo-module prepare",
+    "prepare": "tsc --project tsconfig.json",
     "postinstall": "node scripts/postinstall.js",
     "test": "jest",
     "test:watch": "jest --watch",
