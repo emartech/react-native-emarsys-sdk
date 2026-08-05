@@ -112,15 +112,34 @@ The React Native wrapper for SAP Emarsys SDK automatically integrates the **Emar
 }
 ```
 
-2. Add your `google-services.json` file into the app project:
-  - Option 1: Place the json file in default path `./assets/google-services.json`, `androidGoogleServicesJsonPath` can omitted.
+2. Enable `use_frameworks!` in Podfile
+
+```json
+{
+  "expo": {
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ]
+    ]
+  }
+}
+```
+
+3. Add your `google-services.json` file into the app project:
+  - Option 1: Place the json file in default path `./assets/google-services.json`, `androidGoogleServicesJsonPath` can be omitted.
   - Option 2: Update the plugin config option `androidGoogleServicesJsonPath` with the json file relative path.
 
-3. *(Optional)* Provide a custom Android **push notification icon**:
+4. *(Optional)* Provide a custom Android **push notification icon**:
    - Place an image in the app project, and update the plugin config option `androidSmallNotificationIconPath` with its relative path.
    - During build, it will be copied into the correct Android resources directory (`res/drawable`).
 
-4. *(Optional)* If you are building your app with Expo Application Services (EAS), add the EAS Build config options to your `app.json` with your own values:
+5. *(Optional)* If you are building your app with Expo Application Services (EAS), add the EAS Build config options to your `app.json` with your own values:
 
 ```json
 {
@@ -150,7 +169,7 @@ The React Native wrapper for SAP Emarsys SDK automatically integrates the **Emar
 
 ```
 
-5. Run prebuild to apply the changes:
+6. Run prebuild to apply the changes:
 
 ```bash
 npx expo prebuild

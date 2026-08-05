@@ -61,7 +61,7 @@ export const withEmarsysXcodeProject: ConfigPlugin<EMSOptions> = (config, _optio
     if (existingBuildSettings) {
       const settingsToCopy = [
         'CURRENT_PROJECT_VERSION', 'MARKETING_VERSION',
-        'SWIFT_VERSION', 'TARGETED_DEVICE_FAMILY',
+        'IPHONEOS_DEPLOYMENT_TARGET', 'SWIFT_VERSION', 'TARGETED_DEVICE_FAMILY',
         'DEVELOPMENT_TEAM', 'PROVISIONING_PROFILE_SPECIFIER',
         'CODE_SIGN_STYLE', 'CODE_SIGN_IDENTITY', 'OTHER_CODE_SIGN_FLAGS'
       ]

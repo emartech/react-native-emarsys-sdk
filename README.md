@@ -15,6 +15,12 @@ npm install "git+ssh://git@github.com/emartech/react-native-emarsys-sdk.git#<ver
 
 Check the latest version [here](https://github.com/emartech/react-native-emarsys-sdk/releases)
 
+## Requirements
+
+- React Native version 0.68 or higher, with New Architecture enabled.
+- Android minSdkVersion 24 or higher, compileSdkVersion 36 or higher.
+- iOS deployment target 14 or higher.
+
 ---
 
 ## Configuration

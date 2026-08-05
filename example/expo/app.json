@@ -42,6 +42,14 @@
     },
     "plugins": [
       [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ],
+      [
         "react-native-emarsys-sdk",
         {
           "applicationCode": "EMS25-20071",

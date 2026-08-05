@@ -40,6 +40,25 @@ The SDK now supports Expo through a plugin configuration in `app.json`:
 }
 ```
 
+Enable `use_frameworks!` in Podfile
+
+```json
+{
+  "expo": {
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ]
+    ]
+  }
+}
+```
+
 After configuration, run:
 ```bash
 npx expo prebuild
