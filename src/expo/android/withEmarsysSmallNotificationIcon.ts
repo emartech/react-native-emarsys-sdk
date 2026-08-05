@@ -4,7 +4,7 @@ import { setMetaData } from './withEmarsysAndroidHelpers';
 
 export const withEmarsysSmallNotificationIcon: ConfigPlugin<EMSOptions> = (config, options) => {
   if (!options.androidSmallNotificationIconPath) {
-    console.warn('androidNotificationIconPath not available. Skipping configuration.');
+    console.warn('androidSmallNotificationIconPath not available. Skipping configuration.');
     return config;
   }
 
@@ -19,7 +19,7 @@ export const withEmarsysSmallNotificationIcon: ConfigPlugin<EMSOptions> = (confi
       const dest = path.join(projectRoot, 'android', 'app', 'src', 'main', 'res', 'drawable', notificationIconFile);
 
       if (!fs.existsSync(source)) {
-        console.warn(`File ${source} does not exist. Skipping copy.`);
+        console.warn(`File ${source} does not exist. Skipping file copy.`);
         return config;
       }
 

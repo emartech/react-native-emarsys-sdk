@@ -134,7 +134,7 @@ describe('withEmarsysSmallNotificationIcon', () => {
       expect(mockFs.existsSync).toHaveBeenCalledWith('/test/project/custom/assets/path/notification_icon.png');
       expect(mockFs.mkdirSync).not.toHaveBeenCalled();
       expect(mockFs.copyFileSync).not.toHaveBeenCalled();
-      expect(mockConsoleWarn).toHaveBeenCalledWith('File /test/project/custom/assets/path/notification_icon.png does not exist. Skipping copy.');
+      expect(mockConsoleWarn).toHaveBeenCalledWith('File /test/project/custom/assets/path/notification_icon.png does not exist. Skipping file copy.');
       // Function should return some config object
       expect(result).toBeDefined();
     });
@@ -142,7 +142,7 @@ describe('withEmarsysSmallNotificationIcon', () => {
     it('should skip file operations when path is not available', async () => {
       const result = await withEmarsysSmallNotificationIcon(mockConfig, { applicationCode: 'TEST_APP_CODE' });
 
-      expect(mockConsoleWarn).toHaveBeenCalledWith('androidNotificationIconPath not available. Skipping configuration.');
+      expect(mockConsoleWarn).toHaveBeenCalledWith('androidSmallNotificationIconPath not available. Skipping configuration.');
       expect(mockFs.existsSync).not.toHaveBeenCalled();
       expect(mockFs.mkdirSync).not.toHaveBeenCalled();
       expect(mockFs.copyFileSync).not.toHaveBeenCalled();
@@ -190,7 +190,7 @@ describe('withEmarsysSmallNotificationIcon', () => {
     it('should skip manifest modification when path is not available', async () => {
       const result = await withEmarsysSmallNotificationIcon(mockConfig, { applicationCode: 'TEST_APP_CODE' });
 
-      expect(mockConsoleWarn).toHaveBeenCalledWith('androidNotificationIconPath not available. Skipping configuration.');
+      expect(mockConsoleWarn).toHaveBeenCalledWith('androidSmallNotificationIconPath not available. Skipping configuration.');
       expect(setMetaData).not.toHaveBeenCalled();
       // Function should return some config object
       expect(result).toBeDefined();
@@ -306,7 +306,7 @@ describe('withEmarsysSmallNotificationIcon', () => {
 
       // Verify file operations were skipped
       expect(mockFs.copyFileSync).not.toHaveBeenCalled();
-      expect(mockConsoleWarn).toHaveBeenCalledWith('File /test/project/custom/assets/path/notification_icon.png does not exist. Skipping copy.');
+      expect(mockConsoleWarn).toHaveBeenCalledWith('File /test/project/custom/assets/path/notification_icon.png does not exist. Skipping file copy.');
       
       // Verify manifest modifications were skipped
       expect(setMetaData).not.toHaveBeenCalled();
@@ -319,7 +319,7 @@ describe('withEmarsysSmallNotificationIcon', () => {
     it('should skip both operations when path is not available', async () => {
       const result = await withEmarsysSmallNotificationIcon(mockConfig, { applicationCode: 'TEST_APP_CODE' });
 
-      expect(mockConsoleWarn).toHaveBeenCalledWith('androidNotificationIconPath not available. Skipping configuration.');
+      expect(mockConsoleWarn).toHaveBeenCalledWith('androidSmallNotificationIconPath not available. Skipping configuration.');
       expect(mockFs.copyFileSync).not.toHaveBeenCalled();
       expect(setMetaData).not.toHaveBeenCalled();
       // Function should return some config object

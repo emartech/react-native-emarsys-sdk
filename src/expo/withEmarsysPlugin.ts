@@ -23,6 +23,7 @@ export type EMSOptions = {
   applicationCode?: string;
   merchantId?: string;
   enableConsoleLogging?: boolean;
+  androidGoogleServicesJsonPath?: string;
   androidSmallNotificationIconPath?: string;
   androidSharedPackageNames?: string[];
   androidSharedSecret?: string;
