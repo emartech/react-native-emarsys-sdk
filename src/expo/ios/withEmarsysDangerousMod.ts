@@ -17,8 +17,14 @@ export const withEmarsysDangerousMod: ConfigPlugin<EMSOptions> = (config, _optio
 
       // Notification Service Extension
       // Copy files
-      // TODO - get packageDir with require.resolve
-      const packageDir = `${projectRoot}/node_modules/react-native-emarsys-sdk`;
+      let packageDir;
+      try {
+        packageDir = path.dirname(require.resolve('react-native-emarsys-sdk/package.json'));
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (error) {
+        // Fallback when require.resolve failed, e.g. in example project
+        packageDir = `${projectRoot}/node_modules/react-native-emarsys-sdk`;
+      }
       const sourceDir = path.join(packageDir, 'ios', 'expo', NOTIFICATION_SERVICE_TARGET);
       const destDir = path.join(projectRoot, 'ios', NOTIFICATION_SERVICE_TARGET);
       if (!fs.existsSync(`${destDir}`)) {
