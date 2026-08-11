@@ -8,6 +8,9 @@ on:
     paths:
       - 'docs/**'
 
+permissions:
+  contents: write
+
 jobs:
   sync-wiki:
     runs-on: ubuntu-latest

@@ -19,6 +19,11 @@ public class EmarsysAppDelegateSubscriber: ExpoAppDelegateSubscriber {
     Emarsys.push.setPushToken(deviceToken)
   }
 
+  public func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+	Emarsys.push.handleMessage(userInfo: userInfo)
+	completionHandler(.newData)
+  }
+
 }
 
 // Expo plugin - END */
