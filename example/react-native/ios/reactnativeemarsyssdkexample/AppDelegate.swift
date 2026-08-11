@@ -47,9 +47,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
 
-  public func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     // Emarsys - push token
     Emarsys.push.setPushToken(deviceToken)
+  }
+
+  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    Emarsys.push.handleMessage(userInfo: userInfo)
+    completionHandler(.newData)
   }
 
 }
