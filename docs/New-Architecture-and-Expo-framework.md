@@ -2,11 +2,13 @@
 
 - [Installation](#installation)
   - [Expo](#expo)
+    - [Android Kotlin compatibility](#android-kotlin-compatibility)
   - [Bare React Native](#bare-react-native)
     - [Setup](#setup)
       - [iOS](#ios)
         - [SDK Initialisation](#sdk-initialisation)
       - [Android](#android)
+        - [Kotlin compatibility](#kotlin-compatibility)
         - [Firebase](#firebase)
         - [Messaging service](#messaging-service)
         - [SDK Initialisation](#sdk-initialisation-1)
@@ -175,6 +177,10 @@ The React Native wrapper for SAP Emarsys SDK automatically integrates the **Emar
 npx expo prebuild
 ```
 
+#### Android Kotlin compatibility
+
+The Emarsys SDK for Android is compiled with Kotlin 2.4.x. Expo's toolchain (KSP, `expo-root-project`) currently supports Kotlin up to 2.1.x, so the plugin automatically injects `-Xskip-metadata-version-check` into all Android subprojects via the generated `android/build.gradle`. This allows Kotlin 2.1.x to read the newer metadata without a version mismatch error.
+
 ## Bare React Native
 
 ### Setup
@@ -236,6 +242,32 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 ```
 
 #### Android
+
+##### Kotlin compatibility
+
+The Emarsys SDK for Android is compiled with Kotlin 2.4.x. Your project must use a matching Kotlin version to avoid the following build error:
+
+```
+Module was compiled with an incompatible version of Kotlin.
+The binary version of its metadata is 2.4.0, expected version is 2.1.0.
+```
+
+In your root `android/build.gradle`, set `kotlinVersion` to `2.4.0` and pin the compiler plugin explicitly so it takes precedence over the version bundled with the React Native Gradle plugin:
+
+```groovy
+buildscript {
+    ext {
+        kotlinVersion = "2.4.0"
+        // ...
+    }
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        // ...
+    }
+}
+```
+
+> **Note:** The React Native Gradle plugin ships its own Kotlin version via a composite build. Pinning the classpath explicitly as shown above is required for it to be overridden.
 
 ##### Firebase
 

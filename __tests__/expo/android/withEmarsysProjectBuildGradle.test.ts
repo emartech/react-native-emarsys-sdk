@@ -178,6 +178,49 @@ allprojects {
       expect(result.modResults.contents).toContain("classpath('com.google.gms:google-services:4.4.4')");
     });
 
+    it('should add -Xskip-metadata-version-check allprojects hook when not present', () => {
+      const configWithBuildGradle: ConfigWithModResults = {
+        ...mockConfig,
+        modResults: {
+          contents: `
+buildscript {
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.0.0'
+    }
+}`
+        }
+      };
+
+      const result = withEmarsysProjectBuildGradle(configWithBuildGradle) as ConfigWithModResults;
+
+      expect(result.modResults.contents).toContain('-Xskip-metadata-version-check');
+      expect(result.modResults.contents).toContain('plugins.withId("org.jetbrains.kotlin.android")');
+    });
+
+    it('should not duplicate -Xskip-metadata-version-check when already present', () => {
+      const configWithBuildGradle: ConfigWithModResults = {
+        ...mockConfig,
+        modResults: {
+          contents: `
+buildscript {
+    dependencies {}
+}
+subprojects {
+  plugins.withId("org.jetbrains.kotlin.android") {
+    extensions.configure(org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension) {
+      it.compilerOptions.freeCompilerArgs.add("-Xskip-metadata-version-check")
+    }
+  }
+}`
+        }
+      };
+
+      const result = withEmarsysProjectBuildGradle(configWithBuildGradle) as ConfigWithModResults;
+
+      const matches = result.modResults.contents.match(/-Xskip-metadata-version-check/g);
+      expect(matches).toHaveLength(1);
+    });
+
     it('should return the same config object', () => {
       const configWithBuildGradle: ConfigWithModResults = {
         ...mockConfig,
