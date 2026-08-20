@@ -1,6 +1,6 @@
 {
   "name": "react-native-emarsys-sdk",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "description": "React Native wrapper for SAP Emarsys SDK",
   "main": "build/index.js",
   "types": "build/index.d.ts",

@@ -22,6 +22,7 @@ export const withEmarsysProjectBuildGradle: ConfigPlugin = config =>
       );
     }
 
+    // TODO: review and remove when expo supports higher kotlin version
     if (!contents.includes('-Xskip-metadata-version-check')) {
       contents += SKIP_METADATA_HOOK;
     }

@@ -2,7 +2,6 @@
 
 - [Installation](#installation)
   - [Expo](#expo)
-    - [Android Kotlin compatibility](#android-kotlin-compatibility)
   - [Bare React Native](#bare-react-native)
     - [Setup](#setup)
       - [iOS](#ios)
