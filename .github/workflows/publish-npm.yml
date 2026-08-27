@@ -1,0 +1,45 @@
+name: Publish to npm
+
+on:
+  # TODO: remove push
+  push: 
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    name: Build, Test & Pack
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run linting
+      run: npm run lint:all
+
+    - name: Run tests
+      run: npm run test
+
+    - name: Build project
+      run: npm run clean && npm run build
+
+    - name: Pack tarball
+      run: npm pack
+
+    - name: Upload package artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: npm-package
+        path: '*.tgz'
+        if-no-files-found: error
+        retention-days: 7
