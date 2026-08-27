@@ -2,7 +2,7 @@ name: Publish to npm
 
 on:
   # TODO: remove push
-  push: 
+  push:
   release:
     types: [published]
   workflow_dispatch:
@@ -19,10 +19,10 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '20'
 
     - name: Install dependencies
-      run: npm ci
+      run: npm ci --ignore-scripts
 
     - name: Run linting
       run: npm run lint:all
@@ -43,3 +43,59 @@ jobs:
         path: '*.tgz'
         if-no-files-found: error
         retention-days: 7
+
+  test-example-expo:
+    name: Build Example (Expo/Android)
+    needs: build-and-publish
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: temurin
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Download package artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: npm-package
+        path: artifacts
+
+    - name: Install example dependencies
+      working-directory: example/expo
+      run: |
+        # Autolinking must use the installed tarball, not the SDK source at repo root
+        npm pkg delete expo.autolinking.nativeModulesDir
+
+        # remove local dev dependency
+        npm uninstall @emartech/react-native-emarsys-sdk --ignore-scripts
+
+        # install from generated artifact
+        TGZ_ABS=$(realpath ../../artifacts/*.tgz)
+        npm install "$TGZ_ABS" --ignore-scripts
+
+        echo "Installed SDK from $TGZ_ABS"
+        node -e "console.log(require('@emartech/react-native-emarsys-sdk/package.json').version)"
+
+    - name: Write google-services.json
+      run: echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > example/expo/assets/google-services.json
+
+    - name: Expo prebuild (Android)
+      working-directory: example/expo
+      run: npx expo prebuild --platform android --clean
+
+    - name: Build Android (debug)
+      working-directory: example/expo/android
+      run: ./gradlew assembleDebug --no-daemon

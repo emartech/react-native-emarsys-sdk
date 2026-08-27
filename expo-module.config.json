@@ -1,5 +1,8 @@
 {
   "platforms": ["ios", "android"],
+  "android": {
+    "name": "emartech_react-native-emarsys-sdk"
+  },
   "ios": {
     "appDelegateSubscribers": ["EmarsysAppDelegateSubscriber"]
   }
