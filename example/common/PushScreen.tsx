@@ -1,5 +1,5 @@
 import { Platform, PermissionsAndroid } from 'react-native';
-import Emarsys from 'react-native-emarsys-sdk';
+import Emarsys from '@emartech/react-native-emarsys-sdk';
 import { ScrollView, Button, Alert, Separator, SectionTitle } from './Components';
 
 export default function PushScreen({ requestPushPermission }: { requestPushPermission: () => Promise<boolean> }) {

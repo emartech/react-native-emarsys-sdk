@@ -39,4 +39,4 @@ jobs:
 
     - name: Run Android Tests
       working-directory: example/expo/android
-      run: ./gradlew :react-native-emarsys-sdk:test
+      run: ./gradlew :emartech_react-native-emarsys-sdk:test

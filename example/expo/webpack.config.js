@@ -6,7 +6,7 @@ module.exports = async (env, argv) => {
     {
       ...env,
       babel: {
-        dangerouslyAddModulePathsToTranspile: ['react-native-emarsys-sdk'],
+        dangerouslyAddModulePathsToTranspile: ['@emartech/react-native-emarsys-sdk'],
       },
     },
     argv

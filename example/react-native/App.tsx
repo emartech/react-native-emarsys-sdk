@@ -1,7 +1,7 @@
 import { Platform, PermissionsAndroid } from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
-import Emarsys from 'react-native-emarsys-sdk';
+import Emarsys from '@emartech/react-native-emarsys-sdk';
 import CommonApp from './common/App';
 
 export default function App() {

@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import * as Notifications from 'expo-notifications';
-import Emarsys from 'react-native-emarsys-sdk';
+import Emarsys from '@emartech/react-native-emarsys-sdk';
 import CommonApp from './common/App';
 
 export default function App() {

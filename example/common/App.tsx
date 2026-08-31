@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { EventSubscription } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Emarsys, { type Event } from 'react-native-emarsys-sdk';
+import Emarsys, { type Event } from '@emartech/react-native-emarsys-sdk';
 import ConfigScreen from './ConfigScreen';
 import PushScreen from './PushScreen';
 import InAppScreen from './InAppScreen';
