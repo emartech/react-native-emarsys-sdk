@@ -1,4 +1,4 @@
-import Emarsys, { type CartItem, Logic, Filter, type Product } from 'react-native-emarsys-sdk';
+import Emarsys, { type CartItem, Logic, Filter, type Product } from '@emartech/react-native-emarsys-sdk';
 import { ScrollView, Button } from './Components';
 
 let recommendedProducts: Product[] | null | undefined = undefined

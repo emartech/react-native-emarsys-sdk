@@ -50,7 +50,7 @@
         }
       ],
       [
-        "react-native-emarsys-sdk",
+        "@emartech/react-native-emarsys-sdk",
         {
           "applicationCode": "EMS25-20071",
           "merchantId": "1DF86BF95CBE8F19",

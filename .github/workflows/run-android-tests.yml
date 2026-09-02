@@ -10,15 +10,15 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v5
       with:
         node-version: '18'
 
     - name: Setup Java
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v5
       with:
         distribution: 'temurin'
         java-version: '17'
@@ -31,7 +31,7 @@ jobs:
       run: npm install
 
     - name: Create google-services.json
-      run: echo '${{ secrets.GOOGLE_SERVICE_JSON }}' > example/expo/assets/google-services.json
+      run: echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > example/expo/assets/google-services.json
 
     - name: Prebuild Android project
       working-directory: example/expo
@@ -39,4 +39,4 @@ jobs:
 
     - name: Run Android Tests
       working-directory: example/expo/android
-      run: ./gradlew :react-native-emarsys-sdk:test
+      run: ./gradlew :emartech_react-native-emarsys-sdk:test

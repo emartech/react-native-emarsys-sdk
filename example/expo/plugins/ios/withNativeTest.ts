@@ -10,7 +10,7 @@ const withTestFiles = (config) => {
     'ios',
     (config) => {
       const projectRoot = config.modRequest.projectRoot;
-      const packageDir = `${projectRoot}/node_modules/react-native-emarsys-sdk`;
+      const packageDir = `${projectRoot}/node_modules/@emartech/react-native-emarsys-sdk`;
       const sourceTestsDir = path.join(packageDir, 'ios', 'test');
       const targetTestsDir = path.join(projectRoot, 'ios', TEST_TARGET_NAME);
 

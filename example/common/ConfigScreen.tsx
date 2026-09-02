@@ -1,4 +1,4 @@
-import Emarsys from 'react-native-emarsys-sdk';
+import Emarsys from '@emartech/react-native-emarsys-sdk';
 import { ScrollView, Button, Separator } from './Components';
 
 export default function ConfigScreen() {

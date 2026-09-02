@@ -1,5 +1,5 @@
 {
-  "name": "react-native-emarsys-sdk",
+  "name": "@emartech/react-native-emarsys-sdk",
   "version": "2.0.0-beta.2",
   "description": "React Native wrapper for SAP Emarsys SDK",
   "main": "build/index.js",
@@ -20,6 +20,26 @@
     "open:ios": "xed example/ios",
     "open:android": "open -a \"Android Studio\" example/android"
   },
+  "files": [
+    "build/",
+    "src/",
+    "android/src/main/",
+    "android/build.gradle",
+    "ios/RNEmarsys.h",
+    "ios/RNEmarsys.m",
+    "ios/RNEmarsysSDK.podspec",
+    "ios/expo/",
+    "ios/utils/",
+    "ios/wrapper/",
+    "scripts/postinstall.js",
+    "app.plugin.js",
+    "RNEmarsysSDK.podspec",
+    "expo-module.config.json",
+    "react-native.config.js",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
   "keywords": [
     "react-native",
     "expo",
