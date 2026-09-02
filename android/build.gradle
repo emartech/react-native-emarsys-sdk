@@ -2,16 +2,18 @@ apply plugin: "com.android.library"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
-// Expo plugin - START
-group = 'com.emarsys.reactnative.expo'
-version = '2.0.0-beta.2'
+def isExpo = findProject(':expo-modules-core') != null
 
-def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
-apply from: expoModulesCorePlugin
-applyKotlinExpoModulesCorePlugin()
-useCoreDependencies()
-useExpoPublishing()
-// Expo plugin - END */
+if (isExpo) {
+  group = 'com.emarsys.reactnative.expo'
+  version = '2.0.0-beta.2'
+
+  def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
+  apply from: expoModulesCorePlugin
+  applyKotlinExpoModulesCorePlugin()
+  useCoreDependencies()
+  useExpoPublishing()
+}
 
 buildscript {
   // Simple helper that allows the root project to override versions declared by this library.
@@ -39,6 +41,24 @@ android {
   }
   lintOptions {
     abortOnError false
+  }
+  if (!isExpo) {
+    sourceSets {
+      main {
+        java {
+          exclude 'com/emarsys/reactnative/expo/**'
+        }
+        kotlin {
+          exclude 'com/emarsys/reactnative/expo/**'
+        }
+      }
+    }
+  }
+}
+
+if (!isExpo) {
+  tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    exclude 'com/emarsys/reactnative/expo/**'
   }
 }
 

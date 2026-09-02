@@ -2582,7 +2582,7 @@ DEPENDENCIES:
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
-  - RNEmarsysSDK (from `../node_modules/react-native-emarsys-sdk`)
+  - "RNEmarsysSDK (from `../node_modules/@emartech/react-native-emarsys-sdk`)"
   - RNScreens (from `../node_modules/react-native-screens`)
   - SocketRocket (~> 0.7.1)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -2746,7 +2746,7 @@ EXTERNAL SOURCES:
   RNCPushNotificationIOS:
     :path: "../node_modules/@react-native-community/push-notification-ios"
   RNEmarsysSDK:
-    :path: "../node_modules/react-native-emarsys-sdk"
+    :path: "../node_modules/@emartech/react-native-emarsys-sdk"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   Yoga:
@@ -2830,7 +2830,7 @@ SPEC CHECKSUMS:
   ReactCodegen: 0bce2d209e2e802589f4c5ff76d21618200e74cb
   ReactCommon: 801eff8cb9c940c04d3a89ce399c343ee3eff654
   RNCPushNotificationIOS: 85957a0534fd1309b4c028ccbe5b1baf9ab5cf57
-  RNEmarsysSDK: e41f3aaeff79dbfdc21726eead80d07f1c68929b
+  RNEmarsysSDK: 9d9e669d426000b4995aaa9b5fc2dfd12cc09c66
   RNScreens: 199799bdab32fa1e17ebf938b06fec52033e81e5
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 526f25666395d30c297d53154398ffd249eaf9e1

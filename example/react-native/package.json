@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "postinstall": "node scripts/postinstall.js",
     "prepare:android": "cd android && ./gradlew generateCodegenArtifactsFromSchema && cd ..",
     "prepare:ios": "cd ios && pod install && cd ..",
     "start": "react-native start",
