@@ -19,7 +19,14 @@ RCT_EXPORT_MODULE()
 
 - (void)setEventHandler:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
   [EventUtils setEventHandler:^(NSString *eventName, NSDictionary<NSString *, id> *payload) {
-    [self emitOnEvent:@{@"name": eventName, @"payload": payload}];
+    [self emitOnEvent:@{@"name": eventName, @"payload": payload ?: [NSNull null]}];
+  }];
+  resolve(nil);
+}
+
+- (void)setSilentMessageEventHandler:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+  [EventUtils setSilentMessageEventHandler:^(NSString *eventName, NSDictionary<NSString *, id> *payload) {
+    [self emitOnSilentMessageEvent:@{@"name": eventName, @"payload": payload ?: [NSNull null]}];
   }];
   resolve(nil);
 }

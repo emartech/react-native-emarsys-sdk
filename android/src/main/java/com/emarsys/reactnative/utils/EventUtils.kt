@@ -1,8 +1,10 @@
 package com.emarsys.reactnative.utils
 
 import android.content.Context
+import android.content.Intent
 import com.emarsys.Emarsys
 import com.emarsys.mobileengage.api.event.EventHandler
+import com.emarsys.reactnative.RNEmarsysHeadlessJsTaskService
 import org.json.JSONObject
 
 object EventUtils {
@@ -17,7 +19,6 @@ object EventUtils {
       eventsCache.add(mapOf("context" to context, "eventName" to eventName, "payload" to payload))
     }
     Emarsys.push.setNotificationEventHandler(_eventHandler)
-    Emarsys.push.setSilentMessageEventHandler(_eventHandler)
     Emarsys.inApp.setEventHandler(_eventHandler)
     Emarsys.geofence.setEventHandler(_eventHandler)
     Emarsys.onEventAction.setOnEventActionEventHandler(_eventHandler)
@@ -27,6 +28,16 @@ object EventUtils {
         eventHandler.handleEvent(event["context"] as Context, event["eventName"] as String, event["payload"] as JSONObject?)
       }
       eventsCache.clear()
+    }
+  }
+
+  fun setSilentMessageEventHandler() {
+    Emarsys.push.setSilentMessageEventHandler { context: Context, eventName: String, payload: JSONObject? ->
+      val intent = Intent(context, RNEmarsysHeadlessJsTaskService::class.java).apply {
+        putExtra(RNEmarsysHeadlessJsTaskService.EXTRA_EVENT_NAME, eventName)
+        putExtra(RNEmarsysHeadlessJsTaskService.EXTRA_PAYLOAD, payload?.toString())
+      }
+      RNEmarsysHeadlessJsTaskService.start(context, intent)
     }
   }
 

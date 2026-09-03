@@ -25,6 +25,11 @@ class NativeEmarsys(reactContext: ReactApplicationContext) : NativeEmarsysSpec(r
     promise.resolve(null)
   }
 
+  override fun setSilentMessageEventHandler(promise: Promise) {
+    EventUtils.setSilentMessageEventHandler()
+    promise.resolve(null)
+  }
+
   override fun setContact(contactFieldId: Double, contactFieldValue: String, promise: Promise) {
     try {
       Emarsys.setContact(contactFieldId.toInt(), contactFieldValue) { errorCause: Throwable? ->
