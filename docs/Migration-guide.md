@@ -181,7 +181,7 @@ import Emarsys from 'react-native-emarsys-wrapper';
 
 **New:**
 ```javascript
-import Emarsys from 'react-native-emarsys-sdk';
+import Emarsys from '@emartech/react-native-emarsys-sdk';
 ```
 
 ### Contact Management
@@ -235,7 +235,7 @@ this.inlineInAppView.current.loadInApp('view-id')
 
 **New:**
 ```javascript
-import { InlineInAppView } from 'react-native-emarsys-sdk';
+import { InlineInAppView } from '@emartech/react-native-emarsys-sdk';
 
 const inlineInAppView = useRef<any>(null);
 const [inlineInAppViewHeight, setInlineInAppViewHeight] = useState(0);
@@ -433,7 +433,7 @@ await Emarsys.geofence.getRegisteredGeofences();
 - Event structure: `(eventName, payload)` → `(event: Event)` with `event.name` and `event.payload`
 
 ### Inline InApp
-- Import separately: `import { InlineInAppView } from 'react-native-emarsys-sdk'`
+- Import separately: `import { InlineInAppView } from '@emartech/react-native-emarsys-sdk'`
 - Loading: `ref.current.loadInApp(viewId)` → `Emarsys.inApp.loadInlineInApp(ref.current, viewId)`
 
 ### Predict API

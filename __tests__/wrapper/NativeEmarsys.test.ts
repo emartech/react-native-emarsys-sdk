@@ -8,6 +8,7 @@ describe('NativeEmarsys', () => {
     mockConfig = {
       onEvent: jest.fn(),
       setEventHandler: jest.fn(),
+      setSilentMessageEventHandler: jest.fn(),
       setContact: jest.fn(),
       clearContact: jest.fn(),
       trackCustomEvent: jest.fn(),
@@ -51,6 +52,29 @@ describe('NativeEmarsys', () => {
       (mockConfig.setEventHandler as jest.Mock).mockRejectedValue(error);
 
       await expect(mockConfig.setEventHandler()).rejects.toThrow('Failed to setEventHandler');
+    });
+  });
+
+  describe('setSilentMessageEventHandler', () => {
+    it('should call setSilentMessageEventHandler', async () => {
+      (mockConfig.setSilentMessageEventHandler as jest.Mock).mockResolvedValue(undefined);
+
+      await mockConfig.setSilentMessageEventHandler();
+
+      expect(mockConfig.setSilentMessageEventHandler).toHaveBeenCalledTimes(1);
+    });
+
+    it('should handle successful setSilentMessageEventHandler', async () => {
+      (mockConfig.setSilentMessageEventHandler as jest.Mock).mockResolvedValue(undefined);
+
+      await expect(mockConfig.setSilentMessageEventHandler()).resolves.toBeUndefined();
+    });
+
+    it('should handle errors when setSilentMessageEventHandler', async () => {
+      const error = new Error('Failed to setSilentMessageEventHandler');
+      (mockConfig.setSilentMessageEventHandler as jest.Mock).mockRejectedValue(error);
+
+      await expect(mockConfig.setSilentMessageEventHandler()).rejects.toThrow('Failed to setSilentMessageEventHandler');
     });
   });
 

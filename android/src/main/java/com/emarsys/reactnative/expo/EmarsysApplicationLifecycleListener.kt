@@ -4,7 +4,7 @@ package com.emarsys.reactnative.expo
 
 import android.app.Application
 import com.emarsys.Emarsys
-import com.emarsys.reactnative.utils.EventUtils
+import com.emarsys.reactnative.RNEmarsys
 import com.emarsys.reactnative.utils.StorageUtils
 import expo.modules.core.interfaces.ApplicationLifecycleListener
 
@@ -15,8 +15,7 @@ class EmarsysApplicationLifecycleListener : ApplicationLifecycleListener {
 
     val config = StorageUtils.getEmarsysConfig(application)
     Emarsys.setup(config)
-
-    EventUtils.setEventHandler()
+    RNEmarsys.setup()
   }
 
 }
