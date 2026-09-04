@@ -46,10 +46,19 @@
     "react-native-emarsys-sdk",
     "RNEmarsysSDK"
   ],
-  "repository": "https://github.com/emartech/react-native-emarsys-sdk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emartech/react-native-emarsys-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/emartech/react-native-emarsys-sdk/issues"
+  },
   "author": "Emarsys <g-gsuite-mobileengineers@emarsys.com> (https://github.com/emartech)",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "homepage": "https://github.com/emartech/react-native-emarsys-sdk#readme",
+  "engines": {
+    "node": ">=18"
+  },
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/node": "^22.0.0",
