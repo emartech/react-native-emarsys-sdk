@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  push: # temp
+  release:
+    types: [published]
+
+jobs:
+  build-package:
+    name: Build Package
+    uses: ./.github/workflows/build-package.yml
+
+  build-sample-expo:
+    name: Build Expo Sample
+    needs: build-package
+    uses: ./.github/workflows/build-sample-expo.yml
+    secrets: inherit
+
+  build-sample-rn:
+    name: Build React Native Sample
+    needs: build-package
+    uses: ./.github/workflows/build-sample-rn.yml
+    secrets: inherit
+
+  publish-npm:
+    name: Publish to npm
+    needs: [build-sample-expo, build-sample-rn]
+    uses: ./.github/workflows/publish-npm.yml
+    secrets: inherit

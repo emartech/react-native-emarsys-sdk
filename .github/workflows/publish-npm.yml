@@ -1,52 +1,40 @@
 name: Publish to npm
 
 on:
-  # TODO: remove push before npm publish step
-  push:
-  release:
-    types: [published]
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
-  build-and-publish:
-    name: Build, Test & Pack
+  publish-npm:
+    name: Publish to npm
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v5
+    - name: Download package artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: npm-package
 
     - name: Setup Node.js
       uses: actions/setup-node@v5
       with:
         node-version: '20'
+        registry-url: 'https://registry.npmjs.org'
 
-    - name: Install dependencies
-      run: npm ci
+    - name: Determine npm dist-tag
+      id: dist_tag
+      run: |
+        VERSION=$(tar -xzO -f *.tgz package/package.json | node -pe "JSON.parse(require('fs').readFileSync(0)).version")
+        if [[ "$VERSION" == *-* ]]; then
+          TAG=beta
+        else
+          TAG=latest
+        fi
+        echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+        echo "Publishing $VERSION under dist-tag: $TAG"
 
-    - name: Run linting
-      run: npm run lint:all
-
-    - name: Run tests
-      run: npm run test
-
-    - name: Build project
-      run: npm run clean && npm run build
-
-    - name: Pack tarball
-      run: npm pack
-
-    - name: Upload package artifact
-      uses: actions/upload-artifact@v6
-      with:
-        name: npm-package
-        path: '*.tgz'
-        if-no-files-found: error
-        retention-days: 7
-
-  build-sample-apps:
-    name: Build Sample Apps
-    needs: build-and-publish
-    uses: ./.github/workflows/build-sample-apps.yml
-    secrets: inherit
-
+    - name: Publish to npm
+      run: echo "Publishing @emartech/react-native-emarsys-sdk to npm with tag ${{ steps.dist_tag.outputs.tag }}"
+      # TODO
+      # run: npm publish *.tgz --access public --tag ${{ steps.dist_tag.outputs.tag }}
+      # env:
+      #   NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISHER_TOKEN }}

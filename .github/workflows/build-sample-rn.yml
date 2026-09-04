@@ -1,0 +1,82 @@
+name: Build React Native Sample
+
+on:
+  workflow_call:
+
+jobs:
+  build-rn-sample:
+    name: Build React Native Sample (Android & iOS)
+    permissions:
+      contents: read
+    runs-on: macos-15-xlarge
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+      with:
+        sparse-checkout: |
+          example/react-native
+          example/common
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v5
+      with:
+        node-version: '20'
+
+    - name: Setup Java
+      uses: actions/setup-java@v5
+      with:
+        java-version: '17'
+        distribution: temurin
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v4
+
+    - name: Download package artifact
+      uses: actions/download-artifact@v6
+      with:
+        name: npm-package
+        path: artifacts
+
+    - name: Remove example postinstall script
+      run: rm example/react-native/scripts/postinstall.js
+
+    - name: Install example dependencies
+      working-directory: example/react-native
+      run: |
+        # remove local dev dependency
+        npm uninstall @emartech/react-native-emarsys-sdk --ignore-scripts
+
+        # install from generated artifact (scripts run so the SDK postinstall
+        # generates the podspec and disables the Expo plugin blocks)
+        TGZ_ABS=$(realpath ../../artifacts/*.tgz)
+        npm install "$TGZ_ABS"
+
+        echo "Installed SDK from $TGZ_ABS"
+        node -e "console.log(require('@emartech/react-native-emarsys-sdk/package.json').version)"
+
+    - name: Write google-services.json
+      run: echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > example/react-native/android/app/google-services.json
+
+    - name: Build Android
+      working-directory: example/react-native/android
+      run: ./gradlew assembleDebug --no-daemon
+
+    - name: Use Xcode 16.4
+      run: sudo xcode-select -switch /Applications/Xcode_16.4.app
+
+    - name: Install CocoaPods
+      working-directory: example/react-native/ios
+      run: pod install
+
+    - name: Build iOS
+      working-directory: example/react-native/ios
+      run: |
+        xcodebuild \
+          -workspace reactnativeemarsyssdkexample.xcworkspace \
+          -scheme reactnativeemarsyssdkexample \
+          -configuration Debug \
+          -sdk iphonesimulator \
+          -destination 'generic/platform=iOS Simulator' \
+          CODE_SIGNING_ALLOWED=NO \
+          build
