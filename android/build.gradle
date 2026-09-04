@@ -1,44 +1,56 @@
 apply plugin: "com.android.library"
-apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
-// Expo plugin - START
-group = 'com.emarsys.reactnative.expo'
-version = '2.0.0-beta.2'
+def isExpo = findProject(':expo-modules-core') != null
 
-def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
-apply from: expoModulesCorePlugin
-applyKotlinExpoModulesCorePlugin()
-useCoreDependencies()
-useExpoPublishing()
-// Expo plugin - END */
-
-buildscript {
-  // Simple helper that allows the root project to override versions declared by this library.
-  ext.safeExtGet = { prop, fallback ->
-    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+if (!isExpo) {
+  try {
+    apply plugin: "org.jetbrains.kotlin.android"
+  } catch (Exception ignored) {
+    // AGP 9.0+ has built-in Kotlin support; kotlin.android plugin is not needed
   }
 }
-project.android {
-  compileSdkVersion safeExtGet("compileSdkVersion", 36)
-  defaultConfig {
-    minSdkVersion safeExtGet("minSdkVersion", 24)
-    targetSdkVersion safeExtGet("targetSdkVersion", 36)
-  }
+
+if (isExpo) {
+  group = 'com.emarsys.reactnative.expo'
+  version = '2.0.0-beta.2'
+
+  def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
+  apply from: expoModulesCorePlugin
+  applyKotlinExpoModulesCorePlugin()
+  useCoreDependencies()
+  useExpoPublishing()
 }
 
 android {
   namespace "com.emarsys.reactnative"
+  compileSdk 36
   defaultConfig {
+    minSdk 24
+    targetSdk 36
     versionCode 3
     versionName "2.0.0-beta.2"
   }
-  kotlinOptions {
-    jvmTarget = '17'
-    freeCompilerArgs += ["-Xskip-metadata-version-check"]
-  }
   lintOptions {
     abortOnError false
+  }
+  if (!isExpo) {
+    sourceSets {
+      main {
+        java {
+          exclude 'com/emarsys/reactnative/expo/**'
+        }
+        kotlin {
+          exclude 'com/emarsys/reactnative/expo/**'
+        }
+      }
+    }
+  }
+}
+
+if (!isExpo) {
+  tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    exclude 'com/emarsys/reactnative/expo/**'
   }
 }
 

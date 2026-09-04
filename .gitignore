@@ -58,4 +58,6 @@ yarn-error.log
 
 # Build
 build/
-/RNEmarsysSDK.podspec
+
+artifacts/*
+!artifacts/.gitkeep

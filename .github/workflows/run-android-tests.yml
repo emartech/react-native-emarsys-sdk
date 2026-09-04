@@ -26,6 +26,9 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
+    - name: Build SDK
+      run: npm run clean && npm run build
+
     - name: Install example dependencies
       working-directory: example/expo
       run: npm install

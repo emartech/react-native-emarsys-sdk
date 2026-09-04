@@ -31,15 +31,18 @@ jobs:
       run: npm run clean && npm run build
 
     - name: Pack tarball
-      run: npm pack
+      run: |
+        mkdir -p artifacts
+        rm -f artifacts/*.tgz || true
+        npm pack --pack-destination ./artifacts
 
     - name: Dry run publish
-      run: npm publish --dry-run *.tgz
+      run: npm publish --dry-run ./artifacts/*.tgz
 
     - name: Upload package artifact
       uses: actions/upload-artifact@v6
       with:
         name: npm-package
-        path: '*.tgz'
+        path: artifacts/*.tgz
         if-no-files-found: error
         retention-days: 7

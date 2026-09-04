@@ -38,19 +38,17 @@ jobs:
         name: npm-package
         path: artifacts
 
-    - name: Remove example postinstall script
-      run: rm example/react-native/scripts/postinstall.js
-
     - name: Install example dependencies
       working-directory: example/react-native
       run: |
         # remove local dev dependency
         npm uninstall @emartech/react-native-emarsys-sdk --ignore-scripts
 
-        # install from generated artifact (scripts run so the SDK postinstall
-        # generates the podspec and disables the Expo plugin blocks)
+        # install from generated artifact (no install scripts run; Expo vs
+        # bare-RN is resolved at build time by the Gradle findProject gate and
+        # the podspec exclude_files)
         TGZ_ABS=$(realpath ../../artifacts/*.tgz)
-        npm install "$TGZ_ABS"
+        npm install "$TGZ_ABS" --ignore-scripts
 
         echo "Installed SDK from $TGZ_ABS"
         node -e "console.log(require('@emartech/react-native-emarsys-sdk/package.json').version)"
