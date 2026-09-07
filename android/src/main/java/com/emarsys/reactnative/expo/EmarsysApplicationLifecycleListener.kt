@@ -1,5 +1,3 @@
-// Expo plugin - START
-
 package com.emarsys.reactnative.expo
 
 import android.app.Application
@@ -20,5 +18,3 @@ class EmarsysApplicationLifecycleListener : ApplicationLifecycleListener {
   }
 
 }
-
-// Expo plugin - END */

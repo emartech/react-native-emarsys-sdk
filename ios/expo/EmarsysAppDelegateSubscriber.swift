@@ -1,5 +1,3 @@
-// Expo plugin - START
-
 import ExpoModulesCore
 import EmarsysSDK
 
@@ -25,5 +23,3 @@ public class EmarsysAppDelegateSubscriber: ExpoAppDelegateSubscriber {
   }
 
 }
-
-// Expo plugin - END */

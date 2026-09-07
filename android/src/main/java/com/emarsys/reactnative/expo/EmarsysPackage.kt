@@ -1,5 +1,3 @@
-// Expo plugin - START
-
 package com.emarsys.reactnative.expo
 
 import android.content.Context
@@ -13,5 +11,3 @@ class EmarsysPackage : Package {
   }
 
 }
-
-// Expo plugin - END */

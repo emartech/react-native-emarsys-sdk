@@ -38,9 +38,6 @@ jobs:
         name: npm-package
         path: artifacts
 
-    - name: Remove example postinstall script
-      run: rm example/react-native/scripts/postinstall.js
-
     - name: Install example dependencies
       working-directory: example/react-native
       run: |
