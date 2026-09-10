@@ -1,10 +1,16 @@
+# [Unreleased]
+
+## What's new
+
+- New `setSilentMessageEventHandler()` — see [Set Silent Message Event Handler](https://github.com/emartech/react-native-emarsys-sdk/wiki/New-Architecture-and-Expo-framework#4-set-silent-message-event-handler)
+
 # 2.0.0-beta.2
 
 ## What's new
 
 - Expo plugin: support `androidGoogleServicesJsonPath` config option
 - Expo plugin: support `androidSmallNotificationIconPath` config option
-- Expo plugin: automatically inject `-Xskip-metadata-version-check` for Android Kotlin compatibility — see [Android Kotlin compatibility](https://github.com/emartech/react-native-emarsys-sdk/wiki/New-Architecture-and-Expo-framework#android-kotlin-compatibility
+- Expo plugin: automatically inject `-Xskip-metadata-version-check` for Android Kotlin compatibility — see [Android Kotlin compatibility](https://github.com/emartech/react-native-emarsys-sdk/wiki/New-Architecture-and-Expo-framework#android-kotlin-compatibility)
 - Expo plugin: support iOS Silent Push
 
 ## What's fixed

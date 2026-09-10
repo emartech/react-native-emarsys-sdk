@@ -33,6 +33,7 @@
     - [1. Set Push Token](#1-set-push-token)
     - [2. Clear Push Token](#2-clear-push-token)
     - [3. Get Push Token](#3-get-push-token)
+    - [4. Set Silent Message Event Handler](#4-set-silent-message-event-handler)
   - [InApp](#inapp)
     - [1. Overlay InApp](#1-overlay-inapp)
       - [1.1. Pause](#11-pause)
@@ -480,7 +481,7 @@ From Android 12, when the `ACCESS_FINE_LOCATION` permission is granted to the Ap
 
 ## Import
 ```javascript
-import Emarsys from 'react-native-emarsys-sdk';
+import Emarsys from '@emartech/react-native-emarsys-sdk';
 ```
 
 ## Contact Management
@@ -524,7 +525,7 @@ Add `setEventHandler` to the `useEffect` in your `App.js`.
 `setEventHandler` returns React Native `EventSubscription`, which could be unsubscribed (`remove()`) when needed, e.g. in the cleanup function.
 
 ```javascript
-import { type Event } from 'react-native-emarsys-sdk';
+import { type Event } from '@emartech/react-native-emarsys-sdk';
 
 const eventHandlerSubscription = useRef<EventSubscription | null>(null);
 
@@ -575,6 +576,16 @@ If you want to get the push token for the contact, please use `getPushToken()` m
 const pushToken = await Emarsys.push.getPushToken();
 ```
 
+### 4. Set Silent Message Event Handler
+
+To handle silent push notifications, register a handler at module level in your `index.js` — outside any React component, before `AppRegistry.registerComponent`.
+
+```javascript
+Emarsys.setSilentMessageEventHandler(async (event) => {
+  console.log('Silent Message Event', event.name, JSON.stringify(event.payload));
+});
+```
+
 ## InApp
 
 ### 1. Overlay InApp
@@ -601,7 +612,7 @@ In-App message, that takes place in the application's view hierarchy. Multiple i
 
 Create the view with component `InlineInAppView`.
 ```javascript
-import { InlineInAppView } from 'react-native-emarsys-sdk';
+import { InlineInAppView } from '@emartech/react-native-emarsys-sdk';
 
 const inlineInAppView = useRef<any>(null);
 const [inlineInAppViewHeight, setInlineInAppViewHeight] = useState(0);
@@ -646,7 +657,7 @@ To use the Predict functionality you have to setup your `merchantId` during the 
 When you want to track the cart items in the basket, you can call the `trackCart()` method with a list of `CartItem`. `CartItem` is an interface that can be used in your application for your own `CartItem` and then simply use the same items with the SDK.
 
 ```javascript
-import { type CartItem } from 'react-native-emarsys-sdk';
+import { type CartItem } from '@emartech/react-native-emarsys-sdk';
 
 const items: CartItem[] = [
   { itemId: 'item1', price: 1.1, quantity: 1 },
@@ -725,7 +736,7 @@ await Emarsys.predict.trackTag(tag, attributes);
 With the Emarsys SDK you can ask for product recommendations based on different recommendation parameters.
 
 ```javascript
-import { Logic, Filter, type Product } from 'react-native-emarsys-sdk';
+import { Logic, Filter, type Product } from '@emartech/react-native-emarsys-sdk';
 
 const logic = Logic.home(['1', '2']);
 const filters = [Filter.exclude.isValue('field', 'value')];
@@ -913,7 +924,7 @@ const RNWrapperVersion = await Emarsys.config.getRNWrapperVersion();
 In order to receive the message Inbox content, you can use the `fetchMessages()` method.
 
 ```javascript
-import { type Message } from 'react-native-emarsys-sdk';
+import { type Message } from '@emartech/react-native-emarsys-sdk';
 
 const inboxMessages: Message[] = await Emarsys.inbox.fetchMessages();
 ```
@@ -935,7 +946,7 @@ Tags are to be used to set the status of the inbox message, e.g. opened, seen et
 
 #### 2.1 Tags
 ```javascript
-import { Tag } from 'react-native-emarsys-sdk';
+import { Tag } from '@emartech/react-native-emarsys-sdk';
 ```
 
 #### 2.2 Add Tag
@@ -1028,7 +1039,7 @@ await Emarsys.geofence.setInitialEnterTriggerEnabled(true);
 You can access the registered geofences from the device using the `getRegisteredGeofences()` method.
 
 ```javascript
-import { type Geofence } from 'react-native-emarsys-sdk';
+import { type Geofence } from '@emartech/react-native-emarsys-sdk';
 
 const geofences: Geofence[] = await Emarsys.geofence.getRegisteredGeofences();
 ```
