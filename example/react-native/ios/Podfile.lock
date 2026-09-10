@@ -2413,7 +2413,7 @@ PODS:
     - SocketRocket
   - RNCPushNotificationIOS (1.12.0):
     - React-Core
-  - RNEmarsysSDK (2.0.0-beta.2):
+  - RNEmarsysSDK (2.0.0-beta.3):
     - boost
     - DoubleConversion
     - EmarsysSDK (~> 3.10.0)
@@ -2830,11 +2830,11 @@ SPEC CHECKSUMS:
   ReactCodegen: 0bce2d209e2e802589f4c5ff76d21618200e74cb
   ReactCommon: 801eff8cb9c940c04d3a89ce399c343ee3eff654
   RNCPushNotificationIOS: 85957a0534fd1309b4c028ccbe5b1baf9ab5cf57
-  RNEmarsysSDK: 79a960365e892c6f6636cf77c603528649cccf89
+  RNEmarsysSDK: 860e5a44bdb7630791cec3f6697405e34b8a2d0e
   RNScreens: 199799bdab32fa1e17ebf938b06fec52033e81e5
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 526f25666395d30c297d53154398ffd249eaf9e1
 
-PODFILE CHECKSUM: 14115d6c5b8d15564459f25fd88e0e8fafcaaf31
+PODFILE CHECKSUM: 51d530eaed8dba064e3daa19ddb393cdd8daa86e
 
 COCOAPODS: 1.16.2

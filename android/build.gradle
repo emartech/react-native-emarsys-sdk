@@ -4,7 +4,7 @@ apply plugin: "com.facebook.react"
 
 // Expo plugin - START
 group = 'com.emarsys.reactnative.expo'
-version = '2.0.0-beta.2'
+version = '2.0.0-beta.3'
 
 def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
 apply from: expoModulesCorePlugin
@@ -30,8 +30,8 @@ project.android {
 android {
   namespace "com.emarsys.reactnative"
   defaultConfig {
-    versionCode 3
-    versionName "2.0.0-beta.2"
+    versionCode 4
+    versionName "2.0.0-beta.3"
   }
   kotlinOptions {
     jvmTarget = '17'
