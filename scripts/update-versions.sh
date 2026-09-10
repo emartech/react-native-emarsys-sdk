@@ -661,24 +661,11 @@ echo -e "${GREEN}🔄 Applying updates...${NC}"
 # Apply updates
 UPDATE_SUCCESS=true
 
-# Update package.json - Package version
-PACKAGE_JSON_UPDATED=false
+# Update package.json + package-lock.json - Package version
+# npm version edits both files atomically (no sed/regex escaping, no separate lockfile sync).
 if [ "$CURRENT_PACKAGE" != "$NEW_PACKAGE_VERSION" ]; then
-    echo -ne "${WHITE}   📝 Updating package.json... ${NC}"
-    if sed -i.tmp "s/\"version\": \"$CURRENT_PACKAGE\"/\"version\": \"$NEW_PACKAGE_VERSION\"/" "$PACKAGE_JSON_PATH" 2>/dev/null; then
-        rm "$PACKAGE_JSON_PATH.tmp"
-        echo -e "${GREEN}✓${NC}"
-        PACKAGE_JSON_UPDATED=true
-    else
-        echo -e "${RED}✗${NC}"
-        UPDATE_SUCCESS=false
-    fi
-fi
-
-# Update package-lock.json if package.json was updated
-if [ "$PACKAGE_JSON_UPDATED" = true ]; then
-    echo -ne "${WHITE}   📝 Syncing package-lock.json... ${NC}"
-    if (cd "$PROJECT_ROOT" && npm install --package-lock-only --silent 2>/dev/null); then
+    echo -ne "${WHITE}   📝 Updating package.json + package-lock.json... ${NC}"
+    if (cd "$PROJECT_ROOT" && npm version "$NEW_PACKAGE_VERSION" --no-git-tag-version --allow-same-version >/dev/null 2>&1); then
         echo -e "${GREEN}✓${NC}"
     else
         echo -e "${RED}✗${NC}"

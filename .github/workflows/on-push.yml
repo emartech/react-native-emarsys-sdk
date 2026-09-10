@@ -1,9 +1,21 @@
 name: Run Tests
 
 on:
+  pull_request:
   push:
+    branches: [master, New-Architecture-and-Expo]
 
 jobs:
+  check-versions:
+    name: Check Version Consistency
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+
+    - name: Check version consistency
+      run: bash scripts/check-version-consistency.sh
+
   run-integration-tests:
     name: Run Integration Tests
     uses: ./.github/workflows/run-integration-tests.yml
