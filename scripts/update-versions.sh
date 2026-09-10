@@ -113,31 +113,46 @@ fetch_latest_sdk_versions() {
 derive_android_versions() {
     local package_version=$1
     local current_version_code=$2
-    
-    # versionName is the full version (e.g., 0.0.1)
-    local version_name="$package_version"
-    
+
+    # Strip beta suffix for Android versionName (e.g., 1.2.3.beta-1 → 1.2.3)
+    local version_name="${package_version%.beta-*}"
+
     # versionCode is simply incremented by 1
     local version_code=$((current_version_code + 1))
-    
+
     echo "$version_code $version_name"
 }
 
 # Function to calculate next package version suggestions
 calculate_package_versions() {
     local current_version="$1"
-    
-    # Parse version (e.g., "0.2.0" → major=0, minor=2, patch=0)
+
+    # Parse stable version (e.g., "0.2.0")
     if [[ "$current_version" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
         local major="${BASH_REMATCH[1]}"
         local minor="${BASH_REMATCH[2]}"
         local patch="${BASH_REMATCH[3]}"
-        
+
         SUGGESTED_PATCH="$major.$minor.$((patch + 1))"
         SUGGESTED_MINOR="$major.$((minor + 1)).0"
+        SUGGESTED_BETA="$major.$minor.$patch.beta-1"
+        SUGGESTED_PROMOTE=""
+    # Parse beta version (e.g., "0.2.0.beta-3")
+    elif [[ "$current_version" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)\.beta-([0-9]+)$ ]]; then
+        local major="${BASH_REMATCH[1]}"
+        local minor="${BASH_REMATCH[2]}"
+        local patch="${BASH_REMATCH[3]}"
+        local beta="${BASH_REMATCH[4]}"
+
+        SUGGESTED_PATCH=""
+        SUGGESTED_MINOR=""
+        SUGGESTED_BETA="$major.$minor.$patch.beta-$((beta + 1))"
+        SUGGESTED_PROMOTE="$major.$minor.$patch"
     else
         SUGGESTED_PATCH=""
         SUGGESTED_MINOR=""
+        SUGGESTED_BETA=""
+        SUGGESTED_PROMOTE=""
     fi
 }
 
@@ -145,53 +160,71 @@ calculate_package_versions() {
 prompt_for_package_version() {
     local current_version="$1"
     local variable_name="$2"
-    
+
     # Calculate smart version suggestions
     calculate_package_versions "$current_version"
-    
+
     echo -e "${BLUE}${BOLD}📦 Package Version Update${NC}"
     echo -e "${WHITE}Current: ${YELLOW}$current_version${NC}"
-    
-    if [ -n "$SUGGESTED_PATCH" ] && [ -n "$SUGGESTED_MINOR" ]; then
-        echo -e "${WHITE}Suggestions:${NC}"
+
+    echo -e "${WHITE}Suggestions:${NC}"
+    if [ -n "$SUGGESTED_BETA" ]; then
+        echo -e "${WHITE}   🧪 Next beta:         ${GREEN}$SUGGESTED_BETA${NC}"
+    fi
+    if [ -n "$SUGGESTED_PROMOTE" ]; then
+        echo -e "${WHITE}   🚀 Promote to stable: ${GREEN}$SUGGESTED_PROMOTE${NC}"
+    fi
+    if [ -n "$SUGGESTED_PATCH" ]; then
         echo -e "${WHITE}   🔧 Patch (bug fixes): ${GREEN}$SUGGESTED_PATCH${NC}"
+    fi
+    if [ -n "$SUGGESTED_MINOR" ]; then
         echo -e "${WHITE}   📈 Minor (new features): ${GREEN}$SUGGESTED_MINOR${NC}"
     fi
-    
-    echo -e "${WHITE}Example: ${CYAN}0.2.0${NC}"
+
+    echo -e "${WHITE}Example: ${CYAN}0.2.0${NC} or ${CYAN}0.2.0.beta-1${NC}"
     echo ""
-    
+
     local prompt_msg="? Enter new version (or press Enter to keep current"
+    if [ -n "$SUGGESTED_BETA" ]; then
+        prompt_msg="$prompt_msg, 'b' for next beta"
+    fi
+    if [ -n "$SUGGESTED_PROMOTE" ]; then
+        prompt_msg="$prompt_msg, 's' to promote to stable"
+    fi
     if [ -n "$SUGGESTED_PATCH" ]; then
         prompt_msg="$prompt_msg, 'p' for patch, 'm' for minor"
     fi
     prompt_msg="$prompt_msg): "
-    
+
     while true; do
         read -p $'\033[1;32m'"$prompt_msg"$'\033[0m' input
-        
+
         if [ -z "$input" ]; then
-            # Keep current version
             eval "$variable_name='$current_version'"
             echo -e "${WHITE}   → Keeping: ${YELLOW}$current_version${NC}"
             break
+        elif [ "$input" = "b" ] && [ -n "$SUGGESTED_BETA" ]; then
+            eval "$variable_name='$SUGGESTED_BETA'"
+            echo -e "${WHITE}   → Next beta: ${GREEN}$SUGGESTED_BETA${NC}"
+            break
+        elif [ "$input" = "s" ] && [ -n "$SUGGESTED_PROMOTE" ]; then
+            eval "$variable_name='$SUGGESTED_PROMOTE'"
+            echo -e "${WHITE}   → Promote to stable: ${GREEN}$SUGGESTED_PROMOTE${NC}"
+            break
         elif [ "$input" = "p" ] && [ -n "$SUGGESTED_PATCH" ]; then
-            # Use patch version
             eval "$variable_name='$SUGGESTED_PATCH'"
             echo -e "${WHITE}   → Patch update: ${GREEN}$SUGGESTED_PATCH${NC}"
             break
         elif [ "$input" = "m" ] && [ -n "$SUGGESTED_MINOR" ]; then
-            # Use minor version
             eval "$variable_name='$SUGGESTED_MINOR'"
             echo -e "${WHITE}   → Minor update: ${GREEN}$SUGGESTED_MINOR${NC}"
             break
-        elif [[ "$input" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            # Valid version format
+        elif [[ "$input" =~ ^[0-9]+\.[0-9]+\.[0-9]+(\.beta-[0-9]+)?$ ]]; then
             eval "$variable_name='$input'"
             echo -e "${WHITE}   → New version: ${GREEN}$input${NC}"
             break
         else
-            echo -e "${RED}   ✗ Invalid format. Please use semantic versioning (e.g., 0.2.0)${NC}"
+            echo -e "${RED}   ✗ Invalid format. Use e.g. 0.2.0 or 0.2.0.beta-1${NC}"
         fi
     done
     echo ""
