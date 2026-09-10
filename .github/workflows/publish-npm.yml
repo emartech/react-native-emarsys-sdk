@@ -20,7 +20,7 @@ jobs:
         node-version: '20'
         registry-url: 'https://registry.npmjs.org'
 
-    - name: Determine npm dist-tag
+    - name: Determine npm dist-tag and publish status
       id: dist_tag
       run: |
         VERSION=$(tar -xzO -f *.tgz package/package.json | node -pe "JSON.parse(require('fs').readFileSync(0)).version")
@@ -30,9 +30,16 @@ jobs:
           TAG=latest
         fi
         echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+        if npm view "@emartech/react-native-emarsys-sdk@$VERSION" version >/dev/null 2>&1; then
+          echo "already_published=true" >> "$GITHUB_OUTPUT"
+          echo "::warning::$VERSION already on npm — skipping publish"
+        else
+          echo "already_published=false" >> "$GITHUB_OUTPUT"
+        fi
         echo "Publishing $VERSION under dist-tag: $TAG"
 
     - name: Publish to npm
+      if: steps.dist_tag.outputs.already_published == 'false'
       run: |
         echo "Publishing @emartech/react-native-emarsys-sdk to npm with tag ${{ steps.dist_tag.outputs.tag }}"
         npm publish *.tgz --access public --tag ${{ steps.dist_tag.outputs.tag }}
