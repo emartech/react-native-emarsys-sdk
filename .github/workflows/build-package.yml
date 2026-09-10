@@ -21,6 +21,20 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
+    - name: Check version consistency
+      run: bash scripts/check-version-consistency.sh
+
+    - name: Verify version matches release tag
+      if: github.event_name == 'release'
+      run: |
+        PKG=$(node -pe "require('./package.json').version")
+        TAG="${{ github.event.release.tag_name }}"
+        if [ "$PKG" != "${TAG#v}" ]; then
+          echo "::error::package.json version ($PKG) != release tag (${TAG#v})"
+          exit 1
+        fi
+        echo "Version $PKG matches release tag $TAG"
+
     - name: Run linting
       run: npm run lint:all
 
