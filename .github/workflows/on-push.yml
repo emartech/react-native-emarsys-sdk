@@ -1,32 +1,11 @@
-name: Run Tests
+name: On Push
+permissions:
+  contents: read
 
-on:
-  pull_request:
-  push:
-    branches: [New-Architecture-and-Expo]
+on: push
 
 jobs:
-  check-versions:
-    name: Check Version Consistency
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v5
-
-    - name: Check version consistency
-      run: bash scripts/check-version-consistency.sh
-
-  run-integration-tests:
-    name: Run Integration Tests
-    uses: ./.github/workflows/run-integration-tests.yml
-    secrets: inherit
-
-  run-android-tests:
-    name: Run Android Tests
-    uses: ./.github/workflows/run-android-tests.yml
-    secrets: inherit
-
-  run-ios-tests:
-    name: Run iOS Tests
-    uses: ./.github/workflows/run-ios-tests.yml
+  run-tests:
+    name: Run Tests
+    uses: ./.github/workflows/run-tests.yml
     secrets: inherit

@@ -4,24 +4,14 @@ on:
   workflow_call:
 
 jobs:
-  run-integration-tests:
-    name: Run Integration Tests
-    uses: ./.github/workflows/run-integration-tests.yml
-    secrets: inherit
-
-  run-android-tests:
-    name: Run Android Tests
-    uses: ./.github/workflows/run-android-tests.yml
-    secrets: inherit
-
-  run-ios-tests:
-    name: Run iOS Tests
-    uses: ./.github/workflows/run-ios-tests.yml
+  run-tests:
+    name: Run Tests
+    uses: ./.github/workflows/run-tests.yml
     secrets: inherit
 
   build-package:
     name: Build Package
-    needs: [run-integration-tests, run-android-tests, run-ios-tests]
+    needs: run-tests
     uses: ./.github/workflows/build-package.yml
     secrets: inherit
 

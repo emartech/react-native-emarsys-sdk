@@ -1,0 +1,24 @@
+name: Run Tests
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  run-integration-tests:
+    name: Run Integration Tests
+    uses: ./.github/workflows/run-integration-tests.yml
+    secrets: inherit
+
+  run-android-tests:
+    name: Run Android Tests
+    uses: ./.github/workflows/run-android-tests.yml
+    secrets: inherit
+
+  run-ios-tests:
+    name: Run iOS Tests
+    uses: ./.github/workflows/run-ios-tests.yml
+    secrets: inherit

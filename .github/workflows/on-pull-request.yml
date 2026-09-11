@@ -1,10 +1,10 @@
-name: On Release
+name: On Pull Request
 permissions:
   contents: read
 
 on:
-  release:
-    types: [published]
+  pull_request:
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 jobs:
@@ -29,10 +29,4 @@ jobs:
     name: Build React Native Sample
     needs: build-package
     uses: ./.github/workflows/build-sample-rn.yml
-    secrets: inherit
-
-  publish-npm:
-    name: Publish to npm
-    needs: [build-sample-expo, build-sample-rn]
-    uses: ./.github/workflows/publish-npm.yml
     secrets: inherit
