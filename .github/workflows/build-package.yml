@@ -56,7 +56,7 @@ jobs:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISHER_TOKEN }}
 
     - name: Upload package artifact
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: npm-package
         path: artifacts/*.tgz

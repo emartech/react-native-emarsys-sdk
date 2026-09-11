@@ -3,7 +3,7 @@ name: Run Tests
 on:
   pull_request:
   push:
-    branches: [master, New-Architecture-and-Expo, MV-1215] # TODO: remove MV-1215
+    branches: [New-Architecture-and-Expo]
 
 jobs:
   check-versions:

@@ -3,13 +3,13 @@ name: Create Release Draft
 on:
   pull_request:
     types: [closed]
-    branches: [master]
+    branches: [New-Architecture-and-Expo]
   workflow_dispatch:
 
 jobs:
   create-release:
     name: Create Release Draft
-    # Run when a "[Release]" PR is merged into master, or on manual dispatch.
+    # Run when a "[Release]" PR is merged into New-Architecture-and-Expo, or on manual dispatch.
     if: ${{ (contains(github.event.pull_request.title, '[Release]') && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch' }}
     uses: ./.github/workflows/create-release-draft.yml
     secrets: inherit
