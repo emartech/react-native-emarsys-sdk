@@ -10,7 +10,7 @@ For further information about how to use the wrapper please visit our [Documenta
 ## Installation
 
 ```bash
-npm install "git+ssh://git@github.com/emartech/react-native-emarsys-sdk.git#<version>" --save
+npm install @emartech/react-native-emarsys-sdk
 ```
 
 Check the latest version [here](https://github.com/emartech/react-native-emarsys-sdk/releases)

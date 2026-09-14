@@ -8,7 +8,7 @@ jobs:
     name: Build React Native Sample (Android & iOS)
     permissions:
       contents: read
-    runs-on: macos-15-xlarge
+    runs-on: macos-latest
 
     steps:
     - name: Checkout code
@@ -33,7 +33,7 @@ jobs:
       uses: android-actions/setup-android@v4
 
     - name: Download package artifact
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v7
       with:
         name: npm-package
         path: artifacts
@@ -60,9 +60,6 @@ jobs:
       working-directory: example/react-native/android
       run: ./gradlew assembleDebug --no-daemon
 
-    - name: Use Xcode 16.4
-      run: sudo xcode-select -switch /Applications/Xcode_16.4.app
-
     - name: Install CocoaPods
       working-directory: example/react-native/ios
       run: pod install
@@ -75,6 +72,6 @@ jobs:
           -scheme reactnativeemarsyssdkexample \
           -configuration Debug \
           -sdk iphonesimulator \
-          -destination 'generic/platform=iOS Simulator' \
+          -destination 'platform=iOS Simulator,name=iPhone 17' \
           CODE_SIGNING_ALLOWED=NO \
           build

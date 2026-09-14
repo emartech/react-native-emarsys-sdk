@@ -1,0 +1,16 @@
+name: On Release PR
+permissions:
+  contents: write
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [New-Architecture-and-Expo]
+  workflow_dispatch:
+
+jobs:
+  create-release:
+    name: Create Release Draft
+    if: ${{ (contains(github.event.pull_request.title, '[Release]') && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch' }}
+    uses: ./.github/workflows/create-release-draft.yml
+    secrets: inherit

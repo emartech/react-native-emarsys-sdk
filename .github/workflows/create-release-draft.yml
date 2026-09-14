@@ -1,0 +1,108 @@
+name: Create Release Draft
+
+on:
+  workflow_call:
+
+jobs:
+  run-tests:
+    name: Run Tests
+    uses: ./.github/workflows/run-tests.yml
+    secrets: inherit
+
+  build-package:
+    name: Build Package
+    needs: run-tests
+    uses: ./.github/workflows/build-package.yml
+    secrets: inherit
+
+  build-sample-expo:
+    name: Build Expo Sample
+    needs: build-package
+    uses: ./.github/workflows/build-sample-expo.yml
+    secrets: inherit
+
+  build-sample-rn:
+    name: Build React Native Sample
+    needs: build-package
+    uses: ./.github/workflows/build-sample-rn.yml
+    secrets: inherit
+
+  tag-and-draft:
+    name: Tag and Create Release Draft
+    needs: [build-sample-expo, build-sample-rn]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+      with:
+        fetch-depth: 0
+
+    - name: Check version consistency
+      run: bash scripts/check-version-consistency.sh
+
+    - name: Get version and notes from CHANGELOG
+      id: changelog
+      run: |
+        # Top "# <version>" header (allows X.Y.Z and X.Y.Z-beta.N)
+        VERSION=$(grep -oE "^# [0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?" CHANGELOG.md | head -1 | sed 's/^# //')
+        if [ -z "$VERSION" ]; then
+          echo "::error::Could not read a version header from CHANGELOG.md"
+          exit 1
+        fi
+        echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+        echo "Found version: $VERSION"
+
+        # Body of the top section (everything after the header up to the next "# " header)
+        awk '/^# /{c++} c==1{print} c==2{exit}' CHANGELOG.md | tail -n +2 > /tmp/notes.md
+
+        # Mark as prerelease when the version carries a suffix (e.g. -beta.N)
+        if [[ "$VERSION" == *-* ]]; then
+          echo "prerelease=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "prerelease=false" >> "$GITHUB_OUTPUT"
+        fi
+
+    - name: Check if tag exists
+      id: check-tag
+      env:
+        VERSION: ${{ steps.changelog.outputs.version }}
+      run: |
+        if git rev-parse "$VERSION" >/dev/null 2>&1; then
+          echo "tag-exists=true" >> "$GITHUB_OUTPUT"
+          echo "Tag $VERSION already exists"
+        else
+          echo "tag-exists=false" >> "$GITHUB_OUTPUT"
+          echo "Tag $VERSION does not exist"
+        fi
+
+    - name: Create git tag
+      id: create-tag
+      if: steps.check-tag.outputs.tag-exists == 'false'
+      env:
+        VERSION: ${{ steps.changelog.outputs.version }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git tag -a "$VERSION" -m "Release version $VERSION"
+        git push origin "$VERSION"
+        echo "Created and pushed tag $VERSION"
+
+    - name: Create GitHub Release draft
+      if: steps.check-tag.outputs.tag-exists == 'false'
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VERSION: ${{ steps.changelog.outputs.version }}
+        PRERELEASE: ${{ steps.changelog.outputs.prerelease }}
+      run: |
+        PRERELEASE_FLAG=""
+        if [ "$PRERELEASE" = "true" ]; then
+          PRERELEASE_FLAG="--prerelease"
+        fi
+        gh release create "$VERSION" \
+          --draft \
+          --title "$VERSION" \
+          --notes-file /tmp/notes.md \
+          $PRERELEASE_FLAG
+        echo "Created draft release $VERSION"
